@@ -9,61 +9,61 @@
 }
 
 :root {
-  --background: hsl(0, 0%, 100%);
-  --foreground: hsl(20, 14.3%, 4.1%);
-  --muted: hsl(60, 4.8%, 95.9%);
-  --muted-foreground: hsl(25, 5.3%, 44.7%);
-  --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(20, 14.3%, 4.1%);
-  --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(20, 14.3%, 4.1%);
-  --border: hsl(20, 5.9%, 90%);
-  --input: hsl(20, 5.9%, 90%);
-  --primary: hsl(207, 90%, 54%);
-  --primary-foreground: hsl(211, 100%, 99%);
-  --secondary: hsl(60, 4.8%, 95.9%);
-  --secondary-foreground: hsl(24, 9.8%, 10%);
-  --accent: hsl(60, 4.8%, 95.9%);
-  --accent-foreground: hsl(24, 9.8%, 10%);
+  --background: hsl(212, 25%, 97%); /* #f9fafc */
+  --foreground: hsl(215, 60%, 13%); /* #0a1b3d */
+  --muted: hsl(212, 25%, 97%);
+  --muted-foreground: hsl(212, 20%, 27%); /* #2f3a45 */
+  --popover: hsl(212, 25%, 97%);
+  --popover-foreground: hsl(215, 60%, 13%);
+  --card: hsl(212, 25%, 97%);
+  --card-foreground: hsl(215, 60%, 13%);
+  --border: hsl(212, 15%, 85%);
+  --input: hsl(212, 15%, 85%);
+  --primary: hsl(185, 100%, 35%); /* #00a7b2 */
+  --primary-foreground: hsl(212, 25%, 97%);
+  --secondary: hsl(212, 20%, 27%); /* #2f3a45 */
+  --secondary-foreground: hsl(212, 25%, 97%);
+  --accent: hsl(185, 100%, 35%);
+  --accent-foreground: hsl(212, 25%, 97%);
   --destructive: hsl(0, 84.2%, 60.2%);
-  --destructive-foreground: hsl(60, 9.1%, 97.8%);
-  --ring: hsl(20, 14.3%, 4.1%);
+  --destructive-foreground: hsl(212, 25%, 97%);
+  --ring: hsl(185, 100%, 35%);
   --radius: 0.5rem;
   
   /* Role-specific colors */
-  --investor: hsl(142, 76%, 36%);
-  --contractor: hsl(45, 93%, 47%);
-  --consultant: hsl(262, 83%, 58%);
-  --developer: hsl(0, 84%, 60%);
-  --supplier: hsl(220, 91%, 54%);
+  --investor: hsl(185, 100%, 35%); /* #00a7b2 */
+  --contractor: hsl(215, 60%, 13%); /* #0a1b3d */
+  --consultant: hsl(185, 100%, 35%); /* #00a7b2 */
+  --developer: hsl(212, 20%, 27%); /* #2f3a45 */
+  --supplier: hsl(185, 100%, 35%); /* #00a7b2 */
   
   /* Additional colors for market indicators */
-  --success: hsl(142, 76%, 36%);
+  --success: hsl(185, 100%, 35%);
   --warning: hsl(45, 93%, 47%);
-  --info: hsl(207, 90%, 54%);
+  --info: hsl(185, 100%, 35%);
   --danger: hsl(0, 84%, 60%);
 }
 
 .dark {
-  --background: hsl(240, 10%, 3.9%);
-  --foreground: hsl(0, 0%, 98%);
-  --muted: hsl(240, 3.7%, 15.9%);
-  --muted-foreground: hsl(240, 5%, 64.9%);
-  --popover: hsl(240, 10%, 3.9%);
-  --popover-foreground: hsl(0, 0%, 98%);
-  --card: hsl(240, 10%, 3.9%);
-  --card-foreground: hsl(0, 0%, 98%);
-  --border: hsl(240, 3.7%, 15.9%);
-  --input: hsl(240, 3.7%, 15.9%);
-  --primary: hsl(207, 90%, 54%);
-  --primary-foreground: hsl(211, 100%, 99%);
-  --secondary: hsl(240, 3.7%, 15.9%);
-  --secondary-foreground: hsl(0, 0%, 98%);
-  --accent: hsl(240, 3.7%, 15.9%);
-  --accent-foreground: hsl(0, 0%, 98%);
+  --background: hsl(215, 60%, 13%); /* #0a1b3d */
+  --foreground: hsl(212, 25%, 97%); /* #f9fafc */
+  --muted: hsl(212, 20%, 27%); /* #2f3a45 */
+  --muted-foreground: hsl(212, 25%, 97%);
+  --popover: hsl(215, 60%, 13%);
+  --popover-foreground: hsl(212, 25%, 97%);
+  --card: hsl(212, 20%, 27%); /* #2f3a45 */
+  --card-foreground: hsl(212, 25%, 97%);
+  --border: hsl(212, 20%, 35%);
+  --input: hsl(212, 20%, 35%);
+  --primary: hsl(185, 100%, 35%); /* #00a7b2 */
+  --primary-foreground: hsl(212, 25%, 97%);
+  --secondary: hsl(212, 20%, 27%); /* #2f3a45 */
+  --secondary-foreground: hsl(212, 25%, 97%);
+  --accent: hsl(185, 100%, 35%);
+  --accent-foreground: hsl(212, 25%, 97%);
   --destructive: hsl(0, 62.8%, 30.6%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(240, 4.9%, 83.9%);
+  --destructive-foreground: hsl(212, 25%, 97%);
+  --ring: hsl(185, 100%, 35%);
   --radius: 0.5rem;
 }
 
