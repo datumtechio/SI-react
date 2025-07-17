@@ -10,7 +10,7 @@ const roles = [
   {
     id: "investor" as UserRole,
     title: "Investor",
-    description: "Discover investment opportunities and market trends",
+    description: "Investment opportunities & market trends",
     icon: ChartLine,
     features: ["ROI Analysis", "Market Comparisons", "Investment Reports"],
     color: "investor",
@@ -18,7 +18,7 @@ const roles = [
   {
     id: "contractor" as UserRole,
     title: "Contractor",
-    description: "Find active projects and bidding opportunities",
+    description: "Active projects & bidding opportunities",
     icon: HardHat,
     features: ["Project Pipeline", "Tender Alerts", "Construction Timeline"],
     color: "contractor",
@@ -26,7 +26,7 @@ const roles = [
   {
     id: "consultant" as UserRole,
     title: "Consultant",
-    description: "Access market insights and advisory data",
+    description: "Market insights & advisory data",
     icon: Lightbulb,
     features: ["Market Analysis", "Feasibility Studies", "Trend Reports"],
     color: "consultant",
@@ -34,7 +34,7 @@ const roles = [
   {
     id: "developer" as UserRole,
     title: "Developer",
-    description: "Identify development sites and market gaps",
+    description: "Development sites & market gaps",
     icon: DraftingCompass,
     features: ["Site Analysis", "Zoning Data", "Competition Mapping"],
     color: "developer",
@@ -42,7 +42,7 @@ const roles = [
   {
     id: "supplier" as UserRole,
     title: "Supplier",
-    description: "Supply materials and equipment for active projects",
+    description: "Materials & equipment for projects",
     icon: Truck,
     features: ["Supply Opportunities", "Material Demand", "Project Schedules"],
     color: "supplier",
