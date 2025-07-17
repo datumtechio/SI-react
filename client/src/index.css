@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* Role-specific colors */
+  --investor: hsl(142, 76%, 36%);
+  --contractor: hsl(45, 93%, 47%);
+  --consultant: hsl(262, 83%, 58%);
+  --developer: hsl(0, 84%, 60%);
+  
+  /* Additional colors for market indicators */
+  --success: hsl(142, 76%, 36%);
+  --warning: hsl(45, 93%, 47%);
+  --info: hsl(207, 90%, 54%);
+  --danger: hsl(0, 84%, 60%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .role-card {
+    @apply transition-all duration-300 cursor-pointer;
+  }
+  
+  .role-card:hover {
+    @apply transform scale-105 shadow-xl;
+  }
+  
+  .role-card.selected {
+    @apply ring-2 ring-primary bg-blue-50;
+  }
+  
+  .market-indicator {
+    @apply bg-white rounded-lg shadow-sm border border-slate-200 p-6;
+  }
+  
+  .market-indicator.opportunity {
+    @apply border-l-4 border-l-green-500;
+  }
+  
+  .market-indicator.trend {
+    @apply border-l-4 border-l-blue-500;
+  }
+  
+  .market-indicator.alert {
+    @apply border-l-4 border-l-orange-500;
+  }
+  
+  .project-card {
+    @apply bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow duration-200;
+  }
+  
+  .filter-sidebar {
+    @apply w-80 bg-white border-r border-slate-200 fixed h-full overflow-y-auto;
+  }
+  
+  .page-nav-tab {
+    @apply px-3 py-2 text-sm font-medium rounded-md transition-colors;
+  }
+  
+  .page-nav-tab.active {
+    @apply bg-primary text-white;
+  }
+  
+  .page-nav-tab:not(.active) {
+    @apply text-slate-600 hover:text-slate-900;
+  }
+}
+
+@layer utilities {
+  .slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.2s ease-out;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
