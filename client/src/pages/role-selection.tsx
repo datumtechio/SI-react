@@ -41,7 +41,7 @@ const roles = [
   },
   {
     id: "supplier" as UserRole,
-    title: "Construction Supplier",
+    title: "Supplier",
     description: "Supply materials and equipment for active projects",
     icon: Truck,
     features: ["Supply Opportunities", "Material Demand", "Project Schedules"],

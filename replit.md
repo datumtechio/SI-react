@@ -38,7 +38,7 @@ The application supports five distinct user roles:
 - **Contractor**: Access to project pipeline, tender alerts, construction timelines
 - **Consultant**: Market analysis, feasibility studies, trend reports
 - **Developer**: Site analysis, zoning data, competition mapping
-- **Construction Supplier**: Supply opportunities, material demand tracking, project schedules
+- **Supplier**: Supply opportunities, material demand tracking, project schedules
 
 Each role has customized features and data views tailored to their specific needs.
 
