@@ -33,11 +33,12 @@ Preferred communication style: Simple, everyday language.
 ## Key Components
 
 ### Role-Based System
-The application supports four distinct user roles:
+The application supports five distinct user roles:
 - **Investor**: Focus on ROI analysis, market comparisons, investment reports
 - **Contractor**: Access to project pipeline, tender alerts, construction timelines
 - **Consultant**: Market analysis, feasibility studies, trend reports
 - **Developer**: Site analysis, zoning data, competition mapping
+- **Construction Supplier**: Supply opportunities, material demand tracking, project schedules
 
 Each role has customized features and data views tailored to their specific needs.
 

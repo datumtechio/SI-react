@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Building, ChartLine, HardHat, Lightbulb, DraftingCompass, ArrowRight } from "lucide-react";
+import { Building, ChartLine, HardHat, Lightbulb, DraftingCompass, Truck, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UserRole, roleColors } from "@/lib/types";
 
@@ -39,6 +39,14 @@ const roles = [
     features: ["Site Analysis", "Zoning Data", "Competition Mapping"],
     color: "developer",
   },
+  {
+    id: "supplier" as UserRole,
+    title: "Construction Supplier",
+    description: "Supply materials and equipment for active projects",
+    icon: Truck,
+    features: ["Supply Opportunities", "Material Demand", "Project Schedules"],
+    color: "supplier",
+  },
 ];
 
 export default function RoleSelection() {
@@ -67,7 +75,7 @@ export default function RoleSelection() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mt-12">
             {roles.map((role) => {
               const Icon = role.icon;
               const isSelected = selectedRole === role.id;
