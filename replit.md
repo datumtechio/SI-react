@@ -7,6 +7,7 @@ This is a full-stack real estate investment platform built with React, TypeScrip
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Typography: Raleway font family used throughout the application.
 
 ## System Architecture
 
