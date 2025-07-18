@@ -226,7 +226,7 @@ export default function Homepage() {
           {/* Featured Project Profiles */}
           <section className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Project Profiles</h2>
+              <h2 className="text-3xl font-bold mb-4 text-[#ffffff]">Featured Project Profiles</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                 Explore detailed profiles of high-value investment opportunities
               </p>
