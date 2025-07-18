@@ -136,14 +136,14 @@ export default function Homepage() {
         </div>
       </div>
       {/* Content Sections */}
-      <div className="bg-white py-20">
+      <div className="py-20" style={{ backgroundColor: '#0a1b3d' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Latest Projects */}
           <section className="mb-20">
             <div className="flex items-center justify-between mb-12">
               <div className="text-center flex-1">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Latest Projects</h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                <h2 className="text-3xl font-bold text-white mb-4">Latest Projects</h2>
+                <p className="text-lg text-gray-300 max-w-2xl mx-auto">
                   Discover the newest investment opportunities and development projects across the MENA region
                 </p>
               </div>
