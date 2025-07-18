@@ -9,6 +9,7 @@ This is a full-stack real estate investment platform built with React, TypeScrip
 Preferred communication style: Simple, everyday language.
 Typography: Raleway font family used throughout the application.
 Branding colors: #0a1b3d (dark blue), #00a7b2 (teal), #2f3a45 (gray), #f9fafc (light background).
+Design reference: Clean, modern design inspired by sectorintelligence.ai with minimalist navigation, split hero layout, and professional typography.
 
 ## System Architecture
 
