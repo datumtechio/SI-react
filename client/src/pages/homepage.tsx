@@ -4,6 +4,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Building, Search, MapPin, DollarSign, Calendar } from "lucide-react";
+import logoPath from "@assets/Sector Intellignece Logo (500x500)_1752856578754.png";
 
 interface Project {
   id: string;
@@ -63,10 +64,12 @@ export default function Homepage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                  <Building className="text-white" size={16} />
-                </div>
+              <div className="flex items-center gap-3">
+                <img 
+                  src={logoPath} 
+                  alt="Sector Intelligence Logo" 
+                  className="w-10 h-10 object-contain"
+                />
                 <span className="text-xl font-bold text-gray-900">SECTOR INTELLIGENCE</span>
               </div>
             </div>
@@ -132,11 +135,15 @@ export default function Homepage() {
             {/* Right Visual */}
             <div className="flex justify-center">
               <div className="w-96 h-96 relative">
-                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center">
-                  <div className="w-80 h-80 border-4 border-primary/30 rounded-full flex items-center justify-center">
-                    <div className="w-60 h-60 border-2 border-primary/50 rounded-full flex items-center justify-center">
-                      <div className="w-40 h-40 bg-primary/20 rounded-full flex items-center justify-center">
-                        <Building className="text-primary" size={48} />
+                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg flex items-center justify-center">
+                  <div className="w-80 h-80 border-4 border-primary/30 rounded-lg flex items-center justify-center">
+                    <div className="w-60 h-60 border-2 border-primary/50 rounded-lg flex items-center justify-center">
+                      <div className="w-40 h-40 bg-white/90 rounded-lg flex items-center justify-center p-4">
+                        <img 
+                          src={logoPath} 
+                          alt="Sector Intelligence Logo" 
+                          className="w-full h-full object-contain"
+                        />
                       </div>
                     </div>
                   </div>

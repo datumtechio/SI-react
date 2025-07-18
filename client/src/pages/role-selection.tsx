@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Building, ChartLine, HardHat, Lightbulb, DraftingCompass, Truck, ArrowRight } from "lucide-react";
+import logoPath from "@assets/Sector Intellignece Logo (500x500)_1752856578754.png";
 import { cn } from "@/lib/utils";
 import { UserRole, roleColors } from "@/lib/types";
 
@@ -66,8 +67,12 @@ export default function RoleSelection() {
       <div className="pt-16 pb-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="mb-8">
-            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 flex items-center justify-center gap-3">
-              <Building className="text-primary" size={48} />
+            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 flex items-center justify-center gap-4">
+              <img 
+                src={logoPath} 
+                alt="Sector Intelligence Logo" 
+                className="w-12 h-12 object-contain"
+              />
               Sector Intelligence
             </h1>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
