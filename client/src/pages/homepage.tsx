@@ -68,7 +68,7 @@ export default function Homepage() {
                 <img 
                   src={logoPath} 
                   alt="Sector Intelligence Logo" 
-                  className="object-contain ml-[2px] mr-[2px]"
+                  className="object-contain ml-[1px] mr-[1px]"
                   style={{ width: '714px', height: '202.53px' }}
                 />
               </div>
