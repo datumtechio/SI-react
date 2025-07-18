@@ -68,7 +68,8 @@ export default function Homepage() {
                 <img 
                   src={logoPath} 
                   alt="Sector Intelligence Logo" 
-                  className="w-16 h-16 object-contain"
+                  className="object-contain"
+                  style={{ width: '238px', height: '67.51px' }}
                 />
                 <span className="text-xl font-bold text-gray-900">SECTOR INTELLIGENCE</span>
               </div>
@@ -138,11 +139,12 @@ export default function Homepage() {
                 <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center">
                   <div className="w-[420px] h-[420px] border-4 border-primary/30 rounded-2xl flex items-center justify-center">
                     <div className="w-80 h-80 border-2 border-primary/50 rounded-xl flex items-center justify-center">
-                      <div className="w-64 h-64 bg-white/95 rounded-xl flex items-center justify-center p-8 shadow-2xl">
+                      <div className="bg-white/95 rounded-xl flex items-center justify-center p-8 shadow-2xl" style={{ width: '300px', height: '150px' }}>
                         <img 
                           src={logoPath} 
                           alt="Sector Intelligence Logo" 
-                          className="w-full h-full object-contain filter drop-shadow-lg"
+                          className="object-contain filter drop-shadow-lg"
+                          style={{ width: '238px', height: '67.51px' }}
                         />
                       </div>
                     </div>
