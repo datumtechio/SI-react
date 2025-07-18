@@ -191,10 +191,10 @@ export default function Homepage() {
           </section>
 
           {/* Trending Sectors */}
-          <section className="mb-20">
+          <section className="mb-20 py-16 px-8 rounded-2xl" style={{ backgroundColor: '#00a7b2' }}>
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Trending Sectors</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <h2 className="text-3xl font-bold text-white mb-4">Trending Sectors</h2>
+              <p className="text-lg text-gray-100 max-w-2xl mx-auto">
                 Browse the most active investment sectors with growth opportunities
               </p>
             </div>
