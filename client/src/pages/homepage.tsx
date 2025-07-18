@@ -68,7 +68,7 @@ export default function Homepage() {
                 <img 
                   src={logoPath} 
                   alt="Sector Intelligence Logo" 
-                  className="object-contain"
+                  className="object-contain ml-[2px] mr-[2px]"
                   style={{ width: '714px', height: '202.53px' }}
                 />
               </div>
@@ -82,7 +82,6 @@ export default function Homepage() {
           </div>
         </div>
       </nav>
-
       {/* Hero Section */}
       <div className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -136,7 +135,6 @@ export default function Homepage() {
           </div>
         </div>
       </div>
-
       {/* Content Sections */}
       <div className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -271,7 +269,6 @@ export default function Homepage() {
           </section>
         </div>
       </div>
-
       {/* Call to Action */}
       <div className="bg-gray-50 py-20">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
