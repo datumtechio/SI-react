@@ -62,14 +62,14 @@ export default function Homepage() {
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-20">
+          <div className="flex justify-between h-52">
             <div className="flex items-center">
               <div className="flex items-center gap-3">
                 <img 
                   src={logoPath} 
                   alt="Sector Intelligence Logo" 
                   className="object-contain"
-                  style={{ width: '238px', height: '67.51px' }}
+                  style={{ width: '714px', height: '202.53px' }}
                 />
                 <span className="text-xl font-bold text-gray-900">SECTOR INTELLIGENCE</span>
               </div>
@@ -135,16 +135,16 @@ export default function Homepage() {
 
             {/* Right Visual */}
             <div className="flex justify-center">
-              <div className="w-[500px] h-[500px] relative">
+              <div className="w-[900px] h-[400px] relative">
                 <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center">
-                  <div className="w-[420px] h-[420px] border-4 border-primary/30 rounded-2xl flex items-center justify-center">
-                    <div className="w-80 h-80 border-2 border-primary/50 rounded-xl flex items-center justify-center">
-                      <div className="bg-white/95 rounded-xl flex items-center justify-center p-8 shadow-2xl" style={{ width: '300px', height: '150px' }}>
+                  <div className="w-[850px] h-[350px] border-4 border-primary/30 rounded-2xl flex items-center justify-center">
+                    <div className="w-[820px] h-[300px] border-2 border-primary/50 rounded-xl flex items-center justify-center">
+                      <div className="bg-white/95 rounded-xl flex items-center justify-center p-8 shadow-2xl" style={{ width: '800px', height: '250px' }}>
                         <img 
                           src={logoPath} 
                           alt="Sector Intelligence Logo" 
                           className="object-contain filter drop-shadow-lg"
-                          style={{ width: '238px', height: '67.51px' }}
+                          style={{ width: '714px', height: '202.53px' }}
                         />
                       </div>
                     </div>
