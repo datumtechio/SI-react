@@ -99,7 +99,7 @@ export default function RoleSelection() {
                         style={{ color: roleColors[role.id] }}
                       />
                     </div>
-                    <h3 className="text-xl font-semibold text-slate-900 mb-2">{role.title}</h3>
+                    <h3 className="text-xl font-semibold text-slate-900 mb-6">{role.title}</h3>
                     <div className="h-12 flex items-center justify-center mb-4">
                       <p className="text-slate-600 text-sm pl-[5px] pr-[5px]">{role.description}</p>
                     </div>
