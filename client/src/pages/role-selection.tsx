@@ -67,13 +67,7 @@ export default function RoleSelection() {
       <div className="pt-16 pb-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="mb-8">
-            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 flex items-center justify-center gap-4">
-              <img 
-                src={logoPath} 
-                alt="Sector Intelligence Logo" 
-                className="object-contain filter drop-shadow-lg"
-                style={{ width: '238px', height: '67.51px' }}
-              />
+            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
               Sector Intelligence
             </h1>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
