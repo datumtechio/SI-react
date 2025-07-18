@@ -101,7 +101,7 @@ export default function Homepage() {
               <Link href="/role-selection">
                 <Button 
                   size="lg" 
-                  className="bg-primary hover:bg-primary/90 text-white px-8 py-4 text-lg rounded-full"
+                  className="bg-primary hover:bg-primary/90 text-white px-8 py-4 text-lg rounded-full mt-[-1px] mb-[-1px]"
                 >
                   Sign Up
                 </Button>
