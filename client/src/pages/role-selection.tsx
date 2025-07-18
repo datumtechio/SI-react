@@ -71,7 +71,7 @@ export default function RoleSelection() {
               <img 
                 src={logoPath} 
                 alt="Sector Intelligence Logo" 
-                className="w-12 h-12 object-contain"
+                className="w-20 h-20 object-contain filter drop-shadow-lg"
               />
               Sector Intelligence
             </h1>
