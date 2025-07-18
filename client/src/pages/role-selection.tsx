@@ -101,7 +101,7 @@ export default function RoleSelection() {
                     </div>
                     <h3 className="text-xl font-semibold text-slate-900 mb-2">{role.title}</h3>
                     <div className="h-12 flex items-center justify-center mb-4">
-                      <p className="text-slate-600 text-sm">{role.description}</p>
+                      <p className="text-slate-600 text-sm pl-[5px] pr-[5px]">{role.description}</p>
                     </div>
                     <ul className="text-xs text-slate-500 space-y-1 mt-auto">
                       {role.features.map((feature, index) => (
