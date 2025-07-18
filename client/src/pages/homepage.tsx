@@ -71,7 +71,6 @@ export default function Homepage() {
                   className="object-contain"
                   style={{ width: '714px', height: '202.53px' }}
                 />
-                <span className="text-xl font-bold text-gray-900">SECTOR INTELLIGENCE</span>
               </div>
             </div>
             <div className="flex items-center space-x-8">
@@ -133,25 +132,7 @@ export default function Homepage() {
               </form>
             </div>
 
-            {/* Right Visual */}
-            <div className="flex justify-center">
-              <div className="w-[900px] h-[400px] relative">
-                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center">
-                  <div className="w-[850px] h-[350px] border-4 border-primary/30 rounded-2xl flex items-center justify-center">
-                    <div className="w-[820px] h-[300px] border-2 border-primary/50 rounded-xl flex items-center justify-center">
-                      <div className="bg-white/95 rounded-xl flex items-center justify-center p-8 shadow-2xl" style={{ width: '800px', height: '250px' }}>
-                        <img 
-                          src={logoPath} 
-                          alt="Sector Intelligence Logo" 
-                          className="object-contain filter drop-shadow-lg"
-                          style={{ width: '714px', height: '202.53px' }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
