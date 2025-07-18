@@ -4,7 +4,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Building, Search, MapPin, DollarSign, Calendar } from "lucide-react";
-import logoPath from "@assets/Sector Intellignece Logo (500x500)_1752856578754.png";
+import logoPath from "@assets/Colored SI Logo_1752857295177.png";
 
 interface Project {
   id: string;

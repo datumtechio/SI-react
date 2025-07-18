@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Building, ChartLine, HardHat, Lightbulb, DraftingCompass, Truck, ArrowRight } from "lucide-react";
-import logoPath from "@assets/Sector Intellignece Logo (500x500)_1752856578754.png";
+import logoPath from "@assets/Colored SI Logo_1752857295177.png";
 import { cn } from "@/lib/utils";
 import { UserRole, roleColors } from "@/lib/types";
 
