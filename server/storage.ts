@@ -14,6 +14,9 @@ export interface IStorage {
   // Market Indicators
   getMarketIndicators(): Promise<MarketIndicator[]>;
   createMarketIndicator(indicator: InsertMarketIndicator): Promise<MarketIndicator>;
+  
+  // Trending Sectors
+  getTrendingSectors(): Promise<any[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -314,6 +317,30 @@ export class MemStorage implements IStorage {
     };
     this.marketIndicators.set(id, indicator);
     return indicator;
+  }
+
+  async getTrendingSectors(): Promise<any[]> {
+    const projects = Array.from(this.projects.values());
+    const sectorStats = new Map<string, { projectCount: number; totalValue: number; }>();
+    
+    // Calculate sector statistics
+    projects.forEach(project => {
+      const current = sectorStats.get(project.sector) || { projectCount: 0, totalValue: 0 };
+      current.projectCount++;
+      current.totalValue += project.investment;
+      sectorStats.set(project.sector, current);
+    });
+
+    // Convert to trending sectors format
+    const trendingSectors = Array.from(sectorStats.entries()).map(([name, stats]) => ({
+      name,
+      projectCount: stats.projectCount,
+      growthRate: `+${Math.floor(Math.random() * 25 + 5)}%`, // Simulated growth rate
+      averageValue: stats.totalValue / stats.projectCount * 1000000, // Convert to actual currency
+    }));
+
+    // Sort by project count descending
+    return trendingSectors.sort((a, b) => b.projectCount - a.projectCount);
   }
 }
 

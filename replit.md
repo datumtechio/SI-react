@@ -65,7 +65,7 @@ Each role has customized features and data views tailored to their specific need
 
 ## Data Flow
 
-1. **Authentication Flow**: Session-based user preferences stored in localStorage
+1. **Homepage Discovery**: Users start with latest projects, trending sectors, and featured content
 2. **Role Selection**: Users select their role which customizes the entire experience
 3. **Search & Filter**: Advanced filtering with real-time updates via React Query
 4. **Dashboard**: Personalized dashboards with role-specific widgets and data

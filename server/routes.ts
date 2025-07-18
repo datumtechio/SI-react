@@ -99,6 +99,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get trending sectors
+  app.get("/api/trending-sectors", async (req, res) => {
+    try {
+      const sectors = await storage.getTrendingSectors();
+      res.json(sectors);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch trending sectors" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
