@@ -150,12 +150,64 @@ export default function Homepage() {
       {/* Content Sections */}
       <div className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Latest Projects */}
+          <section className="mb-20">
+            <div className="flex items-center justify-between mb-12">
+              <div className="text-center flex-1">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">Latest Projects</h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Discover the newest investment opportunities and development projects across the MENA region
+                </p>
+              </div>
+              <Link href="/search">
+                <Button variant="outline" className="ml-8">
+                  View All Projects
+                </Button>
+              </Link>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {latestProjects.slice(0, 6).map((project) => (
+                <div key={project.id} className="bg-white border border-gray-100 rounded-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-4">
+                      <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">{project.name}</h3>
+                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                        {project.status}
+                      </span>
+                    </div>
+                    <div className="flex items-center text-sm text-gray-500 mb-4">
+                      <MapPin size={14} className="mr-1" />
+                      {project.location}
+                    </div>
+                    <p className="text-sm text-gray-600 mb-6 line-clamp-2">
+                      {project.description}
+                    </p>
+                    <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                      <div className="flex items-center">
+                        <DollarSign size={14} className="mr-1 text-primary" />
+                        <span className="font-medium text-gray-900">{formatCurrency(project.investment * 1000000)}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Calendar size={14} className="mr-1 text-primary" />
+                        <span className="text-gray-600">{project.completionDate}</span>
+                      </div>
+                    </div>
+                    <span className="inline-block bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">
+                      {project.sector}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* Trending Sectors */}
           <section className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Market Intelligence</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Trending Sectors</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover trending sectors and investment opportunities across the MENA region
+                Browse the most active investment sectors with growth opportunities
               </p>
             </div>
             
@@ -183,12 +235,12 @@ export default function Homepage() {
             </div>
           </section>
 
-          {/* Featured Projects */}
+          {/* Featured Project Profiles */}
           <section className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Projects</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Project Profiles</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Explore high-value investment opportunities and development projects
+                Explore detailed profiles of high-value investment opportunities
               </p>
             </div>
             
