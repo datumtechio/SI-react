@@ -82,59 +82,7 @@ export default function Homepage() {
           </div>
         </div>
       </nav>
-      {/* Hero Section */}
-      <div className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                  Sector<br />
-                  Intelligence
-                </h1>
-                <p className="text-lg text-gray-600 max-w-lg leading-relaxed">
-                  Sector Intelligence is a next-generation market intelligence platform built to unlock business potential across the MENA region
-                </p>
-              </div>
-              
-              <Link href="/role-selection">
-                <Button 
-                  size="lg" 
-                  className="bg-primary hover:bg-primary/90 text-white pl-[32px] pr-[32px] pt-[22px] pb-[22px] mt-[18px] mb-[18px] text-lg rounded-full"
-                >
-                  Sign Up
-                </Button>
-              </Link>
-
-              {/* Quick Search */}
-              <form onSubmit={handleSearch} className="max-w-lg">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                  <Input
-                    type="text"
-                    placeholder="Search projects, locations, or sectors..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-12 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
-                  {searchTerm.trim() && (
-                    <Button 
-                      type="submit" 
-                      size="sm"
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2"
-                    >
-                      Search
-                    </Button>
-                  )}
-                </div>
-              </form>
-            </div>
-
-            
-          </div>
-        </div>
-      </div>
+      
       {/* Content Sections */}
       <div className="py-20" style={{ backgroundColor: '#0a1b3d' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
