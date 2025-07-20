@@ -11,7 +11,9 @@ import { ProjectCard } from "@/components/project-card";
 import { MarketIndicator } from "@/components/market-indicator";
 import { ProjectComparison } from "@/components/project-comparison";
 import { GlobalHeaderFilter } from "@/components/global-header-filter";
-import { Project, MarketIndicator as MarketIndicatorType, SearchFilters } from "@shared/schema";
+import { InvestorFiltersComponent } from "@/components/investor-filters";
+import { InvestorInsights } from "@/components/investor-insights";
+import { Project, MarketIndicator as MarketIndicatorType, SearchFilters, InvestorFilters } from "@shared/schema";
 import { UserRole, FilterOptions } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
@@ -26,6 +28,8 @@ export default function Dashboard() {
   const [comparisonProjects, setComparisonProjects] = useState<Project[]>([]);
   const [favoriteProjects, setFavoriteProjects] = useState<number[]>([]);
   const [globalFilters, setGlobalFilters] = useState<{ country?: string; sector?: string }>({});
+  const [investorFilters, setInvestorFilters] = useState<InvestorFilters>({ country: "Saudi Arabia" });
+  const [showInsights, setShowInsights] = useState(false);
 
   useEffect(() => {
     const role = localStorage.getItem("selectedRole") as UserRole;
@@ -51,10 +55,19 @@ export default function Dashboard() {
         sector: savedSector || undefined,
       });
     }
+
+    // Set default country to Saudi Arabia for investors
+    if (role === "investor" && !savedCountry) {
+      setGlobalFilters(prev => ({ ...prev, country: "Saudi Arabia" }));
+      setInvestorFilters(prev => ({ ...prev, country: "Saudi Arabia" }));
+    }
   }, []);
 
+  // Use investor filters for investor role, otherwise use regular filters
+  const queryFilters = selectedRole === "investor" ? investorFilters : { ...activeFilters, ...globalFilters };
+  
   const { data: projects = [], isLoading: isLoadingProjects } = useQuery<Project[]>({
-    queryKey: ["/api/projects", { ...activeFilters, ...globalFilters }],
+    queryKey: ["/api/projects", queryFilters],
     enabled: true,
   });
 
@@ -136,6 +149,18 @@ export default function Dashboard() {
     });
   };
 
+  const handleInvestorFiltersChange = (filters: InvestorFilters) => {
+    setInvestorFilters(filters);
+  };
+
+  const handleGetInsights = () => {
+    setShowInsights(true);
+    toast({
+      title: "Market Analysis Generated",
+      description: "District-level insights and market gap indicators are now available.",
+    });
+  };
+
   const getActiveFilterEntries = () => {
     return Object.entries(activeFilters).filter(([, value]) => value !== undefined);
   };
@@ -163,10 +188,18 @@ export default function Dashboard() {
         {/* Sidebar Filters */}
         <div className="filter-sidebar">
           <div className="p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-slate-900">Filters</h2>
-              <Filter size={18} className="text-slate-400" />
-            </div>
+            {selectedRole === "investor" ? (
+              <InvestorFiltersComponent 
+                filters={investorFilters}
+                onFiltersChange={handleInvestorFiltersChange}
+                onGetInsights={handleGetInsights}
+              />
+            ) : (
+              <>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-lg font-semibold text-slate-900">Filters</h2>
+                  <Filter size={18} className="text-slate-400" />
+                </div>
 
             {/* Active Filters */}
             {getActiveFilterEntries().length > 0 && (
@@ -284,6 +317,8 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
+              </>
+            )}
           </div>
         </div>
 
@@ -330,12 +365,23 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Market Opportunity Indicators */}
-            <div className="grid lg:grid-cols-3 gap-6 mb-8">
-              {marketIndicators.map((indicator) => (
-                <MarketIndicator key={indicator.id} indicator={indicator} />
-              ))}
-            </div>
+            {/* Investor Insights or Market Indicators */}
+            {selectedRole === "investor" && showInsights ? (
+              <div className="mb-8">
+                <InvestorInsights 
+                  projects={projects}
+                  selectedLocation={`${investorFilters.city || investorFilters.country || ""}${investorFilters.district ? ` → ${investorFilters.district}` : ""}`}
+                  selectedSector={investorFilters.sector}
+                  selectedSubSector={investorFilters.subSector}
+                />
+              </div>
+            ) : (
+              <div className="grid lg:grid-cols-3 gap-6 mb-8">
+                {marketIndicators.map((indicator) => (
+                  <MarketIndicator key={indicator.id} indicator={indicator} />
+                ))}
+              </div>
+            )}
 
             {/* Project Comparison Module */}
             <div className="mb-8">
