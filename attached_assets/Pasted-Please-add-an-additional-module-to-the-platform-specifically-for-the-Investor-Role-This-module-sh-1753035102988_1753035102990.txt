@@ -1,0 +1,77 @@
+Please add an additional module to the platform specifically for the "Investor Role."
+This module should allow investors to search and analyze projects based on specific investment criteria relevant to Sector Intelligence.
+
+Investor Search Module – Requirements
+User Inputs (Filters):
+
+1️⃣ Location Filters:
+
+Country (Start with Saudi Arabia, but prepare for other MENA countries)
+
+City
+
+District (optional refinement)
+
+2️⃣ Sector Selection:
+The sectors are specific to Sector Intelligence’s current focus:
+
+Main Sector	Sub-Sector Examples
+Real Estate	Residential, Commercial, Hospitality, Retail, Mixed-use
+Infrastructure	Roads, Bridges, Airports, Ports, Utilities Infrastructure
+Energy	Renewable Energy (Solar, Wind), Power Plants, Energy Storage
+Industry	Industrial Parks, Manufacturing Zones, Logistics Hubs
+Oil & Gas	Refineries, Petrochemical Plants, Distribution Facilities
+
+3️⃣ Project Status:
+
+Planning
+
+Under Construction
+
+Nearing Completion
+
+Completed / Operational
+
+Expected Outputs (Results to Display):
+Market Overview Map / Visualization:
+Show how different project types are distributed across regions (e.g., oil refineries in Eastern Province, real estate projects in Riyadh, etc.)
+
+Project Listings:
+Display projects matching the filters, including:
+
+Project Name
+
+Location (Country, City, District)
+
+Development Status
+
+Sector / Sub-sector
+
+Developer or Contractor (if data available)
+
+Comparison Tool:
+Enable side-by-side comparisons of projects in the same sector and location to assess investment competition or strategic positioning.
+
+Gap Analysis / Pipeline Insights:
+Highlight areas with a concentration of upcoming projects or reveal market gaps where few developments exist (e.g., no renewable energy projects in a specific region).
+
+User Flow Example:
+1️⃣ Investor logs in and selects role (already implemented)
+2️⃣ On the dashboard, investor selects filters:
+
+Location (e.g., UAE → Dubai)
+
+Sector (Infrastructure → Airports)
+
+Project Status (Under Construction)
+3️⃣ System returns a list of projects, insights on distribution by location, and identifies opportunity areas.
+
+Design & Functionality Notes:
+Follow the design style of previous pages
+
+Use side panel filters and simple dropdowns for user inputs
+
+Display results in cards, tables, or interactive lists
+
+If possible, add basic visualization like maps or charts (optional)
+

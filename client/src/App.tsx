@@ -7,6 +7,7 @@ import Homepage from "@/pages/homepage";
 import RoleSelection from "@/pages/role-selection";
 import SearchFilter from "@/pages/search-filter";
 import Dashboard from "@/pages/dashboard";
+import InvestorSearch from "@/pages/investor-search";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -16,6 +17,7 @@ function Router() {
       <Route path="/role-selection" component={RoleSelection} />
       <Route path="/search" component={SearchFilter} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/investor-search" component={InvestorSearch} />
       <Route component={NotFound} />
     </Switch>
   );

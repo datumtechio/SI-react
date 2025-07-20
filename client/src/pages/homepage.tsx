@@ -77,6 +77,7 @@ export default function Homepage() {
               <Link href="/" className="text-primary font-medium">Home</Link>
               <Link href="/role-selection" className="text-gray-600 hover:text-gray-900">About Us</Link>
               <Link href="/search" className="text-gray-600 hover:text-gray-900">Project Intelligence</Link>
+              <Link href="/investor-search" className="text-gray-600 hover:text-gray-900">Investor Search</Link>
               <Link href="/dashboard" className="text-gray-600 hover:text-gray-900">Contact Us</Link>
             </div>
           </div>

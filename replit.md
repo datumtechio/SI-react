@@ -4,6 +4,14 @@
 
 This is a full-stack real estate investment platform built with React, TypeScript, Express.js, and PostgreSQL. The application provides role-based dashboards for investors, contractors, consultants, and developers to discover, analyze, and manage real estate projects.
 
+## Recent Changes (July 18, 2025)
+
+- **Investor Search Module Added**: Comprehensive investment opportunity search with advanced filtering
+- **Oil & Gas Sector Integration**: Added fifth sector (Oil & Gas) with sub-sectors including refineries, petrochemical plants, and distribution facilities
+- **Saudi Arabia Market Focus**: Enhanced location filters starting with Saudi Arabia as primary market
+- **Enhanced Project Database**: Added major Saudi projects including NEOM, Riyadh Metro, and Jubail Petrochemical Complex
+- **Sector-Specific Sub-Categories**: Implemented detailed sub-sector filtering for all five main sectors
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.

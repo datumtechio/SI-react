@@ -66,6 +66,7 @@ export const insertMarketIndicatorSchema = createInsertSchema(marketIndicators).
 export const searchFiltersSchema = z.object({
   country: z.string().optional(),
   sector: z.string().optional(),
+  subSector: z.string().optional(),
   projectType: z.string().optional(),
   city: z.string().optional(),
   district: z.string().optional(),
@@ -79,6 +80,23 @@ export const searchFiltersSchema = z.object({
   isSustainable: z.boolean().optional(),
 });
 
+// Investor-specific search filters
+export const investorFiltersSchema = z.object({
+  country: z.string().optional(),
+  city: z.string().optional(),
+  district: z.string().optional(),
+  sector: z.string().optional(),
+  subSector: z.string().optional(),
+  status: z.enum(["Planning", "Under Construction", "Nearing Completion", "Completed / Operational"]).optional(),
+  minInvestment: z.number().optional(),
+  maxInvestment: z.number().optional(),
+  minRoi: z.number().optional(),
+  maxRoi: z.number().optional(),
+  completionTimeframe: z.string().optional(),
+  riskLevel: z.enum(["Low", "Medium", "High"]).optional(),
+  sustainabilityRating: z.string().optional(),
+});
+
 export type InsertProject = z.infer<typeof insertProjectSchema>;
 export type Project = typeof projects.$inferSelect;
 export type InsertUserPreferences = z.infer<typeof insertUserPreferencesSchema>;
@@ -86,3 +104,4 @@ export type UserPreferences = typeof userPreferences.$inferSelect;
 export type InsertMarketIndicator = z.infer<typeof insertMarketIndicatorSchema>;
 export type MarketIndicator = typeof marketIndicators.$inferSelect;
 export type SearchFilters = z.infer<typeof searchFiltersSchema>;
+export type InvestorFilters = z.infer<typeof investorFiltersSchema>;

@@ -109,6 +109,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Investor-specific endpoints
+  app.get("/api/cities/:country", async (req, res) => {
+    try {
+      const { country } = req.params;
+      const projects = await storage.getProjects();
+      const cities = Array.from(new Set(projects
+        .filter(p => p.country === country)
+        .map(p => p.city)
+      )).sort();
+      res.json(cities);
+    } catch (error) {
+      console.error("Error fetching cities:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.get("/api/districts/:country/:city", async (req, res) => {
+    try {
+      const { country, city } = req.params;
+      const projects = await storage.getProjects();
+      const districts = Array.from(new Set(projects
+        .filter(p => p.country === country && p.city === city)
+        .map(p => p.district)
+      )).sort();
+      res.json(districts);
+    } catch (error) {
+      console.error("Error fetching districts:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
