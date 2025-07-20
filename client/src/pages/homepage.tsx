@@ -62,23 +62,26 @@ export default function Homepage() {
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-52">
+          <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
               <div className="flex items-center gap-3">
                 <img 
                   src={logoPath} 
                   alt="Sector Intelligence Logo" 
-                  className="object-contain ml-[1px] mr-[1px]"
-                  style={{ width: '714px', height: '202.53px' }}
+                  className="object-contain h-12 w-auto"
                 />
               </div>
             </div>
             <div className="flex items-center space-x-8">
-              <Link href="/" className="text-primary font-medium">Home</Link>
-              <Link href="/role-selection" className="text-gray-600 hover:text-gray-900">About Us</Link>
-              <Link href="/search" className="text-gray-600 hover:text-gray-900">Project Intelligence</Link>
-              <Link href="/investor-search" className="text-gray-600 hover:text-gray-900">Investor Search</Link>
-              <Link href="/dashboard" className="text-gray-600 hover:text-gray-900">Contact Us</Link>
+              <Link href="/" className="text-primary font-medium hover:text-primary/80 transition-colors">Home</Link>
+              <Link href="/role-selection" className="text-gray-600 hover:text-gray-900 transition-colors">About Us</Link>
+              <Link href="/search" className="text-gray-600 hover:text-gray-900 transition-colors">Project Intelligence</Link>
+              <Link href="/investor-search" className="text-gray-600 hover:text-gray-900 transition-colors">Investor Search</Link>
+              <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 transition-colors">Contact Us</Link>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Button variant="outline">Sign In</Button>
+              <Button>Get Started</Button>
             </div>
           </div>
         </div>

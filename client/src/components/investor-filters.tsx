@@ -181,7 +181,7 @@ export function InvestorFiltersComponent({ filters, onFiltersChange, onGetInsigh
                   <SelectValue placeholder="Select city" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Cities</SelectItem>
+                  <SelectItem value="all">All Cities</SelectItem>
                   {cities.map(city => (
                     <SelectItem key={city} value={city}>{city}</SelectItem>
                   ))}
@@ -198,7 +198,7 @@ export function InvestorFiltersComponent({ filters, onFiltersChange, onGetInsigh
                     <SelectValue placeholder="Select district" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Districts</SelectItem>
+                    <SelectItem value="all">All Districts</SelectItem>
                     {districts.map(district => (
                       <SelectItem key={district} value={district}>{district}</SelectItem>
                     ))}
@@ -227,7 +227,7 @@ export function InvestorFiltersComponent({ filters, onFiltersChange, onGetInsigh
                   <SelectValue placeholder="Select sector" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Sectors</SelectItem>
+                  <SelectItem value="all">All Sectors</SelectItem>
                   {Object.entries(SECTORS_CONFIG).map(([sector, config]) => {
                     const Icon = config.icon;
                     return (
@@ -252,7 +252,7 @@ export function InvestorFiltersComponent({ filters, onFiltersChange, onGetInsigh
                     <SelectValue placeholder="Select sub-sector" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Sub-Sectors</SelectItem>
+                    <SelectItem value="all">All Sub-Sectors</SelectItem>
                     {selectedSectorConfig.subSectors.map(subSector => (
                       <SelectItem key={subSector} value={subSector}>{subSector}</SelectItem>
                     ))}
@@ -277,7 +277,7 @@ export function InvestorFiltersComponent({ filters, onFiltersChange, onGetInsigh
               <SelectValue placeholder="Select project status" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Statuses</SelectItem>
+              <SelectItem value="all">All Statuses</SelectItem>
               {STATUSES.map(status => (
                 <SelectItem key={status} value={status}>{status}</SelectItem>
               ))}
