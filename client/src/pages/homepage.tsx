@@ -80,7 +80,9 @@ export default function Homepage() {
               <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 transition-colors">Contact Us</Link>
             </div>
             <div className="flex items-center">
-              <Button>Get Started</Button>
+              <Link href="/role-selection">
+                <Button>Get Started</Button>
+              </Link>
             </div>
           </div>
         </div>
