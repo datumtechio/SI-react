@@ -114,35 +114,36 @@ export default function InvestorDashboard() {
   ].filter(Boolean).length;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: '#f9fafc' }}>
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white border-b" style={{ borderColor: '#f9fafc' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Button 
                 variant="ghost" 
                 onClick={() => setLocation("/role-selection")}
-                className="text-gray-600"
+                className="hover:bg-gray-100"
+                style={{ color: '#2f3a45' }}
               >
                 ← Back to Role Selection
               </Button>
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-green-600" />
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#00a7b2' }}>
+                  <TrendingUp className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900">Investor Dashboard</h1>
-                  <p className="text-gray-600">Discover investment opportunities and analyze market potential</p>
+                  <h1 className="text-2xl font-bold" style={{ color: '#0a1b3d' }}>Investor Dashboard</h1>
+                  <p style={{ color: '#2f3a45' }}>Discover investment opportunities and analyze market potential</p>
                 </div>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="border-gray-300 hover:bg-gray-50">
                 <Download className="w-4 h-4 mr-2" />
                 Export Data
               </Button>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="border-gray-300 hover:bg-gray-50">
                 <FileSpreadsheet className="w-4 h-4 mr-2" />
                 Investment Report
               </Button>
@@ -157,12 +158,12 @@ export default function InvestorDashboard() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <TrendingUp className="w-6 h-6 text-green-600" />
+                <div className="p-2 rounded-lg" style={{ backgroundColor: '#00a7b220' }}>
+                  <TrendingUp className="w-6 h-6" style={{ color: '#00a7b2' }} />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">High ROI Projects</p>
-                  <p className="text-2xl font-bold text-gray-900">247</p>
+                  <p className="text-sm font-medium" style={{ color: '#2f3a45' }}>High ROI Projects</p>
+                  <p className="text-2xl font-bold" style={{ color: '#0a1b3d' }}>247</p>
                 </div>
               </div>
             </CardContent>
@@ -171,12 +172,12 @@ export default function InvestorDashboard() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <Search className="w-6 h-6 text-blue-600" />
+                <div className="p-2 rounded-lg" style={{ backgroundColor: '#0a1b3d20' }}>
+                  <Search className="w-6 h-6" style={{ color: '#0a1b3d' }} />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">Available Opportunities</p>
-                  <p className="text-2xl font-bold text-gray-900">89</p>
+                  <p className="text-sm font-medium" style={{ color: '#2f3a45' }}>Available Opportunities</p>
+                  <p className="text-2xl font-bold" style={{ color: '#0a1b3d' }}>89</p>
                 </div>
               </div>
             </CardContent>
@@ -185,12 +186,12 @@ export default function InvestorDashboard() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <Filter className="w-6 h-6 text-purple-600" />
+                <div className="p-2 rounded-lg" style={{ backgroundColor: '#2f3a4520' }}>
+                  <Filter className="w-6 h-6" style={{ color: '#2f3a45' }} />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">Total Market Value</p>
-                  <p className="text-2xl font-bold text-gray-900">$12.4B</p>
+                  <p className="text-sm font-medium" style={{ color: '#2f3a45' }}>Total Market Value</p>
+                  <p className="text-2xl font-bold" style={{ color: '#0a1b3d' }}>$12.4B</p>
                 </div>
               </div>
             </CardContent>
@@ -199,12 +200,12 @@ export default function InvestorDashboard() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <div className="p-2 bg-orange-100 rounded-lg">
-                  <TrendingUp className="w-6 h-6 text-orange-600" />
+                <div className="p-2 rounded-lg" style={{ backgroundColor: '#00a7b220' }}>
+                  <TrendingUp className="w-6 h-6" style={{ color: '#00a7b2' }} />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">Avg. Expected ROI</p>
-                  <p className="text-2xl font-bold text-gray-900">14.2%</p>
+                  <p className="text-sm font-medium" style={{ color: '#2f3a45' }}>Avg. Expected ROI</p>
+                  <p className="text-2xl font-bold" style={{ color: '#0a1b3d' }}>14.2%</p>
                 </div>
               </div>
             </CardContent>
@@ -215,7 +216,7 @@ export default function InvestorDashboard() {
         <Card className="mb-8">
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg font-semibold text-gray-900">
+              <CardTitle className="text-lg font-semibold" style={{ color: '#0a1b3d' }}>
                 Investment Opportunity Filters
               </CardTitle>
               {activeFiltersCount > 0 && (
@@ -223,7 +224,7 @@ export default function InvestorDashboard() {
                   variant="outline" 
                   size="sm" 
                   onClick={handleClearFilters}
-                  className="text-gray-600"
+                  style={{ color: '#2f3a45' }}
                 >
                   <X className="w-4 h-4 mr-2" />
                   Clear All ({activeFiltersCount})
@@ -235,7 +236,7 @@ export default function InvestorDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Sector Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Sector</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>Sector</label>
                 <Select value={selectedSector} onValueChange={setSelectedSector}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select sector" />
@@ -253,7 +254,7 @@ export default function InvestorDashboard() {
 
               {/* Project Type Filter - Dynamic based on sector */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Project Type</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>Project Type</label>
                 <Select 
                   value={selectedProjectType} 
                   onValueChange={setSelectedProjectType}
@@ -277,7 +278,7 @@ export default function InvestorDashboard() {
 
               {/* Country Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Country</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>Country</label>
                 <Select value={selectedCountry} onValueChange={setSelectedCountry}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select country" />
@@ -293,7 +294,7 @@ export default function InvestorDashboard() {
 
               {/* Status Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Project Status</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>Project Status</label>
                 <Select value={selectedStatus} onValueChange={setSelectedStatus}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select status" />
@@ -313,7 +314,7 @@ export default function InvestorDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-4">
               {/* City Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">City</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>City</label>
                 <Select 
                   value={selectedCity} 
                   onValueChange={setSelectedCity}
@@ -340,7 +341,7 @@ export default function InvestorDashboard() {
 
               {/* District Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">District</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>District</label>
                 <Select 
                   value={selectedDistrict} 
                   onValueChange={setSelectedDistrict}
@@ -367,7 +368,7 @@ export default function InvestorDashboard() {
 
               {/* Company Name Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Developer/Company</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>Developer/Company</label>
                 <Input
                   type="text"
                   placeholder="Search developer..."
@@ -380,7 +381,7 @@ export default function InvestorDashboard() {
 
               {/* Investment Range Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Investment Range</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>Investment Range</label>
                 <Select value={investmentRange} onValueChange={setInvestmentRange}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select range" />
@@ -396,10 +397,11 @@ export default function InvestorDashboard() {
 
               {/* Find Investments Button */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">&nbsp;</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>&nbsp;</label>
                 <Button 
                   onClick={handleFindInvestments}
-                  className="w-full h-10 bg-green-600 hover:bg-green-700"
+                  className="w-full h-10 text-white hover:opacity-90"
+                  style={{ backgroundColor: '#00a7b2' }}
                 >
                   <Search className="w-4 h-4 mr-2" />
                   Find Investments
@@ -412,23 +414,23 @@ export default function InvestorDashboard() {
         {/* Information Section */}
         <Card>
           <CardContent className="p-8 text-center">
-            <TrendingUp className="w-16 h-16 text-green-600 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Ready to Discover Investment Opportunities?</h3>
-            <p className="text-gray-600 mb-6">
+            <TrendingUp className="w-16 h-16 mx-auto mb-4" style={{ color: '#00a7b2' }} />
+            <h3 className="text-xl font-semibold mb-2" style={{ color: '#0a1b3d' }}>Ready to Discover Investment Opportunities?</h3>
+            <p className="mb-6" style={{ color: '#2f3a45' }}>
               Use the filters above to search for investment opportunities and analyze market potential. 
               You can filter by sector, project type, location, developer, and investment range.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm" style={{ color: '#2f3a45' }}>
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-2 h-2 bg-green-600 rounded-full"></div>
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#00a7b2' }}></div>
                 <span>ROI analysis and market comparisons</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-2 h-2 bg-green-600 rounded-full"></div>
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#00a7b2' }}></div>
                 <span>Location-based investment insights</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-2 h-2 bg-green-600 rounded-full"></div>
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#00a7b2' }}></div>
                 <span>Investment range filtering and analysis</span>
               </div>
             </div>

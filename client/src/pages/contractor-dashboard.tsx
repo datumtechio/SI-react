@@ -118,18 +118,18 @@ export default function ContractorDashboard() {
   // Remove this section since we're moving to results page
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: '#f9fafc' }}>
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white border-b" style={{ borderColor: '#f9fafc' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-                <HardHat className="w-6 h-6 text-orange-600" />
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#00a7b2' }}>
+                <HardHat className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Contractor Dashboard</h1>
-                <p className="text-gray-600">Find active projects and bidding opportunities</p>
+                <h1 className="text-2xl font-bold" style={{ color: '#0a1b3d' }}>Contractor Dashboard</h1>
+                <p style={{ color: '#2f3a45' }}>Find active projects and bidding opportunities</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -152,8 +152,8 @@ export default function ContractorDashboard() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center space-x-2">
-                <Filter className="w-5 h-5" />
-                <span>Project Filters</span>
+                <Filter className="w-5 h-5" style={{ color: '#00a7b2' }} />
+                <span style={{ color: '#0a1b3d' }}>Project Filters</span>
                 {activeFiltersCount > 0 && (
                   <Badge variant="secondary">{activeFiltersCount} active</Badge>
                 )}
@@ -170,7 +170,7 @@ export default function ContractorDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Sector Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Sector</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>Sector</label>
                 <Select value={selectedSector} onValueChange={setSelectedSector}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select sector" />
@@ -186,7 +186,7 @@ export default function ContractorDashboard() {
 
               {/* Project Type Filter - Dynamic based on sector */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Project Type</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>Project Type</label>
                 <Select 
                   value={selectedProjectType} 
                   onValueChange={setSelectedProjectType}
@@ -210,7 +210,7 @@ export default function ContractorDashboard() {
 
               {/* Country Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Country</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>Country</label>
                 <Select value={selectedCountry} onValueChange={setSelectedCountry}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select country" />
@@ -226,7 +226,7 @@ export default function ContractorDashboard() {
 
               {/* Status Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Project Status</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>Project Status</label>
                 <Select value={selectedStatus} onValueChange={setSelectedStatus}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select status" />
@@ -246,7 +246,7 @@ export default function ContractorDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-4">
               {/* City Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">City</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>City</label>
                 <Select 
                   value={selectedCity} 
                   onValueChange={setSelectedCity}
@@ -332,7 +332,8 @@ export default function ContractorDashboard() {
                 <label className="text-sm font-medium text-gray-700">&nbsp;</label>
                 <Button 
                   onClick={handleFindProjects}
-                  className="w-full h-10 bg-orange-600 hover:bg-orange-700"
+                  className="w-full h-10 text-white hover:opacity-90"
+                  style={{ backgroundColor: '#00a7b2' }}
                 >
                   <Search className="w-4 h-4 mr-2" />
                   Find Projects
