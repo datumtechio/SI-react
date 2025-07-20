@@ -133,11 +133,11 @@ export default function ContractorDashboard() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <Button variant="outline" size="sm" className="border-gray-300 text-gray-300 hover:bg-gray-700">
+              <Button variant="outline" size="sm" className="border-gray-300 text-gray-300 hover:bg-gray-700 bg-[#0a1b3d]">
                 <Download className="w-4 h-4 mr-2" />
                 Export Projects
               </Button>
-              <Button variant="outline" size="sm" className="border-gray-300 text-gray-300 hover:bg-gray-700">
+              <Button variant="outline" size="sm" className="border-gray-300 text-gray-300 hover:bg-gray-700 bg-[#0a1b3d]">
                 <FileSpreadsheet className="w-4 h-4 mr-2" />
                 Generate Report
               </Button>
