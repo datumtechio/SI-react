@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Grid, List, Download, FileSpreadsheet, Filter, X, HardHat, MapPin, Calendar, DollarSign } from "lucide-react";
-import { ProjectCard } from "@/components/project-card";
+import { Search, Download, FileSpreadsheet, Filter, X, HardHat } from "lucide-react";
 import { Project, SearchFilters } from "@shared/schema";
 import { FilterOptions } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -23,32 +24,68 @@ const sectorProjectTypes: Record<string, string[]> = {
 
 export default function ContractorDashboard() {
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
   const [selectedSector, setSelectedSector] = useState<string>("");
   const [selectedProjectType, setSelectedProjectType] = useState<string>("");
-  const [selectedLocation, setSelectedLocation] = useState<string>("");
+  const [selectedCountry, setSelectedCountry] = useState<string>("");
+  const [selectedCity, setSelectedCity] = useState<string>("");
+  const [selectedDistrict, setSelectedDistrict] = useState<string>("");
   const [selectedStatus, setSelectedStatus] = useState<string>("");
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [sortBy, setSortBy] = useState("deadline");
+  const [companyName, setCompanyName] = useState<string>("");
+  const [contractValueRange, setContractValueRange] = useState<string>("");
 
   // Available project types based on selected sector
   const availableProjectTypes = selectedSector ? sectorProjectTypes[selectedSector] || [] : [];
 
-  // Reset project type when sector changes
+  // Reset project type when sector changes, and city/district when country changes
   useEffect(() => {
     setSelectedProjectType("");
   }, [selectedSector]);
 
-  const contractorFilters: SearchFilters = {
-    sector: selectedSector || undefined,
-    projectType: selectedProjectType || undefined,
-    country: selectedLocation || undefined,
-    status: selectedStatus || undefined
-  };
+  useEffect(() => {
+    setSelectedCity("");
+    setSelectedDistrict("");
+  }, [selectedCountry]);
 
-  const { data: projects = [], isLoading: isLoadingProjects } = useQuery<Project[]>({
-    queryKey: ["/api/projects", contractorFilters],
-    enabled: true,
-  });
+  const handleFindProjects = () => {
+    // Get contract value range
+    let minValue, maxValue;
+    switch (contractValueRange) {
+      case "small":
+        minValue = 0;
+        maxValue = 50; // $50M
+        break;
+      case "medium":
+        minValue = 50;
+        maxValue = 500; // $50M - $500M
+        break;
+      case "mega":
+        minValue = 500;
+        maxValue = undefined; // $500M+
+        break;
+      default:
+        minValue = undefined;
+        maxValue = undefined;
+    }
+
+    const contractorFilters = {
+      sector: selectedSector || undefined,
+      projectType: selectedProjectType || undefined,
+      country: selectedCountry || undefined,
+      city: selectedCity || undefined,
+      district: selectedDistrict || undefined,
+      status: selectedStatus || undefined,
+      companyName: companyName || undefined,
+      minValue,
+      maxValue
+    };
+
+    // Save filters to localStorage for the results page
+    localStorage.setItem("contractorFilters", JSON.stringify(contractorFilters));
+    
+    // Navigate to results page
+    setLocation("/contractor-projects");
+  };
 
   const { data: filterOptions } = useQuery<FilterOptions>({
     queryKey: ["/api/filter-options"],
@@ -57,34 +94,28 @@ export default function ContractorDashboard() {
   const handleClearFilters = () => {
     setSelectedSector("");
     setSelectedProjectType("");
-    setSelectedLocation("");
+    setSelectedCountry("");
+    setSelectedCity("");
+    setSelectedDistrict("");
     setSelectedStatus("");
+    setCompanyName("");
+    setContractValueRange("");
   };
 
-  const activeFiltersCount = [selectedSector, selectedProjectType, selectedLocation, selectedStatus].filter(Boolean).length;
+  const activeFiltersCount = [
+    selectedSector, 
+    selectedProjectType, 
+    selectedCountry, 
+    selectedCity, 
+    selectedDistrict, 
+    selectedStatus, 
+    companyName, 
+    contractValueRange
+  ].filter(Boolean).length;
 
-  const filteredProjects = projects.filter(project => {
-    if (selectedSector && project.sector !== selectedSector) return false;
-    if (selectedProjectType && project.projectType !== selectedProjectType) return false;
-    if (selectedLocation && project.country !== selectedLocation) return false;
-    if (selectedStatus && project.status !== selectedStatus) return false;
-    return true;
-  });
+  // Remove this section since we're moving to results page
 
-  const sortedProjects = [...filteredProjects].sort((a, b) => {
-    switch (sortBy) {
-      case "deadline":
-        // Use createdAt as a proxy for deadline since timeline doesn't exist
-        return new Date(a.createdAt || "").getTime() - new Date(b.createdAt || "").getTime();
-      case "value":
-        // Use size as a proxy for project value since budget doesn't exist
-        return (b.size || 0) - (a.size || 0);
-      case "name":
-        return a.name.localeCompare(b.name);
-      default:
-        return 0;
-    }
-  });
+  // Remove this section since we're moving to results page
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -136,7 +167,7 @@ export default function ContractorDashboard() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Sector Filter */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">Sector</label>
@@ -177,15 +208,15 @@ export default function ContractorDashboard() {
                 </Select>
               </div>
 
-              {/* Location Filter */}
+              {/* Country Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Location</label>
-                <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+                <label className="text-sm font-medium text-gray-700">Country</label>
+                <Select value={selectedCountry} onValueChange={setSelectedCountry}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select location" />
+                    <SelectValue placeholder="Select country" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Locations</SelectItem>
+                    <SelectItem value="all">All Countries</SelectItem>
                     {filterOptions?.countries?.map((country) => (
                       <SelectItem key={country} value={country}>{country}</SelectItem>
                     ))}
@@ -209,157 +240,127 @@ export default function ContractorDashboard() {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
 
-              {/* Sort Filter */}
+            {/* Second Row of Filters */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-4">
+              {/* City Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Sort By</label>
-                <Select value={sortBy} onValueChange={setSortBy}>
+                <label className="text-sm font-medium text-gray-700">City</label>
+                <Select 
+                  value={selectedCity} 
+                  onValueChange={setSelectedCity}
+                  disabled={!selectedCountry || selectedCountry === "all"}
+                >
                   <SelectTrigger>
-                    <SelectValue />
+                    <SelectValue placeholder={
+                      !selectedCountry || selectedCountry === "all" 
+                        ? "Select country first" 
+                        : "Select city"
+                    } />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="deadline">Deadline</SelectItem>
-                    <SelectItem value="value">Project Value</SelectItem>
-                    <SelectItem value="name">Name</SelectItem>
+                    <SelectItem value="all">All Cities</SelectItem>
+                    {filterOptions?.cities?.map((city) => (
+                      <SelectItem key={city} value={city}>{city}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
+              </div>
+
+              {/* District Filter */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">District</label>
+                <Select 
+                  value={selectedDistrict} 
+                  onValueChange={setSelectedDistrict}
+                  disabled={!selectedCity || selectedCity === "all"}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder={
+                      !selectedCity || selectedCity === "all" 
+                        ? "Select city first" 
+                        : "Select district"
+                    } />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Districts</SelectItem>
+                    {filterOptions?.districts?.map((district) => (
+                      <SelectItem key={district} value={district}>{district}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Company Name Filter */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Company Name</label>
+                <Input
+                  type="text"
+                  placeholder="Search company..."
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  className="w-full"
+                />
+                <p className="text-xs text-gray-500">View competitor or own activity</p>
+              </div>
+
+              {/* Contract Value Range Filter */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Contract Value Range</label>
+                <Select value={contractValueRange} onValueChange={setContractValueRange}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select range" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Ranges</SelectItem>
+                    <SelectItem value="small">Small Projects (Under $50M)</SelectItem>
+                    <SelectItem value="medium">Medium Projects ($50M - $500M)</SelectItem>
+                    <SelectItem value="mega">Mega Projects ($500M+)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Find Projects Button */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">&nbsp;</label>
+                <Button 
+                  onClick={handleFindProjects}
+                  className="w-full h-10 bg-orange-600 hover:bg-orange-700"
+                >
+                  <Search className="w-4 h-4 mr-2" />
+                  Find Projects
+                </Button>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Results Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-xl font-semibold text-gray-900">
-              Available Projects ({sortedProjects.length})
-            </h2>
-            <p className="text-gray-600">
-              {selectedSector && selectedSector !== "all" && (
-                <span>Showing {selectedSector} projects</span>
-              )}
-              {selectedProjectType && selectedProjectType !== "all" && (
-                <span> • {selectedProjectType} type</span>
-              )}
+        {/* Information Section */}
+        <Card>
+          <CardContent className="p-8 text-center">
+            <HardHat className="w-16 h-16 text-orange-600 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Ready to Find Projects?</h3>
+            <p className="text-gray-600 mb-6">
+              Use the filters above to search for construction projects and bidding opportunities. 
+              You can filter by sector, project type, location, company, and contract value range.
             </p>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex bg-gray-100 rounded-lg p-1">
-              <Button
-                variant={viewMode === "grid" ? "default" : "ghost"}
-                size="sm"
-                onClick={() => setViewMode("grid")}
-                className="px-3"
-              >
-                <Grid className="w-4 h-4" />
-              </Button>
-              <Button
-                variant={viewMode === "list" ? "default" : "ghost"}
-                size="sm"
-                onClick={() => setViewMode("list")}
-                className="px-3"
-              >
-                <List className="w-4 h-4" />
-              </Button>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
+              <div className="flex items-center justify-center space-x-2">
+                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                <span>Dynamic project types based on sector</span>
+              </div>
+              <div className="flex items-center justify-center space-x-2">
+                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                <span>Location filtering with city and district</span>
+              </div>
+              <div className="flex items-center justify-center space-x-2">
+                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                <span>Contract value range filtering</span>
+              </div>
             </div>
-          </div>
-        </div>
-
-        {/* Projects Grid/List */}
-        {isLoadingProjects ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => (
-              <Card key={i} className="animate-pulse">
-                <CardContent className="p-6">
-                  <div className="h-4 bg-gray-200 rounded mb-4"></div>
-                  <div className="h-3 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-3 bg-gray-200 rounded mb-4"></div>
-                  <div className="h-8 bg-gray-200 rounded"></div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        ) : sortedProjects.length === 0 ? (
-          <Card>
-            <CardContent className="p-12 text-center">
-              <HardHat className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No projects found</h3>
-              <p className="text-gray-600 mb-4">
-                Try adjusting your filters to find more projects.
-              </p>
-              <Button variant="outline" onClick={handleClearFilters}>
-                Clear Filters
-              </Button>
-            </CardContent>
-          </Card>
-        ) : (
-          <div className={cn(
-            viewMode === "grid" 
-              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-              : "space-y-4"
-          )}>
-            {sortedProjects.map((project) => (
-              <Card key={project.id} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">
-                      {project.name}
-                    </h3>
-                    <Badge variant={
-                      project.status === "Tender Open" ? "default" :
-                      project.status === "In Progress" ? "secondary" : "outline"
-                    }>
-                      {project.status}
-                    </Badge>
-                  </div>
-                  
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                    {project.description}
-                  </p>
-
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      {project.city}, {project.country}
-                    </div>
-                    {project.size && (
-                      <div className="flex items-center text-sm text-gray-600">
-                        <DollarSign className="w-4 h-4 mr-2" />
-                        Size: {project.size.toLocaleString()} sq ft
-                      </div>
-                    )}
-                    {project.createdAt && (
-                      <div className="flex items-center text-sm text-gray-600">
-                        <Calendar className="w-4 h-4 mr-2" />
-                        Created: {new Date(project.createdAt).toLocaleDateString()}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="outline" className="text-xs">
-                      {project.sector}
-                    </Badge>
-                    {project.projectType && (
-                      <Badge variant="outline" className="text-xs">
-                        {project.projectType}
-                      </Badge>
-                    )}
-                  </div>
-
-                  <div className="flex space-x-2">
-                    <Button size="sm" className="flex-1">
-                      View Details
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      Save
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        )}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

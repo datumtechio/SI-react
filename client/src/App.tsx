@@ -9,6 +9,7 @@ import SearchFilter from "@/pages/search-filter";
 import Dashboard from "@/pages/dashboard";
 import InvestorSearch from "@/pages/investor-search";
 import ContractorDashboard from "@/pages/contractor-dashboard";
+import ContractorProjects from "@/pages/contractor-projects";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/investor-search" component={InvestorSearch} />
       <Route path="/contractor-dashboard" component={ContractorDashboard} />
+      <Route path="/contractor-projects" component={ContractorProjects} />
       <Route component={NotFound} />
     </Switch>
   );
