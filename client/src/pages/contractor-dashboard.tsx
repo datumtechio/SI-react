@@ -273,7 +273,7 @@ export default function ContractorDashboard() {
 
               {/* District Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">District</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>District</label>
                 <Select 
                   value={selectedDistrict} 
                   onValueChange={setSelectedDistrict}
@@ -300,7 +300,7 @@ export default function ContractorDashboard() {
 
               {/* Company Name Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Company Name</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>Company Name</label>
                 <Input
                   type="text"
                   placeholder="Search company..."
@@ -313,7 +313,7 @@ export default function ContractorDashboard() {
 
               {/* Contract Value Range Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Contract Value Range</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>Contract Value Range</label>
                 <Select value={contractValueRange} onValueChange={setContractValueRange}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select range" />
@@ -329,7 +329,7 @@ export default function ContractorDashboard() {
 
               {/* Find Projects Button */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">&nbsp;</label>
+                <label className="text-sm font-medium" style={{ color: '#0a1b3d' }}>&nbsp;</label>
                 <Button 
                   onClick={handleFindProjects}
                   className="w-full h-10 text-white hover:opacity-90"
