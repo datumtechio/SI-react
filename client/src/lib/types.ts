@@ -7,6 +7,8 @@ export interface FilterOptions {
   cities: string[];
   districts: string[];
   statuses: string[];
+  countryToCities?: Record<string, string[]>;
+  cityToDistricts?: Record<string, string[]>;
 }
 
 export interface ComparisonProject {

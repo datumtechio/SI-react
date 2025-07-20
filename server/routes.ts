@@ -86,6 +86,62 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const districts = Array.from(new Set(projects.map(p => p.district)));
       const statuses = Array.from(new Set(projects.map(p => p.status)));
       
+      // Country-specific city mappings
+      const countryToCities: Record<string, string[]> = {
+        "United Arab Emirates": [
+          "Dubai",
+          "Abu Dhabi", 
+          "Sharjah",
+          "Ajman",
+          "Ras Al Khaimah",
+          "Fujairah"
+        ],
+        "Saudi Arabia": [
+          "Riyadh",
+          "Jeddah",
+          "Mecca",
+          "Medina",
+          "Dammam",
+          "Khobar",
+          "Tabuk",
+          "Buraidah",
+          "Khamis Mushait",
+          "Hail"
+        ]
+      };
+
+      // City to district mappings
+      const cityToDistricts: Record<string, string[]> = {
+        "Dubai": [
+          "Downtown Dubai",
+          "Dubai Marina",
+          "Jumeirah",
+          "Business Bay",
+          "DIFC",
+          "Dubai Hills",
+          "Arabian Ranches",
+          "Palm Jumeirah"
+        ],
+        "Abu Dhabi": [
+          "Abu Dhabi Island",
+          "Al Reem Island",
+          "Yas Island",
+          "Saadiyat Island",
+          "Al Raha",
+          "Khalifa City",
+          "Mohammed Bin Zayed City"
+        ],
+        "Riyadh": [
+          "King Fahd District",
+          "Olaya District",
+          "Al Malaz",
+          "Diplomatic Quarter",
+          "King Abdul Aziz District",
+          "Al Worood",
+          "Al Nakheel"
+        ]
+      };
+      
       res.json({
         countries,
         sectors,
@@ -93,6 +149,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         cities,
         districts,
         statuses,
+        countryToCities,
+        cityToDistricts
       });
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch filter options" });

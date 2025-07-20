@@ -261,7 +261,10 @@ export default function ContractorDashboard() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Cities</SelectItem>
-                    {filterOptions?.cities?.map((city) => (
+                    {(selectedCountry && selectedCountry !== "all" && filterOptions?.countryToCities?.[selectedCountry] 
+                      ? filterOptions.countryToCities[selectedCountry]
+                      : filterOptions?.cities || []
+                    ).map((city) => (
                       <SelectItem key={city} value={city}>{city}</SelectItem>
                     ))}
                   </SelectContent>
@@ -285,7 +288,10 @@ export default function ContractorDashboard() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Districts</SelectItem>
-                    {filterOptions?.districts?.map((district) => (
+                    {(selectedCity && selectedCity !== "all" && filterOptions?.cityToDistricts?.[selectedCity] 
+                      ? filterOptions.cityToDistricts[selectedCity]
+                      : filterOptions?.districts || []
+                    ).map((district) => (
                       <SelectItem key={district} value={district}>{district}</SelectItem>
                     ))}
                   </SelectContent>
