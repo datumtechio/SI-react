@@ -4,7 +4,9 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Grid, List, Download, FileSpreadsheet, MapPin, Calendar, DollarSign, Building2, HardHat } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
+import { ArrowLeft, Grid, List, Download, FileSpreadsheet, MapPin, Calendar, DollarSign, Building2, HardHat, TrendingUp, Users, Target, BarChart3 } from "lucide-react";
 import { Project } from "@shared/schema";
 import { cn } from "@/lib/utils";
 
@@ -53,6 +55,147 @@ export default function ContractorProjects() {
         return 0;
     }
   });
+
+  // Analytics data for contractor insights
+  const getContractorAnalytics = () => {
+    const analytics = {
+      activeProjects: sortedProjects.filter(p => p.status === "In Progress" || p.status === "Under Construction"),
+      completedProjects: sortedProjects.filter(p => p.status === "Completed"),
+      tenderProjects: sortedProjects.filter(p => p.status === "Tender Open"),
+      planningProjects: sortedProjects.filter(p => p.status === "Planning"),
+      
+      // Contractor workload analysis (simulated based on project names)
+      contractorWorkload: getContractorWorkload(sortedProjects),
+      
+      // Location analysis
+      locationBreakdown: getLocationBreakdown(sortedProjects),
+      
+      // Sector analysis
+      sectorBreakdown: getSectorBreakdown(sortedProjects),
+      
+      // Value analysis
+      valueAnalysis: getValueAnalysis(sortedProjects)
+    };
+    
+    return analytics;
+  };
+
+  const getContractorWorkload = (projects: Project[]) => {
+    // Extract company names from project names (simplified approach)
+    const contractors: Record<string, { projects: number; sectors: string[]; locations: string[]; totalValue: number; status: Record<string, number> }> = {};
+    
+    projects.forEach(project => {
+      // Extract potential contractor name from project name
+      const contractorName = extractContractorName(project.name);
+      
+      if (!contractors[contractorName]) {
+        contractors[contractorName] = {
+          projects: 0,
+          sectors: [],
+          locations: [],
+          totalValue: 0,
+          status: {}
+        };
+      }
+      
+      contractors[contractorName].projects++;
+      contractors[contractorName].totalValue += project.investment;
+      
+      if (!contractors[contractorName].sectors.includes(project.sector)) {
+        contractors[contractorName].sectors.push(project.sector);
+      }
+      
+      const location = `${project.city}, ${project.country}`;
+      if (!contractors[contractorName].locations.includes(location)) {
+        contractors[contractorName].locations.push(location);
+      }
+      
+      contractors[contractorName].status[project.status] = (contractors[contractorName].status[project.status] || 0) + 1;
+    });
+    
+    return Object.entries(contractors)
+      .map(([name, data]) => ({ name, ...data }))
+      .sort((a, b) => b.totalValue - a.totalValue);
+  };
+
+  const extractContractorName = (projectName: string): string => {
+    // Simplified contractor name extraction from project names
+    const commonContractors = ["Emaar", "DAMAC", "Aldar", "Majid Al Futtaim", "Dubai Properties", "Nakheel", "Sobha", "Danube"];
+    
+    for (const contractor of commonContractors) {
+      if (projectName.toLowerCase().includes(contractor.toLowerCase())) {
+        return contractor;
+      }
+    }
+    
+    // If no known contractor found, use first word of project name
+    return projectName.split(' ')[0] + " Group";
+  };
+
+  const getLocationBreakdown = (projects: Project[]) => {
+    const locations: Record<string, { count: number; value: number; sectors: string[] }> = {};
+    
+    projects.forEach(project => {
+      const location = `${project.city}, ${project.country}`;
+      
+      if (!locations[location]) {
+        locations[location] = { count: 0, value: 0, sectors: [] };
+      }
+      
+      locations[location].count++;
+      locations[location].value += project.investment;
+      
+      if (!locations[location].sectors.includes(project.sector)) {
+        locations[location].sectors.push(project.sector);
+      }
+    });
+    
+    return Object.entries(locations)
+      .map(([location, data]) => ({ location, ...data }))
+      .sort((a, b) => b.value - a.value);
+  };
+
+  const getSectorBreakdown = (projects: Project[]) => {
+    const sectors: Record<string, { count: number; value: number; activeProjects: number; completedProjects: number }> = {};
+    
+    projects.forEach(project => {
+      if (!sectors[project.sector]) {
+        sectors[project.sector] = { count: 0, value: 0, activeProjects: 0, completedProjects: 0 };
+      }
+      
+      sectors[project.sector].count++;
+      sectors[project.sector].value += project.investment;
+      
+      if (project.status === "In Progress" || project.status === "Under Construction") {
+        sectors[project.sector].activeProjects++;
+      } else if (project.status === "Completed") {
+        sectors[project.sector].completedProjects++;
+      }
+    });
+    
+    return Object.entries(sectors)
+      .map(([sector, data]) => ({ sector, ...data }))
+      .sort((a, b) => b.value - a.value);
+  };
+
+  const getValueAnalysis = (projects: Project[]) => {
+    const totalValue = projects.reduce((sum, p) => sum + p.investment, 0);
+    const averageValue = totalValue / projects.length;
+    
+    const valueRanges = {
+      small: projects.filter(p => p.investment < 50).length,
+      medium: projects.filter(p => p.investment >= 50 && p.investment < 500).length,
+      mega: projects.filter(p => p.investment >= 500).length
+    };
+    
+    return {
+      totalValue,
+      averageValue,
+      valueRanges
+    };
+  };
+
+  const analytics = getContractorAnalytics();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -133,43 +276,112 @@ export default function ContractorProjects() {
           </Card>
         )}
 
-        {/* Results Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-xl font-semibold text-gray-900">
-              Project Opportunities
-            </h2>
-          </div>
-          <div className="flex items-center space-x-4">
-            <select 
-              value={sortBy} 
-              onChange={(e) => setSortBy(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-md text-sm"
-            >
-              <option value="deadline">Sort by Deadline</option>
-              <option value="value">Sort by Value</option>
-              <option value="name">Sort by Name</option>
-            </select>
-            <div className="flex bg-gray-100 rounded-lg p-1">
-              <Button
-                variant={viewMode === "grid" ? "default" : "ghost"}
-                size="sm"
-                onClick={() => setViewMode("grid")}
-                className="px-3"
-              >
-                <Grid className="w-4 h-4" />
-              </Button>
-              <Button
-                variant={viewMode === "list" ? "default" : "ghost"}
-                size="sm"
-                onClick={() => setViewMode("list")}
-                className="px-3"
-              >
-                <List className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
+        {/* Market Overview Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <TrendingUp className="w-6 h-6 text-green-600" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Active Projects</p>
+                  <p className="text-2xl font-bold text-gray-900">{analytics.activeProjects.length}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center">
+                <div className="p-2 bg-blue-100 rounded-lg">
+                  <Building2 className="w-6 h-6 text-blue-600" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Tender Open</p>
+                  <p className="text-2xl font-bold text-gray-900">{analytics.tenderProjects.length}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center">
+                <div className="p-2 bg-purple-100 rounded-lg">
+                  <Users className="w-6 h-6 text-purple-600" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Active Contractors</p>
+                  <p className="text-2xl font-bold text-gray-900">{analytics.contractorWorkload.length}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center">
+                <div className="p-2 bg-orange-100 rounded-lg">
+                  <DollarSign className="w-6 h-6 text-orange-600" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Total Value</p>
+                  <p className="text-2xl font-bold text-gray-900">${analytics.valueAnalysis.totalValue.toFixed(0)}M</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
+
+        {/* Detailed Analysis Tabs */}
+        <Tabs defaultValue="projects" className="mb-8">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="projects">Project List</TabsTrigger>
+            <TabsTrigger value="contractors">Contractor Analysis</TabsTrigger>
+            <TabsTrigger value="locations">Location Breakdown</TabsTrigger>
+            <TabsTrigger value="sectors">Sector Analysis</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="projects" className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Project Opportunities ({sortedProjects.length})
+                </h3>
+                <p className="text-gray-600">Detailed breakdown of active and completed projects</p>
+              </div>
+              <div className="flex items-center space-x-4">
+                <select 
+                  value={sortBy} 
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+                >
+                  <option value="deadline">Sort by Deadline</option>
+                  <option value="value">Sort by Value</option>
+                  <option value="name">Sort by Name</option>
+                </select>
+                <div className="flex bg-gray-100 rounded-lg p-1">
+                  <Button
+                    variant={viewMode === "grid" ? "default" : "ghost"}
+                    size="sm"
+                    onClick={() => setViewMode("grid")}
+                    className="px-3"
+                  >
+                    <Grid className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant={viewMode === "list" ? "default" : "ghost"}
+                    size="sm"
+                    onClick={() => setViewMode("list")}
+                    className="px-3"
+                  >
+                    <List className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
 
         {/* Projects Grid/List */}
         {isLoading ? (
@@ -278,6 +490,183 @@ export default function ContractorProjects() {
             ))}
           </div>
         )}
+          </TabsContent>
+          
+          <TabsContent value="contractors" className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Contractor Workload Analysis</h3>
+              <p className="text-gray-600 mb-6">Breakdown of which contractors are working on which types of projects</p>
+            </div>
+            
+            <div className="grid gap-6">
+              {analytics.contractorWorkload.slice(0, 10).map((contractor, index) => (
+                <Card key={contractor.name}>
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900">{contractor.name}</h4>
+                        <p className="text-gray-600">{contractor.projects} projects • ${contractor.totalValue.toFixed(0)}M total value</p>
+                      </div>
+                      <Badge variant="outline">#{index + 1} by Value</Badge>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                      <div>
+                        <p className="text-sm font-medium text-gray-700 mb-2">Sectors</p>
+                        <div className="flex flex-wrap gap-1">
+                          {contractor.sectors.map(sector => (
+                            <Badge key={sector} variant="secondary" className="text-xs">
+                              {sector}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <p className="text-sm font-medium text-gray-700 mb-2">Key Locations</p>
+                        <div className="flex flex-wrap gap-1">
+                          {contractor.locations.slice(0, 2).map(location => (
+                            <Badge key={location} variant="outline" className="text-xs">
+                              {location}
+                            </Badge>
+                          ))}
+                          {contractor.locations.length > 2 && (
+                            <Badge variant="outline" className="text-xs">
+                              +{contractor.locations.length - 2} more
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <p className="text-sm font-medium text-gray-700 mb-2">Project Status</p>
+                        <div className="space-y-1">
+                          {Object.entries(contractor.status).map(([status, count]) => (
+                            <div key={status} className="flex justify-between text-xs">
+                              <span className="text-gray-600">{status}</span>
+                              <span className="font-medium">{count}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="pt-4 border-t border-gray-200">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">Market Activity Level</span>
+                        <span className="font-medium">
+                          {contractor.projects > 10 ? "High" : contractor.projects > 5 ? "Medium" : "Low"}
+                        </span>
+                      </div>
+                      <Progress 
+                        value={Math.min((contractor.projects / 15) * 100, 100)} 
+                        className="mt-2 h-2"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="locations" className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Location Breakdown</h3>
+              <p className="text-gray-600 mb-6">Geographic distribution of projects and market activity</p>
+            </div>
+            
+            <div className="grid gap-4">
+              {analytics.locationBreakdown.map((location, index) => (
+                <Card key={location.location}>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                          <MapPin className="w-4 h-4 text-blue-600" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900">{location.location}</h4>
+                          <p className="text-sm text-gray-600">{location.count} projects • ${location.value.toFixed(0)}M total value</p>
+                        </div>
+                      </div>
+                      <Badge variant="outline">#{index + 1}</Badge>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {location.sectors.map(sector => (
+                        <Badge key={sector} variant="secondary" className="text-xs">
+                          {sector}
+                        </Badge>
+                      ))}
+                    </div>
+                    
+                    <div className="pt-4 border-t border-gray-200">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">Market Concentration</span>
+                        <span className="font-medium">
+                          ${(location.value / location.count).toFixed(0)}M avg per project
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="sectors" className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Sector Analysis</h3>
+              <p className="text-gray-600 mb-6">Competitive landscape and market activity by sector</p>
+            </div>
+            
+            <div className="grid gap-6">
+              {analytics.sectorBreakdown.map((sector, index) => (
+                <Card key={sector.sector}>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900">{sector.sector}</h4>
+                        <p className="text-gray-600">${sector.value.toFixed(0)}M total market value</p>
+                      </div>
+                      <Badge variant="outline">#{index + 1} by Value</Badge>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                      <div className="text-center">
+                        <p className="text-2xl font-bold text-gray-900">{sector.count}</p>
+                        <p className="text-sm text-gray-600">Total Projects</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-2xl font-bold text-green-600">{sector.activeProjects}</p>
+                        <p className="text-sm text-gray-600">Active</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-2xl font-bold text-blue-600">{sector.completedProjects}</p>
+                        <p className="text-sm text-gray-600">Completed</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-2xl font-bold text-purple-600">${(sector.value / sector.count).toFixed(0)}M</p>
+                        <p className="text-sm text-gray-600">Avg Value</p>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Market Activity</span>
+                        <span className="font-medium">{((sector.activeProjects / sector.count) * 100).toFixed(0)}% active</span>
+                      </div>
+                      <Progress 
+                        value={(sector.activeProjects / sector.count) * 100} 
+                        className="h-2"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
