@@ -79,8 +79,7 @@ export default function Homepage() {
               <Link href="/investor-search" className="text-gray-600 hover:text-gray-900 transition-colors">Investor Search</Link>
               <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 transition-colors">Contact Us</Link>
             </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="outline">Sign In</Button>
+            <div className="flex items-center">
               <Button>Get Started</Button>
             </div>
           </div>
