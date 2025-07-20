@@ -8,6 +8,8 @@ import RoleSelection from "@/pages/role-selection";
 import SearchFilter from "@/pages/search-filter";
 import Dashboard from "@/pages/dashboard";
 import InvestorSearch from "@/pages/investor-search";
+import InvestorDashboard from "@/pages/investor-dashboard";
+import InvestorProjects from "@/pages/investor-projects";
 import ContractorDashboard from "@/pages/contractor-dashboard";
 import ContractorProjects from "@/pages/contractor-projects";
 import NotFound from "@/pages/not-found";
@@ -20,6 +22,8 @@ function Router() {
       <Route path="/search" component={SearchFilter} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/investor-search" component={InvestorSearch} />
+      <Route path="/investor-dashboard" component={InvestorDashboard} />
+      <Route path="/investor-projects" component={InvestorProjects} />
       <Route path="/contractor-dashboard" component={ContractorDashboard} />
       <Route path="/contractor-projects" component={ContractorProjects} />
       <Route component={NotFound} />

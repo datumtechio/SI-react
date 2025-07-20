@@ -63,7 +63,7 @@ export default function RoleSelection() {
       if (selectedRole === "contractor") {
         setLocation("/contractor-dashboard");
       } else if (selectedRole === "investor") {
-        setLocation("/investor-search");
+        setLocation("/investor-dashboard");
       } else {
         setLocation("/search");
       }
