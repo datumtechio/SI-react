@@ -58,7 +58,15 @@ export default function RoleSelection() {
     if (selectedRole) {
       // Store role in localStorage for persistence
       localStorage.setItem("selectedRole", selectedRole);
-      setLocation("/search");
+      
+      // Route to role-specific pages
+      if (selectedRole === "contractor") {
+        setLocation("/contractor-dashboard");
+      } else if (selectedRole === "investor") {
+        setLocation("/investor-search");
+      } else {
+        setLocation("/search");
+      }
     }
   };
 

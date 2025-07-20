@@ -8,6 +8,7 @@ import RoleSelection from "@/pages/role-selection";
 import SearchFilter from "@/pages/search-filter";
 import Dashboard from "@/pages/dashboard";
 import InvestorSearch from "@/pages/investor-search";
+import ContractorDashboard from "@/pages/contractor-dashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/search" component={SearchFilter} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/investor-search" component={InvestorSearch} />
+      <Route path="/contractor-dashboard" component={ContractorDashboard} />
       <Route component={NotFound} />
     </Switch>
   );
