@@ -118,9 +118,9 @@ export default function ContractorDashboard() {
   // Remove this section since we're moving to results page
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: '#0a1b3d' }}>
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="border-b" style={{ backgroundColor: '#0a1b3d', borderColor: '#2d3748' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -128,16 +128,16 @@ export default function ContractorDashboard() {
                 <HardHat className="w-6 h-6 text-orange-600" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Contractor Dashboard</h1>
-                <p className="text-gray-600">Find active projects and bidding opportunities</p>
+                <h1 className="text-2xl font-bold text-white">Contractor Dashboard</h1>
+                <p className="text-gray-300">Find active projects and bidding opportunities</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="border-gray-300 text-gray-300 hover:bg-gray-700">
                 <Download className="w-4 h-4 mr-2" />
                 Export Projects
               </Button>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="border-gray-300 text-gray-300 hover:bg-gray-700">
                 <FileSpreadsheet className="w-4 h-4 mr-2" />
                 Generate Report
               </Button>
