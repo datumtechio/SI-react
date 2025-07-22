@@ -6,14 +6,15 @@ This is a full-stack real estate investment platform built with React, TypeScrip
 
 ## Recent Changes (July 22, 2025)
 
-- **Consultant Dashboard Module Added**: Complete consultant-specific dashboard with market analysis filters
-- **Multi-Select Filtering**: Implemented checkbox-based multi-select for sectors and market metrics
-- **Time Range Analysis**: Added project launch/completion year filters with historical data options
+- **Developer Dashboard Module Added**: Complete developer-focused dashboard for identifying development opportunities
+- **Sector & Sub-sector Filtering**: Implemented dynamic sub-sector selection for 8 major development sectors
+- **Development Stage Focus**: Added filtering by Land Available, Planning Phase, Under Construction, Recently Completed
+- **Land Use Zoning Options**: Optional zoning filters for residential, commercial, mixed-use, and special zones
+- **Budget-Based Price Range**: Dual price filtering for land cost and development cost per sqm
 - **Consultant Analysis Results Page**: Built comprehensive analytics page with interactive market insights
 - **Market Intelligence Features**: Added heatmaps, competitive benchmarks, growth trends, and gap analysis
-- **Downloadable Reports**: Integrated PDF, PowerPoint, and Excel export functionality for consultant reports
-- **Role-Based Color Schemes**: Contractor (dark blue #0a1b3d), Investor (green), Consultant (blue) themes
-- **Enhanced Navigation**: Updated role selection routing to include consultant dashboard
+- **Role-Based Color Schemes**: Contractor (dark blue), Investor (green), Consultant (blue), Developer (purple)
+- **Enhanced Navigation**: Updated role selection routing to include all four specialized dashboards
 
 ## User Preferences
 
