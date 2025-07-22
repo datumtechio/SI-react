@@ -103,6 +103,14 @@ export default function ConsultantDashboard() {
   };
 
   const handleGenerateAnalysis = () => {
+    // Store filter settings for analysis
+    const analysisFilters = {
+      location: { country: selectedCountry, city: selectedCity, district: selectedDistrict },
+      sectors: selectedSectors,
+      timeRange: { launch: projectLaunchYear, completion: projectCompletionYear, historical: includeHistoricalData },
+      metrics: selectedMetrics
+    };
+    localStorage.setItem("consultantAnalysisFilters", JSON.stringify(analysisFilters));
     setLocation("/consultant-analysis");
   };
 
