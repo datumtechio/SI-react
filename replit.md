@@ -6,15 +6,15 @@ This is a full-stack real estate investment platform built with React, TypeScrip
 
 ## Recent Changes (July 22, 2025)
 
-- **Developer Dashboard Module Added**: Complete developer-focused dashboard for identifying development opportunities
-- **Sector & Sub-sector Filtering**: Implemented dynamic sub-sector selection for 8 major development sectors
-- **Development Stage Focus**: Added filtering by Land Available, Planning Phase, Under Construction, Recently Completed
-- **Land Use Zoning Options**: Optional zoning filters for residential, commercial, mixed-use, and special zones
-- **Budget-Based Price Range**: Dual price filtering for land cost and development cost per sqm
-- **Consultant Analysis Results Page**: Built comprehensive analytics page with interactive market insights
-- **Market Intelligence Features**: Added heatmaps, competitive benchmarks, growth trends, and gap analysis
-- **Role-Based Color Schemes**: Contractor (dark blue), Investor (green), Consultant (blue), Developer (purple)
-- **Enhanced Navigation**: Updated role selection routing to include all four specialized dashboards
+- **Developer Opportunities Results Page**: Built comprehensive development analysis with visual heatmaps and competitive pipeline
+- **Development Opportunity Map**: Visual heatmap showing land availability, demand gaps, and growth zones with color-coded status
+- **Competitive Pipeline Dashboard**: Real-time tracking of planned and under-construction projects to assess saturation risk
+- **Market Gaps & Demand Indicators**: Identification of missing asset types per district with opportunity sizing
+- **Feasibility Snapshot**: Land prices, construction costs, selling prices, and margin analysis by district
+- **Project Benchmarking Tool**: Framework for comparing intended projects against existing developments
+- **Underserved Zone Alerts**: Automated alerts for districts with no upcoming similar projects (greenfield opportunities)
+- **Role-Based Color Schemes**: All four roles now have distinct themes and specialized analytical workflows
+- **Enhanced Navigation**: Complete developer workflow from filtering to opportunity identification and analysis
 
 ## User Preferences
 
