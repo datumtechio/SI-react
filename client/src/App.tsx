@@ -12,6 +12,7 @@ import InvestorDashboard from "@/pages/investor-dashboard";
 import InvestorProjects from "@/pages/investor-projects";
 import ContractorDashboard from "@/pages/contractor-dashboard";
 import ContractorProjects from "@/pages/contractor-projects";
+import ConsultantDashboard from "@/pages/consultant-dashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -26,6 +27,7 @@ function Router() {
       <Route path="/investor-projects" component={InvestorProjects} />
       <Route path="/contractor-dashboard" component={ContractorDashboard} />
       <Route path="/contractor-projects" component={ContractorProjects} />
+      <Route path="/consultant-dashboard" component={ConsultantDashboard} />
       <Route component={NotFound} />
     </Switch>
   );
