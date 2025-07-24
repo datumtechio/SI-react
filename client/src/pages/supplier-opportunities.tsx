@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -29,16 +29,37 @@ export default function SupplierOpportunities() {
   const [, setLocation] = useLocation();
   const [selectedTimeframe, setSelectedTimeframe] = useState("30days");
   const [selectedSector, setSelectedSector] = useState("all");
+  const [appliedFilters, setAppliedFilters] = useState<any>(null);
 
-  // Mock data for supply opportunities
-  const opportunityStats = {
-    totalOpportunities: "247",
-    totalProcurementValue: "$1.8B",
-    activeDeadlines: "89",
-    avgLeadTime: "45 days"
-  };
+  // Load applied filters from localStorage
+  useEffect(() => {
+    const storedFilters = localStorage.getItem("supplierOpportunityFilters");
+    if (storedFilters) {
+      setAppliedFilters(JSON.parse(storedFilters));
+    }
+  }, []);
 
-  const supplyOpportunities = [
+  // Dynamic opportunity stats based on filtered results
+  const getOpportunityStats = (filteredOps: any[]) => ({
+    totalOpportunities: filteredOps.length.toString(),
+    totalProcurementValue: `$${(filteredOps.reduce((sum, op) => {
+      const budget = op.budget.split(' - ')[1] || op.budget.split(' - ')[0];
+      const value = parseFloat(budget.replace(/[$M]/g, '')) || 0;
+      return sum + value;
+    }, 0) / 1000).toFixed(1)}B`,
+    activeDeadlines: filteredOps.filter(op => {
+      const deadline = new Date(op.bidDeadline);
+      const today = new Date();
+      return deadline > today;
+    }).length.toString(),
+    avgLeadTime: `${Math.round(filteredOps.reduce((sum, op) => {
+      return sum + parseInt(op.leadTime.replace(' days', ''));
+    }, 0) / filteredOps.length) || 45} days`
+  });
+
+  // Extended supply opportunities database with more specific Dubai construction projects
+  const allSupplyOpportunities = [
+    // Dubai Construction Projects
     {
       id: 1,
       projectName: "Dubai Marina Tower Complex",
@@ -63,6 +84,76 @@ export default function SupplierOpportunities() {
       leadTime: "60 days"
     },
     {
+      id: 6,
+      projectName: "Dubai Creek Harbour Residences",
+      location: { country: "United Arab Emirates", city: "Dubai", district: "Dubai Creek Harbour" },
+      sector: "Construction",
+      stage: "Pre-Tender",
+      productNeeds: [
+        { product: "Cement & Concrete", quantity: "8,500 m³", priority: "High" },
+        { product: "Steel & Rebar", quantity: "1,200 tons", priority: "High" },
+        { product: "Roofing Materials", quantity: "15,000 sqm", priority: "Medium" }
+      ],
+      procurementTimeline: "Q3 2024 - Q1 2025",
+      budget: "$28M - $35M",
+      contact: {
+        name: "Sarah Al-Mansouri",
+        role: "Senior Procurement Officer",
+        email: "s.mansouri@creekdevelopment.ae",
+        phone: "+971 4 556 7890"
+      },
+      bidDeadline: "2024-04-05",
+      competitionLevel: "Medium",
+      leadTime: "45 days"
+    },
+    {
+      id: 7,
+      projectName: "Business Bay Commercial Tower",
+      location: { country: "United Arab Emirates", city: "Dubai", district: "Business Bay" },
+      sector: "Construction",
+      stage: "Execution",
+      productNeeds: [
+        { product: "Cement & Concrete", quantity: "12,000 m³", priority: "High" },
+        { product: "Scaffolding & Formwork", quantity: "450 tons", priority: "High" },
+        { product: "Plumbing Supplies", quantity: "2,800 units", priority: "Medium" }
+      ],
+      procurementTimeline: "Q1 2024 - Q3 2024",
+      budget: "$38M - $48M",
+      contact: {
+        name: "Omar Al-Zaabi",
+        role: "Procurement Lead",
+        email: "o.zaabi@businessbaytowers.ae",
+        phone: "+971 4 445 6789"
+      },
+      bidDeadline: "2024-02-20",
+      competitionLevel: "Low",
+      leadTime: "30 days"
+    },
+    {
+      id: 8,
+      projectName: "Dubai Hills Estate Community Center",
+      location: { country: "United Arab Emirates", city: "Dubai", district: "Dubai Hills Estate" },
+      sector: "Construction",
+      stage: "Design",
+      productNeeds: [
+        { product: "Cement & Concrete", quantity: "3,200 m³", priority: "Medium" },
+        { product: "Insulation Materials", quantity: "850 sqm", priority: "High" },
+        { product: "Heavy Machinery", quantity: "12 units", priority: "Low" }
+      ],
+      procurementTimeline: "Q4 2024 - Q2 2025",
+      budget: "$15M - $22M",
+      contact: {
+        name: "Layla Al-Hashimi",
+        role: "Procurement Coordinator",
+        email: "l.hashimi@dubaihills.ae",
+        phone: "+971 4 334 5678"
+      },
+      bidDeadline: "2024-06-15",
+      competitionLevel: "Medium",
+      leadTime: "90 days"
+    },
+    // Energy Projects
+    {
       id: 2,
       projectName: "Abu Dhabi Solar Farm Phase 2",
       location: { country: "United Arab Emirates", city: "Abu Dhabi", district: "Al Dhafra" },
@@ -85,6 +176,7 @@ export default function SupplierOpportunities() {
       competitionLevel: "Medium",
       leadTime: "120 days"
     },
+    // Oil & Gas Projects
     {
       id: 3,
       projectName: "Qatar Gas Processing Facility",
@@ -108,6 +200,7 @@ export default function SupplierOpportunities() {
       competitionLevel: "Low",
       leadTime: "90 days"
     },
+    // Infrastructure Projects
     {
       id: 4,
       projectName: "Riyadh Metro Extension",
@@ -131,6 +224,7 @@ export default function SupplierOpportunities() {
       competitionLevel: "High",
       leadTime: "150 days"
     },
+    // Industry Projects
     {
       id: 5,
       projectName: "Kuwait Manufacturing Hub",
@@ -197,9 +291,98 @@ export default function SupplierOpportunities() {
     return diffDays;
   };
 
-  const filteredOpportunities = selectedSector === "all" 
-    ? supplyOpportunities 
-    : supplyOpportunities.filter(opp => opp.sector === selectedSector);
+  // Apply dynamic filtering based on stored filters
+  const getFilteredOpportunities = () => {
+    let filtered = [...allSupplyOpportunities];
+    
+    if (!appliedFilters) return filtered;
+    
+    // Filter by location
+    if (appliedFilters.location?.country && appliedFilters.location.country !== "all") {
+      filtered = filtered.filter(opp => opp.location.country === appliedFilters.location.country);
+    }
+    if (appliedFilters.location?.city && appliedFilters.location.city !== "all") {
+      filtered = filtered.filter(opp => opp.location.city === appliedFilters.location.city);
+    }
+    if (appliedFilters.location?.district && appliedFilters.location.district !== "all") {
+      filtered = filtered.filter(opp => opp.location.district === appliedFilters.location.district);
+    }
+    
+    // Filter by sectors
+    if (appliedFilters.sectors && appliedFilters.sectors.length > 0) {
+      filtered = filtered.filter(opp => appliedFilters.sectors.includes(opp.sector));
+    }
+    
+    // Filter by product categories
+    if (appliedFilters.productCategories && appliedFilters.productCategories.length > 0) {
+      filtered = filtered.filter(opp => 
+        opp.productNeeds.some(product => 
+          appliedFilters.productCategories.includes(product.product)
+        )
+      );
+    }
+    
+    // Filter by project stage
+    if (appliedFilters.projectStage && appliedFilters.projectStage !== "all") {
+      filtered = filtered.filter(opp => opp.stage === appliedFilters.projectStage);
+    }
+    
+    // Filter by budget range
+    if (appliedFilters.budgetRange && (appliedFilters.budgetRange[0] > 0 || appliedFilters.budgetRange[1] < 50000000)) {
+      filtered = filtered.filter(opp => {
+        const budget = opp.budget.split(' - ')[1] || opp.budget.split(' - ')[0];
+        const budgetValue = parseFloat(budget.replace(/[$M]/g, '')) * 1000000;
+        return budgetValue >= appliedFilters.budgetRange[0] && budgetValue <= appliedFilters.budgetRange[1];
+      });
+    }
+    
+    // Filter by material demand forecast
+    if (appliedFilters.materialDemandForecast) {
+      // Only show projects with high priority product needs
+      filtered = filtered.filter(opp => 
+        opp.productNeeds.some(product => product.priority === "High")
+      );
+    }
+    
+    // Filter by delivery lead time
+    if (appliedFilters.deliveryLeadTime && appliedFilters.deliveryLeadTime !== "all") {
+      filtered = filtered.filter(opp => {
+        const leadTimeDays = parseInt(opp.leadTime.replace(' days', ''));
+        if (appliedFilters.deliveryLeadTime.includes("Short-term")) {
+          return leadTimeDays <= 90;
+        } else if (appliedFilters.deliveryLeadTime.includes("Medium-term")) {
+          return leadTimeDays > 90 && leadTimeDays <= 365;
+        } else if (appliedFilters.deliveryLeadTime.includes("Long-term")) {
+          return leadTimeDays > 365;
+        }
+        return true;
+      });
+    }
+    
+    // Filter by competitor presence
+    if (appliedFilters.competitorPresence && appliedFilters.competitorPresence !== "all") {
+      filtered = filtered.filter(opp => opp.competitionLevel === appliedFilters.competitorPresence);
+    }
+    
+    // Filter by bid deadline
+    if (appliedFilters.bidDeadline) {
+      const targetDate = new Date(appliedFilters.bidDeadline);
+      filtered = filtered.filter(opp => {
+        const oppDeadline = new Date(opp.bidDeadline);
+        return oppDeadline <= targetDate;
+      });
+    }
+    
+    // Additional sector filter from dropdown
+    if (selectedSector !== "all") {
+      filtered = filtered.filter(opp => opp.sector === selectedSector);
+    }
+    
+    return filtered;
+  };
+
+  const filteredOpportunities = getFilteredOpportunities();
+  const opportunityStats = getOpportunityStats(filteredOpportunities);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -356,6 +539,46 @@ export default function SupplierOpportunities() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Applied Filters Display */}
+        {appliedFilters && (
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="text-sm font-medium text-gray-700">Applied Filters</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {appliedFilters.location?.country && appliedFilters.location.country !== "all" && (
+                  <Badge variant="outline">Country: {appliedFilters.location.country}</Badge>
+                )}
+                {appliedFilters.location?.city && appliedFilters.location.city !== "all" && (
+                  <Badge variant="outline">City: {appliedFilters.location.city}</Badge>
+                )}
+                {appliedFilters.location?.district && appliedFilters.location.district !== "all" && (
+                  <Badge variant="outline">District: {appliedFilters.location.district}</Badge>
+                )}
+                {appliedFilters.sectors?.map((sector: string) => (
+                  <Badge key={sector} variant="outline">Sector: {sector}</Badge>
+                ))}
+                {appliedFilters.productCategories?.map((category: string) => (
+                  <Badge key={category} variant="outline">Product: {category}</Badge>
+                ))}
+                {appliedFilters.projectStage && appliedFilters.projectStage !== "all" && (
+                  <Badge variant="outline">Stage: {appliedFilters.projectStage}</Badge>
+                )}
+                {appliedFilters.deliveryLeadTime && appliedFilters.deliveryLeadTime !== "all" && (
+                  <Badge variant="outline">Lead Time: {appliedFilters.deliveryLeadTime}</Badge>
+                )}
+                {appliedFilters.competitorPresence && appliedFilters.competitorPresence !== "all" && (
+                  <Badge variant="outline">Competition: {appliedFilters.competitorPresence}</Badge>
+                )}
+                {appliedFilters.materialDemandForecast && (
+                  <Badge variant="outline">High Demand Projects Only</Badge>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Matching Projects */}
         <div className="space-y-6">
