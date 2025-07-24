@@ -1,0 +1,545 @@
+import { useState } from "react";
+import { useLocation } from "wouter";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { 
+  Download, 
+  FileSpreadsheet, 
+  FileText, 
+  Presentation,
+  Truck, 
+  Package,
+  Calendar,
+  DollarSign,
+  ArrowLeft,
+  Phone,
+  Mail,
+  Building,
+  MapPin,
+  Clock,
+  AlertTriangle,
+  CheckCircle,
+  User
+} from "lucide-react";
+
+export default function SupplierOpportunities() {
+  const [, setLocation] = useLocation();
+  const [selectedTimeframe, setSelectedTimeframe] = useState("30days");
+  const [selectedSector, setSelectedSector] = useState("all");
+
+  // Mock data for supply opportunities
+  const opportunityStats = {
+    totalOpportunities: "247",
+    totalProcurementValue: "$1.8B",
+    activeDeadlines: "89",
+    avgLeadTime: "45 days"
+  };
+
+  const supplyOpportunities = [
+    {
+      id: 1,
+      projectName: "Dubai Marina Tower Complex",
+      location: { country: "United Arab Emirates", city: "Dubai", district: "Dubai Marina" },
+      sector: "Construction",
+      stage: "Tender",
+      productNeeds: [
+        { product: "Steel & Rebar", quantity: "2,500 tons", priority: "High" },
+        { product: "Cement & Concrete", quantity: "15,000 m³", priority: "High" },
+        { product: "Electrical Components", quantity: "850 units", priority: "Medium" }
+      ],
+      procurementTimeline: "Q2 2024 - Q4 2024",
+      budget: "$45M - $65M",
+      contact: {
+        name: "Ahmad Al-Rashid",
+        role: "Procurement Manager",
+        email: "ahmad.rashid@emaardevelopment.ae",
+        phone: "+971 4 362 8888"
+      },
+      bidDeadline: "2024-03-15",
+      competitionLevel: "High",
+      leadTime: "60 days"
+    },
+    {
+      id: 2,
+      projectName: "Abu Dhabi Solar Farm Phase 2",
+      location: { country: "United Arab Emirates", city: "Abu Dhabi", district: "Al Dhafra" },
+      sector: "Energy",
+      stage: "Pre-Tender",
+      productNeeds: [
+        { product: "Solar Panels", quantity: "25,000 units", priority: "High" },
+        { product: "Inverters", quantity: "150 units", priority: "High" },
+        { product: "Power Cables", quantity: "45 km", priority: "Medium" }
+      ],
+      procurementTimeline: "Q3 2024 - Q1 2025",
+      budget: "$180M - $220M",
+      contact: {
+        name: "Fatima Al-Zahra",
+        role: "Senior Procurement Specialist",
+        email: "f.alzahra@adwea.gov.ae",
+        phone: "+971 2 691 4000"
+      },
+      bidDeadline: "2024-04-22",
+      competitionLevel: "Medium",
+      leadTime: "120 days"
+    },
+    {
+      id: 3,
+      projectName: "Qatar Gas Processing Facility",
+      location: { country: "Qatar", city: "Doha", district: "Ras Laffan" },
+      sector: "Oil & Gas",
+      stage: "Execution",
+      productNeeds: [
+        { product: "Pumps & Compressors", quantity: "45 units", priority: "High" },
+        { product: "Valves & Controls", quantity: "350 units", priority: "High" },
+        { product: "Safety Equipment", quantity: "1,200 units", priority: "Medium" }
+      ],
+      procurementTimeline: "Q1 2024 - Q3 2024",
+      budget: "$95M - $125M",
+      contact: {
+        name: "Mohammed Al-Thani",
+        role: "Lead Procurement Officer",
+        email: "m.althani@qatargas.com.qa",
+        phone: "+974 4013 2000"
+      },
+      bidDeadline: "2024-02-28",
+      competitionLevel: "Low",
+      leadTime: "90 days"
+    },
+    {
+      id: 4,
+      projectName: "Riyadh Metro Extension",
+      location: { country: "Saudi Arabia", city: "Riyadh", district: "King Abdullah Financial District" },
+      sector: "Infrastructure",
+      stage: "Design",
+      productNeeds: [
+        { product: "Public Transport Systems", quantity: "25 units", priority: "High" },
+        { product: "Traffic Systems", quantity: "180 units", priority: "Medium" },
+        { product: "Security Equipment", quantity: "450 units", priority: "Medium" }
+      ],
+      procurementTimeline: "Q4 2024 - Q2 2025",
+      budget: "$280M - $350M",
+      contact: {
+        name: "Abdullah Al-Saud",
+        role: "Procurement Director",
+        email: "a.alsaud@riyadhmetro.gov.sa",
+        phone: "+966 11 289 3000"
+      },
+      bidDeadline: "2024-05-10",
+      competitionLevel: "High",
+      leadTime: "150 days"
+    },
+    {
+      id: 5,
+      projectName: "Kuwait Manufacturing Hub",
+      location: { country: "Kuwait", city: "Kuwait City", district: "Shuwaikh Industrial" },
+      sector: "Industry",
+      stage: "Tender",
+      productNeeds: [
+        { product: "Manufacturing Equipment", quantity: "65 units", priority: "High" },
+        { product: "Automation Systems", quantity: "12 systems", priority: "High" },
+        { product: "HVAC Equipment", quantity: "85 units", priority: "Low" }
+      ],
+      procurementTimeline: "Q2 2024 - Q4 2024",
+      budget: "$75M - $95M",
+      contact: {
+        name: "Nasser Al-Mutairi",
+        role: "Supply Chain Manager",
+        email: "n.mutairi@kuwaitindustries.com.kw",
+        phone: "+965 2481 7000"
+      },
+      bidDeadline: "2024-03-30",
+      competitionLevel: "Medium",
+      leadTime: "75 days"
+    }
+  ];
+
+  const handleDownload = (format: string) => {
+    console.log(`Downloading ${format} supply opportunities report...`);
+  };
+
+  const getStageColor = (stage: string) => {
+    switch (stage) {
+      case "Design": return "text-blue-600 bg-blue-50";
+      case "Pre-Tender": return "text-purple-600 bg-purple-50";
+      case "Tender": return "text-orange-600 bg-orange-50";
+      case "Execution": return "text-green-600 bg-green-50";
+      case "Completion": return "text-gray-600 bg-gray-50";
+      default: return "text-gray-600 bg-gray-50";
+    }
+  };
+
+  const getCompetitionColor = (level: string) => {
+    switch (level) {
+      case "High": return "text-red-600";
+      case "Medium": return "text-orange-600";
+      case "Low": return "text-green-600";
+      default: return "text-gray-600";
+    }
+  };
+
+  const getPriorityColor = (priority: string) => {
+    switch (priority) {
+      case "High": return "text-red-600 bg-red-50";
+      case "Medium": return "text-orange-600 bg-orange-50";
+      case "Low": return "text-green-600 bg-green-50";
+      default: return "text-gray-600 bg-gray-50";
+    }
+  };
+
+  const getDaysUntilDeadline = (deadline: string) => {
+    const today = new Date();
+    const deadlineDate = new Date(deadline);
+    const diffTime = deadlineDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+  };
+
+  const filteredOpportunities = selectedSector === "all" 
+    ? supplyOpportunities 
+    : supplyOpportunities.filter(opp => opp.sector === selectedSector);
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Button 
+                variant="ghost" 
+                onClick={() => setLocation("/supplier-dashboard")}
+                className="text-gray-600"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Filters
+              </Button>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                  <Truck className="w-6 h-6 text-orange-600" />
+                </div>
+                <div>
+                  <h1 className="text-2xl font-bold text-gray-900">Supply Opportunities</h1>
+                  <p className="text-gray-600">Matching procurement opportunities and project details</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Select value={selectedTimeframe} onValueChange={setSelectedTimeframe}>
+                <SelectTrigger className="w-40">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="30days">Next 30 Days</SelectItem>
+                  <SelectItem value="60days">Next 60 Days</SelectItem>
+                  <SelectItem value="90days">Next 90 Days</SelectItem>
+                  <SelectItem value="6months">Next 6 Months</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={selectedSector} onValueChange={setSelectedSector}>
+                <SelectTrigger className="w-40">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Sectors</SelectItem>
+                  <SelectItem value="Construction">Construction</SelectItem>
+                  <SelectItem value="Energy">Energy</SelectItem>
+                  <SelectItem value="Oil & Gas">Oil & Gas</SelectItem>
+                  <SelectItem value="Industry">Industry</SelectItem>
+                  <SelectItem value="Infrastructure">Infrastructure</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Key Supply Statistics */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center">
+                <div className="p-2 bg-orange-100 rounded-lg">
+                  <Package className="w-6 h-6 text-orange-600" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Matching Opportunities</p>
+                  <p className="text-2xl font-bold text-gray-900">{opportunityStats.totalOpportunities}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <DollarSign className="w-6 h-6 text-green-600" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Total Procurement Value</p>
+                  <p className="text-2xl font-bold text-gray-900">{opportunityStats.totalProcurementValue}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center">
+                <div className="p-2 bg-red-100 rounded-lg">
+                  <Calendar className="w-6 h-6 text-red-600" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Active Deadlines</p>
+                  <p className="text-2xl font-bold text-gray-900">{opportunityStats.activeDeadlines}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center">
+                <div className="p-2 bg-blue-100 rounded-lg">
+                  <Clock className="w-6 h-6 text-blue-600" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Average Lead Time</p>
+                  <p className="text-2xl font-bold text-gray-900">{opportunityStats.avgLeadTime}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Download Reports Section */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <Download className="w-5 h-5 text-orange-600" />
+              <span>Supply Opportunity Reports</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Button 
+                variant="outline" 
+                className="h-20 flex flex-col items-center space-y-2"
+                onClick={() => handleDownload('pdf')}
+              >
+                <FileText className="w-6 h-6 text-red-600" />
+                <span>PDF Report</span>
+                <span className="text-xs text-gray-500">Detailed opportunities</span>
+              </Button>
+              <Button 
+                variant="outline"
+                className="h-20 flex flex-col items-center space-y-2"
+                onClick={() => handleDownload('ppt')}
+              >
+                <Presentation className="w-6 h-6 text-orange-600" />
+                <span>PowerPoint</span>
+                <span className="text-xs text-gray-500">Executive summary</span>
+              </Button>
+              <Button 
+                variant="outline"
+                className="h-20 flex flex-col items-center space-y-2"
+                onClick={() => handleDownload('excel')}
+              >
+                <FileSpreadsheet className="w-6 h-6 text-green-600" />
+                <span>Excel Data</span>
+                <span className="text-xs text-gray-500">Contact lists & tracking</span>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Matching Projects */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold text-gray-900">
+              Matching Supply Opportunities ({filteredOpportunities.length})
+            </h2>
+          </div>
+
+          {filteredOpportunities.map((opportunity) => {
+            const daysUntilDeadline = getDaysUntilDeadline(opportunity.bidDeadline);
+            const isUrgent = daysUntilDeadline <= 7;
+
+            return (
+              <Card key={opportunity.id} className={`${isUrgent ? 'border-red-200 bg-red-50' : ''}`}>
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <div className="flex items-center space-x-3 mb-2">
+                        <h3 className="text-lg font-semibold text-gray-900">{opportunity.projectName}</h3>
+                        <Badge className={getStageColor(opportunity.stage)}>
+                          {opportunity.stage}
+                        </Badge>
+                        {isUrgent && (
+                          <Badge className="bg-red-100 text-red-800">
+                            <AlertTriangle className="w-3 h-3 mr-1" />
+                            Urgent
+                          </Badge>
+                        )}
+                      </div>
+                      <div className="flex items-center space-x-4 text-sm text-gray-600">
+                        <span className="flex items-center">
+                          <MapPin className="w-4 h-4 mr-1" />
+                          {opportunity.location.city}, {opportunity.location.district}
+                        </span>
+                        <span className="flex items-center">
+                          <Building className="w-4 h-4 mr-1" />
+                          {opportunity.sector}
+                        </span>
+                        <span className={`flex items-center font-medium ${getCompetitionColor(opportunity.competitionLevel)}`}>
+                          Competition: {opportunity.competitionLevel}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-2xl font-bold text-green-600">{opportunity.budget}</p>
+                      <p className="text-sm text-gray-500">Procurement Budget</p>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <Tabs defaultValue="products" className="space-y-4">
+                    <TabsList className="grid w-full grid-cols-3">
+                      <TabsTrigger value="products">Product Needs</TabsTrigger>
+                      <TabsTrigger value="timeline">Timeline & Budget</TabsTrigger>
+                      <TabsTrigger value="contact">Contact Info</TabsTrigger>
+                    </TabsList>
+
+                    <TabsContent value="products">
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-gray-900">Expected Product Needs & Quantities</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                          {opportunity.productNeeds.map((product, index) => (
+                            <div key={index} className="border rounded-lg p-3">
+                              <div className="flex items-center justify-between mb-2">
+                                <h5 className="font-medium text-gray-900">{product.product}</h5>
+                                <Badge className={getPriorityColor(product.priority)} variant="outline">
+                                  {product.priority}
+                                </Badge>
+                              </div>
+                              <p className="text-sm text-gray-600">Quantity: {product.quantity}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </TabsContent>
+
+                    <TabsContent value="timeline">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <h4 className="font-semibold text-gray-900 mb-3">Procurement Timeline</h4>
+                          <div className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <Calendar className="w-4 h-4 text-blue-600" />
+                              <span className="text-sm text-gray-700">Timeline: {opportunity.procurementTimeline}</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <Clock className="w-4 h-4 text-orange-600" />
+                              <span className="text-sm text-gray-700">Lead Time: {opportunity.leadTime}</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <AlertTriangle className={`w-4 h-4 ${isUrgent ? 'text-red-600' : 'text-green-600'}`} />
+                              <span className={`text-sm font-medium ${isUrgent ? 'text-red-700' : 'text-green-700'}`}>
+                                Bid Deadline: {opportunity.bidDeadline} ({daysUntilDeadline} days remaining)
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900 mb-3">Budget Information</h4>
+                          <div className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <DollarSign className="w-4 h-4 text-green-600" />
+                              <span className="text-sm text-gray-700">Budget Range: {opportunity.budget}</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <CheckCircle className="w-4 h-4 text-blue-600" />
+                              <span className="text-sm text-gray-700">Stage: {opportunity.stage}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </TabsContent>
+
+                    <TabsContent value="contact">
+                      <div className="bg-gray-50 rounded-lg p-4">
+                        <h4 className="font-semibold text-gray-900 mb-3">Procurement Contact Information</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <User className="w-4 h-4 text-gray-600" />
+                              <span className="text-sm">
+                                <strong>{opportunity.contact.name}</strong>
+                              </span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <Building className="w-4 h-4 text-gray-600" />
+                              <span className="text-sm text-gray-700">{opportunity.contact.role}</span>
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <Mail className="w-4 h-4 text-blue-600" />
+                              <a 
+                                href={`mailto:${opportunity.contact.email}`}
+                                className="text-sm text-blue-600 hover:underline"
+                              >
+                                {opportunity.contact.email}
+                              </a>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <Phone className="w-4 h-4 text-green-600" />
+                              <a 
+                                href={`tel:${opportunity.contact.phone}`}
+                                className="text-sm text-green-600 hover:underline"
+                              >
+                                {opportunity.contact.phone}
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="mt-4 pt-3 border-t border-gray-200">
+                          <Button className="bg-orange-600 hover:bg-orange-700">
+                            Contact Procurement Team
+                          </Button>
+                        </div>
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+
+        {filteredOpportunities.length === 0 && (
+          <Card>
+            <CardContent className="p-12 text-center">
+              <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">No Matching Opportunities</h3>
+              <p className="text-gray-600 mb-6">
+                No supply opportunities match your current filter criteria. 
+                Try adjusting your sector or timeframe selections.
+              </p>
+              <Button 
+                variant="outline"
+                onClick={() => setLocation("/supplier-dashboard")}
+              >
+                Modify Search Criteria
+              </Button>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+    </div>
+  );
+}

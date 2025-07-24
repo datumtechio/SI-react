@@ -17,6 +17,7 @@ import ConsultantAnalysis from "@/pages/consultant-analysis";
 import DeveloperDashboard from "@/pages/developer-dashboard";
 import DeveloperOpportunities from "@/pages/developer-opportunities";
 import SupplierDashboard from "@/pages/supplier-dashboard";
+import SupplierOpportunities from "@/pages/supplier-opportunities";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/developer-dashboard" component={DeveloperDashboard} />
       <Route path="/developer-opportunities" component={DeveloperOpportunities} />
       <Route path="/supplier-dashboard" component={SupplierDashboard} />
+      <Route path="/supplier-opportunities" component={SupplierOpportunities} />
       <Route component={NotFound} />
     </Switch>
   );

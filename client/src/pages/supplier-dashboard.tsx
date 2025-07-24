@@ -67,7 +67,7 @@ export default function SupplierDashboard() {
     "Infrastructure"
   ];
 
-  const productCategories = {
+  const productCategories: Record<string, string[]> = {
     "Construction": [
       "Cement & Concrete",
       "Steel & Rebar", 
