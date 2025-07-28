@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -123,16 +123,18 @@ export default function AccountSettings() {
     changePasswordMutation.mutate(data);
   };
 
-  // Update form values when user data changes
-  if (user && !profileForm.formState.isDirty) {
-    profileForm.reset({
-      firstName: user.firstName || "",
-      lastName: user.lastName || "",
-      phoneNumber: user.phoneNumber || "",
-      selectedRole: user.selectedRole || undefined,
-      emailNotifications: user.emailNotifications ?? true,
-    });
-  }
+  // Initialize form with user data once
+  useEffect(() => {
+    if (user && user.id) {
+      profileForm.reset({
+        firstName: user.firstName || "",
+        lastName: user.lastName || "",
+        phoneNumber: user.phoneNumber || "",
+        selectedRole: user.selectedRole || undefined,
+        emailNotifications: user.emailNotifications ?? true,
+      });
+    }
+  }, [user?.id]); // Only reset when user ID changes
 
   if (isLoading) {
     return (
