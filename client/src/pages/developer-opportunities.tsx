@@ -309,46 +309,18 @@ export default function DeveloperOpportunities() {
           </Card>
         </div>
 
-        {/* Download Reports Section */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <Download className="w-5 h-5 text-purple-600" />
-              <span>Development Reports</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Button 
-                variant="outline" 
-                className="h-20 flex flex-col items-center space-y-2"
-                onClick={() => handleDownload('pdf')}
-              >
-                <FileText className="w-6 h-6 text-red-600" />
-                <span>PDF Report</span>
-                <span className="text-xs text-gray-500">Comprehensive analysis</span>
-              </Button>
-              <Button 
-                variant="outline"
-                className="h-20 flex flex-col items-center space-y-2"
-                onClick={() => handleDownload('ppt')}
-              >
-                <Presentation className="w-6 h-6 text-orange-600" />
-                <span>PowerPoint</span>
-                <span className="text-xs text-gray-500">Executive presentation</span>
-              </Button>
-              <Button 
-                variant="outline"
-                className="h-20 flex flex-col items-center space-y-2"
-                onClick={() => handleDownload('excel')}
-              >
-                <FileSpreadsheet className="w-6 h-6 text-green-600" />
-                <span>Excel Data</span>
-                <span className="text-xs text-gray-500">Financial modeling</span>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+
+
+        {/* Development Opportunities Header */}
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-semibold text-gray-900">
+            Development Opportunities
+          </h2>
+          <Button variant="outline" size="sm">
+            <Download className="w-4 h-4 mr-2" />
+            Export Result
+          </Button>
+        </div>
 
         {/* Main Analysis Tabs */}
         <Tabs defaultValue="heatmap" className="space-y-6">

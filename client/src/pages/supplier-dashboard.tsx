@@ -248,11 +248,7 @@ export default function SupplierDashboard() {
             <div className="flex items-center space-x-4">
               <Button variant="outline" size="sm">
                 <Download className="w-4 h-4 mr-2" />
-                Export Opportunities
-              </Button>
-              <Button variant="outline" size="sm">
-                <FileSpreadsheet className="w-4 h-4 mr-2" />
-                Generate Report
+                Export Result
               </Button>
             </div>
           </div>
