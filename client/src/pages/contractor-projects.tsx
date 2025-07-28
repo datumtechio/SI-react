@@ -438,7 +438,13 @@ export default function ContractorProjects() {
               <Card key={project.id} className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
                   <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">
+                    <h3 
+                      className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-orange-600 transition-colors"
+                      onClick={() => {
+                        localStorage.setItem("projectProfileReferrer", "/contractor-projects");
+                        setLocation(`/project/${project.id}`);
+                      }}
+                    >
                       {project.name}
                     </h3>
                     <Badge variant={

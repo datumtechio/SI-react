@@ -237,7 +237,13 @@ export default function InvestorProjects() {
                 <Card key={project.id} className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">
+                      <h3 
+                        className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-green-600 transition-colors"
+                        onClick={() => {
+                          localStorage.setItem("projectProfileReferrer", "/investor-projects");
+                          setLocation(`/project/${project.id}`);
+                        }}
+                      >
                         {project.name}
                       </h3>
                       <Badge variant={
@@ -281,7 +287,14 @@ export default function InvestorProjects() {
                     </div>
 
                     <div className="flex space-x-2">
-                      <Button size="sm" className="flex-1 bg-green-600 hover:bg-green-700">
+                      <Button 
+                        size="sm" 
+                        className="flex-1 bg-green-600 hover:bg-green-700"
+                        onClick={() => {
+                          localStorage.setItem("projectProfileReferrer", "/investor-projects");
+                          setLocation(`/project/${project.id}`);
+                        }}
+                      >
                         View Details
                       </Button>
                       <Button variant="outline" size="sm">

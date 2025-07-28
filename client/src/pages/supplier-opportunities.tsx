@@ -561,7 +561,15 @@ export default function SupplierOpportunities() {
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="flex items-center space-x-3 mb-2">
-                        <h3 className="text-lg font-semibold text-gray-900">{opportunity.projectName}</h3>
+                        <h3 
+                          className="text-lg font-semibold text-gray-900 cursor-pointer hover:text-orange-600 transition-colors"
+                          onClick={() => {
+                            localStorage.setItem("projectProfileReferrer", "/supplier-opportunities");
+                            setLocation(`/project/${opportunity.id}`);
+                          }}
+                        >
+                          {opportunity.projectName}
+                        </h3>
                         <Badge className={getStageColor(opportunity.stage)}>
                           {opportunity.stage}
                         </Badge>

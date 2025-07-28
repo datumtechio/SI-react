@@ -20,6 +20,7 @@ import DeveloperDashboard from "@/pages/developer-dashboard";
 import DeveloperOpportunities from "@/pages/developer-opportunities";
 import SupplierDashboard from "@/pages/supplier-dashboard";
 import SupplierOpportunities from "@/pages/supplier-opportunities";
+import ProjectProfile from "@/pages/project-profile";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -70,6 +71,9 @@ function Router() {
         <Route path="/developer-opportunities" component={DeveloperOpportunities} />
         <Route path="/supplier-dashboard" component={SupplierDashboard} />
         <Route path="/supplier-opportunities" component={SupplierOpportunities} />
+        
+        <Route path="/project/:id" component={ProjectProfile} />
+        
         <Route component={NotFound} />
       </Switch>
     </div>

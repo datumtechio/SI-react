@@ -84,7 +84,15 @@ export default function Homepage() {
                 <div key={project.id} className="bg-white border border-gray-100 rounded-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">{project.name}</h3>
+                      <h3 
+                        className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors"
+                        onClick={() => {
+                          localStorage.setItem("projectProfileReferrer", "/");
+                          setLocation(`/project/${project.id}`);
+                        }}
+                      >
+                        {project.name}
+                      </h3>
                       <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
                         {project.status}
                       </span>
@@ -162,7 +170,15 @@ export default function Homepage() {
                 <div key={project.id} className="bg-white border border-gray-100 rounded-lg overflow-hidden hover:shadow-xl transition-shadow">
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">{project.name}</h3>
+                      <h3 
+                        className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors"
+                        onClick={() => {
+                          localStorage.setItem("projectProfileReferrer", "/");
+                          setLocation(`/project/${project.id}`);
+                        }}
+                      >
+                        {project.name}
+                      </h3>
                       <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
                         {project.status}
                       </span>
