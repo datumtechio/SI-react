@@ -9,6 +9,34 @@ export function useAuth() {
     queryKey: ['/api/auth/me'],
     retry: false,
     staleTime: 5 * 60 * 1000, // 5 minutes
+    queryFn: async () => {
+      try {
+        const response = await fetch('/api/auth/me');
+        if (!response.ok) {
+          throw new Error(`${response.status}: ${response.statusText}`);
+        }
+        return await response.json();
+      } catch (error) {
+        // For demo purposes, return a mock user if not authenticated
+        const storedRole = localStorage.getItem("selectedRole");
+        const storedUserName = localStorage.getItem("userName");
+        
+        if (storedRole) {
+          return {
+            id: "demo-user",
+            email: "demo@sectorintelligence.ai",
+            firstName: storedUserName?.split(" ")[0] || "Demo",
+            lastName: storedUserName?.split(" ")[1] || "User",
+            selectedRole: storedRole,
+            phoneNumber: "+1-555-0123",
+            emailNotifications: true,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+          };
+        }
+        throw error;
+      }
+    }
   });
 
   const loginMutation = useMutation({

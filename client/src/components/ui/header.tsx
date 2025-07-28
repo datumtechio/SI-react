@@ -22,10 +22,12 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
+    // For now, just clear localStorage and stay on current page
+    // In a full auth system, this would call the logout API
     localStorage.removeItem("selectedRole");
     localStorage.removeItem("supplierOpportunityFilters");
-    // Navigate to login page
-    window.location.href = "/login";
+    localStorage.removeItem("userName");
+    window.location.href = "/role-selection";
   };
 
   const getDashboardPath = () => {

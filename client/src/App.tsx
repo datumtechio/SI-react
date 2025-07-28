@@ -28,32 +28,41 @@ import { useAuth } from "@/hooks/useAuth";
 
 function Router() {
   const [location] = useLocation();
+  const { user, isLoading } = useAuth();
   const [userRole, setUserRole] = useState<string>("");
   const [userName, setUserName] = useState<string>("User");
 
   useEffect(() => {
-    // Get user role from localStorage
-    const storedRole = localStorage.getItem("selectedRole");
-    if (storedRole) {
-      setUserRole(storedRole);
-    }
+    // If user is authenticated, use their data
+    if (user) {
+      setUserRole(user.selectedRole || "");
+      setUserName(`${user.firstName} ${user.lastName}`.trim() || "User");
+      // Sync with localStorage for compatibility with existing components
+      if (user.selectedRole) {
+        localStorage.setItem("selectedRole", user.selectedRole);
+      }
+    } else {
+      // Fallback to localStorage for demo purposes
+      const storedRole = localStorage.getItem("selectedRole");
+      if (storedRole) {
+        setUserRole(storedRole);
+      }
 
-    // Get user name from localStorage or generate a default based on role
-    const storedUserName = localStorage.getItem("userName");
-    if (storedUserName) {
-      setUserName(storedUserName);
-    } else if (storedRole) {
-      // Generate sample names based on role
-      const roleNames = {
-        contractor: "Ahmed",
-        investor: "Sarah",
-        consultant: "Michael",
-        developer: "Fatima",
-        supplier: "Omar"
-      };
-      setUserName(roleNames[storedRole as keyof typeof roleNames] || "User");
+      const storedUserName = localStorage.getItem("userName");
+      if (storedUserName) {
+        setUserName(storedUserName);
+      } else if (storedRole) {
+        const roleNames = {
+          contractor: "Ahmed",
+          investor: "Sarah",
+          consultant: "Michael",
+          developer: "Fatima",
+          supplier: "Omar"
+        };
+        setUserName(roleNames[storedRole as keyof typeof roleNames] || "User");
+      }
     }
-  }, [location]);
+  }, [location, user]);
 
   return (
     <div className="min-h-screen bg-gray-50">
