@@ -672,5 +672,46 @@ class DatabaseStorage implements IStorage {
   }
 }
 
-// Use DatabaseStorage for authentication features
-export const storage = new DatabaseStorage();
+// Use MemStorage for demo with sample projects, but extend it with database user features
+class HybridStorage extends MemStorage {
+  private dbStorage = new DatabaseStorage();
+
+  // Use database for user management
+  async createUser(userData: { email: string; firstName: string; lastName: string; password: string; selectedRole?: string }): Promise<User> {
+    return this.dbStorage.createUser(userData);
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    return this.dbStorage.getUserByEmail(email);
+  }
+
+  async getUserById(id: string): Promise<User | undefined> {
+    return this.dbStorage.getUserById(id);
+  }
+
+  async updateUserProfile(id: string, updates: UpdateUserProfile): Promise<User | undefined> {
+    return this.dbStorage.updateUserProfile(id, updates);
+  }
+
+  async changeUserPassword(id: string, currentPassword: string, newPassword: string): Promise<boolean> {
+    return this.dbStorage.changeUserPassword(id, currentPassword, newPassword);
+  }
+
+  async createSession(userId: string): Promise<Session> {
+    return this.dbStorage.createSession(userId);
+  }
+
+  async getSession(sessionId: string): Promise<Session | undefined> {
+    return this.dbStorage.getSession(sessionId);
+  }
+
+  async deleteSession(sessionId: string): Promise<void> {
+    return this.dbStorage.deleteSession(sessionId);
+  }
+
+  async getValidSession(sessionId: string): Promise<{ user: User; session: Session } | null> {
+    return this.dbStorage.getValidSession(sessionId);
+  }
+}
+
+export const storage = new HybridStorage();
