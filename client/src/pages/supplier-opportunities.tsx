@@ -408,6 +408,10 @@ export default function SupplierOpportunities() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
+              <Button variant="outline" size="sm">
+                <Download className="w-4 h-4 mr-2" />
+                Export Result
+              </Button>
               <Select value={selectedTimeframe} onValueChange={setSelectedTimeframe}>
                 <SelectTrigger className="w-40">
                   <SelectValue />
@@ -545,10 +549,6 @@ export default function SupplierOpportunities() {
             <h2 className="text-xl font-semibold text-gray-900">
               Matching Supply Opportunities ({filteredOpportunities.length})
             </h2>
-            <Button variant="outline" size="sm">
-              <Download className="w-4 h-4 mr-2" />
-              Export Result
-            </Button>
           </div>
 
           {filteredOpportunities.map((opportunity) => {

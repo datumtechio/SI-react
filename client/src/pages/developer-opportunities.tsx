@@ -233,6 +233,10 @@ export default function DeveloperOpportunities() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
+              <Button variant="outline" size="sm">
+                <Download className="w-4 h-4 mr-2" />
+                Export Result
+              </Button>
               <Select value={selectedTimeframe} onValueChange={setSelectedTimeframe}>
                 <SelectTrigger className="w-40">
                   <SelectValue />
@@ -311,16 +315,7 @@ export default function DeveloperOpportunities() {
 
 
 
-        {/* Development Opportunities Header */}
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">
-            Development Opportunities
-          </h2>
-          <Button variant="outline" size="sm">
-            <Download className="w-4 h-4 mr-2" />
-            Export Result
-          </Button>
-        </div>
+
 
         {/* Main Analysis Tabs */}
         <Tabs defaultValue="heatmap" className="space-y-6">
