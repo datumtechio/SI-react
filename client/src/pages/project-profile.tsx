@@ -87,8 +87,13 @@ export default function ProjectProfile() {
   const [project, setProject] = useState<ProjectDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
 
   useEffect(() => {
+    // Get user role from localStorage
+    const role = localStorage.getItem("selectedRole");
+    setUserRole(role);
+    
     if (params?.id) {
       // Mock project data - in real implementation, this would fetch from API
       const mockProject: ProjectDetails = {
@@ -161,6 +166,47 @@ export default function ProjectProfile() {
     setLocation(referrer);
   };
 
+  const getRoleSpecificTabs = () => {
+    const baseTabs = ["overview", "financials", "timeline"];
+    
+    switch(userRole) {
+      case "investor":
+        return [...baseTabs, "analysis", "roi-projections", "market-comparison"];
+      case "contractor":
+        return [...baseTabs, "construction", "procurement", "timeline-details"];
+      case "consultant":
+        return [...baseTabs, "market-analysis", "feasibility", "recommendations"];
+      case "developer":
+        return [...baseTabs, "development-plan", "zoning", "site-analysis"];
+      case "supplier":
+        return [...baseTabs, "supply-opportunities", "material-specs", "procurement-schedule"];
+      default:
+        return [...baseTabs, "stakeholders", "documents", "analysis"];
+    }
+  };
+
+  const getRoleColor = () => {
+    switch(userRole) {
+      case "investor": return "text-green-600";
+      case "contractor": return "text-orange-600";
+      case "consultant": return "text-blue-600";
+      case "developer": return "text-purple-600";
+      case "supplier": return "text-orange-600";
+      default: return "text-gray-600";
+    }
+  };
+
+  const getRoleIcon = () => {
+    switch(userRole) {
+      case "investor": return <TrendingUp className="w-5 h-5" />;
+      case "contractor": return <Building className="w-5 h-5" />;
+      case "consultant": return <BarChart3 className="w-5 h-5" />;
+      case "developer": return <Target className="w-5 h-5" />;
+      case "supplier": return <Briefcase className="w-5 h-5" />;
+      default: return <Building className="w-5 h-5" />;
+    }
+  };
+
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
   };
@@ -228,8 +274,16 @@ export default function ProjectProfile() {
                 Back
               </Button>
               <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <Building className="w-7 h-7 text-blue-600" />
+                <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                  userRole === "investor" ? "bg-green-100" :
+                  userRole === "contractor" ? "bg-orange-100" :
+                  userRole === "consultant" ? "bg-blue-100" :
+                  userRole === "developer" ? "bg-purple-100" :
+                  userRole === "supplier" ? "bg-orange-100" : "bg-blue-100"
+                }`}>
+                  <div className={getRoleColor()}>
+                    {getRoleIcon()}
+                  </div>
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">{project.name}</h1>
@@ -325,13 +379,12 @@ export default function ProjectProfile() {
 
         {/* Main Content Tabs */}
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="financials">Financials</TabsTrigger>
-            <TabsTrigger value="timeline">Timeline</TabsTrigger>
-            <TabsTrigger value="stakeholders">Stakeholders</TabsTrigger>
-            <TabsTrigger value="documents">Documents</TabsTrigger>
-            <TabsTrigger value="analysis">Analysis</TabsTrigger>
+          <TabsList className={`grid w-full grid-cols-${getRoleSpecificTabs().length}`}>
+            {getRoleSpecificTabs().map(tab => (
+              <TabsTrigger key={tab} value={tab}>
+                {tab.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+              </TabsTrigger>
+            ))}
           </TabsList>
 
           {/* Overview Tab */}
@@ -669,8 +722,233 @@ export default function ProjectProfile() {
               </Card>
             </div>
           </TabsContent>
+
+          {/* Role-Specific Tabs */}
+          {userRole === "investor" && (
+            <>
+              <TabsContent value="roi-projections" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <TrendingUp className="w-5 h-5 text-green-600 mr-2" />
+                      ROI Projections & Investment Analysis
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="text-center">
+                        <p className="text-3xl font-bold text-green-600">{project.expectedRoi}%</p>
+                        <p className="text-sm text-gray-600">Expected ROI</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-3xl font-bold text-blue-600">5.4 yrs</p>
+                        <p className="text-sm text-gray-600">Payback Period</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-3xl font-bold text-purple-600">$85.2M</p>
+                        <p className="text-sm text-gray-600">Net Present Value</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="market-comparison" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Market Comparison Analysis</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-600">vs Similar Projects:</span>
+                        <Badge variant="default" className="bg-green-100 text-green-700">+15% ROI</Badge>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Market Position:</span>
+                        <span className="font-medium text-green-600">Top 10%</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </>
+          )}
+
+          {userRole === "contractor" && (
+            <>
+              <TabsContent value="construction" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Construction Details</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Construction Method:</span>
+                        <span className="font-medium">Cast-in-place Concrete</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Main Contractor:</span>
+                        <span className="font-medium">{project.contractor}</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="procurement" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Procurement Schedule</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="border-l-4 border-orange-500 pl-4">
+                        <p className="font-medium">Steel & Concrete</p>
+                        <p className="text-sm text-gray-600">Q2 2025 - $45M procurement value</p>
+                      </div>
+                      <div className="border-l-4 border-blue-500 pl-4">
+                        <p className="font-medium">MEP Systems</p>
+                        <p className="text-sm text-gray-600">Q3 2025 - $28M procurement value</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="timeline-details" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Detailed Construction Timeline</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {project.timeline.milestones.map((milestone, idx) => (
+                        <div key={idx} className="flex items-center space-x-4">
+                          <div className={`w-3 h-3 rounded-full ${
+                            milestone.status === 'Completed' ? 'bg-green-500' :
+                            milestone.status === 'In Progress' ? 'bg-orange-500' : 'bg-gray-300'
+                          }`} />
+                          <div className="flex-1">
+                            <p className="font-medium">{milestone.name}</p>
+                            <p className="text-sm text-gray-600">{milestone.date}</p>
+                          </div>
+                          <Badge variant={
+                            milestone.status === 'Completed' ? 'default' :
+                            milestone.status === 'In Progress' ? 'secondary' : 'outline'
+                          }>
+                            {milestone.status}
+                          </Badge>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </>
+          )}
+
+          {/* Default tabs for other roles */}
+          {(!userRole || !["investor", "contractor"].includes(userRole)) && (
+            <>
+              <TabsContent value="stakeholders" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Key Stakeholders</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-sm text-gray-600">Developer</p>
+                        <p className="font-medium text-gray-900">{project.developer}</p>
+                      </div>
+                      {project.contractor && (
+                        <div>
+                          <p className="text-sm text-gray-600">Contractor</p>
+                          <p className="font-medium text-gray-900">{project.contractor}</p>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="documents" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Project Documents</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      {project.documents.map((doc, index) => (
+                        <div key={index} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
+                          <div className="flex items-center">
+                            <FileText className="w-6 h-6 text-blue-600 mr-3" />
+                            <div>
+                              <p className="font-medium text-gray-900">{doc.name}</p>
+                              <p className="text-sm text-gray-600">{doc.type} • {doc.size} • {doc.date}</p>
+                            </div>
+                          </div>
+                          <Button variant="outline" size="sm">
+                            <Download className="w-4 h-4 mr-2" />
+                            Download
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="analysis" className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Market Analysis</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Market Demand:</span>
+                          <Badge variant={project.marketDemand === 'High' ? 'default' : 'secondary'}>
+                            {project.marketDemand}
+                          </Badge>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Competition Level:</span>
+                          <Badge variant={project.competition === 'Low' ? 'default' : 'secondary'}>
+                            {project.competition}
+                          </Badge>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Investment Metrics</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">ROI Projection:</span>
+                          <span className="font-bold text-green-600">{project.expectedRoi}%</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Payback Period:</span>
+                          <span className="font-medium">5.4 years</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+            </>
+          )}
         </Tabs>
       </div>
     </div>
   );
 }
+

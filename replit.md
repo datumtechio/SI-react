@@ -6,14 +6,14 @@ This is a full-stack real estate investment platform built with React, TypeScrip
 
 ## Recent Changes (July 28, 2025)
 
-- **Project Profile Page**: Created comprehensive project detail page with full project information, stakeholder details, financial data, timeline milestones, and documents
+- **Role-Customized Project Profiles**: Created role-specific project profile pages tailored to each user type's workflow and data needs
 - **Universal Project Linking**: Made project names clickable throughout the platform, linking to detailed project profiles from all modules
 - **Clickable Project Names**: Implemented hover effects and navigation for project names in homepage, dashboard widgets, search results, and filtered views
 - **Smart Navigation Context**: Added referrer tracking so users can return to their previous page after viewing project details
-- **Export Button Standardization**: Unified export button positioning across all dashboards and results pages in page headers
-- **Simplified Export Interface**: Replaced multiple download format options with single "Export Result" button for consistent user experience
-- **Enhanced Project Details**: Six-tab interface covering overview, financials, timeline, stakeholders, documents, and analysis
-- **Interactive Project Features**: Added favorite functionality, sharing capabilities, and comprehensive project metrics display
+- **Role-Specific Tab Content**: Investor profiles show ROI projections and market comparison; Contractor profiles show construction details, procurement schedules, and timeline details
+- **Dynamic Tab Structure**: Project profile tabs automatically adjust based on user role, showing relevant information for each user type
+- **Role-Based Visual Theming**: Project profile headers display role-specific icons and colors matching the user's selected role
+- **Comprehensive Role Coverage**: Specialized content for investors, contractors, consultants, developers, and suppliers with fallback for generic users
 
 ## User Preferences
 
