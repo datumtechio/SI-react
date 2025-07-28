@@ -58,35 +58,7 @@ export default function Homepage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center">
-              <div className="flex items-center gap-3">
-                <img 
-                  src={logoPath} 
-                  alt="Sector Intelligence Logo" 
-                  className="object-contain h-12 w-auto"
-                />
-              </div>
-            </div>
-            <div className="flex items-center space-x-8">
-              <Link href="/" className="text-primary font-medium hover:text-primary/80 transition-colors">Home</Link>
-              <Link href="/role-selection" className="text-gray-600 hover:text-gray-900 transition-colors">About Us</Link>
-              <Link href="/search" className="text-gray-600 hover:text-gray-900 transition-colors">Project Intelligence</Link>
-              <Link href="/investor-search" className="text-gray-600 hover:text-gray-900 transition-colors">Investor Search</Link>
-              <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 transition-colors">Contact Us</Link>
-            </div>
-            <div className="flex items-center">
-              <Link href="/role-selection">
-                <Button>Get Started</Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div className="bg-white">
       
       {/* Content Sections */}
       <div className="py-20" style={{ backgroundColor: '#0a1b3d' }}>

@@ -1,8 +1,10 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import Header from "@/components/ui/header";
 import Homepage from "@/pages/homepage";
 import RoleSelection from "@/pages/role-selection";
 import SearchFilter from "@/pages/search-filter";
@@ -21,25 +23,56 @@ import SupplierOpportunities from "@/pages/supplier-opportunities";
 import NotFound from "@/pages/not-found";
 
 function Router() {
+  const [location] = useLocation();
+  const [userRole, setUserRole] = useState<string>("");
+  const [userName, setUserName] = useState<string>("User");
+
+  useEffect(() => {
+    // Get user role from localStorage
+    const storedRole = localStorage.getItem("selectedRole");
+    if (storedRole) {
+      setUserRole(storedRole);
+    }
+
+    // Get user name from localStorage or generate a default based on role
+    const storedUserName = localStorage.getItem("userName");
+    if (storedUserName) {
+      setUserName(storedUserName);
+    } else if (storedRole) {
+      // Generate sample names based on role
+      const roleNames = {
+        contractor: "Ahmed",
+        investor: "Sarah",
+        consultant: "Michael",
+        developer: "Fatima",
+        supplier: "Omar"
+      };
+      setUserName(roleNames[storedRole as keyof typeof roleNames] || "User");
+    }
+  }, [location]);
+
   return (
-    <Switch>
-      <Route path="/" component={Homepage} />
-      <Route path="/role-selection" component={RoleSelection} />
-      <Route path="/search" component={SearchFilter} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/investor-search" component={InvestorSearch} />
-      <Route path="/investor-dashboard" component={InvestorDashboard} />
-      <Route path="/investor-projects" component={InvestorProjects} />
-      <Route path="/contractor-dashboard" component={ContractorDashboard} />
-      <Route path="/contractor-projects" component={ContractorProjects} />
-      <Route path="/consultant-dashboard" component={ConsultantDashboard} />
-      <Route path="/consultant-analysis" component={ConsultantAnalysis} />
-      <Route path="/developer-dashboard" component={DeveloperDashboard} />
-      <Route path="/developer-opportunities" component={DeveloperOpportunities} />
-      <Route path="/supplier-dashboard" component={SupplierDashboard} />
-      <Route path="/supplier-opportunities" component={SupplierOpportunities} />
-      <Route component={NotFound} />
-    </Switch>
+    <div className="min-h-screen bg-gray-50">
+      <Header userRole={userRole} userName={userName} />
+      <Switch>
+        <Route path="/" component={Homepage} />
+        <Route path="/role-selection" component={RoleSelection} />
+        <Route path="/search" component={SearchFilter} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/investor-search" component={InvestorSearch} />
+        <Route path="/investor-dashboard" component={InvestorDashboard} />
+        <Route path="/investor-projects" component={InvestorProjects} />
+        <Route path="/contractor-dashboard" component={ContractorDashboard} />
+        <Route path="/contractor-projects" component={ContractorProjects} />
+        <Route path="/consultant-dashboard" component={ConsultantDashboard} />
+        <Route path="/consultant-analysis" component={ConsultantAnalysis} />
+        <Route path="/developer-dashboard" component={DeveloperDashboard} />
+        <Route path="/developer-opportunities" component={DeveloperOpportunities} />
+        <Route path="/supplier-dashboard" component={SupplierDashboard} />
+        <Route path="/supplier-opportunities" component={SupplierOpportunities} />
+        <Route component={NotFound} />
+      </Switch>
+    </div>
   );
 }
 

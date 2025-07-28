@@ -118,7 +118,7 @@ export default function ContractorDashboard() {
   // Remove this section since we're moving to results page
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#0a1b3d' }}>
+    <div style={{ backgroundColor: '#0a1b3d' }}>
       {/* Header */}
       <div className="border-b" style={{ backgroundColor: '#0a1b3d', borderColor: '#2d3748' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
