@@ -1,6 +1,7 @@
-import { pgTable, text, serial, integer, real, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, real, timestamp, boolean, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { sql } from "drizzle-orm";
 
 export const projects = pgTable("projects", {
   id: serial("id").primaryKey(),
@@ -48,6 +49,29 @@ export const marketIndicators = pgTable("market_indicators", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// Users table for authentication and account management
+export const users = pgTable("users", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: varchar("email").unique().notNull(),
+  firstName: varchar("first_name"),
+  lastName: varchar("last_name"),
+  phoneNumber: varchar("phone_number"),
+  profileImageUrl: varchar("profile_image_url"),
+  passwordHash: varchar("password_hash").notNull(),
+  selectedRole: varchar("selected_role"), // investor, contractor, consultant, developer, supplier
+  emailNotifications: boolean("email_notifications").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Session storage table for authentication
+export const sessions = pgTable("sessions", {
+  id: varchar("id").primaryKey(),
+  userId: varchar("user_id").references(() => users.id).notNull(),
+  expiresAt: timestamp("expires_at").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertProjectSchema = createInsertSchema(projects).omit({
   id: true,
   createdAt: true,
@@ -61,6 +85,54 @@ export const insertUserPreferencesSchema = createInsertSchema(userPreferences).o
 export const insertMarketIndicatorSchema = createInsertSchema(marketIndicators).omit({
   id: true,
   createdAt: true,
+});
+
+export const insertUserSchema = createInsertSchema(users).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertSessionSchema = createInsertSchema(sessions).omit({
+  createdAt: true,
+});
+
+// User profile update schema (excludes password and sensitive fields)
+export const updateUserProfileSchema = z.object({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  phoneNumber: z.string().optional(),
+  selectedRole: z.enum(["investor", "contractor", "consultant", "developer", "supplier"]).optional(),
+  emailNotifications: z.boolean().optional(),
+});
+
+// Password change schema
+export const changePasswordSchema = z.object({
+  currentPassword: z.string().min(6, "Current password is required"),
+  newPassword: z.string().min(6, "New password must be at least 6 characters"),
+  confirmPassword: z.string().min(6, "Please confirm your new password"),
+}).refine((data) => data.newPassword === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
+});
+
+// Login schema
+export const loginSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
+
+// Registration schema
+export const registerSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  confirmPassword: z.string().min(6, "Please confirm your password"),
+  selectedRole: z.enum(["investor", "contractor", "consultant", "developer", "supplier"]),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
 });
 
 export const searchFiltersSchema = z.object({
@@ -105,3 +177,11 @@ export type InsertMarketIndicator = z.infer<typeof insertMarketIndicatorSchema>;
 export type MarketIndicator = typeof marketIndicators.$inferSelect;
 export type SearchFilters = z.infer<typeof searchFiltersSchema>;
 export type InvestorFilters = z.infer<typeof investorFiltersSchema>;
+export type InsertUser = z.infer<typeof insertUserSchema>;
+export type User = typeof users.$inferSelect;
+export type InsertSession = z.infer<typeof insertSessionSchema>;
+export type Session = typeof sessions.$inferSelect;
+export type UpdateUserProfile = z.infer<typeof updateUserProfileSchema>;
+export type ChangePassword = z.infer<typeof changePasswordSchema>;
+export type LoginData = z.infer<typeof loginSchema>;
+export type RegisterData = z.infer<typeof registerSchema>;

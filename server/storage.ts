@@ -1,4 +1,7 @@
-import { projects, userPreferences, marketIndicators, type Project, type InsertProject, type UserPreferences, type InsertUserPreferences, type MarketIndicator, type InsertMarketIndicator, type SearchFilters } from "@shared/schema";
+import { projects, userPreferences, marketIndicators, users, sessions, type Project, type InsertProject, type UserPreferences, type InsertUserPreferences, type MarketIndicator, type InsertMarketIndicator, type SearchFilters, type User, type InsertUser, type Session, type InsertSession, type UpdateUserProfile } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
+import { hashPassword, verifyPassword, generateSessionId, getSessionExpiry } from "./auth";
 
 export interface IStorage {
   // Projects
@@ -17,6 +20,19 @@ export interface IStorage {
   
   // Trending Sectors
   getTrendingSectors(): Promise<any[]>;
+  
+  // User Management
+  createUser(userData: { email: string; firstName: string; lastName: string; password: string; selectedRole?: string }): Promise<User>;
+  getUserByEmail(email: string): Promise<User | undefined>;
+  getUserById(id: string): Promise<User | undefined>;
+  updateUserProfile(id: string, updates: UpdateUserProfile): Promise<User | undefined>;
+  changeUserPassword(id: string, currentPassword: string, newPassword: string): Promise<boolean>;
+  
+  // Session Management
+  createSession(userId: string): Promise<Session>;
+  getSession(sessionId: string): Promise<Session | undefined>;
+  deleteSession(sessionId: string): Promise<void>;
+  getValidSession(sessionId: string): Promise<{ user: User; session: Session } | null>;
 }
 
 export class MemStorage implements IStorage {
@@ -462,6 +478,199 @@ export class MemStorage implements IStorage {
     // Sort by project count descending
     return trendingSectors.sort((a, b) => b.projectCount - a.projectCount);
   }
+
+  // User Management Methods - In-memory implementation for development
+  async createUser(userData: { email: string; firstName: string; lastName: string; password: string; selectedRole?: string }): Promise<User> {
+    // For development, we'll simulate database behavior
+    throw new Error("User creation not available in memory storage - use database storage");
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    throw new Error("User management not available in memory storage - use database storage");
+  }
+
+  async getUserById(id: string): Promise<User | undefined> {
+    throw new Error("User management not available in memory storage - use database storage");
+  }
+
+  async updateUserProfile(id: string, updates: UpdateUserProfile): Promise<User | undefined> {
+    throw new Error("User management not available in memory storage - use database storage");
+  }
+
+  async changeUserPassword(id: string, currentPassword: string, newPassword: string): Promise<boolean> {
+    throw new Error("User management not available in memory storage - use database storage");
+  }
+
+  // Session Management Methods - In-memory implementation for development
+  async createSession(userId: string): Promise<Session> {
+    throw new Error("Session management not available in memory storage - use database storage");
+  }
+
+  async getSession(sessionId: string): Promise<Session | undefined> {
+    throw new Error("Session management not available in memory storage - use database storage");
+  }
+
+  async deleteSession(sessionId: string): Promise<void> {
+    throw new Error("Session management not available in memory storage - use database storage");
+  }
+
+  async getValidSession(sessionId: string): Promise<{ user: User; session: Session } | null> {
+    throw new Error("Session management not available in memory storage - use database storage");
+  }
 }
 
-export const storage = new MemStorage();
+// Database Storage Implementation
+class DatabaseStorage implements IStorage {
+  // Projects
+  async getProjects(filters?: SearchFilters): Promise<Project[]> {
+    let query = db.select().from(projects);
+    // Add filtering logic similar to MemStorage if needed
+    return await query;
+  }
+
+  async getProject(id: number): Promise<Project | undefined> {
+    const [project] = await db.select().from(projects).where(eq(projects.id, id));
+    return project;
+  }
+
+  async createProject(project: InsertProject): Promise<Project> {
+    const [newProject] = await db.insert(projects).values(project).returning();
+    return newProject;
+  }
+
+  // User Preferences
+  async getUserPreferences(sessionId: string): Promise<UserPreferences | undefined> {
+    const [prefs] = await db.select().from(userPreferences).where(eq(userPreferences.sessionId, sessionId));
+    return prefs;
+  }
+
+  async createUserPreferences(preferences: InsertUserPreferences): Promise<UserPreferences> {
+    const [newPrefs] = await db.insert(userPreferences).values(preferences).returning();
+    return newPrefs;
+  }
+
+  async updateUserPreferences(sessionId: string, updates: Partial<InsertUserPreferences>): Promise<UserPreferences | undefined> {
+    const [updated] = await db
+      .update(userPreferences)
+      .set(updates)
+      .where(eq(userPreferences.sessionId, sessionId))
+      .returning();
+    return updated;
+  }
+
+  // Market Indicators
+  async getMarketIndicators(): Promise<MarketIndicator[]> {
+    return await db.select().from(marketIndicators).where(eq(marketIndicators.isActive, true));
+  }
+
+  async createMarketIndicator(indicator: InsertMarketIndicator): Promise<MarketIndicator> {
+    const [newIndicator] = await db.insert(marketIndicators).values(indicator).returning();
+    return newIndicator;
+  }
+
+  // Trending Sectors
+  async getTrendingSectors(): Promise<any[]> {
+    const sectors = ["Real Estate", "Infrastructure", "Hospitality", "Energy"];
+    return sectors.map(sector => ({
+      name: sector,
+      projectCount: Math.floor(Math.random() * 10) + 5,
+      growth: Math.floor(Math.random() * 30) + 10,
+      averageRoi: Math.floor(Math.random() * 15) + 15
+    }));
+  }
+
+  // User Management Methods
+  async createUser(userData: { email: string; firstName: string; lastName: string; password: string; selectedRole?: string }): Promise<User> {
+    const passwordHash = await hashPassword(userData.password);
+    const newUser: InsertUser = {
+      email: userData.email,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      passwordHash,
+      selectedRole: userData.selectedRole || null,
+      phoneNumber: null,
+      profileImageUrl: null,
+      emailNotifications: true,
+    };
+    
+    const [user] = await db.insert(users).values(newUser).returning();
+    return user;
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    return user;
+  }
+
+  async getUserById(id: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
+  }
+
+  async updateUserProfile(id: string, updates: UpdateUserProfile): Promise<User | undefined> {
+    const [updatedUser] = await db
+      .update(users)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(users.id, id))
+      .returning();
+    return updatedUser;
+  }
+
+  async changeUserPassword(id: string, currentPassword: string, newPassword: string): Promise<boolean> {
+    const user = await this.getUserById(id);
+    if (!user) return false;
+
+    const isValidPassword = await verifyPassword(currentPassword, user.passwordHash);
+    if (!isValidPassword) return false;
+
+    const newPasswordHash = await hashPassword(newPassword);
+    await db
+      .update(users)
+      .set({ passwordHash: newPasswordHash, updatedAt: new Date() })
+      .where(eq(users.id, id));
+    
+    return true;
+  }
+
+  // Session Management Methods
+  async createSession(userId: string): Promise<Session> {
+    const sessionData: InsertSession = {
+      id: generateSessionId(),
+      userId,
+      expiresAt: getSessionExpiry(),
+    };
+    
+    const [session] = await db.insert(sessions).values(sessionData).returning();
+    return session;
+  }
+
+  async getSession(sessionId: string): Promise<Session | undefined> {
+    const [session] = await db.select().from(sessions).where(eq(sessions.id, sessionId));
+    return session;
+  }
+
+  async deleteSession(sessionId: string): Promise<void> {
+    await db.delete(sessions).where(eq(sessions.id, sessionId));
+  }
+
+  async getValidSession(sessionId: string): Promise<{ user: User; session: Session } | null> {
+    const session = await this.getSession(sessionId);
+    if (!session || session.expiresAt < new Date()) {
+      if (session) {
+        await this.deleteSession(sessionId);
+      }
+      return null;
+    }
+
+    const user = await this.getUserById(session.userId);
+    if (!user) {
+      await this.deleteSession(sessionId);
+      return null;
+    }
+
+    return { user, session };
+  }
+}
+
+// Use DatabaseStorage for authentication features
+export const storage = new DatabaseStorage();

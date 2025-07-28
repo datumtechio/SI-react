@@ -1,9 +1,34 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { searchFiltersSchema } from "@shared/schema";
+import { searchFiltersSchema, loginSchema, registerSchema, updateUserProfileSchema, changePasswordSchema } from "@shared/schema";
+import cookieParser from 'cookie-parser';
+import { getSessionFromRequest } from "./auth";
+
+// Middleware to authenticate user
+async function authenticateUser(req: any, res: any, next: any) {
+  try {
+    const sessionId = getSessionFromRequest(req);
+    if (!sessionId) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+
+    const authData = await storage.getValidSession(sessionId);
+    if (!authData) {
+      return res.status(401).json({ message: "Invalid or expired session" });
+    }
+
+    req.user = authData.user;
+    req.session = authData.session;
+    next();
+  } catch (error) {
+    console.error("Authentication error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  app.use(cookieParser());
   // Get all projects with optional filtering
   app.get("/api/projects", async (req, res) => {
     try {
@@ -195,6 +220,164 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error fetching districts:", error);
       res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Authentication Routes
+  
+  // Register new user
+  app.post("/api/auth/register", async (req, res) => {
+    try {
+      const userData = registerSchema.parse(req.body);
+      
+      // Check if user already exists
+      const existingUser = await storage.getUserByEmail(userData.email);
+      if (existingUser) {
+        return res.status(400).json({ message: "Email already registered" });
+      }
+      
+      // Create new user
+      const user = await storage.createUser({
+        email: userData.email,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        password: userData.password,
+        selectedRole: userData.selectedRole,
+      });
+      
+      // Create session
+      const session = await storage.createSession(user.id);
+      
+      // Set cookie
+      res.cookie('session', session.id, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      });
+      
+      // Return user data (excluding password)
+      const { passwordHash, ...userResponse } = user;
+      res.status(201).json({ user: userResponse });
+    } catch (error: any) {
+      if (error.name === 'ZodError') {
+        return res.status(400).json({ message: "Invalid registration data", errors: error.errors });
+      }
+      console.error("Registration error:", error);
+      res.status(500).json({ message: "Failed to create account" });
+    }
+  });
+
+  // Login user
+  app.post("/api/auth/login", async (req, res) => {
+    try {
+      const loginData = loginSchema.parse(req.body);
+      
+      // Find user by email
+      const user = await storage.getUserByEmail(loginData.email);
+      if (!user) {
+        return res.status(401).json({ message: "Invalid email or password" });
+      }
+      
+      // Verify password
+      const { verifyPassword } = await import('./auth');
+      const isValidPassword = await verifyPassword(loginData.password, user.passwordHash);
+      if (!isValidPassword) {
+        return res.status(401).json({ message: "Invalid email or password" });
+      }
+      
+      // Create session
+      const session = await storage.createSession(user.id);
+      
+      // Set cookie
+      res.cookie('session', session.id, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      });
+      
+      // Return user data (excluding password)
+      const { passwordHash, ...userResponse } = user;
+      res.json({ user: userResponse });
+    } catch (error: any) {
+      if (error.name === 'ZodError') {
+        return res.status(400).json({ message: "Invalid login data" });
+      }
+      console.error("Login error:", error);
+      res.status(500).json({ message: "Login failed" });
+    }
+  });
+
+  // Logout user
+  app.post("/api/auth/logout", authenticateUser, async (req: any, res) => {
+    try {
+      const sessionId = getSessionFromRequest(req);
+      if (sessionId) {
+        await storage.deleteSession(sessionId);
+      }
+      
+      res.clearCookie('session');
+      res.json({ message: "Logged out successfully" });
+    } catch (error) {
+      console.error("Logout error:", error);
+      res.status(500).json({ message: "Logout failed" });
+    }
+  });
+
+  // Get current user
+  app.get("/api/auth/me", authenticateUser, async (req: any, res) => {
+    try {
+      const { passwordHash, ...userResponse } = req.user;
+      res.json(userResponse);
+    } catch (error) {
+      console.error("Get user error:", error);
+      res.status(500).json({ message: "Failed to get user data" });
+    }
+  });
+
+  // Account Settings Routes
+  
+  // Update user profile
+  app.put("/api/account/profile", authenticateUser, async (req: any, res) => {
+    try {
+      const updates = updateUserProfileSchema.parse(req.body);
+      const updatedUser = await storage.updateUserProfile(req.user.id, updates);
+      
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      const { passwordHash, ...userResponse } = updatedUser;
+      res.json(userResponse);
+    } catch (error: any) {
+      if (error.name === 'ZodError') {
+        return res.status(400).json({ message: "Invalid profile data", errors: error.errors });
+      }
+      console.error("Profile update error:", error);
+      res.status(500).json({ message: "Failed to update profile" });
+    }
+  });
+
+  // Change password
+  app.put("/api/account/password", authenticateUser, async (req: any, res) => {
+    try {
+      const passwordData = changePasswordSchema.parse(req.body);
+      const success = await storage.changeUserPassword(
+        req.user.id,
+        passwordData.currentPassword,
+        passwordData.newPassword
+      );
+      
+      if (!success) {
+        return res.status(400).json({ message: "Current password is incorrect" });
+      }
+      
+      res.json({ message: "Password changed successfully" });
+    } catch (error: any) {
+      if (error.name === 'ZodError') {
+        return res.status(400).json({ message: "Invalid password data", errors: error.errors });
+      }
+      console.error("Password change error:", error);
+      res.status(500).json({ message: "Failed to change password" });
     }
   });
 

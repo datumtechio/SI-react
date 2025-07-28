@@ -21,7 +21,10 @@ import DeveloperOpportunities from "@/pages/developer-opportunities";
 import SupplierDashboard from "@/pages/supplier-dashboard";
 import SupplierOpportunities from "@/pages/supplier-opportunities";
 import ProjectProfile from "@/pages/project-profile";
+import AccountSettings from "@/pages/account-settings";
+import LoginPage from "@/pages/login";
 import NotFound from "@/pages/not-found";
+import { useAuth } from "@/hooks/useAuth";
 
 function Router() {
   const [location] = useLocation();
@@ -73,6 +76,8 @@ function Router() {
         <Route path="/supplier-opportunities" component={SupplierOpportunities} />
         
         <Route path="/project/:id" component={ProjectProfile} />
+        <Route path="/account-settings" component={AccountSettings} />
+        <Route path="/login" component={LoginPage} />
         
         <Route component={NotFound} />
       </Switch>

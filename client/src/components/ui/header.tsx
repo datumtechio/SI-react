@@ -8,7 +8,8 @@ import {
   LayoutDashboard, 
   Building2, 
   LogOut,
-  User
+  User,
+  Settings
 } from "lucide-react";
 
 interface HeaderProps {
@@ -23,8 +24,8 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
   const handleLogout = () => {
     localStorage.removeItem("selectedRole");
     localStorage.removeItem("supplierOpportunityFilters");
-    // Navigate to home page
-    window.location.href = "/";
+    // Navigate to login page
+    window.location.href = "/login";
   };
 
   const getDashboardPath = () => {
@@ -69,6 +70,11 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
       label: "Projects",
       path: getProjectsPath(),
       icon: Building2
+    },
+    {
+      label: "Account",
+      path: "/account-settings",
+      icon: Settings
     }
   ];
 
