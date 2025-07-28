@@ -21,6 +21,23 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const getRoleBadgeStyles = (role: string) => {
+    switch (role) {
+      case "investor":
+        return "text-green-700 bg-green-100 border border-green-200";
+      case "contractor":
+        return "text-orange-700 bg-orange-100 border border-orange-200";
+      case "consultant":
+        return "text-blue-700 bg-blue-100 border border-blue-200";
+      case "developer":
+        return "text-purple-700 bg-purple-100 border border-purple-200";
+      case "supplier":
+        return "text-amber-700 bg-amber-100 border border-amber-200";
+      default:
+        return "text-gray-700 bg-gray-100 border border-gray-200";
+    }
+  };
+
   const handleLogout = () => {
     // For now, just clear localStorage and stay on current page
     // In a full auth system, this would call the logout API
@@ -125,7 +142,7 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
                 <span>Welcome, {userName}</span>
               </div>
               {userRole && (
-                <div className="px-2 py-1 text-xs font-medium text-blue-600 bg-blue-50 rounded-full capitalize">
+                <div className={`px-3 py-1 text-xs font-medium rounded-full capitalize ${getRoleBadgeStyles(userRole)}`}>
                   {userRole}
                 </div>
               )}
@@ -165,7 +182,7 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
                 </div>
                 {userRole && (
                   <div className="mt-1">
-                    <span className="px-2 py-1 text-xs font-medium text-blue-600 bg-blue-50 rounded-full capitalize">
+                    <span className={`px-3 py-1 text-xs font-medium rounded-full capitalize ${getRoleBadgeStyles(userRole)}`}>
                       {userRole}
                     </span>
                   </div>
