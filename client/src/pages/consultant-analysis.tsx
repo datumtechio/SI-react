@@ -66,7 +66,11 @@ export default function ConsultantAnalysis() {
       sector: "Luxury Residential",
       severity: "High",
       opportunity: "$450M",
-      description: "Significant undersupply in luxury residential units with 40% demand-supply gap"
+      description: "Significant undersupply in luxury residential units with 40% demand-supply gap",
+      relatedProjects: [
+        { name: "Dubai Marina Tower", id: 1, status: "Under Construction", value: "$285M" },
+        { name: "Marina Bay Complex", id: 2, status: "Planning", value: "$165M" }
+      ]
     },
     {
       type: "Emerging Opportunity", 
@@ -74,7 +78,10 @@ export default function ConsultantAnalysis() {
       sector: "Mixed-Use Development",
       severity: "Medium",
       opportunity: "$280M",
-      description: "Growing demand for integrated live-work spaces with limited current supply"
+      description: "Growing demand for integrated live-work spaces with limited current supply",
+      relatedProjects: [
+        { name: "Azure Residences", id: 1, status: "Under Construction", value: "$450M" }
+      ]
     },
     {
       type: "Unmet Demand",
@@ -82,7 +89,53 @@ export default function ConsultantAnalysis() {
       sector: "Industrial",
       severity: "High", 
       opportunity: "$320M",
-      description: "Airport proximity creating logistics hub demand but insufficient industrial development"
+      description: "Airport proximity creating logistics hub demand but insufficient industrial development",
+      relatedProjects: [
+        { name: "Al Maktoum Logistics Hub", id: 3, status: "Planning", value: "$320M" }
+      ]
+    }
+  ];
+
+  const featuredProjects = [
+    { 
+      id: 1, 
+      name: "Dubai Marina Tower", 
+      location: "Dubai Marina", 
+      sector: "Luxury Residential",
+      value: "$285M",
+      status: "Under Construction",
+      completion: "Q3 2025",
+      marketScore: 9.2
+    },
+    { 
+      id: 1, 
+      name: "Azure Residences", 
+      location: "Downtown Dubai", 
+      sector: "Luxury Residential",
+      value: "$450M",
+      status: "Under Construction", 
+      completion: "Q3 2025",
+      marketScore: 8.8
+    },
+    { 
+      id: 2, 
+      name: "Marina Bay Complex", 
+      location: "Dubai Marina", 
+      sector: "Mixed-Use",
+      value: "$165M",
+      status: "Planning",
+      completion: "Q1 2026", 
+      marketScore: 8.5
+    },
+    { 
+      id: 3, 
+      name: "Al Maktoum Logistics Hub", 
+      location: "Dubai South", 
+      sector: "Industrial",
+      value: "$320M",
+      status: "Planning",
+      completion: "Q2 2026",
+      marketScore: 7.9
     }
   ];
 
@@ -453,6 +506,32 @@ export default function ConsultantAnalysis() {
                         </div>
                       </div>
                       <p className="text-gray-700">{gap.description}</p>
+                      
+                      {/* Related Projects Section */}
+                      {gap.relatedProjects && gap.relatedProjects.length > 0 && (
+                        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                          <h4 className="font-medium text-gray-900 mb-3">Related Active Projects:</h4>
+                          <div className="space-y-2">
+                            {gap.relatedProjects.map((project, projectIndex) => (
+                              <div key={projectIndex} className="flex items-center justify-between">
+                                <button
+                                  onClick={() => setLocation(`/project/${project.id}`)}
+                                  className="text-blue-600 hover:text-blue-800 hover:underline font-medium text-left"
+                                >
+                                  {project.name}
+                                </button>
+                                <div className="flex items-center space-x-3">
+                                  <Badge variant={project.status === 'Under Construction' ? 'default' : 'outline'}>
+                                    {project.status}
+                                  </Badge>
+                                  <span className="text-sm text-gray-600">{project.value}</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
                       <div className="mt-4 flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
                         <span className="text-sm text-green-700">Recommended for immediate attention</span>
@@ -468,43 +547,63 @@ export default function ConsultantAnalysis() {
           <TabsContent value="projects">
             <Card>
               <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center space-x-2">
-                    <Eye className="w-5 h-5 text-blue-600" />
-                    <span>Individual Project Analysis</span>
-                  </CardTitle>
-                  <Button 
-                    variant="outline"
-                    onClick={() => setShowProjectDetails(!showProjectDetails)}
-                  >
-                    {showProjectDetails ? "Hide Details" : "View Project Details"}
-                  </Button>
-                </div>
+                <CardTitle className="flex items-center space-x-2">
+                  <Eye className="w-5 h-5 text-blue-600" />
+                  <span>Featured Projects Analysis</span>
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                {showProjectDetails ? (
-                  <div className="text-center py-12">
-                    <Building className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Project Database Access</h3>
-                    <p className="text-gray-600 mb-6">
-                      Access detailed information about individual projects including specifications, 
-                      timelines, stakeholders, and financial details.
-                    </p>
-                    <Button 
-                      onClick={() => setLocation("/contractor-projects")}
-                      className="bg-blue-600 hover:bg-blue-700"
-                    >
-                      Access Project Database
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="text-center py-12">
-                    <p className="text-gray-600">
-                      Click "View Project Details" to access the comprehensive project database 
-                      for deep-dive analysis of individual projects.
-                    </p>
-                  </div>
-                )}
+                <div className="space-y-4">
+                  {featuredProjects.map((project, index) => (
+                    <div key={index} className="border rounded-lg p-6 hover:bg-gray-50 transition-colors">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <button
+                            onClick={() => setLocation(`/project/${project.id}`)}
+                            className="text-xl font-semibold text-blue-600 hover:text-blue-800 hover:underline text-left mb-2 block"
+                          >
+                            {project.name}
+                          </button>
+                          <div className="flex items-center space-x-4 text-sm text-gray-600 mb-3">
+                            <span><MapPin className="w-4 h-4 inline mr-1" />{project.location}</span>
+                            <span><Building className="w-4 h-4 inline mr-1" />{project.sector}</span>
+                            <span>• {project.completion}</span>
+                          </div>
+                          <div className="flex items-center space-x-4">
+                            <Badge variant={project.status === 'Under Construction' ? 'default' : 'outline'}>
+                              {project.status}
+                            </Badge>
+                            <span className="text-lg font-bold text-green-600">{project.value}</span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="flex items-center space-x-2 mb-2">
+                            <span className="text-sm text-gray-500">Market Score:</span>
+                            <span className="text-2xl font-bold text-blue-600">{project.marketScore}</span>
+                            <span className="text-sm text-gray-500">/10</span>
+                          </div>
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => setLocation(`/project/${project.id}`)}
+                          >
+                            View Analysis
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="mt-8 text-center">
+                  <Button 
+                    onClick={() => setLocation("/contractor-projects")}
+                    className="bg-blue-600 hover:bg-blue-700"
+                  >
+                    <Building className="w-4 h-4 mr-2" />
+                    Access Full Project Database
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
