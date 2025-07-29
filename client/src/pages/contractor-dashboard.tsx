@@ -124,14 +124,6 @@ export default function ContractorDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setLocation("/role-selection")}
-                className="text-gray-300 hover:text-white hover:bg-white/10"
-              >
-                ← Back to Role Selection
-              </Button>
               <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
                 <HardHat className="w-6 h-6 text-orange-600" />
               </div>
