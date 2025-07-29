@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,11 @@ export default function ConsultantAnalysis() {
   const [, setLocation] = useLocation();
   const [selectedTimeframe, setSelectedTimeframe] = useState("12months");
   const [showProjectDetails, setShowProjectDetails] = useState(false);
+
+  // Set previous page for navigation tracking
+  useEffect(() => {
+    sessionStorage.setItem('previousPage', '/consultant-analysis');
+  }, []);
 
   // Mock data for analysis results
   const marketStats = {
@@ -69,7 +74,7 @@ export default function ConsultantAnalysis() {
       description: "Significant undersupply in luxury residential units with 40% demand-supply gap",
       relatedProjects: [
         { name: "Dubai Marina Tower", id: 1, status: "Under Construction", value: "$285M" },
-        { name: "Marina Bay Complex", id: 2, status: "Planning", value: "$165M" }
+        { name: "Marina Bay Complex", id: 3, status: "Planning", value: "$165M" }
       ]
     },
     {
@@ -80,7 +85,7 @@ export default function ConsultantAnalysis() {
       opportunity: "$280M",
       description: "Growing demand for integrated live-work spaces with limited current supply",
       relatedProjects: [
-        { name: "Azure Residences", id: 1, status: "Under Construction", value: "$450M" }
+        { name: "Azure Residences", id: 2, status: "Under Construction", value: "$450M" }
       ]
     },
     {
@@ -91,7 +96,7 @@ export default function ConsultantAnalysis() {
       opportunity: "$320M",
       description: "Airport proximity creating logistics hub demand but insufficient industrial development",
       relatedProjects: [
-        { name: "Al Maktoum Logistics Hub", id: 3, status: "Planning", value: "$320M" }
+        { name: "Al Maktoum Logistics Hub", id: 4, status: "Planning", value: "$320M" }
       ]
     }
   ];
@@ -108,7 +113,7 @@ export default function ConsultantAnalysis() {
       marketScore: 9.2
     },
     { 
-      id: 1, 
+      id: 2, 
       name: "Azure Residences", 
       location: "Downtown Dubai", 
       sector: "Luxury Residential",
@@ -118,7 +123,7 @@ export default function ConsultantAnalysis() {
       marketScore: 8.8
     },
     { 
-      id: 2, 
+      id: 3, 
       name: "Marina Bay Complex", 
       location: "Dubai Marina", 
       sector: "Mixed-Use",
@@ -128,7 +133,7 @@ export default function ConsultantAnalysis() {
       marketScore: 8.5
     },
     { 
-      id: 3, 
+      id: 4, 
       name: "Al Maktoum Logistics Hub", 
       location: "Dubai South", 
       sector: "Industrial",

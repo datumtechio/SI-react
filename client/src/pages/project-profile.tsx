@@ -104,6 +104,7 @@ export default function ProjectProfile() {
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
+  const [referrerPage, setReferrerPage] = useState<string | null>(null);
   
   // State for expandable sections and priority tags
   const [expandedSections, setExpandedSections] = useState<{[key: string]: boolean}>({
@@ -125,6 +126,15 @@ export default function ProjectProfile() {
     const role = localStorage.getItem("selectedRole");
     setUserRole(role);
     
+    // Check navigation history to determine the referrer page
+    const currentPath = window.location.pathname;
+    const previousPage = sessionStorage.getItem('previousPage') || document.referrer;
+    if (previousPage.includes('/consultant-analysis')) {
+      setReferrerPage('/consultant-analysis');
+    } else if (role) {
+      setReferrerPage(`/${role}-dashboard`);
+    }
+    
     if (params?.id) {
       // Mock project data - different projects based on ID
       const projectId = parseInt(params.id);
@@ -134,8 +144,8 @@ export default function ProjectProfile() {
       if (projectId === 1) {
         mockProject = {
           id: projectId,
-          name: "Azure Residences",
-          description: "Luxury residential development featuring modern amenities and sustainable design principles. Located in the heart of Downtown Dubai with panoramic views of the Burj Khalifa and Dubai skyline.",
+          name: "Dubai Marina Tower",
+          description: "Premium residential tower in Dubai Marina offering panoramic views of the marina and Arabian Gulf. Features contemporary architecture with world-class amenities and waterfront lifestyle.",
           sector: "Real Estate",
           subsector: "Luxury Residential",
           projectType: "Residential Tower",
@@ -143,42 +153,42 @@ export default function ProjectProfile() {
           status: "Under Construction",
           city: "Dubai",
           country: "United Arab Emirates",
-          district: "Downtown Dubai",
-          investment: 450,
-          expectedRoi: 16.2,
-          capacity: "320 Units",
+          district: "Dubai Marina",
+          investment: 285,
+          expectedRoi: 18.5,
+          capacity: "420 Units",
           residentialType: "High-End Apartments",
           residentialClass: "Ultra-Luxury",
           rating: "5-Star",
           category: "Premium Residential Development",
-          value: "$450 Million",
-          startDate: "2024-01-15",
+          value: "$285 Million",
+          startDate: "2024-02-15",
           completionDate: "Q3 2025",
-          briefBackground: "Azure Residences represents the pinnacle of luxury living in Downtown Dubai, featuring state-of-the-art amenities and world-class architectural design. The project caters to discerning investors and residents seeking premium lifestyle experiences in one of Dubai's most prestigious locations.",
+          briefBackground: "Dubai Marina Tower is an iconic residential development offering panoramic views of Dubai Marina and the Arabian Gulf. The project features contemporary architecture, world-class amenities, and represents excellent investment opportunity in one of Dubai's most sought-after waterfront communities.",
           developer: "Emaar Properties",
         contractor: "Arabtec Construction",
         consultant: "AECOM Middle East",
         supplier: "Al Ghurair Iron & Steel",
-        totalUnits: 240,
-        builtUpArea: "85,000 sqm",
-        landArea: "12,500 sqm",
-        floors: 32,
+        totalUnits: 420,
+        builtUpArea: "95,000 sqm",
+        landArea: "15,000 sqm",
+        floors: 45,
         riskLevel: "Low",
-        marketDemand: "High",
-        competition: "Medium",
-        permits: ["Building Permit", "Environmental Clearance", "Fire Safety", "Municipality Approval"],
-        amenities: ["Swimming Pool", "Gym", "Spa", "Concierge", "Valet Parking", "Sky Lounge", "Children's Play Area"],
-        features: ["Smart Home Technology", "Energy Efficient", "LEED Certified", "Sea View", "Private Balconies"],
+        marketDemand: "Very High",
+        competition: "High",
+        permits: ["Building Permit", "Environmental Clearance", "Fire Safety", "Municipality Approval", "Marine Authority Clearance"],
+        amenities: ["Infinity Pool", "Premium Gym", "Spa & Wellness", "24/7 Concierge", "Valet Parking", "Marina Club", "Children's Play Area", "Private Beach Access"],
+        features: ["Marina Views", "Private Beach Access", "Smart Home Technology", "Yacht Club Access", "Private Balconies", "Floor-to-Ceiling Windows"],
         contactInfo: {
-          email: "info@azureresidences.ae",
-          phone: "+971-4-123-4567",
-          website: "www.azureresidences.ae"
+          email: "info@dubaimarinatower.ae",
+          phone: "+971-4-567-8900",
+          website: "www.dubaimarinatower.ae"
         },
         financials: {
-          totalBudget: "$350M",
-          spentToDate: "$180M",
-          remainingBudget: "$170M",
-          fundingSources: ["Bank Financing (60%)", "Developer Equity (25%)", "Pre-sales (15%)"]
+          totalBudget: "$285M",
+          spentToDate: "$125M",
+          remainingBudget: "$160M",
+          fundingSources: ["Bank Financing (55%)", "Developer Equity (30%)", "Pre-sales (15%)"]
         },
         timeline: {
           phase: "Construction Phase 2",
@@ -546,8 +556,12 @@ export default function ProjectProfile() {
 
   const handleBack = () => {
     // Navigate back to the previous page based on referrer
-    const referrer = localStorage.getItem("projectProfileReferrer") || "/dashboard";
-    setLocation(referrer);
+    if (referrerPage) {
+      setLocation(referrerPage);
+    } else {
+      const role = localStorage.getItem("selectedRole");
+      setLocation(role ? `/${role}-dashboard` : "/dashboard");
+    }
   };
 
   const getRoleSpecificTabs = () => {
