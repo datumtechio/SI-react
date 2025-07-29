@@ -63,8 +63,10 @@ function Router() {
       console.log("Debug - reading from localStorage:", { storedRole, storedUserName, setTo: storedRole || "empty" });
       
       if (storedRole) {
+        console.log("Initial load - setting userRole to:", storedRole);
         setUserRole(storedRole);
       } else {
+        console.log("Initial load - no stored role");
         setUserRole(""); // Clear role if nothing stored
       }
 
@@ -95,8 +97,10 @@ function Router() {
         console.log("Storage changed:", { storedRole, storedUserName, currentUserRole: userRole });
         
         if (storedRole) {
+          console.log("Setting userRole to:", storedRole);
           setUserRole(storedRole);
         } else {
+          console.log("No stored role, clearing userRole");
           setUserRole("");
         }
 
