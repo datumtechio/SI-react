@@ -56,8 +56,14 @@ export default function RoleSelection() {
 
   const handleContinue = () => {
     if (selectedRole) {
-      // Store role in localStorage for persistence
+      // Clear any existing role data first
+      localStorage.removeItem("selectedRole");
+      localStorage.removeItem("userName");
+      
+      // Store new role in localStorage for persistence
       localStorage.setItem("selectedRole", selectedRole);
+      
+      console.log("Role selection - storing role:", selectedRole);
       
       // Trigger custom event to notify other components of role change
       window.dispatchEvent(new CustomEvent("roleChanged"));

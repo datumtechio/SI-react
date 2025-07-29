@@ -60,7 +60,7 @@ function Router() {
       const storedRole = localStorage.getItem("selectedRole");
       const storedUserName = localStorage.getItem("userName");
       
-      console.log("Debug - reading from localStorage:", { storedRole, storedUserName });
+      console.log("Debug - reading from localStorage:", { storedRole, storedUserName, setTo: storedRole || "empty" });
       
       if (storedRole) {
         setUserRole(storedRole);
@@ -92,7 +92,7 @@ function Router() {
         const storedRole = localStorage.getItem("selectedRole");
         const storedUserName = localStorage.getItem("userName");
         
-        console.log("Storage changed:", { storedRole, storedUserName });
+        console.log("Storage changed:", { storedRole, storedUserName, currentUserRole: userRole });
         
         if (storedRole) {
           setUserRole(storedRole);
@@ -120,7 +120,8 @@ function Router() {
     // Listen for custom role change event from role selection page
     const handleRoleChanged = () => {
       console.log("Role changed event triggered");
-      handleStorageChange();
+      // Add a small delay to ensure localStorage has been updated
+      setTimeout(handleStorageChange, 50);
     };
 
     // Check every 300ms for changes
