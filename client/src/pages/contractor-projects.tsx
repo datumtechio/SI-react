@@ -222,14 +222,6 @@ export default function ContractorProjects() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setLocation("/role-selection")}
-                className="text-gray-600 hover:text-gray-900"
-              >
-                ← Back to Role Selection
-              </Button>
               <Button 
                 variant="ghost" 
                 onClick={() => setLocation("/contractor-dashboard")}
