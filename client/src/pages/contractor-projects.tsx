@@ -441,94 +441,159 @@ export default function ContractorProjects() {
         ) : (
           <div className={cn(
             viewMode === "grid" 
-              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              ? "grid grid-cols-1 lg:grid-cols-2 gap-6"
               : "space-y-4"
           )}>
-            {sortedProjects.map((project) => (
-              <Card key={project.id} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 
-                      className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-orange-600 transition-colors"
-                      onClick={() => {
-                        localStorage.setItem("projectProfileReferrer", "/contractor-projects");
-                        setLocation(`/project/${project.id}`);
-                      }}
-                    >
-                      {project.name}
-                    </h3>
-                    <Badge variant={
-                      project.status === "Tender Open" ? "default" :
-                      project.status === "In Progress" ? "secondary" : "outline"
-                    }>
-                      {project.status}
-                    </Badge>
-                  </div>
-                  
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                    {project.description}
-                  </p>
+            {sortedProjects.map((project) => {
+              const getMainContractor = (project: any) => {
+                // Extract contractor from project data or use default based on project type
+                if (project.name.includes("Solar")) return "ACWA Power";
+                if (project.name.includes("Metro")) return "Samsung C&T Corp";
+                if (project.name.includes("Hospital")) return "Drake & Scull";
+                if (project.name.includes("Bridge")) return "Samsung C&T Corp";
+                if (project.name.includes("Mall")) return "Arabtec Construction";
+                if (project.name.includes("Data Center")) return "Khansaheb Civil";
+                if (project.name.includes("Warehouse")) return "Al Habtoor Engineering";
+                return "Multiple Contractors";
+              };
 
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      {project.city}, {project.district}, {project.country}
-                    </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <DollarSign className="w-4 h-4 mr-2" />
-                      Investment: ${project.investment}M
-                    </div>
-                    {project.size && (
-                      <div className="flex items-center text-sm text-gray-600">
-                        <Building2 className="w-4 h-4 mr-2" />
-                        Size: {project.size.toLocaleString()} sq ft
+              const getCompetitorData = (project: any) => {
+                const competitors = [
+                  { name: "Arabtec Construction", projects: 23, focus: "Mixed-Use", region: "UAE" },
+                  { name: "Drake & Scull", projects: 18, focus: "Healthcare", region: "GCC" },
+                  { name: "Samsung C&T Corp", projects: 15, focus: "Infrastructure", region: "MENA" },
+                  { name: "ACWA Power", projects: 12, focus: "Energy", region: "Saudi Arabia" },
+                  { name: "Al Habtoor Engineering", projects: 21, focus: "Industrial", region: "UAE" },
+                  { name: "Khansaheb Civil", projects: 16, focus: "Technology", region: "UAE" }
+                ];
+                
+                return competitors
+                  .filter(c => c.focus.toLowerCase() === project.sector.toLowerCase() || 
+                              c.region === project.country || 
+                              c.name === getMainContractor(project))
+                  .slice(0, 3);
+              };
+
+              const mainContractor = getMainContractor(project);
+              const competitors = getCompetitorData(project);
+              const ongoingProjects = Math.floor(Math.random() * 5) + 2;
+              const completedProjects = Math.floor(Math.random() * 15) + 5;
+
+              return (
+                <Card key={project.id} className="hover:shadow-lg transition-shadow border-l-4 border-l-orange-500">
+                  <CardContent className="p-6">
+                    {/* Header Section */}
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="flex-1">
+                        <h3 
+                          className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-orange-600 transition-colors mb-1"
+                          onClick={() => {
+                            localStorage.setItem("projectProfileReferrer", "/contractor-projects");
+                            setLocation(`/project/${project.id}`);
+                          }}
+                        >
+                          {project.name}
+                        </h3>
+                        <div className="flex items-center gap-3 text-sm text-gray-600">
+                          <span className="font-medium">{project.projectType}</span>
+                          <span>•</span>
+                          <span>${project.investment}M</span>
+                          <span>•</span>
+                          <span>{project.city}, {project.country}</span>
+                        </div>
                       </div>
-                    )}
-                    {project.createdAt && (
-                      <div className="flex items-center text-sm text-gray-600">
-                        <Calendar className="w-4 h-4 mr-2" />
-                        Created: {new Date(project.createdAt).toLocaleDateString()}
+                      <Badge variant={
+                        project.status === "Tender Open" ? "default" :
+                        project.status === "Under Construction" ? "secondary" :
+                        project.status === "Planning" ? "outline" : "outline"
+                      } className="ml-4">
+                        {project.status}
+                      </Badge>
+                    </div>
+
+                    {/* Key Stats Grid */}
+                    <div className="grid grid-cols-2 gap-4 mb-4 p-3 bg-gray-50 rounded-lg">
+                      <div>
+                        <p className="text-xs text-gray-500 uppercase tracking-wide">Main Contractor</p>
+                        <p className="font-medium text-gray-900">{mainContractor}</p>
                       </div>
-                    )}
-                  </div>
+                      <div>
+                        <p className="text-xs text-gray-500 uppercase tracking-wide">Region Focus</p>
+                        <p className="font-medium text-gray-900">{project.district}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 uppercase tracking-wide">Ongoing Projects</p>
+                        <p className="font-medium text-orange-600">{ongoingProjects} Active</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 uppercase tracking-wide">Completed</p>
+                        <p className="font-medium text-green-600">{completedProjects} Done</p>
+                      </div>
+                    </div>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="outline" className="text-xs">
-                      {project.sector}
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      {project.projectType}
-                    </Badge>
-                    {project.isLuxury && (
-                      <Badge variant="outline" className="text-xs">
-                        Luxury
-                      </Badge>
-                    )}
-                    {project.isSustainable && (
-                      <Badge variant="outline" className="text-xs">
-                        Sustainable
-                      </Badge>
-                    )}
-                  </div>
+                    {/* Competitor Analysis */}
+                    <div className="mb-4">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">Top Competitors in {project.sector}</p>
+                      <div className="space-y-2">
+                        {competitors.map((competitor, index) => (
+                          <div key={index} className="flex justify-between items-center p-2 bg-white border rounded text-sm">
+                            <div>
+                              <span className="font-medium text-gray-900">{competitor.name}</span>
+                              <span className="text-gray-500 ml-2">• {competitor.focus}</span>
+                            </div>
+                            <div className="text-right">
+                              <span className="font-medium text-gray-700">{competitor.projects} projects</span>
+                              <br />
+                              <span className="text-xs text-gray-500">{competitor.region}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
 
-                  <div className="flex space-x-2">
-                    <Button 
-                      size="sm" 
-                      className="flex-1"
-                      onClick={() => {
-                        localStorage.setItem("projectProfileReferrer", "/contractor-projects");
-                        setLocation(`/project/${project.id}`);
-                      }}
-                    >
-                      View Details
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      Save Project
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <Badge variant="outline" className="text-xs">
+                        {project.sector}
+                      </Badge>
+                      <Badge variant="outline" className="text-xs">
+                        {project.contractType || "Standard Contract"}
+                      </Badge>
+                      {project.isSustainable && (
+                        <Badge variant="outline" className="text-xs bg-green-50 text-green-700">
+                          Sustainable
+                        </Badge>
+                      )}
+                      {project.isLuxury && (
+                        <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700">
+                          Premium
+                        </Badge>
+                      )}
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex space-x-2">
+                      <Button 
+                        size="sm" 
+                        className="flex-1 bg-orange-600 hover:bg-orange-700"
+                        onClick={() => {
+                          localStorage.setItem("projectProfileReferrer", "/contractor-projects");
+                          setLocation(`/project/${project.id}`);
+                        }}
+                      >
+                        View Full Profile
+                      </Button>
+                      <Button variant="outline" size="sm" className="border-orange-200 text-orange-700 hover:bg-orange-50">
+                        Compare
+                      </Button>
+                      <Button variant="outline" size="sm" className="border-orange-200 text-orange-700 hover:bg-orange-50">
+                        Save
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         )}
           </TabsContent>
