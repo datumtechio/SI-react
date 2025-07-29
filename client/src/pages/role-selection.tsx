@@ -86,7 +86,7 @@ export default function RoleSelection() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mt-12">
+          <div className="flex flex-wrap justify-center gap-6 mt-12">
             {roles.map((role) => {
               const Icon = role.icon;
               const isSelected = selectedRole === role.id;
@@ -95,12 +95,12 @@ export default function RoleSelection() {
                 <Card
                   key={role.id}
                   className={cn(
-                    "role-card border-2 border-transparent hover:shadow-xl transition-all duration-300 cursor-pointer",
+                    "role-card border-2 border-transparent hover:shadow-xl transition-all duration-300 cursor-pointer w-64 h-48",
                     isSelected && "border-primary bg-blue-50 selected"
                   )}
                   onClick={() => setSelectedRole(role.id)}
                 >
-                  <CardContent className="p-10 text-center h-full flex flex-col">
+                  <CardContent className="p-8 text-center h-full flex flex-col justify-center">
                     <div 
                       className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
                       style={{ backgroundColor: `${roleColors[role.id]}10` }}
