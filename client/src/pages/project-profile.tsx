@@ -104,31 +104,36 @@ export default function ProjectProfile() {
     setUserRole(role);
     
     if (params?.id) {
-      // Mock project data - in real implementation, this would fetch from API
-      const mockProject: ProjectDetails = {
-        id: parseInt(params.id),
-        name: "Azure Residences",
-        description: "Luxury residential development featuring modern amenities and sustainable design principles. Located in the heart of Downtown Dubai with panoramic views of the Burj Khalifa and Dubai skyline.",
-        sector: "Real Estate",
-        subsector: "Luxury Residential",
-        projectType: "Residential Tower",
-        contractType: "Design-Build",
-        status: "Under Construction",
-        city: "Dubai",
-        country: "United Arab Emirates",
-        district: "Downtown Dubai",
-        investment: 450,
-        expectedRoi: 16.2,
-        capacity: "320 Units",
-        residentialType: "High-End Apartments",
-        residentialClass: "Ultra-Luxury",
-        rating: "5-Star",
-        category: "Premium Residential Development",
-        value: "$450 Million",
-        startDate: "2024-01-15",
-        completionDate: "Q3 2025",
-        briefBackground: "Azure Residences represents the pinnacle of luxury living in Downtown Dubai, featuring state-of-the-art amenities and world-class architectural design. The project caters to discerning investors and residents seeking premium lifestyle experiences in one of Dubai's most prestigious locations.",
-        developer: "Emaar Properties",
+      // Mock project data - different projects based on ID
+      const projectId = parseInt(params.id);
+      let mockProject: ProjectDetails;
+      
+      // Define different projects based on ID
+      if (projectId === 1) {
+        mockProject = {
+          id: projectId,
+          name: "Azure Residences",
+          description: "Luxury residential development featuring modern amenities and sustainable design principles. Located in the heart of Downtown Dubai with panoramic views of the Burj Khalifa and Dubai skyline.",
+          sector: "Real Estate",
+          subsector: "Luxury Residential",
+          projectType: "Residential Tower",
+          contractType: "Design-Build",
+          status: "Under Construction",
+          city: "Dubai",
+          country: "United Arab Emirates",
+          district: "Downtown Dubai",
+          investment: 450,
+          expectedRoi: 16.2,
+          capacity: "320 Units",
+          residentialType: "High-End Apartments",
+          residentialClass: "Ultra-Luxury",
+          rating: "5-Star",
+          category: "Premium Residential Development",
+          value: "$450 Million",
+          startDate: "2024-01-15",
+          completionDate: "Q3 2025",
+          briefBackground: "Azure Residences represents the pinnacle of luxury living in Downtown Dubai, featuring state-of-the-art amenities and world-class architectural design. The project caters to discerning investors and residents seeking premium lifestyle experiences in one of Dubai's most prestigious locations.",
+          developer: "Emaar Properties",
         contractor: "Arabtec Construction",
         consultant: "AECOM Middle East",
         supplier: "Al Ghurair Iron & Steel",
@@ -172,6 +177,211 @@ export default function ProjectProfile() {
           { name: "Building Specifications", type: "PDF", size: "12.1 MB", date: "2024-01-10" }
         ]
       };
+      } else if (projectId === 7) {
+        // Solar Power Plant project for contractors
+        mockProject = {
+          id: projectId,
+          name: "Solar Power Plant",
+          description: "Renewable energy facility with advanced solar technology providing clean energy to over 50,000 homes in Dubai.",
+          sector: "Energy",
+          subsector: "Renewable Energy",
+          projectType: "Solar Power Plant",
+          contractType: "EPC Contract",
+          status: "Tender Open",
+          city: "Dubai",
+          country: "United Arab Emirates",
+          district: "Dubai South",
+          investment: 320,
+          expectedRoi: 18.2,
+          capacity: "200 MW",
+          rating: "Grid-Connected",
+          category: "Utility-Scale Solar Development",
+          value: "$320 Million",
+          startDate: "2025-01-15",
+          completionDate: "Q1 2027",
+          briefBackground: "This utility-scale solar power plant will provide clean energy to over 50,000 homes in Dubai. The project includes advanced photovoltaic technology, energy storage systems, and smart grid integration. Contractors will be responsible for the complete EPC delivery including foundation work, structural installation, electrical systems, and grid connection.",
+          developer: "Dubai Electricity & Water Authority",
+          contractor: "Bidding Open",
+          consultant: "AECOM Energy",
+          supplier: "Bidding Phase",
+          totalUnits: 200000,
+          builtUpArea: "500 hectares",
+          landArea: "500 hectares",
+          floors: 1,
+          riskLevel: "Medium",
+          marketDemand: "High",
+          competition: "High",
+          permits: ["Environmental Clearance", "Grid Connection Permit", "Construction License", "DEWA Approval"],
+          amenities: ["Control Room", "Maintenance Facility", "Security Systems", "Access Roads"],
+          features: ["Solar Panels", "Energy Storage", "Smart Grid", "Monitoring Systems", "Automated Cleaning"],
+          contactInfo: {
+            email: "tenders@dewa.gov.ae",
+            phone: "+971-4-601-9999",
+            website: "www.dewa.gov.ae"
+          },
+          financials: {
+            totalBudget: "$320M",
+            spentToDate: "$0M",
+            remainingBudget: "$320M",
+            fundingSources: ["Government Funding (70%)", "Green Bonds (20%)", "International Financing (10%)"]
+          },
+          timeline: {
+            phase: "Tender Phase",
+            progress: 5,
+            milestones: [
+              { name: "Tender Submission", date: "2025-02-15", status: "Planned" },
+              { name: "Contract Award", date: "2025-04-01", status: "Planned" },
+              { name: "Site Preparation", date: "2025-06-01", status: "Planned" },
+              { name: "Foundation Work", date: "2025-09-01", status: "Planned" },
+              { name: "Panel Installation", date: "2026-03-01", status: "Planned" },
+              { name: "Grid Connection", date: "2026-12-01", status: "Planned" },
+              { name: "Commercial Operation", date: "2027-01-15", status: "Planned" }
+            ]
+          },
+          documents: [
+            { name: "EPC Tender Documents", type: "PDF", size: "45.2 MB", date: "2024-12-01" },
+            { name: "Technical Specifications", type: "PDF", size: "28.8 MB", date: "2024-12-01" },
+            { name: "Environmental Assessment", type: "PDF", size: "18.5 MB", date: "2024-11-15" },
+            { name: "Grid Connection Study", type: "PDF", size: "12.1 MB", date: "2024-11-20" }
+          ]
+        };
+      } else if (projectId === 8) {
+        // Metro Extension project for contractors
+        mockProject = {
+          id: projectId,
+          name: "Metro Extension Phase 3",
+          description: "Advanced metro rail construction project connecting airport to city center with 15 new stations and 25 km of track.",
+          sector: "Infrastructure",
+          subsector: "Mass Transit",
+          projectType: "Metro Rail Construction",
+          contractType: "Design-Build-Finance",
+          status: "Under Construction",
+          city: "Dubai",
+          country: "United Arab Emirates", 
+          district: "Multi-District",
+          investment: 680,
+          expectedRoi: 16.8,
+          capacity: "85 km Track Length",
+          rating: "Fully Automated",
+          category: "Heavy Rail Transit System",
+          value: "$680 Million",
+          startDate: "2024-03-01",
+          completionDate: "Q4 2026",
+          briefBackground: "Phase 3 of Dubai Metro extension includes 15 new stations and 25 km of elevated and underground track. This complex project requires expertise in tunnel boring, elevated construction, station architecture, and advanced rail systems. Contractors will handle civil works, structural steel, MEP systems, and track installation with strict safety and quality standards.",
+          developer: "Roads and Transport Authority",
+          contractor: "Consolidated Contractors Company",
+          consultant: "Systra Engineering",
+          supplier: "Alstom Transportation",
+          totalUnits: 15,
+          builtUpArea: "25 km track",
+          landArea: "Various locations",
+          floors: 0,
+          riskLevel: "High",
+          marketDemand: "Critical",
+          competition: "Low",
+          permits: ["Municipal Approvals", "Traffic Management", "Safety Clearances", "Environmental Permits"],
+          amenities: ["Station Facilities", "Park & Ride", "Retail Spaces", "Maintenance Depot"],
+          features: ["Underground Tunnels", "Elevated Tracks", "Modern Stations", "Automated Systems", "Platform Screen Doors"],
+          contactInfo: {
+            email: "projects@rta.ae",
+            phone: "+971-4-208-0808",
+            website: "www.rta.ae"
+          },
+          financials: {
+            totalBudget: "$680M",
+            spentToDate: "$280M",
+            remainingBudget: "$400M",
+            fundingSources: ["Government Budget (80%)", "Development Bank (15%)", "PPP Financing (5%)"]
+          },
+          timeline: {
+            phase: "Main Construction",
+            progress: 45,
+            milestones: [
+              { name: "Tunnel Boring Complete", date: "2024-08-15", status: "Completed" },
+              { name: "Elevated Structure Phase 1", date: "2024-12-20", status: "Completed" },
+              { name: "Station Construction", date: "2025-06-15", status: "In Progress" },
+              { name: "Track Installation", date: "2025-10-30", status: "Planned" },
+              { name: "Systems Testing", date: "2026-04-15", status: "Planned" },
+              { name: "Commercial Operation", date: "2026-12-01", status: "Planned" }
+            ]
+          },
+          documents: [
+            { name: "Construction Specifications", type: "PDF", size: "65.2 MB", date: "2024-02-15" },
+            { name: "Safety Management Plan", type: "PDF", size: "32.8 MB", date: "2024-03-01" },
+            { name: "Traffic Management Study", type: "PDF", size: "24.5 MB", date: "2024-02-20" },
+            { name: "Progress Reports", type: "PDF", size: "18.1 MB", date: "2024-12-01" }
+          ]
+        };
+      } else {
+        // Default to Azure Residences for other IDs
+        mockProject = {
+          id: projectId,
+          name: "Azure Residences",
+          description: "Luxury residential development featuring modern amenities and sustainable design principles.",
+          sector: "Real Estate",
+          subsector: "Luxury Residential",
+          projectType: "Residential Tower",
+          contractType: "Design-Build",
+          status: "Under Construction",
+          city: "Dubai",
+          country: "United Arab Emirates",
+          district: "Downtown Dubai",
+          investment: 450,
+          expectedRoi: 16.2,
+          capacity: "320 Units",
+          residentialType: "High-End Apartments",
+          residentialClass: "Ultra-Luxury",
+          rating: "5-Star",
+          category: "Premium Residential Development",
+          value: "$450 Million",
+          startDate: "2024-01-15",
+          completionDate: "Q3 2025",
+          briefBackground: "Azure Residences represents the pinnacle of luxury living in Downtown Dubai, featuring state-of-the-art amenities and world-class architectural design.",
+          developer: "Emaar Properties",
+          contractor: "Arabtec Construction",
+          consultant: "AECOM Middle East",
+          supplier: "Al Ghurair Iron & Steel",
+          totalUnits: 240,
+          builtUpArea: "85,000 sqm",
+          landArea: "12,500 sqm",
+          floors: 32,
+          riskLevel: "Low",
+          marketDemand: "High",
+          competition: "Medium",
+          permits: ["Building Permit", "Environmental Clearance", "Fire Safety", "Municipality Approval"],
+          amenities: ["Swimming Pool", "Gym", "Spa", "Concierge", "Valet Parking", "Sky Lounge", "Children's Play Area"],
+          features: ["Smart Home Technology", "Energy Efficient", "LEED Certified", "Sea View", "Private Balconies"],
+          contactInfo: {
+            email: "info@azureresidences.ae",
+            phone: "+971-4-123-4567",
+            website: "www.azureresidences.ae"
+          },
+          financials: {
+            totalBudget: "$450M",
+            spentToDate: "$240M",
+            remainingBudget: "$210M",
+            fundingSources: ["Bank Financing (60%)", "Developer Equity (25%)", "Pre-sales (15%)"]
+          },
+          timeline: {
+            phase: "Construction Phase 2",
+            progress: 55,
+            milestones: [
+              { name: "Foundation Complete", date: "2024-06-15", status: "Completed" },
+              { name: "Structure Phase 1", date: "2024-12-20", status: "Completed" },
+              { name: "Structure Phase 2", date: "2025-04-15", status: "In Progress" },
+              { name: "MEP Installation", date: "2025-08-30", status: "Planned" },
+              { name: "Interior Fit-out", date: "2026-02-15", status: "Planned" },
+              { name: "Final Completion", date: "2026-08-30", status: "Planned" }
+            ]
+          },
+          documents: [
+            { name: "Project Master Plan", type: "PDF", size: "15.2 MB", date: "2024-01-10" },
+            { name: "Financial Projections", type: "Excel", size: "2.8 MB", date: "2024-01-10" },
+            { name: "Environmental Impact", type: "PDF", size: "8.5 MB", date: "2024-01-10" },
+            { name: "Building Specifications", type: "PDF", size: "12.1 MB", date: "2024-01-10" }
+          ]
+        };
+      }
       
       setProject(mockProject);
       setLoading(false);
@@ -899,23 +1109,128 @@ export default function ProjectProfile() {
           {userRole === "contractor" && (
             <>
               <TabsContent value="construction" className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Construction Details</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Construction Method:</span>
-                        <span className="font-medium">Cast-in-place Concrete</span>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Construction Specifications</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Contract Type:</span>
+                          <Badge variant="outline">{project.contractType}</Badge>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Project Status:</span>
+                          <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Built-up Area:</span>
+                          <span className="font-medium">{project.builtUpArea}</span>
+                        </div>
+                        {project.floors && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Number of Floors:</span>
+                            <span className="font-medium">{project.floors}</span>
+                          </div>
+                        )}
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Start Date:</span>
+                          <span className="font-medium">{new Date(project.startDate).toLocaleDateString()}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Completion Date:</span>
+                          <span className="font-medium">{project.completionDate}</span>
+                        </div>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Main Contractor:</span>
-                        <span className="font-medium">{project.contractor}</span>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Construction Team</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="p-3 border rounded-lg">
+                          <div className="flex items-center mb-2">
+                            <Building className="w-5 h-5 text-orange-600 mr-2" />
+                            <span className="font-medium">Main Contractor</span>
+                          </div>
+                          <p className="text-sm text-gray-600">{project.contractor}</p>
+                        </div>
+                        <div className="p-3 border rounded-lg">
+                          <div className="flex items-center mb-2">
+                            <Target className="w-5 h-5 text-blue-600 mr-2" />
+                            <span className="font-medium">Consultant</span>
+                          </div>
+                          <p className="text-sm text-gray-600">{project.consultant}</p>
+                        </div>
+                        <div className="p-3 border rounded-lg">
+                          <div className="flex items-center mb-2">
+                            <Briefcase className="w-5 h-5 text-green-600 mr-2" />
+                            <span className="font-medium">Main Supplier</span>
+                          </div>
+                          <p className="text-sm text-gray-600">{project.supplier}</p>
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Technical Requirements</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <h4 className="font-medium text-gray-900 mb-2">Key Features</h4>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.features.map((feature, index) => (
+                            <Badge key={index} variant="secondary" className="text-xs">
+                              {feature}
+                            </Badge>
+                          ))}
+                        </div>
+                        
+                        <h4 className="font-medium text-gray-900 mb-2">Required Permits</h4>
+                        <div className="space-y-2">
+                          {project.permits.map((permit, index) => (
+                            <div key={index} className="flex items-center">
+                              <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
+                              <span className="text-sm text-gray-700">{permit}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Safety & Compliance</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div className="flex items-center p-3 bg-orange-50 rounded-lg">
+                          <AlertTriangle className={`w-5 h-5 mr-3 ${getRiskColor(project.riskLevel)}`} />
+                          <div>
+                            <p className="font-medium">Risk Level: {project.riskLevel}</p>
+                            <p className="text-sm text-gray-600">Comprehensive safety protocols required</p>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <p className="font-medium text-gray-900">Contact Information</p>
+                          <div className="text-sm text-gray-600">
+                            <p>📧 {project.contactInfo.email}</p>
+                            <p>📞 {project.contactInfo.phone}</p>
+                            <p>🌐 {project.contactInfo.website}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </TabsContent>
 
               <TabsContent value="procurement" className="space-y-6">

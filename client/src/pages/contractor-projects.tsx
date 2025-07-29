@@ -502,7 +502,14 @@ export default function ContractorProjects() {
                   </div>
 
                   <div className="flex space-x-2">
-                    <Button size="sm" className="flex-1">
+                    <Button 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => {
+                        localStorage.setItem("projectProfileReferrer", "/contractor-projects");
+                        setLocation(`/project/${project.id}`);
+                      }}
+                    >
                       View Details
                     </Button>
                     <Button variant="outline" size="sm">
