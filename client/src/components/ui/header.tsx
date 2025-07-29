@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { 
@@ -20,6 +20,37 @@ interface HeaderProps {
 export default function Header({ userRole, userName = "User" }: HeaderProps) {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentRole, setCurrentRole] = useState(userRole);
+
+  // Update current role when prop changes or localStorage changes
+  useEffect(() => {
+    const updateRole = () => {
+      const storedRole = localStorage.getItem("selectedRole");
+      const activeRole = storedRole || userRole || "";
+      setCurrentRole(activeRole);
+    };
+
+    // Initial update
+    updateRole();
+
+    // Listen for storage changes
+    const handleStorageChange = () => {
+      updateRole();
+    };
+
+    // Listen for custom role change events
+    const handleRoleChanged = () => {
+      setTimeout(updateRole, 50); // Small delay to ensure localStorage is updated
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("roleChanged", handleRoleChanged);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("roleChanged", handleRoleChanged);
+    };
+  }, [userRole]);
 
   const getRoleBadgeStyles = (role: string) => {
     switch (role) {
@@ -49,7 +80,7 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
 
   // Get role-specific navigation paths
   const getRoleBasedPaths = () => {
-    switch (userRole) {
+    switch (currentRole) {
       case "investor":
         return {
           home: "/",
@@ -166,9 +197,9 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
                 <User className="w-4 h-4" />
                 <span>Welcome, {userName}</span>
               </div>
-              {userRole && (
-                <div className={`px-3 py-1 text-xs font-medium rounded-full capitalize ${getRoleBadgeStyles(userRole)}`}>
-                  {userRole}
+              {currentRole && (
+                <div className={`px-3 py-1 text-xs font-medium rounded-full capitalize ${getRoleBadgeStyles(currentRole)}`}>
+                  {currentRole}
                 </div>
               )}
             </div>
@@ -205,10 +236,10 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
                   <User className="w-4 h-4" />
                   <span>Welcome, {userName}</span>
                 </div>
-                {userRole && (
+                {currentRole && (
                   <div className="mt-1">
-                    <span className={`px-3 py-1 text-xs font-medium rounded-full capitalize ${getRoleBadgeStyles(userRole)}`}>
-                      {userRole}
+                    <span className={`px-3 py-1 text-xs font-medium rounded-full capitalize ${getRoleBadgeStyles(currentRole)}`}>
+                      {currentRole}
                     </span>
                   </div>
                 )}
