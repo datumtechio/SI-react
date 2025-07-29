@@ -447,8 +447,8 @@ export default function SupplierOpportunities() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <div className="p-2 bg-orange-100 rounded-lg">
-                  <Package className="w-6 h-6 text-orange-600" />
+                <div className="p-2 bg-blue-100 rounded-lg">
+                  <Package className="w-6 h-6 text-blue-600" />
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600">Matching Opportunities</p>

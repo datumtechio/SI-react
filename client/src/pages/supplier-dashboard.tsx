@@ -548,7 +548,7 @@ export default function SupplierDashboard() {
             <div className="pt-4">
               <Button 
                 onClick={handleFindOpportunities}
-                className="w-full md:w-auto px-8 h-11 bg-orange-600 hover:bg-orange-700"
+                className="w-full md:w-auto px-8 h-11 bg-blue-600 hover:bg-blue-700"
               >
                 <Search className="w-4 h-4 mr-2" />
                 Find Supply Opportunities
@@ -560,7 +560,7 @@ export default function SupplierDashboard() {
         {/* Information Section */}
         <Card>
           <CardContent className="p-8 text-center">
-            <Truck className="w-16 h-16 text-orange-600 mx-auto mb-4" />
+            <Truck className="w-16 h-16 text-blue-600 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Ready to Discover Supply Opportunities?</h3>
             <p className="text-gray-600 mb-6">
               Configure your supply criteria above to identify procurement opportunities across multiple sectors. 
@@ -568,19 +568,19 @@ export default function SupplierDashboard() {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-600">
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
                 <span>Multi-sector supply tracking</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
                 <span>Dynamic product categorization</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
                 <span>Lead time optimization</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
                 <span>Competitive intelligence</span>
               </div>
             </div>
