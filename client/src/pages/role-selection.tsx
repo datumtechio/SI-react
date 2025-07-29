@@ -86,7 +86,7 @@ export default function RoleSelection() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mt-12">
             {roles.map((role) => {
               const Icon = role.icon;
               const isSelected = selectedRole === role.id;
@@ -111,14 +111,9 @@ export default function RoleSelection() {
                       />
                     </div>
                     <h3 className="text-xl font-semibold text-slate-900 mb-6">{role.title}</h3>
-                    <div className="h-12 flex items-center justify-center mb-4">
+                    <div className="flex items-center justify-center">
                       <p className="text-slate-700 text-sm pl-[5px] pr-[5px]">{role.description}</p>
                     </div>
-                    <ul className="text-sm text-slate-700 space-y-2 mt-auto">
-                      {role.features.map((feature, index) => (
-                        <li key={index}>• {feature}</li>
-                      ))}
-                    </ul>
                   </CardContent>
                 </Card>
               );
