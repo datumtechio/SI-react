@@ -68,20 +68,8 @@ export default function RoleSelection() {
       // Trigger custom event to notify other components of role change
       window.dispatchEvent(new CustomEvent("roleChanged"));
       
-      // Route to role-specific pages
-      if (selectedRole === "contractor") {
-        setLocation("/contractor-dashboard");
-      } else if (selectedRole === "investor") {
-        setLocation("/investor-dashboard");
-      } else if (selectedRole === "consultant") {
-        setLocation("/consultant-dashboard");
-      } else if (selectedRole === "developer") {
-        setLocation("/developer-dashboard");
-      } else if (selectedRole === "supplier") {
-        setLocation("/supplier-dashboard");
-      } else {
-        setLocation("/search");
-      }
+      // Route to homepage after role selection
+      setLocation("/");
     }
   };
 

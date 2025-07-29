@@ -146,8 +146,10 @@ function Router() {
     <div className="min-h-screen bg-gray-50">
       <Header userRole={showHeaderRole ? userRole : ""} userName={userName} />
       <Switch>
-        <Route path="/" component={Homepage} />
+        {/* Root path shows role selection for new users, homepage for users with selected role */}
+        <Route path="/" component={() => userRole ? <Homepage /> : <RoleSelection />} />
         <Route path="/role-selection" component={RoleSelection} />
+        <Route path="/homepage" component={Homepage} />
         <Route path="/search" component={SearchFilter} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/investor-search" component={InvestorSearch} />

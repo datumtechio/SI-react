@@ -24,9 +24,16 @@ interface Sector {
   averageValue: number;
 }
 
+interface HomepageProps {
+  userRole?: string;
+}
+
 export default function Homepage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [, setLocation] = useLocation();
+  
+  // Get user role from localStorage
+  const userRole = localStorage.getItem("selectedRole") || "";
 
   // Fetch latest projects
   const { data: latestProjects = [] } = useQuery<Project[]>({
@@ -48,6 +55,70 @@ export default function Homepage() {
     }
   };
 
+  const getStartedPath = () => {
+    switch (userRole) {
+      case "contractor": return "/contractor-dashboard";
+      case "investor": return "/investor-dashboard";
+      case "consultant": return "/consultant-dashboard";
+      case "developer": return "/developer-dashboard";
+      case "supplier": return "/supplier-dashboard";
+      default: return "/search";
+    }
+  };
+
+  const getRoleWelcomeMessage = () => {
+    const roleNames = {
+      contractor: "Ahmed",
+      investor: "Sarah",
+      consultant: "Michael",
+      developer: "Fatima",
+      supplier: "Omar"
+    };
+    
+    const name = roleNames[userRole as keyof typeof roleNames] || "User";
+    
+    switch (userRole) {
+      case "contractor":
+        return {
+          title: `Welcome ${name}!`,
+          subtitle: "Discover active projects and bidding opportunities",
+          cta: "Find Projects"
+        };
+      case "investor":
+        return {
+          title: `Welcome ${name}!`,
+          subtitle: "Explore investment opportunities and market trends",
+          cta: "Analyze Investments"
+        };
+      case "consultant":
+        return {
+          title: `Welcome ${name}!`,
+          subtitle: "Access market insights and advisory data",
+          cta: "View Market Analysis"
+        };
+      case "developer":
+        return {
+          title: `Welcome ${name}!`,
+          subtitle: "Find development sites and market gaps",
+          cta: "Explore Opportunities"
+        };
+      case "supplier":
+        return {
+          title: `Welcome ${name}!`,
+          subtitle: "Connect with material and equipment opportunities",
+          cta: "Find Supply Opportunities"
+        };
+      default:
+        return {
+          title: "Welcome to Sector Intelligence",
+          subtitle: "Professional project discovery and market intelligence",
+          cta: "Get Started"
+        };
+    }
+  };
+
+  const welcomeData = getRoleWelcomeMessage();
+
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -59,6 +130,26 @@ export default function Homepage() {
 
   return (
     <div className="bg-white">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center">
+            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-6">
+              {welcomeData.title}
+            </h1>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-8">
+              {welcomeData.subtitle}
+            </p>
+            <Button 
+              size="lg" 
+              onClick={() => setLocation(getStartedPath())}
+              className="px-8 py-3 text-lg"
+            >
+              {welcomeData.cta}
+            </Button>
+          </div>
+        </div>
+      </div>
       
       {/* Content Sections */}
       <div className="py-20" style={{ backgroundColor: '#0a1b3d' }}>
