@@ -85,7 +85,7 @@ function Router() {
     }
   }, [user, location]); // Include location to trigger updates on navigation
 
-  // Listen for localStorage changes
+  // Listen for localStorage changes and custom role change events
   useEffect(() => {
     const handleStorageChange = () => {
       if (!user) {
@@ -117,10 +117,22 @@ function Router() {
       }
     };
 
+    // Listen for custom role change event from role selection page
+    const handleRoleChanged = () => {
+      console.log("Role changed event triggered");
+      handleStorageChange();
+    };
+
     // Check every 300ms for changes
     const interval = setInterval(handleStorageChange, 300);
     
-    return () => clearInterval(interval);
+    // Listen for custom role change events for immediate updates
+    window.addEventListener("roleChanged", handleRoleChanged);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("roleChanged", handleRoleChanged);
+    };
   }, [user]);
 
   const showHeaderRole = location !== "/role-selection";
