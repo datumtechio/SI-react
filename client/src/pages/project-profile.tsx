@@ -34,7 +34,9 @@ interface ProjectDetails {
   name: string;
   description: string;
   sector: string;
+  subsector?: string;
   projectType: string;
+  contractType?: string;
   status: string;
   city: string;
   country: string;
@@ -43,6 +45,13 @@ interface ProjectDetails {
   expectedRoi?: number;
   startDate: string;
   completionDate: string;
+  capacity?: string;
+  residentialType?: string;
+  residentialClass?: string;
+  rating?: string;
+  category?: string;
+  value?: string;
+  briefBackground?: string;
   developer: string;
   contractor?: string;
   consultant?: string;
@@ -99,17 +108,26 @@ export default function ProjectProfile() {
       const mockProject: ProjectDetails = {
         id: parseInt(params.id),
         name: "Azure Residences",
-        description: "Luxury residential development featuring modern amenities and sustainable design principles. Located in the heart of Dubai Marina with panoramic views of the Persian Gulf and Dubai skyline.",
+        description: "Luxury residential development featuring modern amenities and sustainable design principles. Located in the heart of Downtown Dubai with panoramic views of the Burj Khalifa and Dubai skyline.",
         sector: "Real Estate",
-        projectType: "Residential",
+        subsector: "Luxury Residential",
+        projectType: "Residential Tower",
+        contractType: "Design-Build",
         status: "Under Construction",
         city: "Dubai",
         country: "United Arab Emirates",
-        district: "Dubai Marina",
-        investment: 350,
-        expectedRoi: 18.5,
+        district: "Downtown Dubai",
+        investment: 450,
+        expectedRoi: 16.2,
+        capacity: "320 Units",
+        residentialType: "High-End Apartments",
+        residentialClass: "Ultra-Luxury",
+        rating: "5-Star",
+        category: "Premium Residential Development",
+        value: "$450 Million",
         startDate: "2024-01-15",
-        completionDate: "2026-08-30",
+        completionDate: "Q3 2025",
+        briefBackground: "Azure Residences represents the pinnacle of luxury living in Downtown Dubai, featuring state-of-the-art amenities and world-class architectural design. The project caters to discerning investors and residents seeking premium lifestyle experiences in one of Dubai's most prestigious locations.",
         developer: "Emaar Properties",
         contractor: "Arabtec Construction",
         consultant: "AECOM Middle East",
@@ -395,16 +413,119 @@ export default function ProjectProfile() {
                   <CardTitle>Project Description</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-700 mb-4">{project.description}</p>
+                  <p className="text-gray-700 mb-6">{project.description}</p>
+                  
+                  {/* Brief Background */}
+                  {project.briefBackground && (
+                    <div className="mb-6 p-4 bg-blue-50 rounded-lg">
+                      <h4 className="font-semibold text-gray-900 mb-2">Project Background</h4>
+                      <p className="text-sm text-gray-700">{project.briefBackground}</p>
+                    </div>
+                  )}
+                  
+                  {/* Project Details Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    {/* Basic Information */}
+                    <div className="space-y-3">
+                      <h4 className="font-semibold text-gray-900 mb-3">Basic Information</h4>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Status:</span>
+                        <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Sector:</span>
+                        <Badge variant="outline">{project.sector}</Badge>
+                      </div>
+                      {project.subsector && (
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Subsector:</span>
+                          <span className="font-medium">{project.subsector}</span>
+                        </div>
+                      )}
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Project Type:</span>
+                        <span className="font-medium">{project.projectType}</span>
+                      </div>
+                      {project.contractType && (
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Contract Type:</span>
+                          <span className="font-medium">{project.contractType}</span>
+                        </div>
+                      )}
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Completion Date:</span>
+                        <span className="font-medium">{project.completionDate}</span>
+                      </div>
+                    </div>
+                    
+                    {/* Location & Scale */}
+                    <div className="space-y-3">
+                      <h4 className="font-semibold text-gray-900 mb-3">Location & Scale</h4>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Country:</span>
+                        <span className="font-medium">{project.country}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">City:</span>
+                        <span className="font-medium">{project.city}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">District:</span>
+                        <span className="font-medium">{project.district}</span>
+                      </div>
+                      {project.capacity && (
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Capacity:</span>
+                          <span className="font-medium">{project.capacity}</span>
+                        </div>
+                      )}
+                      {project.value && (
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Total Value:</span>
+                          <span className="font-medium text-green-600">{project.value}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Residential-specific Information */}
+                  {(project.residentialType || project.residentialClass || project.rating) && (
+                    <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+                      <h4 className="font-semibold text-gray-900 mb-3">Residential Details</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {project.residentialType && (
+                          <div>
+                            <span className="text-sm text-gray-600">Type:</span>
+                            <p className="font-medium">{project.residentialType}</p>
+                          </div>
+                        )}
+                        {project.residentialClass && (
+                          <div>
+                            <span className="text-sm text-gray-600">Class:</span>
+                            <p className="font-medium">{project.residentialClass}</p>
+                          </div>
+                        )}
+                        {project.rating && (
+                          <div>
+                            <span className="text-sm text-gray-600">Rating:</span>
+                            <p className="font-medium flex items-center">
+                              <Star className="w-4 h-4 mr-1 text-yellow-500" />
+                              {project.rating}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                      {project.category && (
+                        <div className="mt-3">
+                          <span className="text-sm text-gray-600">Category:</span>
+                          <p className="font-medium">{project.category}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  
+                  {/* Additional Details */}
                   <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Sector:</span>
-                      <Badge variant="outline">{project.sector}</Badge>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Project Type:</span>
-                      <span className="font-medium">{project.projectType}</span>
-                    </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Total Units:</span>
                       <span className="font-medium">{project.totalUnits}</span>

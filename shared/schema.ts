@@ -12,13 +12,22 @@ export const projects = pgTable("projects", {
   district: text("district").notNull(),
   country: text("country").notNull(),
   sector: text("sector").notNull(), // Real Estate, Hospitality, Retail, etc.
+  subsector: text("subsector"), // Luxury Residential, Office Space, etc.
   projectType: text("project_type").notNull(), // Residential, Commercial, Mixed Use, etc.
+  contractType: text("contract_type"), // Design-Build, Traditional, etc.
   status: text("status").notNull(), // Planning, Under Construction, Completed, On Hold
   investment: real("investment").notNull(), // in millions USD
   expectedRoi: real("expected_roi"), // percentage
   currentRoi: real("current_roi"), // percentage for completed projects
   size: real("size"), // square feet
+  capacity: text("capacity"), // 320 Units, 50,000 sqft, etc.
+  residentialType: text("residential_type"), // High-End Apartments, Villas, etc.
+  residentialClass: text("residential_class"), // Ultra-Luxury, Premium, etc.
+  rating: text("rating"), // 5-Star, A-Grade, etc.
+  category: text("category"), // Premium Residential Development, etc.
+  value: text("value"), // $450 Million, etc.
   completionDate: text("completion_date"), // Q1 2025, Q2 2026, etc.
+  briefBackground: text("brief_background"), // Project background description
   imageUrl: text("image_url"),
   features: text("features").array(), // array of feature strings
   isLuxury: boolean("is_luxury").default(false),
