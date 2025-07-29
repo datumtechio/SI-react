@@ -25,34 +25,16 @@ import AccountSettings from "@/pages/account-settings";
 import LoginPage from "@/pages/login";
 import NotFound from "@/pages/not-found";
 import { useAuth } from "@/hooks/useAuth";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 function Router() {
   const [location] = useLocation();
   const { user, isLoading } = useAuth();
+  const [storedRole] = useLocalStorage("selectedRole", "");
+  const [storedUserName] = useLocalStorage("userName", "");
+  
   const [userRole, setUserRole] = useState<string>("");
   const [userName, setUserName] = useState<string>("User");
-
-  // Function to update role and userName from localStorage
-  const updateFromLocalStorage = () => {
-    const storedRole = localStorage.getItem("selectedRole");
-    if (storedRole) {
-      setUserRole(storedRole);
-    }
-
-    const storedUserName = localStorage.getItem("userName");
-    if (storedUserName) {
-      setUserName(storedUserName);
-    } else if (storedRole) {
-      const roleNames = {
-        contractor: "Ahmed",
-        investor: "Sarah",
-        consultant: "Michael",
-        developer: "Fatima",
-        supplier: "Omar"
-      };
-      setUserName(roleNames[storedRole as keyof typeof roleNames] || "User");
-    }
-  };
 
   useEffect(() => {
     // If user is authenticated, use their data
@@ -64,34 +46,25 @@ function Router() {
         localStorage.setItem("selectedRole", user.selectedRole);
       }
     } else {
-      // Fallback to localStorage for demo purposes
-      updateFromLocalStorage();
-    }
-  }, [location, user]);
-
-  // Listen for localStorage changes to update role dynamically
-  useEffect(() => {
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "selectedRole" || e.key === "userName") {
-        updateFromLocalStorage();
+      // Use localStorage values with reactive updates
+      if (storedRole) {
+        setUserRole(storedRole);
       }
-    };
 
-    // Listen for storage events from other tabs/windows
-    window.addEventListener("storage", handleStorageChange);
-    
-    // Listen for custom events within the same tab
-    const handleCustomStorageChange = () => {
-      updateFromLocalStorage();
-    };
-    
-    window.addEventListener("roleChanged", handleCustomStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("roleChanged", handleCustomStorageChange);
-    };
-  }, []);
+      if (storedUserName) {
+        setUserName(storedUserName);
+      } else if (storedRole) {
+        const roleNames = {
+          contractor: "Ahmed",
+          investor: "Sarah",
+          consultant: "Michael",
+          developer: "Fatima",
+          supplier: "Omar"
+        };
+        setUserName(roleNames[storedRole as keyof typeof roleNames] || "User");
+      }
+    }
+  }, [user, storedRole, storedUserName]);
 
   return (
     <div className="min-h-screen bg-gray-50">
