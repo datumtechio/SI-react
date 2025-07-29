@@ -59,6 +59,9 @@ export default function RoleSelection() {
       // Store role in localStorage for persistence
       localStorage.setItem("selectedRole", selectedRole);
       
+      // Trigger custom event to notify other components of role change
+      window.dispatchEvent(new CustomEvent("roleChanged"));
+      
       // Route to role-specific pages
       if (selectedRole === "contractor") {
         setLocation("/contractor-dashboard");
