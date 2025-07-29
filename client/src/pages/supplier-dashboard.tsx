@@ -233,9 +233,18 @@ export default function SupplierDashboard() {
                 onClick={() => {
                   // Ensure supplier role is maintained when going back to homepage
                   localStorage.setItem("selectedRole", "supplier");
+                  localStorage.setItem("userName", "Omar");
+                  // Clear any conflicting data
+                  localStorage.removeItem("investor");
+                  localStorage.removeItem("contractor");
+                  localStorage.removeItem("consultant");
+                  localStorage.removeItem("developer");
                   // Trigger role change event for immediate UI update
                   window.dispatchEvent(new CustomEvent('roleChanged'));
-                  setLocation("/");
+                  // Small delay to ensure localStorage is updated before navigation
+                  setTimeout(() => {
+                    setLocation("/");
+                  }, 50);
                 }}
                 className="text-gray-600"
               >

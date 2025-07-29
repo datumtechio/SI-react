@@ -32,8 +32,9 @@ export default function Homepage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [, setLocation] = useLocation();
   
-  // Get user role from localStorage
+  // Get user role from localStorage with explicit logging
   const userRole = localStorage.getItem("selectedRole") || "";
+  console.log("Homepage - detected userRole:", userRole);
 
   // Fetch latest projects
   const { data: latestProjects = [] } = useQuery<Project[]>({
