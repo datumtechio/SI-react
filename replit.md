@@ -16,7 +16,7 @@ This is a full-stack real estate investment platform built with React, TypeScrip
 - **Form Validation**: Comprehensive form validation using Zod schemas for registration, login, and profile updates
 - **Role-Customized Project Profiles**: Created role-specific project profile pages tailored to each user type's workflow and data needs
 - **Universal Project Linking**: Made project names clickable throughout the platform, linking to detailed project profiles from all modules
-- **Color Consistency Fix**: Standardized supplier role color to orange across all components (was inconsistently blue/amber in some areas)
+- **Color Consistency Fix**: Standardized supplier role color to blue theme across all components (was inconsistently orange/amber in some areas)
 
 ## User Preferences
 

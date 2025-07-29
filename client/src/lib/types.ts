@@ -27,7 +27,7 @@ export const roleColors = {
   contractor: "hsl(45, 93%, 47%)", // orange
   consultant: "hsl(220, 91%, 54%)", // blue
   developer: "hsl(262, 83%, 58%)", // purple
-  supplier: "hsl(45, 93%, 47%)", // orange
+  supplier: "hsl(220, 91%, 54%)", // blue
 } as const;
 
 export const roleIcons = {
