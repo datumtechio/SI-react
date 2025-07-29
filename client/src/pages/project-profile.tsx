@@ -591,6 +591,71 @@ export default function ProjectProfile() {
             { name: "Healthcare Regulations", type: "PDF", size: "42.1 MB", date: "2024-12-10" }
           ]
         };
+      } else if (projectId === 13) {
+        // Dubai Creek Harbour Residences
+        mockProject = {
+          id: projectId,
+          name: "Dubai Creek Harbour Residences",
+          description: "Waterfront residential development in Dubai Creek Harbour with marina access and luxury amenities",
+          sector: "Real Estate",
+          subsector: "Luxury Residential",
+          projectType: "Residential Complex",
+          contractType: "Design-Build",
+          status: "Pre-Construction",
+          city: "Dubai",
+          country: "United Arab Emirates",
+          district: "Dubai Creek Harbour",
+          investment: 320,
+          expectedRoi: 19.2,
+          capacity: "580 Units",
+          residentialType: "Waterfront Apartments",
+          residentialClass: "Premium",
+          rating: "4-Star",
+          category: "Mixed-Use Waterfront Development",
+          value: "$320 Million",
+          startDate: "2025-02-01",
+          completionDate: "Q1 2026",
+          briefBackground: "Dubai Creek Harbour Residences offers premium waterfront living with direct marina access and panoramic views of Dubai's skyline. The development features luxury amenities, sustainable design elements, and world-class facilities in one of Dubai's most prestigious waterfront communities.",
+          developer: "Dubai Creek Harbour Development Company",
+          contractor: "Emaar Construction",
+          consultant: "WSP Middle East",
+          supplier: "Premium Materials LLC",
+          totalUnits: 580,
+          builtUpArea: "1,200,000 sq ft",
+          landArea: "15 acres waterfront",
+          floors: 42,
+          riskLevel: "Medium",
+          marketDemand: "High",
+          competition: "Medium",
+          permits: ["Marina Development Permit", "Environmental Clearance", "Construction License", "Waterfront Access Rights"],
+          features: ["Marina Access", "Waterfront Views", "Luxury Amenities", "Sustainable Design", "Premium Finishes", "Community Facilities"],
+          amenities: ["Private Marina", "Infinity Pool", "Spa & Wellness Center", "Fine Dining", "Retail Plaza", "Landscaped Gardens"],
+          financials: {
+            totalBudget: "$320M",
+            spentToDate: "$32M",
+            remainingBudget: "$288M",
+            fundingSources: ["Developer Equity: 40%", "Bank Financing: 45%", "Pre-sales: 15%"]
+          },
+          timeline: {
+            phase: "Pre-Construction",
+            progress: 10,
+            milestones: [
+              { name: "Final Approvals", date: "2025-01-31", status: "In Progress" },
+              { name: "Site Preparation", date: "2025-02-28", status: "Planned" },
+              { name: "Foundation Work", date: "2025-05-01", status: "Planned" },
+              { name: "Structure Phase 1", date: "2025-09-30", status: "Planned" },
+              { name: "MEP Installation", date: "2025-12-31", status: "Planned" },
+              { name: "Interior Fit-out", date: "2026-02-28", status: "Planned" },
+              { name: "Project Completion", date: "2026-03-31", status: "Planned" }
+            ]
+          },
+          documents: [
+            { name: "Master Development Plan", type: "PDF", size: "95.2 MB", date: "2024-11-15" },
+            { name: "Marina Access Guidelines", type: "PDF", size: "45.8 MB", date: "2024-12-01" },
+            { name: "Sustainability Report", type: "PDF", size: "28.5 MB", date: "2024-11-20" },
+            { name: "Amenities Specifications", type: "PDF", size: "22.1 MB", date: "2024-12-05" }
+          ]
+        };
       } else {
         // Default to Azure Residences for other IDs
         mockProject = {
