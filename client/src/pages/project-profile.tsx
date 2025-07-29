@@ -630,6 +630,11 @@ export default function ProjectProfile() {
           permits: ["Marina Development Permit", "Environmental Clearance", "Construction License", "Waterfront Access Rights"],
           features: ["Marina Access", "Waterfront Views", "Luxury Amenities", "Sustainable Design", "Premium Finishes", "Community Facilities"],
           amenities: ["Private Marina", "Infinity Pool", "Spa & Wellness Center", "Fine Dining", "Retail Plaza", "Landscaped Gardens"],
+          contactInfo: {
+            email: "info@dubaicreekharbour.ae",
+            phone: "+971-4-567-9200",
+            website: "www.dubaicreekharbour.ae"
+          },
           financials: {
             totalBudget: "$320M",
             spentToDate: "$32M",
