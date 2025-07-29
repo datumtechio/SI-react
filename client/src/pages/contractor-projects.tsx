@@ -26,11 +26,19 @@ export default function ContractorProjects() {
   }, []);
 
   const { data: projects = [], isLoading } = useQuery<Project[]>({
-    queryKey: ["/api/projects", filters],
+    queryKey: ["/api/projects"],
     enabled: true,
   });
 
+  console.log("All projects:", projects);
+  console.log("Current filters:", filters);
+
   const filteredProjects = projects.filter(project => {
+    // If no filters are set, show all projects
+    if (!filters || Object.keys(filters).length === 0) {
+      return true;
+    }
+    
     if (filters.sector && filters.sector !== "all" && project.sector !== filters.sector) return false;
     if (filters.projectType && filters.projectType !== "all" && project.projectType !== filters.projectType) return false;
     if (filters.country && filters.country !== "all" && project.country !== filters.country) return false;
@@ -42,6 +50,8 @@ export default function ContractorProjects() {
     if (filters.maxValue && project.investment > filters.maxValue) return false;
     return true;
   });
+
+  console.log("Filtered projects:", filteredProjects);
 
   const sortedProjects = [...filteredProjects].sort((a, b) => {
     switch (sortBy) {
