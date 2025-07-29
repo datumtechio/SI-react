@@ -230,7 +230,13 @@ export default function SupplierDashboard() {
             <div className="flex items-center space-x-4">
               <Button 
                 variant="ghost" 
-                onClick={() => setLocation("/")}
+                onClick={() => {
+                  // Ensure supplier role is maintained when going back to homepage
+                  localStorage.setItem("selectedRole", "supplier");
+                  // Trigger role change event for immediate UI update
+                  window.dispatchEvent(new CustomEvent('roleChanged'));
+                  setLocation("/");
+                }}
                 className="text-gray-600"
               >
                 ← Back to Home
