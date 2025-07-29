@@ -145,7 +145,7 @@ export default function ProjectProfile() {
         mockProject = {
           id: projectId,
           name: "Dubai Marina Tower",
-          description: "Premium residential tower in Dubai Marina offering panoramic views of the marina and Arabian Gulf. Features contemporary architecture with world-class amenities and waterfront lifestyle.",
+          description: "A distinguished 45-story residential tower positioned at the heart of Dubai Marina, offering unobstructed waterfront views and direct access to the marina promenade. This architectural masterpiece combines luxury living with the vibrant marina lifestyle, featuring premium amenities and contemporary design tailored for discerning residents and investors.",
           sector: "Real Estate",
           subsector: "Luxury Residential",
           projectType: "Residential Tower",
@@ -164,7 +164,7 @@ export default function ProjectProfile() {
           value: "$285 Million",
           startDate: "2024-02-15",
           completionDate: "Q3 2025",
-          briefBackground: "Dubai Marina Tower is an iconic residential development offering panoramic views of Dubai Marina and the Arabian Gulf. The project features contemporary architecture, world-class amenities, and represents excellent investment opportunity in one of Dubai's most sought-after waterfront communities.",
+          briefBackground: "Strategically located in the prestigious Dubai Marina district, this tower represents a landmark addition to the waterfront skyline. The development capitalizes on the area's transformation into a world-class residential and leisure destination, with direct marina access, proximity to JBR Beach, and integration with the Marina Walk retail and dining precinct. The project targets high-net-worth individuals seeking luxury waterfront living with exceptional rental yields and capital appreciation potential in Dubai's most dynamic residential market.",
           developer: "Emaar Properties",
         contractor: "Arabtec Construction",
         consultant: "AECOM Middle East",
