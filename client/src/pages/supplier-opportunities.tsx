@@ -562,10 +562,19 @@ export default function SupplierOpportunities() {
                     <div>
                       <div className="flex items-center space-x-3 mb-2">
                         <h3 
-                          className="text-lg font-semibold text-gray-900 cursor-pointer hover:text-orange-600 transition-colors"
+                          className="text-lg font-semibold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors"
                           onClick={() => {
-                            localStorage.setItem("projectProfileReferrer", "/supplier-opportunities");
-                            setLocation(`/project/${opportunity.id}`);
+                            // Map supplier opportunity IDs to project profile IDs
+                            const projectMapping: Record<number, number> = {
+                              1: 1, // Dubai Marina Tower Complex → Dubai Marina Tower
+                              6: 13, // Dubai Creek Harbour Residences → Dubai Creek Harbour Residences
+                              7: 3, // Business Bay Commercial Tower → Business Bay
+                              // Add more mappings as needed
+                            };
+                            
+                            const projectId = projectMapping[opportunity.id] || opportunity.id;
+                            sessionStorage.setItem('previousPage', '/supplier-opportunities');
+                            setLocation(`/project/${projectId}`);
                           }}
                         >
                           {opportunity.projectName}
