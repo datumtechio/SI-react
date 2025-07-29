@@ -47,26 +47,51 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
     window.location.href = "/role-selection";
   };
 
-  const getDashboardPath = () => {
+  // Get role-specific navigation paths
+  const getRoleBasedPaths = () => {
     switch (userRole) {
-      case "contractor": return "/contractor-dashboard";
-      case "investor": return "/investor-dashboard";
-      case "consultant": return "/consultant-dashboard";
-      case "developer": return "/developer-dashboard";
-      case "supplier": return "/supplier-dashboard";
-      default: return "/role-selection";
+      case "investor":
+        return {
+          home: "/",
+          dashboard: "/investor-dashboard",
+          projects: "/investor-projects"
+        };
+      case "contractor":
+        return {
+          home: "/",
+          dashboard: "/contractor-dashboard", 
+          projects: "/contractor-projects"
+        };
+      case "consultant":
+        return {
+          home: "/",
+          dashboard: "/consultant-dashboard",
+          projects: "/consultant-analysis"
+        };
+      case "developer":
+        return {
+          home: "/",
+          dashboard: "/developer-dashboard",
+          projects: "/developer-opportunities"
+        };
+      case "supplier":
+        return {
+          home: "/",
+          dashboard: "/supplier-dashboard",
+          projects: "/supplier-opportunities"
+        };
+      default:
+        return {
+          home: "/",
+          dashboard: "/dashboard",
+          projects: "/search"
+        };
     }
   };
 
-  const getProjectsPath = () => {
-    switch (userRole) {
-      case "contractor": return "/contractor-projects";
-      case "consultant": return "/consultant-analysis";
-      case "developer": return "/developer-opportunities";
-      case "supplier": return "/supplier-opportunities";
-      default: return "/search";
-    }
-  };
+  const rolePaths = getRoleBasedPaths();
+
+
 
   const isActivePath = (path: string) => {
     if (path === "/" && location === "/") return true;
@@ -77,17 +102,17 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
   const navigationLinks = [
     {
       label: "Home",
-      path: "/",
+      path: rolePaths.home,
       icon: Home
     },
     {
       label: "Dashboard",
-      path: getDashboardPath(),
+      path: rolePaths.dashboard,
       icon: LayoutDashboard
     },
     {
       label: "Projects",
-      path: getProjectsPath(),
+      path: rolePaths.projects,
       icon: Building2
     },
     {
