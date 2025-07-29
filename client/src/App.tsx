@@ -140,7 +140,7 @@ function Router() {
     };
   }, [user]);
 
-  const showHeader = location !== "/role-selection";
+  const showHeader = location !== "/role-selection" && !(location === "/" && !userRole);
 
   return (
     <div className="min-h-screen bg-gray-50">
