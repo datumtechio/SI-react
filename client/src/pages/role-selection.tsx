@@ -86,7 +86,7 @@ export default function RoleSelection() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mt-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
             {roles.map((role) => {
               const Icon = role.icon;
               const isSelected = selectedRole === role.id;
@@ -100,7 +100,7 @@ export default function RoleSelection() {
                   )}
                   onClick={() => setSelectedRole(role.id)}
                 >
-                  <CardContent className="p-8 text-center h-full flex flex-col">
+                  <CardContent className="p-10 text-center h-full flex flex-col">
                     <div 
                       className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
                       style={{ backgroundColor: `${roleColors[role.id]}10` }}
@@ -112,9 +112,9 @@ export default function RoleSelection() {
                     </div>
                     <h3 className="text-xl font-semibold text-slate-900 mb-6">{role.title}</h3>
                     <div className="h-12 flex items-center justify-center mb-4">
-                      <p className="text-slate-600 text-sm pl-[5px] pr-[5px]">{role.description}</p>
+                      <p className="text-slate-700 text-sm pl-[5px] pr-[5px]">{role.description}</p>
                     </div>
-                    <ul className="text-xs text-slate-500 space-y-1 mt-auto">
+                    <ul className="text-sm text-slate-700 space-y-2 mt-auto">
                       {role.features.map((feature, index) => (
                         <li key={index}>• {feature}</li>
                       ))}
