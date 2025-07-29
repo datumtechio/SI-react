@@ -32,6 +32,24 @@ export default function ConsultantAnalysis() {
     sessionStorage.setItem('previousPage', '/consultant-analysis');
   }, []);
 
+  // Handle location click to navigate to relevant project
+  const handleLocationClick = (locationName: string) => {
+    // Map locations to relevant project IDs
+    const locationProjectMap: { [key: string]: number } = {
+      "Dubai Marina": 1, // Dubai Marina Tower
+      "Downtown Dubai": 2, // Azure Residences  
+      "Business Bay": 3, // Marina Bay Complex
+      "DIFC": 2, // Azure Residences (closest match)
+      "Dubai South": 4, // Al Maktoum Logistics Hub
+      "Al Barsha": 2, // Azure Residences (closest match)
+      "JBR": 1, // Dubai Marina Tower (closest match)
+      "Palm Jumeirah": 1 // Dubai Marina Tower (closest match)
+    };
+
+    const projectId = locationProjectMap[locationName] || 1;
+    setLocation(`/project/${projectId}`);
+  };
+
   // Mock data for analysis results
   const marketStats = {
     totalProjectValue: "$12.4B",
@@ -345,10 +363,18 @@ export default function ConsultantAnalysis() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   {locationHeatmap.map((location) => (
-                    <Card key={location.area} className="border-2">
-                      <CardContent className="p-4">
+                    <Card key={location.area} className="border-2 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <CardContent className="p-4" onClick={() => handleLocationClick(location.area)}>
                         <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-semibold text-gray-900">{location.area}</h4>
+                          <button 
+                            className="font-semibold text-gray-900 hover:text-blue-600 text-left transition-colors"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleLocationClick(location.area);
+                            }}
+                          >
+                            {location.area}
+                          </button>
                           <div className={`w-4 h-4 rounded ${getSupplyLevelColor(location.supplyLevel)}`}></div>
                         </div>
                         <div className="space-y-1 text-sm">
