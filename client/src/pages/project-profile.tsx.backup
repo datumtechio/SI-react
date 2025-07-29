@@ -1300,6 +1300,273 @@ export default function ProjectProfile() {
                 </Card>
               </TabsContent>
 
+                {/* Expandable Sections */}
+                <div className="space-y-4">
+                  {/* Contractor-Client Relationship History */}
+                  <Collapsible>
+                    <Card>
+                      <CollapsibleTrigger className="w-full" onClick={() => toggleSection('relationship')}>
+                        <CardHeader className="cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center justify-between">
+                            <CardTitle className="flex items-center text-left">
+                              <History className="w-5 h-5 text-blue-600 mr-2" />
+                              Contractor-Client Relationship History
+                            </CardTitle>
+                            {expandedSections.relationship ? 
+                              <ChevronUp className="w-5 h-5 text-gray-400" /> : 
+                              <ChevronDown className="w-5 h-5 text-gray-400" />
+                            }
+                          </div>
+                        </CardHeader>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <CardContent>
+                          <div className="space-y-4">
+                            <div className="p-4 bg-blue-50 rounded-lg">
+                              <h4 className="font-semibold text-blue-900 mb-2">Previous Projects (2022-2024)</h4>
+                              <div className="space-y-2">
+                                <div className="flex justify-between items-center">
+                                  <span className="text-blue-800">Dubai Marina Tower</span>
+                                  <Badge variant="outline" className="bg-green-100 text-green-700">Completed</Badge>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                  <span className="text-blue-800">Business Bay Complex</span>
+                                  <Badge variant="outline" className="bg-green-100 text-green-700">Completed</Badge>
+                                </div>
+                                <div className="text-sm text-blue-600 mt-2">
+                                  Total contract value: $1.2B • Performance rating: Excellent
+                                </div>
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <p className="text-sm text-gray-500 uppercase tracking-wide">Relationship Score</p>
+                                <p className="text-2xl font-bold text-green-600">9.2/10</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-gray-500 uppercase tracking-wide">Payment History</p>
+                                <p className="text-2xl font-bold text-green-600">Excellent</p>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </CollapsibleContent>
+                    </Card>
+                  </Collapsible>
+
+                  {/* Business Development Notes */}
+                  <Collapsible>
+                    <Card>
+                      <CollapsibleTrigger className="w-full" onClick={() => toggleSection('businessNotes')}>
+                        <CardHeader className="cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center justify-between">
+                            <CardTitle className="flex items-center text-left">
+                              <MessageSquare className="w-5 h-5 text-green-600 mr-2" />
+                              Business Development Notes
+                            </CardTitle>
+                            {expandedSections.businessNotes ? 
+                              <ChevronUp className="w-5 h-5 text-gray-400" /> : 
+                              <ChevronDown className="w-5 h-5 text-gray-400" />
+                            }
+                          </div>
+                        </CardHeader>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <CardContent>
+                          <div className="space-y-4">
+                            <div className="p-4 bg-yellow-50 border-l-4 border-yellow-400">
+                              <h4 className="font-semibold text-yellow-800 mb-2">Recent Meeting (Jan 15, 2025)</h4>
+                              <p className="text-yellow-700 text-sm">
+                                Client expressed interest in sustainable construction methods. Opportunity to position our green building expertise.
+                                Follow-up scheduled for Jan 22nd to discuss LEED certification requirements.
+                              </p>
+                            </div>
+                            <div className="p-4 bg-green-50 border-l-4 border-green-400">
+                              <h4 className="font-semibold text-green-800 mb-2">Key Opportunity</h4>
+                              <p className="text-green-700 text-sm">
+                                Client is looking for a long-term partnership for their upcoming projects in Phase 2.
+                                Strong performance on this project could lead to preferred contractor status.
+                              </p>
+                            </div>
+                            <div className="flex items-center justify-between p-3 border rounded">
+                              <span className="text-sm font-medium">Next Follow-up Action</span>
+                              <Badge variant="outline">Jan 22, 2025</Badge>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </CollapsibleContent>
+                    </Card>
+                  </Collapsible>
+
+                  {/* Competitor Analysis */}
+                  <Collapsible>
+                    <Card>
+                      <CollapsibleTrigger className="w-full" onClick={() => toggleSection('competitorAnalysis')}>
+                        <CardHeader className="cursor-pointer hover:bg-gray-50">
+                          <div className="flex items-center justify-between">
+                            <CardTitle className="flex items-center text-left">
+                              <BarChart3 className="w-5 h-5 text-red-600 mr-2" />
+                              Competitor Analysis on This Opportunity
+                            </CardTitle>
+                            {expandedSections.competitorAnalysis ? 
+                              <ChevronUp className="w-5 h-5 text-gray-400" /> : 
+                              <ChevronDown className="w-5 h-5 text-gray-400" />
+                            }
+                          </div>
+                        </CardHeader>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <CardContent>
+                          <div className="space-y-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div className="p-4 border rounded-lg">
+                                <h4 className="font-semibold text-gray-900 mb-2">Al Habtoor Engineering</h4>
+                                <div className="space-y-2 text-sm">
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Bid Status:</span>
+                                    <Badge variant="outline" className="bg-red-100 text-red-700">Competing</Badge>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Strength:</span>
+                                    <span className="font-medium">Local presence</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Weakness:</span>
+                                    <span className="font-medium">Higher pricing</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Win Probability:</span>
+                                    <span className="font-medium text-orange-600">25%</span>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div className="p-4 border rounded-lg">
+                                <h4 className="font-semibold text-gray-900 mb-2">Drake & Scull</h4>
+                                <div className="space-y-2 text-sm">
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Bid Status:</span>
+                                    <Badge variant="outline" className="bg-red-100 text-red-700">Competing</Badge>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Strength:</span>
+                                    <span className="font-medium">Technical expertise</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Weakness:</span>
+                                    <span className="font-medium">Timeline concerns</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span className="text-gray-600">Win Probability:</span>
+                                    <span className="font-medium text-orange-600">30%</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="p-4 bg-orange-50 rounded-lg">
+                              <h4 className="font-semibold text-orange-800 mb-2">Our Competitive Advantage</h4>
+                              <ul className="text-orange-700 text-sm space-y-1">
+                                <li>• Strong relationship with client from previous projects</li>
+                                <li>• Competitive pricing with value engineering approach</li>
+                                <li>• Proven track record in similar residential developments</li>
+                                <li>• Advanced project management systems</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </CollapsibleContent>
+                    </Card>
+                  </Collapsible>
+                </div>
+                
+                <Card>
+                    <CardHeader>
+                      <CardTitle>Construction Team</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="p-3 border rounded-lg">
+                          <div className="flex items-center mb-2">
+                            <Building className="w-5 h-5 text-orange-600 mr-2" />
+                            <span className="font-medium">Main Contractor</span>
+                          </div>
+                          <p className="text-sm text-gray-600">{project.contractor}</p>
+                        </div>
+                        <div className="p-3 border rounded-lg">
+                          <div className="flex items-center mb-2">
+                            <Target className="w-5 h-5 text-blue-600 mr-2" />
+                            <span className="font-medium">Consultant</span>
+                          </div>
+                          <p className="text-sm text-gray-600">{project.consultant}</p>
+                        </div>
+                        <div className="p-3 border rounded-lg">
+                          <div className="flex items-center mb-2">
+                            <Briefcase className="w-5 h-5 text-green-600 mr-2" />
+                            <span className="font-medium">Main Supplier</span>
+                          </div>
+                          <p className="text-sm text-gray-600">{project.supplier}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Technical Requirements</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <h4 className="font-medium text-gray-900 mb-2">Key Features</h4>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.features.map((feature, index) => (
+                            <Badge key={index} variant="secondary" className="text-xs">
+                              {feature}
+                            </Badge>
+                          ))}
+                        </div>
+                        
+                        <h4 className="font-medium text-gray-900 mb-2">Required Permits</h4>
+                        <div className="space-y-2">
+                          {project.permits.map((permit, index) => (
+                            <div key={index} className="flex items-center">
+                              <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
+                              <span className="text-sm text-gray-700">{permit}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Safety & Compliance</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div className="flex items-center p-3 bg-orange-50 rounded-lg">
+                          <AlertTriangle className={`w-5 h-5 mr-3 ${getRiskColor(project.riskLevel)}`} />
+                          <div>
+                            <p className="font-medium">Risk Level: {project.riskLevel}</p>
+                            <p className="text-sm text-gray-600">Comprehensive safety protocols required</p>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <p className="font-medium text-gray-900">Contact Information</p>
+                          <div className="text-sm text-gray-600">
+                            <p>📧 {project.contactInfo.email}</p>
+                            <p>📞 {project.contactInfo.phone}</p>
+                            <p>🌐 {project.contactInfo.website}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+
               <TabsContent value="procurement" className="space-y-6">
                 <Card>
                   <CardHeader>
@@ -1314,10 +1581,6 @@ export default function ProjectProfile() {
                       <div className="border-l-4 border-blue-500 pl-4">
                         <p className="font-medium">MEP Systems</p>
                         <p className="text-sm text-gray-600">Q3 2025 - $28M procurement value</p>
-                      </div>
-                      <div className="border-l-4 border-green-500 pl-4">
-                        <p className="font-medium">Finishing Materials</p>
-                        <p className="text-sm text-gray-600">Q4 2025 - $32M procurement value</p>
                       </div>
                     </div>
                   </CardContent>
