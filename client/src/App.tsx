@@ -66,9 +66,11 @@ function Router() {
     }
   }, [user, storedRole, storedUserName]);
 
+  const showHeaderRole = location !== "/role-selection";
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header userRole={userRole} userName={userName} />
+      <Header userRole={showHeaderRole ? userRole : ""} userName={userName} />
       <Switch>
         <Route path="/" component={Homepage} />
         <Route path="/role-selection" component={RoleSelection} />
