@@ -312,6 +312,140 @@ export default function ProjectProfile() {
             { name: "Progress Reports", type: "PDF", size: "18.1 MB", date: "2024-12-01" }
           ]
         };
+      } else if (projectId === 9) {
+        // Highway Bridge Construction
+        mockProject = {
+          id: projectId,
+          name: "Highway Bridge Construction",
+          description: "Major bridge infrastructure project connecting two emirates with advanced engineering",
+          sector: "Infrastructure",
+          subsector: "Transportation",
+          projectType: "Bridge Construction",
+          contractType: "Design-Build-Maintain",
+          status: "Under Construction",
+          city: "Dubai",
+          country: "United Arab Emirates",
+          district: "Dubai Border",
+          investment: 420,
+          expectedRoi: 15.8,
+          capacity: "8-Lane Bridge",
+          rating: "Heavy Traffic",
+          category: "Major Infrastructure Project",
+          value: "$420 Million",
+          startDate: "2024-06-01",
+          completionDate: "Q2 2026",
+          briefBackground: "This strategic bridge project will reduce traffic congestion between Dubai and Sharjah while providing a vital economic corridor. The 2.5km bridge features advanced seismic resistance, smart traffic management systems, and sustainable construction practices. Contractors must demonstrate expertise in marine construction, precast concrete, and complex logistics.",
+          developer: "Roads and Transport Authority",
+          contractor: "Samsung C&T Corporation",
+          consultant: "AECOM Transportation",
+          supplier: "China State Construction",
+          totalUnits: 1,
+          builtUpArea: "2.5 km bridge",
+          landArea: "Marine environment",
+          floors: 0,
+          riskLevel: "High",
+          marketDemand: "Critical",
+          competition: "Low",
+          permits: ["Marine Construction", "Environmental Impact", "Traffic Management", "Safety Clearances"],
+          amenities: ["Emergency Services", "Maintenance Access", "Traffic Control", "Lighting Systems"],
+          features: ["Seismic Resistant", "Smart Traffic Systems", "Marine Construction", "Precast Concrete"],
+          contactInfo: {
+            email: "bridges@rta.ae",
+            phone: "+971-4-208-0808",
+            website: "www.rta.ae"
+          },
+          financials: {
+            totalBudget: "$420M",
+            spentToDate: "$180M",
+            remainingBudget: "$240M",
+            fundingSources: ["Government Budget (90%)", "Federal Grant (10%)"]
+          },
+          timeline: {
+            phase: "Main Construction",
+            progress: 40,
+            milestones: [
+              { name: "Foundation Complete", date: "2024-09-15", status: "Completed" },
+              { name: "Pier Construction", date: "2025-02-28", status: "In Progress" },
+              { name: "Deck Installation", date: "2025-08-30", status: "Planned" },
+              { name: "System Integration", date: "2026-01-15", status: "Planned" },
+              { name: "Traffic Opening", date: "2026-04-30", status: "Planned" }
+            ]
+          },
+          documents: [
+            { name: "Bridge Design Plans", type: "PDF", size: "85.2 MB", date: "2024-05-15" },
+            { name: "Marine Construction Specs", type: "PDF", size: "45.8 MB", date: "2024-06-01" },
+            { name: "Safety Management Plan", type: "PDF", size: "28.5 MB", date: "2024-06-01" },
+            { name: "Environmental Compliance", type: "PDF", size: "22.1 MB", date: "2024-05-20" }
+          ]
+        };
+      } else if (projectId === 10) {
+        // Hospital Complex Al Khaleej
+        mockProject = {
+          id: projectId,
+          name: "Hospital Complex Al Khaleej",
+          description: "State-of-the-art medical facility with 500-bed capacity and specialized departments",
+          sector: "Healthcare",
+          subsector: "Medical Facilities",
+          projectType: "Hospital Construction",
+          contractType: "Traditional Contract",
+          status: "Tender Open",
+          city: "Dubai",
+          country: "United Arab Emirates",
+          district: "Healthcare City",
+          investment: 280,
+          expectedRoi: 12.5,
+          capacity: "500 Beds",
+          rating: "Tier 1 Medical",
+          category: "Healthcare Infrastructure",
+          value: "$280 Million",
+          startDate: "2025-03-01",
+          completionDate: "Q4 2026",
+          briefBackground: "Al Khaleej Hospital will be a comprehensive medical center featuring emergency care, surgery suites, ICU facilities, and specialized departments. The project requires expertise in medical construction standards, clean room environments, advanced MEP systems, and healthcare-specific infrastructure. Contractors must comply with strict medical facility regulations and international healthcare standards.",
+          developer: "Dubai Health Authority",
+          contractor: "Tender Phase",
+          consultant: "HDR Architecture",
+          supplier: "Tender Phase",
+          totalUnits: 500,
+          builtUpArea: "180,000 sqm",
+          landArea: "25,000 sqm",
+          floors: 12,
+          riskLevel: "Medium",
+          marketDemand: "High",
+          competition: "Medium",
+          permits: ["Healthcare License", "Building Permit", "Fire Safety", "Medical Equipment"],
+          amenities: ["Emergency Department", "Surgery Suites", "ICU", "Medical Imaging", "Pharmacy"],
+          features: ["Clean Room Construction", "Medical Gas Systems", "Emergency Power", "Specialized HVAC"],
+          contactInfo: {
+            email: "projects@dha.gov.ae",
+            phone: "+971-4-814-0000",
+            website: "www.dha.gov.ae"
+          },
+          financials: {
+            totalBudget: "$280M",
+            spentToDate: "$0M",
+            remainingBudget: "$280M",
+            fundingSources: ["Government Funding (80%)", "Health Insurance (15%)", "Private Investment (5%)"]
+          },
+          timeline: {
+            phase: "Tender Phase",
+            progress: 5,
+            milestones: [
+              { name: "Tender Submission", date: "2025-02-28", status: "Planned" },
+              { name: "Contract Award", date: "2025-03-31", status: "Planned" },
+              { name: "Site Preparation", date: "2025-05-01", status: "Planned" },
+              { name: "Foundation Work", date: "2025-08-01", status: "Planned" },
+              { name: "Structure Complete", date: "2026-04-30", status: "Planned" },
+              { name: "MEP Installation", date: "2026-08-31", status: "Planned" },
+              { name: "Medical Fit-out", date: "2026-11-30", status: "Planned" }
+            ]
+          },
+          documents: [
+            { name: "Tender Documents", type: "PDF", size: "125.2 MB", date: "2024-12-15" },
+            { name: "Medical Standards", type: "PDF", size: "85.8 MB", date: "2024-12-15" },
+            { name: "MEP Specifications", type: "PDF", size: "65.5 MB", date: "2024-12-15" },
+            { name: "Healthcare Regulations", type: "PDF", size: "42.1 MB", date: "2024-12-10" }
+          ]
+        };
       } else {
         // Default to Azure Residences for other IDs
         mockProject = {
