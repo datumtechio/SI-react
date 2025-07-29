@@ -154,6 +154,8 @@ export default function ProjectProfile() {
       setReferrerPage('/consultant-analysis');
     } else if (previousPage.includes('/developer-opportunities')) {
       setReferrerPage('/developer-opportunities');
+    } else if (previousPage.includes('/supplier-opportunities')) {
+      setReferrerPage('/supplier-opportunities');
     } else if (role) {
       setReferrerPage(`/${role}-dashboard`);
     }

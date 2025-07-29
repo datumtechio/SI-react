@@ -230,10 +230,10 @@ export default function SupplierDashboard() {
             <div className="flex items-center space-x-4">
               <Button 
                 variant="ghost" 
-                onClick={() => setLocation("/role-selection")}
+                onClick={() => setLocation("/")}
                 className="text-gray-600"
               >
-                ← Back to Role Selection
+                ← Back to Home
               </Button>
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -320,7 +320,7 @@ export default function SupplierDashboard() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center space-x-2">
-                <Filter className="w-5 h-5 text-orange-600" />
+                <Filter className="w-5 h-5 text-blue-600" />
                 <span>Supply Opportunity Filters</span>
                 {activeFiltersCount > 0 && (
                   <Badge variant="secondary">{activeFiltersCount} active</Badge>
