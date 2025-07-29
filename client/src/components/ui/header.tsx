@@ -27,6 +27,7 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
     const updateRole = () => {
       const storedRole = localStorage.getItem("selectedRole");
       const activeRole = storedRole || userRole || "";
+      console.log("Header - updating role from:", currentRole, "to:", activeRole);
       setCurrentRole(activeRole);
     };
 
@@ -40,6 +41,7 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
 
     // Listen for custom role change events
     const handleRoleChanged = () => {
+      console.log("Header - role change event detected");
       setTimeout(updateRole, 50); // Small delay to ensure localStorage is updated
     };
 
@@ -121,6 +123,7 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
   };
 
   const rolePaths = getRoleBasedPaths();
+  console.log("Header - current role:", currentRole, "navigation paths:", rolePaths);
 
 
 
