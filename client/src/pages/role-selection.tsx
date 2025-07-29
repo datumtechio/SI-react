@@ -86,7 +86,7 @@ export default function RoleSelection() {
             </p>
           </div>
 
-          <div className="flex justify-center gap-4 mt-12 overflow-x-auto">
+          <div className="flex flex-wrap justify-center gap-6 mt-12">
             {roles.map((role) => {
               const Icon = role.icon;
               const isSelected = selectedRole === role.id;
@@ -95,7 +95,7 @@ export default function RoleSelection() {
                 <Card
                   key={role.id}
                   className={cn(
-                    "role-card border-2 border-transparent hover:shadow-xl transition-all duration-300 cursor-pointer w-72 h-48 flex-shrink-0",
+                    "role-card border-2 border-transparent hover:shadow-xl transition-all duration-300 cursor-pointer w-64 h-48",
                     isSelected && "border-primary bg-blue-50 selected"
                   )}
                   onClick={() => setSelectedRole(role.id)}
