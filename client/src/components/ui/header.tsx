@@ -32,7 +32,7 @@ export default function Header({ userRole, userName = "User" }: HeaderProps) {
       case "developer":
         return "text-purple-700 bg-purple-100 border border-purple-200";
       case "supplier":
-        return "text-amber-700 bg-amber-100 border border-amber-200";
+        return "text-orange-700 bg-orange-100 border border-orange-200";
       default:
         return "text-gray-700 bg-gray-100 border border-gray-200";
     }

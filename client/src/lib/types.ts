@@ -25,9 +25,9 @@ export interface ComparisonProject {
 export const roleColors = {
   investor: "hsl(142, 76%, 36%)", // green
   contractor: "hsl(45, 93%, 47%)", // orange
-  consultant: "hsl(262, 83%, 58%)", // purple
-  developer: "hsl(0, 84%, 60%)", // red
-  supplier: "hsl(220, 91%, 54%)", // blue
+  consultant: "hsl(220, 91%, 54%)", // blue
+  developer: "hsl(262, 83%, 58%)", // purple
+  supplier: "hsl(45, 93%, 47%)", // orange
 } as const;
 
 export const roleIcons = {
