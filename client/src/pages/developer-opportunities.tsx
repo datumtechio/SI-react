@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -29,6 +29,11 @@ export default function DeveloperOpportunities() {
   const [, setLocation] = useLocation();
   const [selectedTimeframe, setSelectedTimeframe] = useState("12months");
   const [selectedDistrict, setSelectedDistrict] = useState("all");
+
+  // Set previous page for navigation tracking
+  useEffect(() => {
+    sessionStorage.setItem('previousPage', '/developer-opportunities');
+  }, []);
 
   // Handle location click to navigate to relevant project
   const handleLocationClick = (locationName: string) => {

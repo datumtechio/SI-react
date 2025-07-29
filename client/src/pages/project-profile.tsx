@@ -152,6 +152,8 @@ export default function ProjectProfile() {
     const previousPage = sessionStorage.getItem('previousPage') || document.referrer;
     if (previousPage.includes('/consultant-analysis')) {
       setReferrerPage('/consultant-analysis');
+    } else if (previousPage.includes('/developer-opportunities')) {
+      setReferrerPage('/developer-opportunities');
     } else if (role) {
       setReferrerPage(`/${role}-dashboard`);
     }
