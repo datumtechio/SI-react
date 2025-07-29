@@ -30,6 +30,24 @@ export default function DeveloperOpportunities() {
   const [selectedTimeframe, setSelectedTimeframe] = useState("12months");
   const [selectedDistrict, setSelectedDistrict] = useState("all");
 
+  // Handle location click to navigate to relevant project
+  const handleLocationClick = (locationName: string) => {
+    // Map locations to relevant project IDs for developers
+    const locationProjectMap: { [key: string]: number } = {
+      "Dubai Marina": 1, // Dubai Marina Tower
+      "Business Bay": 3, // Business Bay project
+      "Dubai South": 4, // Al Maktoum Logistics Hub
+      "Downtown Dubai": 2, // Azure Residences
+      "Al Barsha": 2, // Azure Residences (closest match)
+      "Mohammed Bin Rashid City": 4, // Al Maktoum Logistics Hub (closest match)
+      "Jumeirah Village Circle": 1, // Dubai Marina Tower (closest match)
+      "Dubai Hills Estate": 4 // Al Maktoum Logistics Hub (closest match)
+    };
+
+    const projectId = locationProjectMap[locationName] || 3;
+    setLocation(`/project/${projectId}`);
+  };
+
   // Mock data for development opportunities
   const opportunityStats = {
     totalLandPlots: "247",
@@ -367,10 +385,18 @@ export default function DeveloperOpportunities() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   {opportunityHeatmap.map((location) => (
-                    <Card key={location.area} className="border-2">
-                      <CardContent className="p-4">
+                    <Card key={location.area} className="border-2 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <CardContent className="p-4" onClick={() => handleLocationClick(location.area)}>
                         <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-semibold text-gray-900">{location.area}</h4>
+                          <button 
+                            className="font-semibold text-gray-900 hover:text-purple-600 text-left transition-colors"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleLocationClick(location.area);
+                            }}
+                          >
+                            {location.area}
+                          </button>
                           <div className={`w-4 h-4 rounded ${getStatusColor(location.status)}`}></div>
                         </div>
                         <div className="space-y-1 text-sm">

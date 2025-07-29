@@ -95,6 +95,27 @@ interface ProjectDetails {
     size: string;
     date: string;
   }[];
+  landDetails?: {
+    availablePlots: number;
+    plotSizes: string;
+    landPrice: string;
+    developmentPotential: string;
+    zoningStatus: string;
+  };
+  demandGap?: {
+    level: string;
+    officeSpace: string;
+    residentialUnits: string;
+    retailSpace: string;
+    projectedDemand: string;
+  };
+  growthZone?: {
+    status: string;
+    growthRate: string;
+    infrastructure: string;
+    businessHub: string;
+    futureProjects: string;
+  };
 }
 
 export default function ProjectProfile() {
@@ -209,6 +230,94 @@ export default function ProjectProfile() {
           { name: "Building Specifications", type: "PDF", size: "12.1 MB", date: "2024-01-10" }
         ]
       };
+      } else if (projectId === 3) {
+        // Business Bay Commercial Development
+        mockProject = {
+          id: projectId,
+          name: "Business Bay",
+          description: "Premium mixed-use development strategically positioned in Dubai's central business district, featuring luxury residential towers, Grade A office spaces, and retail facilities. This landmark project capitalizes on the area's rapid transformation into a world-class financial and commercial hub.",
+          sector: "Real Estate",
+          subsector: "Mixed-Use Development",
+          projectType: "Mixed-Use Complex",
+          contractType: "Design-Build-Finance",
+          status: "Planning Phase",
+          city: "Dubai",
+          country: "United Arab Emirates",
+          district: "Business Bay",
+          investment: 520,
+          expectedRoi: 19.8,
+          capacity: "2.5M sqft",
+          rating: "Grade A Development",
+          category: "Commercial Mixed-Use Development",
+          value: "$520 Million",
+          startDate: "2025-06-01",
+          completionDate: "Q4 2027",
+          briefBackground: "Business Bay represents Dubai's next-generation commercial district with strategic positioning along Dubai Canal. The development addresses critical demand gaps in premium office space and luxury residential units while capitalizing on the area's designation as a growing financial zone. With 23 available land plots and medium demand gap levels, this location offers optimal development opportunities in an emerging growth zone with excellent connectivity to DIFC, Downtown Dubai, and Dubai International Airport.",
+          developer: "Damac Properties",
+          contractor: "Bidding Phase",
+          consultant: "Arup Middle East",
+          supplier: "Bidding Phase",
+          totalUnits: 450,
+          builtUpArea: "235,000 sqm",
+          landArea: "28,500 sqm",
+          floors: 55,
+          riskLevel: "Medium",
+          marketDemand: "Very High",
+          competition: "High",
+          permits: ["Planning Permission", "Environmental Impact", "Traffic Assessment", "Fire Safety", "DEWA Approval"],
+          amenities: ["Business Center", "Conference Facilities", "Retail Mall", "Restaurants", "Fitness Center", "Parking", "Canal Views"],
+          features: ["Canal Frontage", "Metro Connectivity", "Smart Building Technology", "LEED Gold Certified", "Mixed-Use Integration"],
+          landDetails: {
+            availablePlots: 23,
+            plotSizes: "2,000-8,500 sqm",
+            landPrice: "$1,650/sqm",
+            developmentPotential: "High-rise mixed-use",
+            zoningStatus: "Commercial/Residential Mixed-Use"
+          },
+          demandGap: {
+            level: "Medium",
+            officeSpace: "45% undersupplied",
+            residentialUnits: "30% undersupplied",
+            retailSpace: "20% undersupplied",
+            projectedDemand: "Growing 18% annually"
+          },
+          growthZone: {
+            status: "Growing",
+            growthRate: "22% over 3 years",
+            infrastructure: "Metro Line 2 connection",
+            businessHub: "Financial services cluster",
+            futureProjects: "12 major developments planned"
+          },
+          contactInfo: {
+            email: "development@businessbay.ae",
+            phone: "+971-4-432-1000",
+            website: "www.businessbaydubai.ae"
+          },
+          financials: {
+            totalBudget: "$520M",
+            spentToDate: "$25M",
+            remainingBudget: "$495M",
+            fundingSources: ["Developer Equity (40%)", "Bank Financing (45%)", "Investment Partners (15%)"]
+          },
+          timeline: {
+            phase: "Planning & Design",
+            progress: 15,
+            milestones: [
+              { name: "Planning Approval", date: "2025-04-30", status: "In Progress" },
+              { name: "Design Finalization", date: "2025-08-15", status: "Planned" },
+              { name: "Construction Start", date: "2025-10-01", status: "Planned" },
+              { name: "Structure Complete", date: "2026-12-31", status: "Planned" },
+              { name: "Fit-out Phase", date: "2027-08-30", status: "Planned" },
+              { name: "Project Completion", date: "2027-12-15", status: "Planned" }
+            ]
+          },
+          documents: [
+            { name: "Master Development Plan", type: "PDF", size: "35.2 MB", date: "2024-12-01" },
+            { name: "Land Analysis Report", type: "PDF", size: "18.8 MB", date: "2024-11-15" },
+            { name: "Market Demand Study", type: "PDF", size: "22.5 MB", date: "2024-11-20" },
+            { name: "Growth Zone Assessment", type: "PDF", size: "15.1 MB", date: "2024-11-25" }
+          ]
+        };
       } else if (projectId === 7) {
         // Solar Power Plant project for contractors
         mockProject = {
@@ -1370,8 +1479,167 @@ export default function ProjectProfile() {
             </>
           )}
 
+          {/* Developer specific tabs */}
+          {userRole === "developer" && (
+            <>
+              <TabsContent value="development-plan" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center space-x-2">
+                      <Target className="w-5 h-5 text-purple-600" />
+                      <span>Development Plan</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Project Type:</span>
+                        <Badge variant="outline">{project.projectType}</Badge>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Development Potential:</span>
+                        <span className="font-medium">{project.landDetails?.developmentPotential || "Mixed-use development"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Zoning Status:</span>
+                        <Badge variant="secondary">{project.landDetails?.zoningStatus || "Commercial/Residential"}</Badge>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Built-up Area:</span>
+                        <span className="font-medium">{project.builtUpArea}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Land Area:</span>
+                        <span className="font-medium">{project.landArea}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Total Floors:</span>
+                        <span className="font-medium">{project.floors}</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="zoning" className="space-y-6">
+                {project.landDetails && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center space-x-2">
+                        <MapPin className="w-5 h-5 text-purple-600" />
+                        <span>Land & Zoning Analysis</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Available Plots:</span>
+                          <span className="font-bold text-purple-600">{project.landDetails.availablePlots} plots</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Plot Sizes:</span>
+                          <span className="font-medium">{project.landDetails.plotSizes}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Land Price:</span>
+                          <span className="font-medium text-green-600">{project.landDetails.landPrice}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Zoning Classification:</span>
+                          <Badge variant="outline">{project.landDetails.zoningStatus}</Badge>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Development Rights:</span>
+                          <span className="font-medium">{project.landDetails.developmentPotential}</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+              </TabsContent>
+
+              <TabsContent value="site-analysis" className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {project.demandGap && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center space-x-2">
+                          <BarChart3 className="w-5 h-5 text-purple-600" />
+                          <span>Demand Gap Analysis</span>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Demand Gap Level:</span>
+                            <Badge variant={project.demandGap.level === 'High' ? 'default' : 'secondary'}>
+                              {project.demandGap.level}
+                            </Badge>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Office Space:</span>
+                            <span className="font-medium text-orange-600">{project.demandGap.officeSpace}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Residential Units:</span>
+                            <span className="font-medium text-blue-600">{project.demandGap.residentialUnits}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Retail Space:</span>
+                            <span className="font-medium text-green-600">{project.demandGap.retailSpace}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Projected Growth:</span>
+                            <span className="font-bold text-purple-600">{project.demandGap.projectedDemand}</span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {project.growthZone && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center space-x-2">
+                          <TrendingUp className="w-5 h-5 text-purple-600" />
+                          <span>Growth Zone Assessment</span>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Zone Status:</span>
+                            <Badge variant={project.growthZone.status === 'Growing' ? 'default' : 'secondary'}>
+                              {project.growthZone.status}
+                            </Badge>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Growth Rate:</span>
+                            <span className="font-bold text-green-600">{project.growthZone.growthRate}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Infrastructure:</span>
+                            <span className="font-medium">{project.growthZone.infrastructure}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Business Hub:</span>
+                            <span className="font-medium">{project.growthZone.businessHub}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Future Projects:</span>
+                            <span className="font-medium text-blue-600">{project.growthZone.futureProjects}</span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+                </div>
+              </TabsContent>
+            </>
+          )}
+
           {/* Default tabs for other roles */}
-          {(!userRole || !["investor", "contractor"].includes(userRole)) && (
+          {(!userRole || !["investor", "contractor", "developer"].includes(userRole)) && (
             <>
               <TabsContent value="stakeholders" className="space-y-6">
                 <Card>
