@@ -25,16 +25,26 @@ import AccountSettings from "@/pages/account-settings";
 import LoginPage from "@/pages/login";
 import NotFound from "@/pages/not-found";
 import { useAuth } from "@/hooks/useAuth";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+
 
 function Router() {
   const [location] = useLocation();
   const { user, isLoading } = useAuth();
-  const [storedRole] = useLocalStorage("selectedRole", "");
-  const [storedUserName] = useLocalStorage("userName", "");
   
   const [userRole, setUserRole] = useState<string>("");
   const [userName, setUserName] = useState<string>("User");
+  
+  // Clear old localStorage data on first load to reset state
+  useEffect(() => {
+    // Only clear if there's stale data
+    const stored = localStorage.getItem("selectedRole");
+    if (stored === "consultant" && location === "/role-selection") {
+      localStorage.removeItem("selectedRole");
+      localStorage.removeItem("userName");
+      setUserRole("");
+      setUserName("User");
+    }
+  }, []);
 
   useEffect(() => {
     // If user is authenticated, use their data
@@ -46,9 +56,16 @@ function Router() {
         localStorage.setItem("selectedRole", user.selectedRole);
       }
     } else {
-      // Use localStorage values with reactive updates
+      // Read directly from localStorage
+      const storedRole = localStorage.getItem("selectedRole");
+      const storedUserName = localStorage.getItem("userName");
+      
+      console.log("Debug - reading from localStorage:", { storedRole, storedUserName });
+      
       if (storedRole) {
         setUserRole(storedRole);
+      } else {
+        setUserRole(""); // Clear role if nothing stored
       }
 
       if (storedUserName) {
@@ -62,9 +79,49 @@ function Router() {
           supplier: "Omar"
         };
         setUserName(roleNames[storedRole as keyof typeof roleNames] || "User");
+      } else {
+        setUserName("User");
       }
     }
-  }, [user, storedRole, storedUserName]);
+  }, [user, location]); // Include location to trigger updates on navigation
+
+  // Listen for localStorage changes
+  useEffect(() => {
+    const handleStorageChange = () => {
+      if (!user) {
+        const storedRole = localStorage.getItem("selectedRole");
+        const storedUserName = localStorage.getItem("userName");
+        
+        console.log("Storage changed:", { storedRole, storedUserName });
+        
+        if (storedRole) {
+          setUserRole(storedRole);
+        } else {
+          setUserRole("");
+        }
+
+        if (storedUserName) {
+          setUserName(storedUserName);
+        } else if (storedRole) {
+          const roleNames = {
+            contractor: "Ahmed",
+            investor: "Sarah",
+            consultant: "Michael",
+            developer: "Fatima",
+            supplier: "Omar"
+          };
+          setUserName(roleNames[storedRole as keyof typeof roleNames] || "User");
+        } else {
+          setUserName("User");
+        }
+      }
+    };
+
+    // Check every 300ms for changes
+    const interval = setInterval(handleStorageChange, 300);
+    
+    return () => clearInterval(interval);
+  }, [user]);
 
   const showHeaderRole = location !== "/role-selection";
 
