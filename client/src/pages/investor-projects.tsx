@@ -92,8 +92,8 @@ export default function InvestorProjects() {
                 Back to Dashboard
               </Button>
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-green-600" />
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <TrendingUp className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">Investment Opportunities</h1>
@@ -238,7 +238,7 @@ export default function InvestorProjects() {
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <h3 
-                        className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-green-600 transition-colors"
+                        className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors"
                         onClick={() => {
                           localStorage.setItem("projectProfileReferrer", "/investor-projects");
                           setLocation(`/project/${project.id}`);
@@ -289,7 +289,7 @@ export default function InvestorProjects() {
                     <div className="flex space-x-2">
                       <Button 
                         size="sm" 
-                        className="flex-1 bg-green-600 hover:bg-green-700"
+                        className="flex-1 bg-blue-600 hover:bg-blue-700"
                         onClick={() => {
                           localStorage.setItem("projectProfileReferrer", "/investor-projects");
                           setLocation(`/project/${project.id}`);

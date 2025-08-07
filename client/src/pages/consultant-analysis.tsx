@@ -220,8 +220,8 @@ export default function ConsultantAnalysis() {
                 Back to Filters
               </Button>
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <BarChart3 className="w-6 h-6 text-blue-600" />
+                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <BarChart3 className="w-6 h-6 text-gray-600" />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">Market Analysis Results</h1>
@@ -367,7 +367,7 @@ export default function ConsultantAnalysis() {
                       <CardContent className="p-4" onClick={() => handleLocationClick(location.area)}>
                         <div className="flex items-center justify-between mb-2">
                           <button 
-                            className="font-semibold text-gray-900 hover:text-blue-600 text-left transition-colors"
+                            className="font-semibold text-gray-900 hover:text-gray-600 text-left transition-colors"
                             onClick={(e) => {
                               e.stopPropagation();
                               handleLocationClick(location.area);
@@ -547,7 +547,7 @@ export default function ConsultantAnalysis() {
                               <div key={projectIndex} className="flex items-center justify-between">
                                 <button
                                   onClick={() => setLocation(`/project/${project.id}`)}
-                                  className="text-blue-600 hover:text-blue-800 hover:underline font-medium text-left"
+                                  className="text-gray-600 hover:text-gray-800 hover:underline font-medium text-left"
                                 >
                                   {project.name}
                                 </button>
@@ -591,7 +591,7 @@ export default function ConsultantAnalysis() {
                         <div className="flex-1">
                           <button
                             onClick={() => setLocation(`/project/${project.id}`)}
-                            className="text-xl font-semibold text-blue-600 hover:text-blue-800 hover:underline text-left mb-2 block"
+                            className="text-xl font-semibold text-gray-600 hover:text-gray-800 hover:underline text-left mb-2 block"
                           >
                             {project.name}
                           </button>
@@ -610,7 +610,7 @@ export default function ConsultantAnalysis() {
                         <div className="text-right">
                           <div className="flex items-center space-x-2 mb-2">
                             <span className="text-sm text-gray-500">Market Score:</span>
-                            <span className="text-2xl font-bold text-blue-600">{project.marketScore}</span>
+                            <span className="text-2xl font-bold text-gray-600">{project.marketScore}</span>
                             <span className="text-sm text-gray-500">/10</span>
                           </div>
                           <Button 
