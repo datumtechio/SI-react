@@ -152,17 +152,46 @@ export default function ProjectProfile() {
     const role = localStorage.getItem("selectedRole");
     setUserRole(role);
     
+    // Get the proper role-specific page based on current role
+    const getRoleSpecificBackPage = (userRole: string) => {
+      switch (userRole) {
+        case "investor":
+          return "/investor-dashboard";
+        case "contractor":
+          return "/contractor-dashboard";
+        case "consultant":
+          return "/consultant-dashboard";
+        case "developer":
+          return "/developer-dashboard";
+        case "supplier":
+          return "/supplier-dashboard";
+        default:
+          return "/dashboard";
+      }
+    };
+    
     // Check navigation history to determine the referrer page
     const currentPath = window.location.pathname;
     const previousPage = sessionStorage.getItem('previousPage') || document.referrer;
-    if (previousPage.includes('/consultant-analysis')) {
-      setReferrerPage('/consultant-analysis');
-    } else if (previousPage.includes('/developer-opportunities')) {
-      setReferrerPage('/developer-opportunities');
-    } else if (previousPage.includes('/supplier-opportunities')) {
-      setReferrerPage('/supplier-opportunities');
-    } else if (role) {
-      setReferrerPage(`/${role}-dashboard`);
+    
+    // Handle role-specific navigation based on previous page and current role
+    if (role) {
+      if (previousPage.includes('/consultant-analysis') && role === 'consultant') {
+        setReferrerPage('/consultant-analysis');
+      } else if (previousPage.includes('/developer-opportunities') && role === 'developer') {
+        setReferrerPage('/developer-opportunities');
+      } else if (previousPage.includes('/supplier-opportunities') && role === 'supplier') {
+        setReferrerPage('/supplier-opportunities');
+      } else if (previousPage.includes('/investor-projects') && role === 'investor') {
+        setReferrerPage('/investor-projects');
+      } else if (previousPage.includes('/contractor-projects') && role === 'contractor') {
+        setReferrerPage('/contractor-projects');
+      } else {
+        // Default to role-specific dashboard
+        setReferrerPage(getRoleSpecificBackPage(role));
+      }
+    } else {
+      setReferrerPage('/dashboard');
     }
     
     if (params?.id) {
@@ -751,12 +780,40 @@ export default function ProjectProfile() {
   }, [params?.id]);
 
   const handleBack = () => {
-    // Navigate back to the previous page based on referrer
-    if (referrerPage) {
-      setLocation(referrerPage);
+    // Always get the current role from localStorage for most up-to-date info
+    const currentRole = localStorage.getItem("selectedRole");
+    
+    // Get the correct role-specific navigation
+    const getRoleBasedNavigation = (role: string) => {
+      switch (role) {
+        case "investor":
+          return "/investor-dashboard";
+        case "contractor":
+          return "/contractor-dashboard";
+        case "consultant":
+          return "/consultant-dashboard";
+        case "developer":
+          return "/developer-dashboard";
+        case "supplier":
+          return "/supplier-dashboard";
+        default:
+          return "/dashboard";
+      }
+    };
+    
+    // Use referrerPage if it matches the current role, otherwise use role-based navigation
+    if (referrerPage && currentRole) {
+      // Validate that referrer page matches current role
+      const roleBasedPage = getRoleBasedNavigation(currentRole);
+      if (referrerPage.includes(currentRole) || referrerPage === roleBasedPage) {
+        setLocation(referrerPage);
+      } else {
+        setLocation(roleBasedPage);
+      }
+    } else if (currentRole) {
+      setLocation(getRoleBasedNavigation(currentRole));
     } else {
-      const role = localStorage.getItem("selectedRole");
-      setLocation(role ? `/${role}-dashboard` : "/dashboard");
+      setLocation("/dashboard");
     }
   };
 

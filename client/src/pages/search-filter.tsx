@@ -64,7 +64,11 @@ export default function SearchFilter() {
     
     // Store combined search filters in localStorage
     localStorage.setItem("searchFilters", JSON.stringify(combinedFilters));
-    setLocation("/dashboard");
+    
+    // Navigate to role-specific dashboard
+    const currentRole = localStorage.getItem("selectedRole");
+    const roleBasedDashboard = currentRole ? `/${currentRole}-dashboard` : "/dashboard";
+    setLocation(roleBasedDashboard);
   };
 
   const handleGlobalFilterChange = (newGlobalFilters: { country?: string; sector?: string }) => {
