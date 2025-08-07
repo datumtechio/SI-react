@@ -240,7 +240,7 @@ export default function InvestorProjects() {
                       <h3 
                         className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors"
                         onClick={() => {
-                          localStorage.setItem("projectProfileReferrer", "/investor-projects");
+                          sessionStorage.setItem('previousPage', window.location.pathname);
                           setLocation(`/project/${project.id}`);
                         }}
                       >
@@ -291,7 +291,7 @@ export default function InvestorProjects() {
                         size="sm" 
                         className="flex-1" style={{backgroundColor: '#00a7b2'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#008a99'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#00a7b2'}
                         onClick={() => {
-                          localStorage.setItem("projectProfileReferrer", "/investor-projects");
+                          sessionStorage.setItem('previousPage', window.location.pathname);
                           setLocation(`/project/${project.id}`);
                         }}
                       >

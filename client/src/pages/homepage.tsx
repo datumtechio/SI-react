@@ -182,7 +182,7 @@ export default function Homepage() {
                       <h3 
                         className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors"
                         onClick={() => {
-                          localStorage.setItem("projectProfileReferrer", "/");
+                          sessionStorage.setItem('previousPage', window.location.pathname);
                           setLocation(`/project/${project.id}`);
                         }}
                       >
@@ -274,7 +274,7 @@ export default function Homepage() {
                       <h3 
                         className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors"
                         onClick={() => {
-                          localStorage.setItem("projectProfileReferrer", "/");
+                          sessionStorage.setItem('previousPage', window.location.pathname);
                           setLocation(`/project/${project.id}`);
                         }}
                       >

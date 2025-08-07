@@ -130,7 +130,7 @@ export default function ProjectProfile() {
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
-  const [referrerPage, setReferrerPage] = useState<string | null>(null);
+  const [navigationHistory, setNavigationHistory] = useState<string[]>([]);
   
   // State for expandable sections and priority tags
   const [expandedSections, setExpandedSections] = useState<{[key: string]: boolean}>({
@@ -152,46 +152,86 @@ export default function ProjectProfile() {
     const role = localStorage.getItem("selectedRole");
     setUserRole(role);
     
-    // Get the proper role-specific page based on current role
-    const getRoleSpecificBackPage = (userRole: string) => {
-      switch (userRole) {
-        case "investor":
-          return "/investor-dashboard";
-        case "contractor":
-          return "/contractor-dashboard";
-        case "consultant":
-          return "/consultant-dashboard";
-        case "developer":
-          return "/developer-dashboard";
-        case "supplier":
-          return "/supplier-dashboard";
-        default:
-          return "/dashboard";
+    // Build the proper navigation history based on role and referrer
+    const buildNavigationHistory = (userRole: string) => {
+      const history = [];
+      
+      // Get role-specific paths
+      const getRoleSpecificPaths = (role: string) => {
+        switch (role) {
+          case "investor":
+            return {
+              resultsPage: "/investor-projects",
+              dashboard: "/investor-dashboard",
+              homepage: "/"
+            };
+          case "contractor":
+            return {
+              resultsPage: "/contractor-projects", 
+              dashboard: "/contractor-dashboard",
+              homepage: "/"
+            };
+          case "consultant":
+            return {
+              resultsPage: "/consultant-analysis",
+              dashboard: "/consultant-dashboard", 
+              homepage: "/"
+            };
+          case "developer":
+            return {
+              resultsPage: "/developer-opportunities",
+              dashboard: "/developer-dashboard",
+              homepage: "/"
+            };
+          case "supplier":
+            return {
+              resultsPage: "/supplier-opportunities",
+              dashboard: "/supplier-dashboard",
+              homepage: "/"
+            };
+          default:
+            return {
+              resultsPage: "/search",
+              dashboard: "/dashboard",
+              homepage: "/"
+            };
+        }
+      };
+      
+      // Check where user came from
+      const previousPage = sessionStorage.getItem('previousPage') || document.referrer;
+      
+      if (userRole) {
+        const paths = getRoleSpecificPaths(userRole);
+        
+        // Check if user came from a results page
+        if (previousPage.includes(paths.resultsPage.substring(1))) {
+          // Full navigation: results → dashboard → homepage
+          history.push(paths.resultsPage);
+          history.push(paths.dashboard);
+          history.push(paths.homepage);
+        } else if (previousPage.includes(paths.dashboard.substring(1))) {
+          // Came from dashboard: dashboard → homepage  
+          history.push(paths.dashboard);
+          history.push(paths.homepage);
+        } else {
+          // Default: go to results page first, then dashboard, then homepage
+          history.push(paths.resultsPage);
+          history.push(paths.dashboard);
+          history.push(paths.homepage);
+        }
+      } else {
+        // No role: default navigation
+        history.push("/dashboard");
+        history.push("/");
       }
+      
+      return history;
     };
     
-    // Check navigation history to determine the referrer page
-    const currentPath = window.location.pathname;
-    const previousPage = sessionStorage.getItem('previousPage') || document.referrer;
-    
-    // Handle role-specific navigation based on previous page and current role
     if (role) {
-      if (previousPage.includes('/consultant-analysis') && role === 'consultant') {
-        setReferrerPage('/consultant-analysis');
-      } else if (previousPage.includes('/developer-opportunities') && role === 'developer') {
-        setReferrerPage('/developer-opportunities');
-      } else if (previousPage.includes('/supplier-opportunities') && role === 'supplier') {
-        setReferrerPage('/supplier-opportunities');
-      } else if (previousPage.includes('/investor-projects') && role === 'investor') {
-        setReferrerPage('/investor-projects');
-      } else if (previousPage.includes('/contractor-projects') && role === 'contractor') {
-        setReferrerPage('/contractor-projects');
-      } else {
-        // Default to role-specific dashboard
-        setReferrerPage(getRoleSpecificBackPage(role));
-      }
-    } else {
-      setReferrerPage('/dashboard');
+      const history = buildNavigationHistory(role);
+      setNavigationHistory(history);
     }
     
     if (params?.id) {
@@ -780,40 +820,16 @@ export default function ProjectProfile() {
   }, [params?.id]);
 
   const handleBack = () => {
-    // Always get the current role from localStorage for most up-to-date info
-    const currentRole = localStorage.getItem("selectedRole");
-    
-    // Get the correct role-specific navigation
-    const getRoleBasedNavigation = (role: string) => {
-      switch (role) {
-        case "investor":
-          return "/investor-dashboard";
-        case "contractor":
-          return "/contractor-dashboard";
-        case "consultant":
-          return "/consultant-dashboard";
-        case "developer":
-          return "/developer-dashboard";
-        case "supplier":
-          return "/supplier-dashboard";
-        default:
-          return "/dashboard";
-      }
-    };
-    
-    // Use referrerPage if it matches the current role, otherwise use role-based navigation
-    if (referrerPage && currentRole) {
-      // Validate that referrer page matches current role
-      const roleBasedPage = getRoleBasedNavigation(currentRole);
-      if (referrerPage.includes(currentRole) || referrerPage === roleBasedPage) {
-        setLocation(referrerPage);
-      } else {
-        setLocation(roleBasedPage);
-      }
-    } else if (currentRole) {
-      setLocation(getRoleBasedNavigation(currentRole));
+    // Follow the navigation history: Results Page → Dashboard → Homepage
+    if (navigationHistory.length > 0) {
+      // Get the next page in the navigation sequence
+      const nextPage = navigationHistory[0];
+      setLocation(nextPage);
     } else {
-      setLocation("/dashboard");
+      // Fallback: go to role-specific dashboard
+      const currentRole = localStorage.getItem("selectedRole");
+      const fallbackPage = currentRole ? `/${currentRole}-dashboard` : "/dashboard";
+      setLocation(fallbackPage);
     }
   };
 

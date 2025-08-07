@@ -546,7 +546,10 @@ export default function ConsultantAnalysis() {
                             {gap.relatedProjects.map((project, projectIndex) => (
                               <div key={projectIndex} className="flex items-center justify-between">
                                 <button
-                                  onClick={() => setLocation(`/project/${project.id}`)}
+                                  onClick={() => {
+                                    sessionStorage.setItem('previousPage', window.location.pathname);
+                                    setLocation(`/project/${project.id}`);
+                                  }}
                                   className="text-gray-600 hover:text-gray-800 hover:underline font-medium text-left" style={{color: '#00a7b2'}} onMouseEnter={(e) => e.currentTarget.style.color = '#008a99'} onMouseLeave={(e) => e.currentTarget.style.color = '#00a7b2'}
                                 >
                                   {project.name}
@@ -590,7 +593,10 @@ export default function ConsultantAnalysis() {
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
                           <button
-                            onClick={() => setLocation(`/project/${project.id}`)}
+                            onClick={() => {
+                              sessionStorage.setItem('previousPage', window.location.pathname);
+                              setLocation(`/project/${project.id}`);
+                            }}
                             className="text-xl font-semibold hover:underline text-left mb-2 block" style={{color: '#00a7b2'}} onMouseEnter={(e) => e.currentTarget.style.color = '#008a99'} onMouseLeave={(e) => e.currentTarget.style.color = '#00a7b2'}
                           >
                             {project.name}
@@ -616,7 +622,10 @@ export default function ConsultantAnalysis() {
                           <Button 
                             variant="outline" 
                             size="sm"
-                            onClick={() => setLocation(`/project/${project.id}`)}
+                            onClick={() => {
+                              sessionStorage.setItem('previousPage', window.location.pathname);
+                              setLocation(`/project/${project.id}`);
+                            }}
                           >
                             View Analysis
                           </Button>

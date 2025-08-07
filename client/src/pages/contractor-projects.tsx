@@ -488,7 +488,7 @@ export default function ContractorProjects() {
                         <h3 
                           className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-orange-600 transition-colors mb-1"
                           onClick={() => {
-                            localStorage.setItem("projectProfileReferrer", "/contractor-projects");
+                            sessionStorage.setItem('previousPage', window.location.pathname);
                             setLocation(`/project/${project.id}`);
                           }}
                         >
@@ -580,7 +580,7 @@ export default function ContractorProjects() {
                         onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#008a99'} 
                         onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#00a7b2'}
                         onClick={() => {
-                          localStorage.setItem("projectProfileReferrer", "/contractor-projects");
+                          sessionStorage.setItem('previousPage', window.location.pathname);
                           setLocation(`/project/${project.id}`);
                         }}
                       >
