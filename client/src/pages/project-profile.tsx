@@ -153,7 +153,7 @@ export default function ProjectProfile() {
     setUserRole(role);
     
     // Build the proper navigation history based on role and referrer
-    const buildNavigationHistory = (userRole: string) => {
+    const buildNavigationHistory = (currentUserRole: string) => {
       const history = [];
       
       // Get role-specific paths
@@ -201,25 +201,14 @@ export default function ProjectProfile() {
       // Check where user came from
       const previousPage = sessionStorage.getItem('previousPage') || document.referrer;
       
-      if (userRole) {
-        const paths = getRoleSpecificPaths(userRole);
+      if (currentUserRole) {
+        const paths = getRoleSpecificPaths(currentUserRole);
         
-        // Check if user came from a results page
-        if (previousPage.includes(paths.resultsPage.substring(1))) {
-          // Full navigation: results → dashboard → homepage
-          history.push(paths.resultsPage);
-          history.push(paths.dashboard);
-          history.push(paths.homepage);
-        } else if (previousPage.includes(paths.dashboard.substring(1))) {
-          // Came from dashboard: dashboard → homepage  
-          history.push(paths.dashboard);
-          history.push(paths.homepage);
-        } else {
-          // Default: go to results page first, then dashboard, then homepage
-          history.push(paths.resultsPage);
-          history.push(paths.dashboard);
-          history.push(paths.homepage);
-        }
+        // Always build the full navigation path: results → dashboard → homepage
+        // This ensures proper role-specific navigation regardless of entry point
+        history.push(paths.resultsPage);
+        history.push(paths.dashboard);
+        history.push(paths.homepage);
       } else {
         // No role: default navigation
         history.push("/dashboard");
