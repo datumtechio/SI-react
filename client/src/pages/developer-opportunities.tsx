@@ -246,8 +246,8 @@ export default function DeveloperOpportunities() {
                 Back to Filters
               </Button>
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                  <Building2 className="w-6 h-6 text-gray-600" />
+                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <Building2 className="w-6 h-6 text-purple-600" />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">Development Opportunities</h1>
@@ -394,7 +394,7 @@ export default function DeveloperOpportunities() {
                       <CardContent className="p-4" onClick={() => handleLocationClick(location.area)}>
                         <div className="flex items-center justify-between mb-2">
                           <button 
-                            className="font-semibold text-gray-900 hover:text-gray-600 text-left transition-colors"
+                            className="font-semibold text-gray-900 hover:text-purple-600 text-left transition-colors"
                             onClick={(e) => {
                               e.stopPropagation();
                               handleLocationClick(location.area);

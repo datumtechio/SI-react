@@ -241,8 +241,8 @@ export default function ContractorProjects() {
                 Back to Dashboard
               </Button>
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <HardHat className="w-6 h-6 text-blue-600" />
+                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                  <HardHat className="w-6 h-6 text-orange-600" />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">Project Results</h1>
@@ -480,13 +480,13 @@ export default function ContractorProjects() {
               const completedProjects = Math.floor(Math.random() * 15) + 5;
 
               return (
-                <Card key={project.id} className="hover:shadow-lg transition-shadow border-l-4 border-l-blue-500">
+                <Card key={project.id} className="hover:shadow-lg transition-shadow border-l-4 border-l-orange-500">
                   <CardContent className="p-6">
                     {/* Header Section */}
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex-1">
                         <h3 
-                          className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors mb-1"
+                          className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-orange-600 transition-colors mb-1"
                           onClick={() => {
                             localStorage.setItem("projectProfileReferrer", "/contractor-projects");
                             setLocation(`/project/${project.id}`);
@@ -523,7 +523,7 @@ export default function ContractorProjects() {
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 uppercase tracking-wide">Ongoing Projects</p>
-                        <p className="font-medium text-blue-600">{ongoingProjects} Active</p>
+                        <p className="font-medium text-orange-600">{ongoingProjects} Active</p>
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 uppercase tracking-wide">Completed</p>
@@ -575,7 +575,10 @@ export default function ContractorProjects() {
                     <div className="flex space-x-2">
                       <Button 
                         size="sm" 
-                        className="flex-1 bg-orange-600 hover:bg-orange-700"
+                        className="flex-1"
+                        style={{backgroundColor: '#00a7b2'}} 
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#008a99'} 
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#00a7b2'}
                         onClick={() => {
                           localStorage.setItem("projectProfileReferrer", "/contractor-projects");
                           setLocation(`/project/${project.id}`);

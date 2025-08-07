@@ -398,8 +398,8 @@ export default function SupplierOpportunities() {
                 Back to Filters
               </Button>
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                  <Truck className="w-6 h-6 text-gray-600" />
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <Truck className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">Supply Opportunities</h1>
@@ -562,7 +562,7 @@ export default function SupplierOpportunities() {
                     <div>
                       <div className="flex items-center space-x-3 mb-2">
                         <h3 
-                          className="text-lg font-semibold text-gray-900 cursor-pointer hover:text-gray-600 transition-colors"
+                          className="text-lg font-semibold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors"
                           onClick={() => {
                             // Map supplier opportunity IDs to project profile IDs
                             const projectMapping: Record<number, number> = {
