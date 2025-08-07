@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Building, Search, MapPin, DollarSign, Calendar } from "lucide-react";
+import { Building, Search, MapPin, DollarSign, Calendar, Newspaper, TrendingUp, Star } from "lucide-react";
 import logoPath from "@assets/Colored SI Logo_1752857295177.png";
 
 interface Project {
@@ -159,7 +159,10 @@ export default function Homepage() {
           <section className="mb-20">
             <div className="flex items-center justify-between mb-12">
               <div className="text-center flex-1">
-                <h2 className="text-3xl font-bold text-white mb-4">Latest Projects</h2>
+                <div className="flex items-center justify-center mb-4">
+                  <Newspaper className="w-8 h-8 text-teal-400 mr-3" />
+                  <h2 className="text-3xl font-bold text-white">Latest Projects</h2>
+                </div>
                 <p className="text-lg text-gray-300 max-w-2xl mx-auto">
                   Discover the newest investment opportunities and development projects across the MENA region
                 </p>
@@ -218,7 +221,10 @@ export default function Homepage() {
           {/* Trending Sectors */}
           <section className="mb-20 py-16 px-8 rounded-2xl" style={{ backgroundColor: '#00a7b2' }}>
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-white mb-4">Trending Sectors</h2>
+              <div className="flex items-center justify-center mb-4">
+                <TrendingUp className="w-8 h-8 text-white mr-3" />
+                <h2 className="text-3xl font-bold text-white">Trending Sectors</h2>
+              </div>
               <p className="text-lg text-gray-100 max-w-2xl mx-auto">
                 Browse the most active investment sectors with growth opportunities
               </p>
@@ -251,7 +257,10 @@ export default function Homepage() {
           {/* Featured Project Profiles */}
           <section className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4 text-[#ffffff]">Featured Project Profiles</h2>
+              <div className="flex items-center justify-center mb-4">
+                <Star className="w-8 h-8 text-yellow-400 mr-3" />
+                <h2 className="text-3xl font-bold text-[#ffffff]">Featured Project Profiles</h2>
+              </div>
               <p className="text-lg max-w-2xl mx-auto text-[#ffffff]">
                 Explore detailed profiles of high-value investment opportunities
               </p>

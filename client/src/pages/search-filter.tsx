@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Search } from "lucide-react";
+import { Search, Settings, Zap } from "lucide-react";
 import { UserRole, FilterOptions } from "@/lib/types";
 import { SearchFilters } from "@shared/schema";
 import { GlobalHeaderFilter } from "@/components/global-header-filter";
@@ -135,7 +135,10 @@ export default function SearchFilter() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Card>
           <CardHeader>
-            <CardTitle>Advanced Search Criteria</CardTitle>
+            <CardTitle className="flex items-center">
+              <Settings className="w-5 h-5 mr-2 text-blue-600" />
+              Advanced Search Criteria
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -262,7 +265,10 @@ export default function SearchFilter() {
         {/* Quick Filters */}
         <Card className="mt-6">
           <CardHeader>
-            <CardTitle className="text-md">Quick Filters</CardTitle>
+            <CardTitle className="text-md flex items-center">
+              <Zap className="w-4 h-4 mr-2 text-orange-500" />
+              Quick Filters
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">

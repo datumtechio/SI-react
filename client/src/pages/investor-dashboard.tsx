@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Search, Download, FileSpreadsheet, Filter, X, TrendingUp } from "lucide-react";
+import { Search, Download, FileSpreadsheet, Filter, X, TrendingUp, Settings2 } from "lucide-react";
 import { Project, SearchFilters } from "@shared/schema";
 import { FilterOptions } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -215,7 +215,8 @@ export default function InvestorDashboard() {
         <Card className="mb-8">
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg font-semibold text-gray-900">
+              <CardTitle className="text-lg font-semibold text-gray-900 flex items-center">
+                <Settings2 className="w-5 h-5 mr-2 text-green-600" />
                 Investment Opportunity Filters
               </CardTitle>
               {activeFiltersCount > 0 && (

@@ -32,7 +32,11 @@ import {
   Flag,
   Edit,
   MessageSquare,
-  History
+  History,
+  Info,
+  Home,
+  Shield,
+  Zap
 } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
@@ -981,7 +985,10 @@ export default function ProjectProfile() {
                   {/* Brief Background */}
                   {project.briefBackground && (
                     <div className="mb-6 p-4 bg-blue-50 rounded-lg">
-                      <h4 className="font-semibold text-gray-900 mb-2">Project Background</h4>
+                      <h4 className="font-semibold text-gray-900 mb-2 flex items-center">
+                        <Info className="w-4 h-4 mr-2 text-blue-600" />
+                        Project Background
+                      </h4>
                       <p className="text-sm text-gray-700">{project.briefBackground}</p>
                     </div>
                   )}
@@ -990,7 +997,10 @@ export default function ProjectProfile() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     {/* Basic Information */}
                     <div className="space-y-3">
-                      <h4 className="font-semibold text-gray-900 mb-3">Basic Information</h4>
+                      <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                        <FileText className="w-4 h-4 mr-2 text-gray-600" />
+                        Basic Information
+                      </h4>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Status:</span>
                         <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
@@ -1023,7 +1033,10 @@ export default function ProjectProfile() {
                     
                     {/* Location & Scale */}
                     <div className="space-y-3">
-                      <h4 className="font-semibold text-gray-900 mb-3">Location & Scale</h4>
+                      <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                        <MapPin className="w-4 h-4 mr-2 text-red-500" />
+                        Location & Scale
+                      </h4>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Country:</span>
                         <span className="font-medium">{project.country}</span>
@@ -1054,7 +1067,10 @@ export default function ProjectProfile() {
                   {/* Residential-specific Information */}
                   {(project.residentialType || project.residentialClass || project.rating) && (
                     <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-                      <h4 className="font-semibold text-gray-900 mb-3">Residential Details</h4>
+                      <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                        <Home className="w-4 h-4 mr-2 text-green-600" />
+                        Residential Details
+                      </h4>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {project.residentialType && (
                           <div>
@@ -1112,7 +1128,10 @@ export default function ProjectProfile() {
                 <CardContent>
                   <div className="space-y-4">
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2">Key Features</h4>
+                      <h4 className="font-medium text-gray-900 mb-2 flex items-center">
+                        <Zap className="w-4 h-4 mr-2 text-yellow-500" />
+                        Key Features
+                      </h4>
                       <div className="flex flex-wrap gap-2">
                         {project.features.map((feature, index) => (
                           <Badge key={index} variant="secondary" className="text-xs">
@@ -1122,7 +1141,10 @@ export default function ProjectProfile() {
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2">Amenities</h4>
+                      <h4 className="font-medium text-gray-900 mb-2 flex items-center">
+                        <Star className="w-4 h-4 mr-2 text-purple-500" />
+                        Amenities
+                      </h4>
                       <div className="flex flex-wrap gap-2">
                         {project.amenities.map((amenity, index) => (
                           <Badge key={index} variant="outline" className="text-xs">
@@ -1132,7 +1154,10 @@ export default function ProjectProfile() {
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2">Permits & Approvals</h4>
+                      <h4 className="font-medium text-gray-900 mb-2 flex items-center">
+                        <Shield className="w-4 h-4 mr-2 text-green-600" />
+                        Permits & Approvals
+                      </h4>
                       <div className="space-y-2">
                         {project.permits.map((permit, index) => (
                           <div key={index} className="flex items-center">
