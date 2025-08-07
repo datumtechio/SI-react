@@ -231,6 +231,7 @@ export default function ProjectProfile() {
     
     if (role) {
       const history = buildNavigationHistory(role);
+      console.log('Building navigation history for role:', role, 'Previous page:', previousPage, 'History:', history);
       setNavigationHistory(history);
     }
     
@@ -824,11 +825,18 @@ export default function ProjectProfile() {
     if (navigationHistory.length > 0) {
       // Get the next page in the navigation sequence
       const nextPage = navigationHistory[0];
+      
+      // Remove the current page from history so next back click goes to the next page
+      const updatedHistory = navigationHistory.slice(1);
+      setNavigationHistory(updatedHistory);
+      
+      console.log('Navigating back to:', nextPage, 'Remaining history:', updatedHistory);
       setLocation(nextPage);
     } else {
       // Fallback: go to role-specific dashboard
       const currentRole = localStorage.getItem("selectedRole");
       const fallbackPage = currentRole ? `/${currentRole}-dashboard` : "/dashboard";
+      console.log('Fallback navigation to:', fallbackPage, 'for role:', currentRole);
       setLocation(fallbackPage);
     }
   };
