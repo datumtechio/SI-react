@@ -1,4 +1,4 @@
-export type UserRole = "investor" | "contractor" | "consultant" | "developer" | "supplier" | "other";
+export type UserRole = "investor" | "contractor" | "consultant" | "developer" | "supplier" | "others";
 
 export interface FilterOptions {
   countries: string[];
@@ -28,7 +28,7 @@ export const roleColors = {
   consultant: "hsl(220, 91%, 54%)", // blue
   developer: "hsl(262, 83%, 58%)", // purple
   supplier: "hsl(220, 91%, 54%)", // blue
-  other: "hsl(220, 14%, 46%)", // gray
+  others: "hsl(220, 14%, 46%)", // gray
 } as const;
 
 export const roleIcons = {
@@ -37,5 +37,5 @@ export const roleIcons = {
   consultant: "lightbulb",
   developer: "drafting-compass",
   supplier: "truck",
-  other: "circle-user",
+  others: "circle-user",
 } as const;

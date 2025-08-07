@@ -49,12 +49,12 @@ const roles = [
     color: "supplier",
   },
   {
-    id: "other" as UserRole,
-    title: "Other",
+    id: "others" as UserRole,
+    title: "Others",
     description: "General project discovery & insights",
     icon: CircleUser,
     features: ["Project Discovery", "Market Overview", "Industry Trends"],
-    color: "other",
+    color: "others",
   },
 ];
 
