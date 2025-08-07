@@ -573,7 +573,8 @@ export default function SupplierOpportunities() {
                             };
                             
                             const projectId = projectMapping[opportunity.id] || opportunity.id;
-                            sessionStorage.setItem('previousPage', '/supplier-opportunities');
+                            // Set navigation tracking for proper back navigation
+                            sessionStorage.setItem('previousPage', window.location.pathname);
                             setLocation(`/project/${projectId}`);
                           }}
                         >

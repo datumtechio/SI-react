@@ -32,7 +32,7 @@ export default function DeveloperOpportunities() {
 
   // Set previous page for navigation tracking
   useEffect(() => {
-    sessionStorage.setItem('previousPage', '/developer-opportunities');
+    sessionStorage.setItem('previousPage', window.location.pathname);
   }, []);
 
   // Handle location click to navigate to relevant project
@@ -50,6 +50,8 @@ export default function DeveloperOpportunities() {
     };
 
     const projectId = locationProjectMap[locationName] || 3;
+    // Set navigation tracking for proper back navigation
+    sessionStorage.setItem('previousPage', window.location.pathname);
     setLocation(`/project/${projectId}`);
   };
 
@@ -397,6 +399,7 @@ export default function DeveloperOpportunities() {
                             className="font-semibold text-gray-900 hover:text-purple-600 text-left transition-colors"
                             onClick={(e) => {
                               e.stopPropagation();
+                              sessionStorage.setItem('previousPage', window.location.pathname);
                               handleLocationClick(location.area);
                             }}
                           >
