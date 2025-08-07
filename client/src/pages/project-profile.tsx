@@ -63,6 +63,7 @@ interface ProjectDetails {
   category?: string;
   value?: string;
   briefBackground?: string;
+  owner: string;
   developer: string;
   contractor?: string;
   consultant?: string;
@@ -194,6 +195,7 @@ export default function ProjectProfile() {
           startDate: "2024-02-15",
           completionDate: "Q3 2025",
           briefBackground: "Strategically located in the prestigious Dubai Marina district, this tower represents a landmark addition to the waterfront skyline. The development capitalizes on the area's transformation into a world-class residential and leisure destination, with direct marina access, proximity to JBR Beach, and integration with the Marina Walk retail and dining precinct. The project targets high-net-worth individuals seeking luxury waterfront living with exceptional rental yields and capital appreciation potential in Dubai's most dynamic residential market.",
+          owner: "Marina Holdings Limited",
           developer: "Emaar Properties",
         contractor: "Arabtec Construction",
         consultant: "AECOM Middle East",
@@ -261,6 +263,7 @@ export default function ProjectProfile() {
           startDate: "2025-06-01",
           completionDate: "Q4 2027",
           briefBackground: "Business Bay represents Dubai's next-generation commercial district with strategic positioning along Dubai Canal. The development addresses critical demand gaps in premium office space and luxury residential units while capitalizing on the area's designation as a growing financial zone. With 23 available land plots and medium demand gap levels, this location offers optimal development opportunities in an emerging growth zone with excellent connectivity to DIFC, Downtown Dubai, and Dubai International Airport.",
+          owner: "Bay Commercial Investments LLC",
           developer: "Damac Properties",
           contractor: "Bidding Phase",
           consultant: "Arup Middle East",
@@ -349,6 +352,7 @@ export default function ProjectProfile() {
           startDate: "2025-01-15",
           completionDate: "Q1 2027",
           briefBackground: "This utility-scale solar power plant will provide clean energy to over 50,000 homes in Dubai. The project includes advanced photovoltaic technology, energy storage systems, and smart grid integration. Contractors will be responsible for the complete EPC delivery including foundation work, structural installation, electrical systems, and grid connection.",
+          owner: "Green Energy Consortium",
           developer: "Dubai Electricity & Water Authority",
           contractor: "Bidding Open",
           consultant: "AECOM Energy",
@@ -417,6 +421,7 @@ export default function ProjectProfile() {
           startDate: "2024-03-01",
           completionDate: "Q4 2026",
           briefBackground: "Phase 3 of Dubai Metro extension includes 15 new stations and 25 km of elevated and underground track. This complex project requires expertise in tunnel boring, elevated construction, station architecture, and advanced rail systems. Contractors will handle civil works, structural steel, MEP systems, and track installation with strict safety and quality standards.",
+          owner: "Dubai Metro Infrastructure Company",
           developer: "Roads and Transport Authority",
           contractor: "Consolidated Contractors Company",
           consultant: "Systra Engineering",
@@ -484,6 +489,7 @@ export default function ProjectProfile() {
           startDate: "2024-06-01",
           completionDate: "Q2 2026",
           briefBackground: "This strategic bridge project will reduce traffic congestion between Dubai and Sharjah while providing a vital economic corridor. The 2.5km bridge features advanced seismic resistance, smart traffic management systems, and sustainable construction practices. Contractors must demonstrate expertise in marine construction, precast concrete, and complex logistics.",
+          owner: "Emirates Bridge Authority",
           developer: "Roads and Transport Authority",
           contractor: "Samsung C&T Corporation",
           consultant: "AECOM Transportation",
@@ -550,6 +556,7 @@ export default function ProjectProfile() {
           startDate: "2025-03-01",
           completionDate: "Q4 2026",
           briefBackground: "Al Khaleej Hospital will be a comprehensive medical center featuring emergency care, surgery suites, ICU facilities, and specialized departments. The project requires expertise in medical construction standards, clean room environments, advanced MEP systems, and healthcare-specific infrastructure. Contractors must comply with strict medical facility regulations and international healthcare standards.",
+          owner: "Al Khaleej Medical Holdings",
           developer: "Dubai Health Authority",
           contractor: "Tender Phase",
           consultant: "HDR Architecture",
@@ -620,6 +627,7 @@ export default function ProjectProfile() {
           startDate: "2025-02-01",
           completionDate: "Q1 2026",
           briefBackground: "Dubai Creek Harbour Residences offers premium waterfront living with direct marina access and panoramic views of Dubai's skyline. The development features luxury amenities, sustainable design elements, and world-class facilities in one of Dubai's most prestigious waterfront communities.",
+          owner: "Creek Harbour Properties Ltd",
           developer: "Dubai Creek Harbour Development Company",
           contractor: "Emaar Construction",
           consultant: "WSP Middle East",
@@ -690,6 +698,7 @@ export default function ProjectProfile() {
           startDate: "2024-01-15",
           completionDate: "Q3 2025",
           briefBackground: "Azure Residences represents the pinnacle of luxury living in Downtown Dubai, featuring state-of-the-art amenities and world-class architectural design.",
+          owner: "Azure Residential Group",
           developer: "Emaar Properties",
           contractor: "Arabtec Construction",
           consultant: "AECOM Middle East",
@@ -1276,6 +1285,13 @@ export default function ProjectProfile() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
+                    <div className="flex items-center p-3 border rounded-lg bg-blue-50">
+                      <Users className="w-6 h-6 text-blue-700 mr-3" />
+                      <div>
+                        <p className="font-medium text-gray-900">Project Owner</p>
+                        <p className="text-sm text-gray-600">{project.owner}</p>
+                      </div>
+                    </div>
                     <div className="flex items-center p-3 border rounded-lg">
                       <Award className="w-6 h-6 text-blue-600 mr-3" />
                       <div>

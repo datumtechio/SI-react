@@ -28,6 +28,7 @@ export const projects = pgTable("projects", {
   value: text("value"), // $450 Million, etc.
   completionDate: text("completion_date"), // Q1 2025, Q2 2026, etc.
   briefBackground: text("brief_background"), // Project background description
+  owner: text("owner"), // Project owner/proprietor
   imageUrl: text("image_url"),
   features: text("features").array(), // array of feature strings
   isLuxury: boolean("is_luxury").default(false),
