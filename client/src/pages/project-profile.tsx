@@ -1960,7 +1960,7 @@ export default function ProjectProfile() {
                     {(project.residentialType ||
                       project.residentialClass ||
                       project.rating) && (
-                      <div className="mt-8">
+                      <div className="mt-12">
                         <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
                           <Home className="w-5 h-5 mr-3 text-green-600" />
                           Residential Details
