@@ -921,16 +921,16 @@ export default function ProjectProfile() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="bg-white border-b border-gray-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" onClick={handleBack} className="text-gray-600">
-                <ArrowLeft className="w-4 h-4 mr-2" />
+            <div className="flex items-center space-x-6">
+              <Button variant="ghost" onClick={handleBack} className="text-gray-600 hover:text-gray-900 px-3 py-2">
+                <ArrowLeft className="w-5 h-5 mr-2" />
                 Back
               </Button>
-              <div className="flex items-center space-x-3">
-                <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+              <div className="flex items-center space-x-4">
+                <div className={`w-14 h-14 rounded-xl flex items-center justify-center shadow-sm ${
                   userRole === "investor" ? "bg-green-100" :
                   userRole === "contractor" ? "bg-orange-100" :
                   userRole === "consultant" ? "bg-blue-100" :
@@ -942,29 +942,29 @@ export default function ProjectProfile() {
                   </div>
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900">{project.name}</h1>
-                  <div className="flex items-center space-x-4 mt-1">
+                  <h1 className="text-3xl font-bold text-gray-900 mb-2">{project.name}</h1>
+                  <div className="flex items-center space-x-6">
                     <div className="flex items-center text-gray-600">
-                      <MapPin className="w-4 h-4 mr-1" />
-                      {project.city}, {project.country}
+                      <MapPin className="w-5 h-5 mr-2" />
+                      <span className="font-medium">{project.city}, {project.country}</span>
                     </div>
-                    <Badge className={getStatusColor(project.status)}>
+                    <Badge className={`${getStatusColor(project.status)} px-3 py-1`}>
                       {project.status}
                     </Badge>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex items-center space-x-3">
-              <Button variant="outline" size="sm" onClick={toggleFavorite}>
+            <div className="flex items-center space-x-4">
+              <Button variant="outline" size="sm" onClick={toggleFavorite} className="px-4 py-2">
                 <Star className={`w-4 h-4 mr-2 ${isFavorite ? 'fill-yellow-400 text-yellow-400' : ''}`} />
                 {isFavorite ? 'Favorited' : 'Add to Favorites'}
               </Button>
-              <Button variant="outline" size="sm" onClick={handleShare}>
+              <Button variant="outline" size="sm" onClick={handleShare} className="px-4 py-2">
                 <Share2 className="w-4 h-4 mr-2" />
                 Share
               </Button>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="px-4 py-2">
                 <Download className="w-4 h-4 mr-2" />
                 Export Details
               </Button>
@@ -973,59 +973,59 @@ export default function ProjectProfile() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Key Project Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardContent className="p-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+          <Card className="hover:shadow-lg transition-shadow duration-200">
+            <CardContent className="p-8">
               <div className="flex items-center">
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <DollarSign className="w-6 h-6 text-green-600" />
+                <div className="p-3 bg-green-100 rounded-xl">
+                  <DollarSign className="w-7 h-7 text-green-600" />
                 </div>
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">Total Investment</p>
+                <div className="ml-5">
+                  <p className="text-sm font-medium text-gray-600 mb-1">Total Investment</p>
                   <p className="text-2xl font-bold text-gray-900">${project.investment}M</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="p-6">
+          <Card className="hover:shadow-lg transition-shadow duration-200">
+            <CardContent className="p-8">
               <div className="flex items-center">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <TrendingUp className="w-6 h-6 text-blue-600" />
+                <div className="p-3 bg-blue-100 rounded-xl">
+                  <TrendingUp className="w-7 h-7 text-blue-600" />
                 </div>
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">Expected ROI</p>
+                <div className="ml-5">
+                  <p className="text-sm font-medium text-gray-600 mb-1">Expected ROI</p>
                   <p className="text-2xl font-bold text-gray-900">{project.expectedRoi}%</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="p-6">
+          <Card className="hover:shadow-lg transition-shadow duration-200">
+            <CardContent className="p-8">
               <div className="flex items-center">
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <Clock className="w-6 h-6 text-purple-600" />
+                <div className="p-3 bg-purple-100 rounded-xl">
+                  <Clock className="w-7 h-7 text-purple-600" />
                 </div>
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">Project Progress</p>
+                <div className="ml-5">
+                  <p className="text-sm font-medium text-gray-600 mb-1">Project Progress</p>
                   <p className="text-2xl font-bold text-gray-900">{project.timeline.progress}%</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="p-6">
+          <Card className="hover:shadow-lg transition-shadow duration-200">
+            <CardContent className="p-8">
               <div className="flex items-center">
-                <div className="p-2 bg-orange-100 rounded-lg">
-                  <AlertTriangle className={`w-6 h-6 ${getRiskColor(project.riskLevel)}`} />
+                <div className="p-3 bg-orange-100 rounded-xl">
+                  <AlertTriangle className={`w-7 h-7 ${getRiskColor(project.riskLevel)}`} />
                 </div>
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">Risk Level</p>
+                <div className="ml-5">
+                  <p className="text-sm font-medium text-gray-600 mb-1">Risk Level</p>
                   <p className={`text-2xl font-bold ${getRiskColor(project.riskLevel)}`}>{project.riskLevel}</p>
                 </div>
               </div>
@@ -1034,102 +1034,102 @@ export default function ProjectProfile() {
         </div>
 
         {/* Main Content Tabs */}
-        <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className={`grid w-full grid-cols-${getRoleSpecificTabs().length}`}>
+        <Tabs defaultValue="overview" className="space-y-8">
+          <TabsList className={`grid w-full grid-cols-${getRoleSpecificTabs().length} h-12 rounded-xl bg-gray-100 p-1`}>
             {getRoleSpecificTabs().map(tab => (
-              <TabsTrigger key={tab} value={tab}>
+              <TabsTrigger key={tab} value={tab} className="rounded-lg font-medium">
                 {tab.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
               </TabsTrigger>
             ))}
           </TabsList>
 
           {/* Overview Tab */}
-          <TabsContent value="overview" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Project Description</CardTitle>
+          <TabsContent value="overview" className="space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <Card className="shadow-sm hover:shadow-md transition-shadow duration-200">
+                <CardHeader className="pb-6">
+                  <CardTitle className="text-xl font-semibold text-gray-900">Project Description</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 mb-6">{project.description}</p>
+                <CardContent className="pt-0">
+                  <p className="text-gray-700 mb-8 leading-relaxed">{project.description}</p>
                   
                   {/* Brief Background */}
                   {project.briefBackground && (
-                    <div className="mb-6 p-4 bg-blue-50 rounded-lg">
-                      <h4 className="font-semibold text-gray-900 mb-2 flex items-center">
-                        <Info className="w-4 h-4 mr-2 text-blue-600" />
+                    <div className="mb-8 p-6 bg-blue-50 rounded-xl border border-blue-100">
+                      <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                        <Info className="w-5 h-5 mr-3 text-blue-600" />
                         Project Background
                       </h4>
-                      <p className="text-sm text-gray-700">{project.briefBackground}</p>
+                      <p className="text-sm text-gray-700 leading-relaxed">{project.briefBackground}</p>
                     </div>
                   )}
                   
                   {/* Project Details Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                     {/* Basic Information */}
-                    <div className="space-y-3">
-                      <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-                        <FileText className="w-4 h-4 mr-2 text-gray-600" />
+                    <div className="space-y-4">
+                      <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                        <FileText className="w-5 h-5 mr-3 text-gray-600" />
                         Basic Information
                       </h4>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Status:</span>
+                      <div className="flex justify-between items-center py-2">
+                        <span className="text-gray-600 font-medium">Status:</span>
                         <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Sector:</span>
+                      <div className="flex justify-between items-center py-2">
+                        <span className="text-gray-600 font-medium">Sector:</span>
                         <Badge variant="outline">{project.sector}</Badge>
                       </div>
                       {project.subsector && (
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Subsector:</span>
-                          <span className="font-medium">{project.subsector}</span>
+                        <div className="flex justify-between items-center py-2">
+                          <span className="text-gray-600 font-medium">Subsector:</span>
+                          <span className="font-semibold text-gray-900">{project.subsector}</span>
                         </div>
                       )}
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Project Type:</span>
-                        <span className="font-medium">{project.projectType}</span>
+                      <div className="flex justify-between items-center py-2">
+                        <span className="text-gray-600 font-medium">Project Type:</span>
+                        <span className="font-semibold text-gray-900">{project.projectType}</span>
                       </div>
                       {project.contractType && (
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Contract Type:</span>
-                          <span className="font-medium">{project.contractType}</span>
+                        <div className="flex justify-between items-center py-2">
+                          <span className="text-gray-600 font-medium">Contract Type:</span>
+                          <span className="font-semibold text-gray-900">{project.contractType}</span>
                         </div>
                       )}
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Completion Date:</span>
-                        <span className="font-medium">{project.completionDate}</span>
+                      <div className="flex justify-between items-center py-2">
+                        <span className="text-gray-600 font-medium">Completion Date:</span>
+                        <span className="font-semibold text-gray-900">{project.completionDate}</span>
                       </div>
                     </div>
                     
                     {/* Location & Scale */}
-                    <div className="space-y-3">
-                      <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-                        <MapPin className="w-4 h-4 mr-2 text-red-500" />
+                    <div className="space-y-4">
+                      <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                        <MapPin className="w-5 h-5 mr-3 text-red-500" />
                         Location & Scale
                       </h4>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Country:</span>
-                        <span className="font-medium">{project.country}</span>
+                      <div className="flex justify-between items-center py-2">
+                        <span className="text-gray-600 font-medium">Country:</span>
+                        <span className="font-semibold text-gray-900">{project.country}</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">City:</span>
-                        <span className="font-medium">{project.city}</span>
+                      <div className="flex justify-between items-center py-2">
+                        <span className="text-gray-600 font-medium">City:</span>
+                        <span className="font-semibold text-gray-900">{project.city}</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">District:</span>
-                        <span className="font-medium">{project.district}</span>
+                      <div className="flex justify-between items-center py-2">
+                        <span className="text-gray-600 font-medium">District:</span>
+                        <span className="font-semibold text-gray-900">{project.district}</span>
                       </div>
                       {project.capacity && (
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Capacity:</span>
-                          <span className="font-medium">{project.capacity}</span>
+                        <div className="flex justify-between items-center py-2">
+                          <span className="text-gray-600 font-medium">Capacity:</span>
+                          <span className="font-semibold text-gray-900">{project.capacity}</span>
                         </div>
                       )}
                       {project.value && (
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Total Value:</span>
-                          <span className="font-medium text-green-600">{project.value}</span>
+                        <div className="flex justify-between items-center py-2">
+                          <span className="text-gray-600 font-medium">Total Value:</span>
+                          <span className="font-semibold text-green-600">{project.value}</span>
                         </div>
                       )}
                     </div>
@@ -1192,48 +1192,48 @@ export default function ProjectProfile() {
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle>Project Features</CardTitle>
+              <Card className="shadow-sm hover:shadow-md transition-shadow duration-200">
+                <CardHeader className="pb-6">
+                  <CardTitle className="text-xl font-semibold text-gray-900">Project Features</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
+                <CardContent className="pt-0">
+                  <div className="space-y-6">
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2 flex items-center">
-                        <Zap className="w-4 h-4 mr-2 text-yellow-500" />
+                      <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                        <Zap className="w-5 h-5 mr-3 text-yellow-500" />
                         Key Features
                       </h4>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-3">
                         {project.features.map((feature, index) => (
-                          <Badge key={index} variant="secondary" className="text-xs">
+                          <Badge key={index} variant="secondary" className="text-sm px-3 py-1">
                             {feature}
                           </Badge>
                         ))}
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2 flex items-center">
-                        <Star className="w-4 h-4 mr-2 text-purple-500" />
+                      <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                        <Star className="w-5 h-5 mr-3 text-purple-500" />
                         Amenities
                       </h4>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-3">
                         {project.amenities.map((amenity, index) => (
-                          <Badge key={index} variant="outline" className="text-xs">
+                          <Badge key={index} variant="outline" className="text-sm px-3 py-1">
                             {amenity}
                           </Badge>
                         ))}
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2 flex items-center">
-                        <Shield className="w-4 h-4 mr-2 text-green-600" />
+                      <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                        <Shield className="w-5 h-5 mr-3 text-green-600" />
                         Permits & Approvals
                       </h4>
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {project.permits.map((permit, index) => (
-                          <div key={index} className="flex items-center">
-                            <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
-                            <span className="text-sm text-gray-700">{permit}</span>
+                          <div key={index} className="flex items-center py-1">
+                            <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
+                            <span className="text-sm text-gray-700 font-medium">{permit}</span>
                           </div>
                         ))}
                       </div>
@@ -1245,49 +1245,49 @@ export default function ProjectProfile() {
           </TabsContent>
 
           {/* Financials Tab */}
-          <TabsContent value="financials" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Budget Overview</CardTitle>
+          <TabsContent value="financials" className="space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <Card className="shadow-sm hover:shadow-md transition-shadow duration-200">
+                <CardHeader className="pb-6">
+                  <CardTitle className="text-xl font-semibold text-gray-900">Budget Overview</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Total Budget:</span>
+                <CardContent className="pt-0">
+                  <div className="space-y-6">
+                    <div className="flex justify-between items-center py-3">
+                      <span className="text-gray-600 font-medium">Total Budget:</span>
                       <span className="text-xl font-bold text-gray-900">{project.financials.totalBudget}</span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Spent to Date:</span>
+                    <div className="flex justify-between items-center py-3">
+                      <span className="text-gray-600 font-medium">Spent to Date:</span>
                       <span className="text-lg font-semibold text-blue-600">{project.financials.spentToDate}</span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Remaining Budget:</span>
+                    <div className="flex justify-between items-center py-3">
+                      <span className="text-gray-600 font-medium">Remaining Budget:</span>
                       <span className="text-lg font-semibold text-green-600">{project.financials.remainingBudget}</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3 mt-4">
+                    <div className="w-full bg-gray-200 rounded-full h-4 mt-6">
                       <div 
-                        className="bg-blue-600 h-3 rounded-full" 
+                        className="bg-gradient-to-r from-blue-500 to-blue-600 h-4 rounded-full shadow-sm" 
                         style={{ width: `${(180/350) * 100}%` }}
                       ></div>
                     </div>
-                    <p className="text-sm text-gray-600 text-center">
+                    <p className="text-sm text-gray-600 text-center font-medium mt-3">
                       {Math.round((180/350) * 100)}% of budget utilized
                     </p>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle>Funding Sources</CardTitle>
+              <Card className="shadow-sm hover:shadow-md transition-shadow duration-200">
+                <CardHeader className="pb-6">
+                  <CardTitle className="text-xl font-semibold text-gray-900">Funding Sources</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
+                <CardContent className="pt-0">
+                  <div className="space-y-4">
                     {project.financials.fundingSources.map((source, index) => (
-                      <div key={index} className="flex items-center p-3 bg-gray-50 rounded-lg">
-                        <PieChart className="w-5 h-5 text-blue-600 mr-3" />
-                        <span className="text-gray-700">{source}</span>
+                      <div key={index} className="flex items-center p-4 bg-gray-50 rounded-xl border border-gray-100 hover:bg-gray-100 transition-colors duration-200">
+                        <PieChart className="w-6 h-6 text-blue-600 mr-4" />
+                        <span className="text-gray-700 font-medium">{source}</span>
                       </div>
                     ))}
                   </div>
@@ -1297,38 +1297,38 @@ export default function ProjectProfile() {
           </TabsContent>
 
           {/* Timeline Tab */}
-          <TabsContent value="timeline" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Project Timeline & Milestones</CardTitle>
+          <TabsContent value="timeline" className="space-y-8">
+            <Card className="shadow-sm hover:shadow-md transition-shadow duration-200">
+              <CardHeader className="pb-6">
+                <CardTitle className="text-xl font-semibold text-gray-900">Project Timeline & Milestones</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="mb-6">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium text-gray-700">Current Phase: {project.timeline.phase}</span>
-                    <span className="text-sm font-medium text-gray-700">{project.timeline.progress}% Complete</span>
+              <CardContent className="pt-0">
+                <div className="mb-8">
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-sm font-semibold text-gray-700">Current Phase: {project.timeline.phase}</span>
+                    <span className="text-sm font-semibold text-gray-700">{project.timeline.progress}% Complete</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 rounded-full h-3">
                     <div 
-                      className="bg-blue-600 h-2 rounded-full" 
+                      className="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full shadow-sm" 
                       style={{ width: `${project.timeline.progress}%` }}
                     ></div>
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-5">
                   {project.timeline.milestones.map((milestone, index) => (
-                    <div key={index} className="flex items-center p-4 border rounded-lg">
-                      <div className="mr-4">
-                        {milestone.status === 'Completed' && <CheckCircle className="w-6 h-6 text-green-600" />}
-                        {milestone.status === 'In Progress' && <Clock className="w-6 h-6 text-blue-600" />}
-                        {milestone.status === 'Planned' && <Calendar className="w-6 h-6 text-gray-400" />}
+                    <div key={index} className="flex items-center p-5 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-sm transition-all duration-200">
+                      <div className="mr-5">
+                        {milestone.status === 'Completed' && <CheckCircle className="w-7 h-7 text-green-600" />}
+                        {milestone.status === 'In Progress' && <Clock className="w-7 h-7 text-blue-600" />}
+                        {milestone.status === 'Planned' && <Calendar className="w-7 h-7 text-gray-400" />}
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900">{milestone.name}</h4>
-                        <p className="text-sm text-gray-600">Target Date: {new Date(milestone.date).toLocaleDateString()}</p>
+                        <h4 className="font-semibold text-gray-900 mb-1">{milestone.name}</h4>
+                        <p className="text-sm text-gray-600 font-medium">Target Date: {new Date(milestone.date).toLocaleDateString()}</p>
                       </div>
-                      <Badge className={getStatusColor(milestone.status)}>
+                      <Badge className={`${getStatusColor(milestone.status)} px-3 py-1`}>
                         {milestone.status}
                       </Badge>
                     </div>
@@ -1339,79 +1339,79 @@ export default function ProjectProfile() {
           </TabsContent>
 
           {/* Stakeholders Tab */}
-          <TabsContent value="stakeholders" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Key Stakeholders</CardTitle>
+          <TabsContent value="stakeholders" className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <Card className="shadow-sm hover:shadow-md transition-shadow duration-200">
+                <CardHeader className="pb-6">
+                  <CardTitle className="text-xl font-semibold text-gray-900">Key Stakeholders</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center p-3 border rounded-lg bg-blue-50">
-                      <Users className="w-6 h-6 text-blue-700 mr-3" />
+                <CardContent className="pt-0">
+                  <div className="space-y-5">
+                    <div className="flex items-center p-5 border border-blue-200 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors duration-200">
+                      <Users className="w-7 h-7 text-blue-700 mr-4" />
                       <div>
-                        <p className="font-medium text-gray-900">Project Owner</p>
-                        <p className="text-sm text-gray-600">{project.owner}</p>
+                        <p className="font-semibold text-gray-900 mb-1">Project Owner</p>
+                        <p className="text-sm text-gray-600 font-medium">{project.owner}</p>
                       </div>
                     </div>
-                    <div className="flex items-center p-3 border rounded-lg">
-                      <Award className="w-6 h-6 text-blue-600 mr-3" />
+                    <div className="flex items-center p-5 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-sm transition-all duration-200">
+                      <Award className="w-7 h-7 text-blue-600 mr-4" />
                       <div>
-                        <p className="font-medium text-gray-900">Developer</p>
-                        <p className="text-sm text-gray-600">{project.developer}</p>
+                        <p className="font-semibold text-gray-900 mb-1">Developer</p>
+                        <p className="text-sm text-gray-600 font-medium">{project.developer}</p>
                       </div>
                     </div>
-                    <div className="flex items-center p-3 border rounded-lg">
-                      <Briefcase className="w-6 h-6 text-orange-600 mr-3" />
+                    <div className="flex items-center p-5 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-sm transition-all duration-200">
+                      <Briefcase className="w-7 h-7 text-orange-600 mr-4" />
                       <div>
-                        <p className="font-medium text-gray-900">Main Contractor</p>
-                        <p className="text-sm text-gray-600">{project.contractor}</p>
+                        <p className="font-semibold text-gray-900 mb-1">Main Contractor</p>
+                        <p className="text-sm text-gray-600 font-medium">{project.contractor}</p>
                       </div>
                     </div>
-                    <div className="flex items-center p-3 border rounded-lg">
-                      <Target className="w-6 h-6 text-purple-600 mr-3" />
+                    <div className="flex items-center p-5 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-sm transition-all duration-200">
+                      <Target className="w-7 h-7 text-purple-600 mr-4" />
                       <div>
-                        <p className="font-medium text-gray-900">Consultant</p>
-                        <p className="text-sm text-gray-600">{project.consultant}</p>
+                        <p className="font-semibold text-gray-900 mb-1">Consultant</p>
+                        <p className="text-sm text-gray-600 font-medium">{project.consultant}</p>
                       </div>
                     </div>
-                    <div className="flex items-center p-3 border rounded-lg">
-                      <Building className="w-6 h-6 text-green-600 mr-3" />
+                    <div className="flex items-center p-5 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-sm transition-all duration-200">
+                      <Building className="w-7 h-7 text-green-600 mr-4" />
                       <div>
-                        <p className="font-medium text-gray-900">Main Supplier</p>
-                        <p className="text-sm text-gray-600">{project.supplier}</p>
+                        <p className="font-semibold text-gray-900 mb-1">Main Supplier</p>
+                        <p className="text-sm text-gray-600 font-medium">{project.supplier}</p>
                       </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle>Contact Information</CardTitle>
+              <Card className="shadow-sm hover:shadow-md transition-shadow duration-200">
+                <CardHeader className="pb-6">
+                  <CardTitle className="text-xl font-semibold text-gray-900">Contact Information</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center">
-                      <Mail className="w-5 h-5 text-gray-500 mr-3" />
+                <CardContent className="pt-0">
+                  <div className="space-y-6">
+                    <div className="flex items-center p-4 bg-gray-50 rounded-xl">
+                      <Mail className="w-6 h-6 text-gray-500 mr-4" />
                       <div>
-                        <p className="text-sm text-gray-600">Email</p>
-                        <p className="font-medium text-blue-600">{project.contactInfo.email}</p>
+                        <p className="text-sm text-gray-600 font-medium mb-1">Email</p>
+                        <p className="font-semibold text-blue-600">{project.contactInfo.email}</p>
                       </div>
                     </div>
-                    <div className="flex items-center">
-                      <Phone className="w-5 h-5 text-gray-500 mr-3" />
+                    <div className="flex items-center p-4 bg-gray-50 rounded-xl">
+                      <Phone className="w-6 h-6 text-gray-500 mr-4" />
                       <div>
-                        <p className="text-sm text-gray-600">Phone</p>
-                        <p className="font-medium text-gray-900">{project.contactInfo.phone}</p>
+                        <p className="text-sm text-gray-600 font-medium mb-1">Phone</p>
+                        <p className="font-semibold text-gray-900">{project.contactInfo.phone}</p>
                       </div>
                     </div>
                     {project.contactInfo.website && (
-                      <div className="flex items-center">
-                        <Globe className="w-5 h-5 text-gray-500 mr-3" />
+                      <div className="flex items-center p-4 bg-gray-50 rounded-xl">
+                        <Globe className="w-6 h-6 text-gray-500 mr-4" />
                         <div>
-                          <p className="text-sm text-gray-600">Website</p>
-                          <p className="font-medium text-blue-600">{project.contactInfo.website}</p>
+                          <p className="text-sm text-gray-600 font-medium mb-1">Website</p>
+                          <p className="font-semibold text-blue-600">{project.contactInfo.website}</p>
                         </div>
                       </div>
                     )}
