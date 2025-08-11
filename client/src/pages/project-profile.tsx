@@ -1699,60 +1699,7 @@ export default function ProjectProfile() {
                     {project.description}
                   </p>
 
-                  {/* Related Companies - Only for Under Construction projects */}
-                  {project.status === "Under Construction" && (
-                    <div className="mb-8">
-                      <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
-                        <Briefcase className="w-5 h-5 mr-3 text-blue-600" />
-                        Related Companies
-                      </h4>
-                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                        <div className="space-y-4">
-                          {project.owner && (
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600 font-medium">Owner:</span>
-                              <span className="font-semibold text-gray-900">{project.owner}</span>
-                            </div>
-                          )}
-                          {project.developer && (
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600 font-medium">Developer:</span>
-                              <span className="font-semibold text-gray-900">{project.developer}</span>
-                            </div>
-                          )}
-                          {project.contractor && (
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600 font-medium">Contractor:</span>
-                              <span className="font-semibold text-gray-900">{project.contractor}</span>
-                            </div>
-                          )}
-                          {project.consultant && (
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600 font-medium">Consultant:</span>
-                              <span className="font-semibold text-gray-900">{project.consultant}</span>
-                            </div>
-                          )}
-                          {project.supplier && (
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600 font-medium">Supplier:</span>
-                              <span className="font-semibold text-gray-900">{project.supplier}</span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Project Background */}
-                  {project.briefBackground && project.status !== "Under Construction" && (
-                    <div className="mb-8 p-6 bg-blue-50 rounded-xl border border-blue-100">
-                      <p className="text-sm text-gray-700 leading-relaxed">
-                        {project.briefBackground}
-                      </p>
-                    </div>
-                  )}
-
-                  {/* Basic Information - Vertical Layout */}
+                  {/* Basic Information - First module under description */}
                   <div className="mb-12">
                     <h4 className="font-semibold text-gray-900 mb-6 flex items-center">
                       <FileText className="w-5 h-5 mr-3 text-gray-600" />
@@ -1789,6 +1736,31 @@ export default function ProjectProfile() {
                       </div>
                     </div>
                   </div>
+
+                  {/* Owner - Separate section under Basic Information */}
+                  {project.owner && (
+                    <div className="mb-12">
+                      <h4 className="font-semibold text-gray-900 mb-6 flex items-center">
+                        <Building className="w-5 h-5 mr-3 text-blue-600" />
+                        Project Owner
+                      </h4>
+                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-600 font-medium">Owner:</span>
+                          <span className="font-semibold text-gray-900">{project.owner}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Project Background */}
+                  {project.briefBackground && project.status !== "Under Construction" && (
+                    <div className="mb-8 p-6 bg-blue-50 rounded-xl border border-blue-100">
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {project.briefBackground}
+                      </p>
+                    </div>
+                  )}
 
                   {/* Location & Scale with Map */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
@@ -1935,23 +1907,7 @@ export default function ProjectProfile() {
                         ))}
                       </div>
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
-                        <Shield className="w-5 h-5 mr-3 text-green-600" />
-                        Permits & Approvals
-                      </h4>
-                      <div className="space-y-3">
-                        {project.permits.map((permit, index) => (
-                          <div key={index} className="flex items-center py-1">
-                            <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                            <span className="text-sm text-gray-700 font-medium">
-                              {permit}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
+
                     {/* Residential Details */}
                     {(project.residentialType ||
                       project.residentialClass ||
@@ -2014,6 +1970,71 @@ export default function ProjectProfile() {
                         </div>
                       </div>
                     </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Related Companies and Permits & Approvals - Moved to end */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Related Companies - Only for Under Construction projects */}
+              {project.status === "Under Construction" && (
+                <Card className="shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <CardHeader className="pb-6">
+                    <CardTitle className="text-xl font-semibold text-gray-900 flex items-center">
+                      <Briefcase className="w-5 h-5 mr-3 text-blue-600" />
+                      Related Companies
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="space-y-4">
+                      {project.developer && (
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-600 font-medium">Developer:</span>
+                          <span className="font-semibold text-gray-900">{project.developer}</span>
+                        </div>
+                      )}
+                      {project.contractor && (
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-600 font-medium">Contractor:</span>
+                          <span className="font-semibold text-gray-900">{project.contractor}</span>
+                        </div>
+                      )}
+                      {project.consultant && (
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-600 font-medium">Consultant:</span>
+                          <span className="font-semibold text-gray-900">{project.consultant}</span>
+                        </div>
+                      )}
+                      {project.supplier && (
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-600 font-medium">Supplier:</span>
+                          <span className="font-semibold text-gray-900">{project.supplier}</span>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Permits & Approvals */}
+              <Card className="shadow-sm hover:shadow-md transition-shadow duration-200">
+                <CardHeader className="pb-6">
+                  <CardTitle className="text-xl font-semibold text-gray-900 flex items-center">
+                    <Shield className="w-5 h-5 mr-3 text-green-600" />
+                    Permits & Approvals
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <div className="space-y-3">
+                    {project.permits.map((permit, index) => (
+                      <div key={index} className="flex items-center py-1">
+                        <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
+                        <span className="text-sm text-gray-700 font-medium">
+                          {permit}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
