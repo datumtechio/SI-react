@@ -1755,28 +1755,28 @@ export default function ProjectProfile() {
                         Location & Scale
                       </h4>
                       <div className="space-y-4">
-                        <div className="flex items-center">
-                          <span className="text-gray-600 font-medium w-32">Country:</span>
-                          <span className="font-semibold text-gray-900">{project.country}</span>
+                        <div className="flex items-start">
+                          <span className="text-gray-600 font-medium w-24 flex-shrink-0">Country:</span>
+                          <span className="font-semibold text-gray-900 ml-2">{project.country}</span>
                         </div>
                         <div className="flex items-center">
-                          <span className="text-gray-600 font-medium w-32">City:</span>
-                          <span className="font-semibold text-gray-900">{project.city}</span>
+                          <span className="text-gray-600 font-medium w-24 flex-shrink-0">City:</span>
+                          <span className="font-semibold text-gray-900 ml-2">{project.city}</span>
                         </div>
                         <div className="flex items-center">
-                          <span className="text-gray-600 font-medium w-32">District:</span>
-                          <span className="font-semibold text-gray-900">{project.district}</span>
+                          <span className="text-gray-600 font-medium w-24 flex-shrink-0">District:</span>
+                          <span className="font-semibold text-gray-900 ml-2">{project.district}</span>
                         </div>
                         {project.capacity && (
                           <div className="flex items-center">
-                            <span className="text-gray-600 font-medium w-32">Capacity:</span>
-                            <span className="font-semibold text-gray-900">{project.capacity}</span>
+                            <span className="text-gray-600 font-medium w-24 flex-shrink-0">Capacity:</span>
+                            <span className="font-semibold text-gray-900 ml-2">{project.capacity}</span>
                           </div>
                         )}
                         {project.value && (
                           <div className="flex items-center">
-                            <span className="text-gray-600 font-medium w-32">Total Value:</span>
-                            <span className="font-semibold text-green-600">{project.value}</span>
+                            <span className="text-gray-600 font-medium w-24 flex-shrink-0">Total Value:</span>
+                            <span className="font-semibold text-green-600 ml-2">{project.value}</span>
                           </div>
                         )}
                       </div>
