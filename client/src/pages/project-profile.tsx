@@ -1703,7 +1703,6 @@ export default function ProjectProfile() {
                   {project.briefBackground && (
                     <div className="mb-8 p-6 bg-blue-50 rounded-xl border border-blue-100">
                       <p className="text-sm text-gray-700 leading-relaxed">
-                        <span className="font-semibold text-gray-900">Background: </span>
                         {project.briefBackground}
                       </p>
                     </div>
