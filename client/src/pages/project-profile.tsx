@@ -1699,8 +1699,52 @@ export default function ProjectProfile() {
                     {project.description}
                   </p>
 
+                  {/* Related Companies - Only for Under Construction projects */}
+                  {project.status === "Under Construction" && (
+                    <div className="mb-8">
+                      <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                        <Briefcase className="w-5 h-5 mr-3 text-blue-600" />
+                        Related Companies
+                      </h4>
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {project.owner && (
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-600 font-medium">Owner:</span>
+                              <span className="font-semibold text-gray-900">{project.owner}</span>
+                            </div>
+                          )}
+                          {project.developer && (
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-600 font-medium">Developer:</span>
+                              <span className="font-semibold text-gray-900">{project.developer}</span>
+                            </div>
+                          )}
+                          {project.contractor && (
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-600 font-medium">Contractor:</span>
+                              <span className="font-semibold text-gray-900">{project.contractor}</span>
+                            </div>
+                          )}
+                          {project.consultant && (
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-600 font-medium">Consultant:</span>
+                              <span className="font-semibold text-gray-900">{project.consultant}</span>
+                            </div>
+                          )}
+                          {project.supplier && (
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-600 font-medium">Supplier:</span>
+                              <span className="font-semibold text-gray-900">{project.supplier}</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Project Background */}
-                  {project.briefBackground && (
+                  {project.briefBackground && project.status !== "Under Construction" && (
                     <div className="mb-8 p-6 bg-blue-50 rounded-xl border border-blue-100">
                       <p className="text-sm text-gray-700 leading-relaxed">
                         {project.briefBackground}
@@ -1745,50 +1789,6 @@ export default function ProjectProfile() {
                       </div>
                     </div>
                   </div>
-
-                  {/* Related Companies - Only for Under Construction projects */}
-                  {project.status === "Under Construction" && (
-                    <div className="mb-8">
-                      <h4 className="font-semibold text-gray-900 mb-6 flex items-center">
-                        <Briefcase className="w-5 h-5 mr-3 text-blue-600" />
-                        Related Companies
-                      </h4>
-                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {project.owner && (
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600 font-medium">Owner:</span>
-                              <span className="font-semibold text-gray-900">{project.owner}</span>
-                            </div>
-                          )}
-                          {project.developer && (
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600 font-medium">Developer:</span>
-                              <span className="font-semibold text-gray-900">{project.developer}</span>
-                            </div>
-                          )}
-                          {project.contractor && (
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600 font-medium">Contractor:</span>
-                              <span className="font-semibold text-gray-900">{project.contractor}</span>
-                            </div>
-                          )}
-                          {project.consultant && (
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600 font-medium">Consultant:</span>
-                              <span className="font-semibold text-gray-900">{project.consultant}</span>
-                            </div>
-                          )}
-                          {project.supplier && (
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600 font-medium">Supplier:</span>
-                              <span className="font-semibold text-gray-900">{project.supplier}</span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  )}
 
                   {/* Location & Scale with Map */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
