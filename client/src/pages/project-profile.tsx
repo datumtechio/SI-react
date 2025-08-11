@@ -1712,39 +1712,39 @@ export default function ProjectProfile() {
                     </div>
                   )}
 
-                  {/* Basic Information - Horizontal Layout */}
+                  {/* Basic Information - Vertical Layout */}
                   <div className="mb-12">
                     <h4 className="font-semibold text-gray-900 mb-6 flex items-center">
                       <FileText className="w-5 h-5 mr-3 text-gray-600" />
                       Basic Information
                     </h4>
-                    <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+                    <div className="space-y-4">
                       <div className="flex items-center space-x-2">
-                        <span className="text-gray-600 font-medium">Status:</span>
+                        <span className="text-gray-600 font-medium w-32">Status:</span>
                         <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <span className="text-gray-600 font-medium">Sector:</span>
+                        <span className="text-gray-600 font-medium w-32">Sector:</span>
                         <Badge variant="outline">{project.sector}</Badge>
                       </div>
                       {project.subsector && (
                         <div className="flex items-center space-x-2">
-                          <span className="text-gray-600 font-medium">Subsector:</span>
+                          <span className="text-gray-600 font-medium w-32">Subsector:</span>
                           <span className="font-semibold text-gray-900">{project.subsector}</span>
                         </div>
                       )}
                       <div className="flex items-center space-x-2">
-                        <span className="text-gray-600 font-medium">Project Type:</span>
+                        <span className="text-gray-600 font-medium w-32">Project Type:</span>
                         <span className="font-semibold text-gray-900">{project.projectType}</span>
                       </div>
                       {project.contractType && (
                         <div className="flex items-center space-x-2">
-                          <span className="text-gray-600 font-medium">Contract Type:</span>
+                          <span className="text-gray-600 font-medium w-32">Contract Type:</span>
                           <span className="font-semibold text-gray-900">{project.contractType}</span>
                         </div>
                       )}
                       <div className="flex items-center space-x-2">
-                        <span className="text-gray-600 font-medium">Completion Date:</span>
+                        <span className="text-gray-600 font-medium w-32">Completion Date:</span>
                         <span className="font-semibold text-gray-900">{project.completionDate}</span>
                       </div>
                     </div>
@@ -1877,56 +1877,7 @@ export default function ProjectProfile() {
                     </div>
                   </div>
 
-                  {/* Residential-specific Information */}
-                  {(project.residentialType ||
-                    project.residentialClass ||
-                    project.rating) && (
-                    <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-                      <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-                        <Home className="w-4 h-4 mr-2 text-green-600" />
-                        Residential Details
-                      </h4>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {project.residentialType && (
-                          <div>
-                            <span className="text-sm text-gray-600">Type:</span>
-                            <p className="font-medium">
-                              {project.residentialType}
-                            </p>
-                          </div>
-                        )}
-                        {project.residentialClass && (
-                          <div>
-                            <span className="text-sm text-gray-600">
-                              Class:
-                            </span>
-                            <p className="font-medium">
-                              {project.residentialClass}
-                            </p>
-                          </div>
-                        )}
-                        {project.rating && (
-                          <div>
-                            <span className="text-sm text-gray-600">
-                              Rating:
-                            </span>
-                            <p className="font-medium flex items-center">
-                              <Star className="w-4 h-4 mr-1 text-yellow-500" />
-                              {project.rating}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                      {project.category && (
-                        <div className="mt-3">
-                          <span className="text-sm text-gray-600">
-                            Category:
-                          </span>
-                          <p className="font-medium">{project.category}</p>
-                        </div>
-                      )}
-                    </div>
-                  )}
+
 
                   {/* Additional Details */}
                   <div className="space-y-3">
@@ -2004,6 +1955,47 @@ export default function ProjectProfile() {
                         ))}
                       </div>
                     </div>
+                    
+                    {/* Residential Details */}
+                    {(project.residentialType ||
+                      project.residentialClass ||
+                      project.rating) && (
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                          <Home className="w-5 h-5 mr-3 text-green-600" />
+                          Residential Details
+                        </h4>
+                        <div className="space-y-3">
+                          {project.residentialType && (
+                            <div className="flex items-center py-2">
+                              <span className="text-gray-600 font-medium w-20">Type:</span>
+                              <span className="font-semibold text-gray-900">{project.residentialType}</span>
+                            </div>
+                          )}
+                          {project.residentialClass && (
+                            <div className="flex items-center py-2">
+                              <span className="text-gray-600 font-medium w-20">Class:</span>
+                              <span className="font-semibold text-gray-900">{project.residentialClass}</span>
+                            </div>
+                          )}
+                          {project.rating && (
+                            <div className="flex items-center py-2">
+                              <span className="text-gray-600 font-medium w-20">Rating:</span>
+                              <span className="font-semibold text-gray-900 flex items-center">
+                                <Star className="w-4 h-4 mr-2 text-yellow-500" />
+                                {project.rating}
+                              </span>
+                            </div>
+                          )}
+                          {project.category && (
+                            <div className="flex items-center py-2">
+                              <span className="text-gray-600 font-medium w-20">Category:</span>
+                              <span className="font-semibold text-gray-900">{project.category}</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </Card>
