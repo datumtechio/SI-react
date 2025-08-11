@@ -1800,73 +1800,43 @@ export default function ProjectProfile() {
                         </svg>
                         Satellite View
                       </h4>
-                      <div className="bg-gray-900 rounded-xl border-2 border-gray-300 overflow-hidden shadow-lg">
-                        <div className="relative h-80 bg-gradient-to-br from-green-400 via-green-500 to-green-600">
-                          {/* Enhanced satellite terrain simulation */}
-                          <div className="absolute inset-0 opacity-70">
-                            {/* Roads and infrastructure */}
-                            <div className="absolute top-0 left-1/3 w-1 h-full bg-gray-600"></div>
-                            <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-600"></div>
-                            <div className="absolute top-1/4 right-1/4 w-1 h-1/2 bg-gray-600"></div>
-                            
-                            {/* Buildings and structures */}
-                            <div className="absolute top-12 left-16 w-12 h-8 bg-gray-700 shadow-lg"></div>
-                            <div className="absolute top-20 right-20 w-10 h-10 bg-gray-800 shadow-lg"></div>
-                            <div className="absolute bottom-20 left-12 w-16 h-12 bg-gray-600 shadow-lg"></div>
-                            <div className="absolute bottom-12 right-16 w-8 h-14 bg-gray-750 shadow-lg"></div>
-                            
-                            {/* Water bodies */}
-                            <div className="absolute top-16 right-12 w-20 h-8 bg-blue-500 rounded-lg opacity-80"></div>
-                            
-                            {/* Green spaces and parks */}
-                            <div className="absolute bottom-16 left-24 w-14 h-10 bg-green-700 rounded-lg"></div>
+                      <div className="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                        <div className="relative h-64 bg-gradient-to-br from-blue-100 via-green-100 to-blue-50">
+                          {/* Simple terrain pattern */}
+                          <div className="absolute inset-0 opacity-40">
+                            <div className="absolute top-12 left-8 w-16 h-12 bg-green-300 rounded-lg"></div>
+                            <div className="absolute top-20 right-12 w-12 h-8 bg-blue-300 rounded-lg"></div>
+                            <div className="absolute bottom-16 left-16 w-20 h-10 bg-green-200 rounded-lg"></div>
+                            <div className="absolute bottom-8 right-8 w-14 h-14 bg-gray-300 rounded-lg"></div>
                           </div>
 
-                          {/* Coordinates overlay */}
-                          <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-md">
-                            <span className="text-xs font-mono text-white">25.0760°N, 55.1308°E</span>
+                          {/* Location info */}
+                          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-2 rounded-lg shadow-sm">
+                            <p className="text-sm font-medium text-gray-800">
+                              {project.city}, {project.country}
+                            </p>
                           </div>
 
-                          {/* Enhanced project location marker */}
+                          {/* Simple project marker */}
                           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                            <div className="relative">
-                              <div className="w-8 h-8 bg-red-500 rounded-full border-3 border-white shadow-xl animate-pulse z-10 relative"></div>
-                              <div className="absolute -top-3 -left-3 w-14 h-14 border-3 border-red-400 rounded-full opacity-40 animate-ping"></div>
-                              <div className="absolute -top-1 -left-1 w-10 h-10 border-2 border-red-300 rounded-full opacity-60 animate-ping" style={{animationDelay: '1s'}}></div>
-                            </div>
+                            <div className="w-6 h-6 bg-red-500 rounded-full border-2 border-white shadow-lg"></div>
                           </div>
 
-                          {/* Enhanced zoom controls */}
-                          <div className="absolute top-4 right-4 flex flex-col bg-white/95 backdrop-blur-sm rounded-lg shadow-md border border-gray-200">
-                            <button className="p-3 hover:bg-gray-100 rounded-t-lg transition-colors duration-200">
-                              <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                              </svg>
-                            </button>
-                            <div className="border-t border-gray-200"></div>
-                            <button className="p-3 hover:bg-gray-100 rounded-b-lg transition-colors duration-200">
-                              <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-                              </svg>
-                            </button>
-                          </div>
-
-                          {/* Enhanced scale indicator */}
-                          <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md border border-gray-200">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-16 h-1.5 bg-gray-800 rounded-full"></div>
-                              <span className="text-sm font-semibold text-gray-800">1 km</span>
-                            </div>
-                          </div>
-
-                          {/* Enhanced map type toggle */}
-                          <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md border border-gray-200">
-                            <button className="text-sm font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-200 flex items-center space-x-2">
+                          {/* Simple controls */}
+                          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur rounded-lg shadow-sm">
+                            <button className="p-2 text-gray-600 hover:text-gray-800">
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                               </svg>
-                              <span>Satellite</span>
                             </button>
+                          </div>
+
+                          {/* Scale */}
+                          <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-2 rounded-lg shadow-sm">
+                            <div className="flex items-center space-x-2">
+                              <div className="w-8 h-0.5 bg-gray-800"></div>
+                              <span className="text-xs text-gray-800">1 km</span>
+                            </div>
                           </div>
                         </div>
                       </div>
