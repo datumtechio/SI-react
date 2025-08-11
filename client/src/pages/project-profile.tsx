@@ -1718,32 +1718,32 @@ export default function ProjectProfile() {
                       <FileText className="w-5 h-5 mr-3 text-gray-600" />
                       Basic Information
                     </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="flex justify-between items-center py-2">
+                    <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+                      <div className="flex items-center space-x-2">
                         <span className="text-gray-600 font-medium">Status:</span>
                         <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
                       </div>
-                      <div className="flex justify-between items-center py-2">
+                      <div className="flex items-center space-x-2">
                         <span className="text-gray-600 font-medium">Sector:</span>
                         <Badge variant="outline">{project.sector}</Badge>
                       </div>
                       {project.subsector && (
-                        <div className="flex justify-between items-center py-2">
+                        <div className="flex items-center space-x-2">
                           <span className="text-gray-600 font-medium">Subsector:</span>
                           <span className="font-semibold text-gray-900">{project.subsector}</span>
                         </div>
                       )}
-                      <div className="flex justify-between items-center py-2">
+                      <div className="flex items-center space-x-2">
                         <span className="text-gray-600 font-medium">Project Type:</span>
                         <span className="font-semibold text-gray-900">{project.projectType}</span>
                       </div>
                       {project.contractType && (
-                        <div className="flex justify-between items-center py-2">
+                        <div className="flex items-center space-x-2">
                           <span className="text-gray-600 font-medium">Contract Type:</span>
                           <span className="font-semibold text-gray-900">{project.contractType}</span>
                         </div>
                       )}
-                      <div className="flex justify-between items-center py-2">
+                      <div className="flex items-center space-x-2">
                         <span className="text-gray-600 font-medium">Completion Date:</span>
                         <span className="font-semibold text-gray-900">{project.completionDate}</span>
                       </div>
