@@ -1064,74 +1064,134 @@ export default function ProjectProfile() {
                     </div>
                   )}
                   
-                  {/* Project Details Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                    {/* Basic Information */}
-                    <div className="space-y-4">
-                      <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
-                        <FileText className="w-5 h-5 mr-3 text-gray-600" />
-                        Basic Information
-                      </h4>
-                      <div className="flex justify-between items-center py-2">
-                        <span className="text-gray-600 font-medium">Status:</span>
+                  {/* Basic Information - Single Row */}
+                  <div className="mb-12">
+                    <h4 className="font-semibold text-gray-900 mb-6 flex items-center">
+                      <FileText className="w-5 h-5 mr-3 text-gray-600" />
+                      Basic Information
+                    </h4>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+                      <div className="flex flex-col space-y-2">
+                        <span className="text-gray-600 font-medium text-sm">Status</span>
                         <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
                       </div>
-                      <div className="flex justify-between items-center py-2">
-                        <span className="text-gray-600 font-medium">Sector:</span>
+                      <div className="flex flex-col space-y-2">
+                        <span className="text-gray-600 font-medium text-sm">Sector</span>
                         <Badge variant="outline">{project.sector}</Badge>
                       </div>
                       {project.subsector && (
-                        <div className="flex justify-between items-center py-2">
-                          <span className="text-gray-600 font-medium">Subsector:</span>
+                        <div className="flex flex-col space-y-2">
+                          <span className="text-gray-600 font-medium text-sm">Subsector</span>
                           <span className="font-semibold text-gray-900">{project.subsector}</span>
                         </div>
                       )}
-                      <div className="flex justify-between items-center py-2">
-                        <span className="text-gray-600 font-medium">Project Type:</span>
+                      <div className="flex flex-col space-y-2">
+                        <span className="text-gray-600 font-medium text-sm">Project Type</span>
                         <span className="font-semibold text-gray-900">{project.projectType}</span>
                       </div>
                       {project.contractType && (
-                        <div className="flex justify-between items-center py-2">
-                          <span className="text-gray-600 font-medium">Contract Type:</span>
+                        <div className="flex flex-col space-y-2">
+                          <span className="text-gray-600 font-medium text-sm">Contract Type</span>
                           <span className="font-semibold text-gray-900">{project.contractType}</span>
                         </div>
                       )}
-                      <div className="flex justify-between items-center py-2">
-                        <span className="text-gray-600 font-medium">Completion Date:</span>
+                      <div className="flex flex-col space-y-2">
+                        <span className="text-gray-600 font-medium text-sm">Completion Date</span>
                         <span className="font-semibold text-gray-900">{project.completionDate}</span>
                       </div>
                     </div>
-                    
+                  </div>
+                  
+                  {/* Location & Scale with Map */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
                     {/* Location & Scale */}
-                    <div className="space-y-4">
-                      <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                    <div className="space-y-6">
+                      <h4 className="font-semibold text-gray-900 mb-6 flex items-center">
                         <MapPin className="w-5 h-5 mr-3 text-red-500" />
                         Location & Scale
                       </h4>
-                      <div className="flex justify-between items-center py-2">
-                        <span className="text-gray-600 font-medium">Country:</span>
-                        <span className="font-semibold text-gray-900">{project.country}</span>
-                      </div>
-                      <div className="flex justify-between items-center py-2">
-                        <span className="text-gray-600 font-medium">City:</span>
-                        <span className="font-semibold text-gray-900">{project.city}</span>
-                      </div>
-                      <div className="flex justify-between items-center py-2">
-                        <span className="text-gray-600 font-medium">District:</span>
-                        <span className="font-semibold text-gray-900">{project.district}</span>
-                      </div>
-                      {project.capacity && (
-                        <div className="flex justify-between items-center py-2">
-                          <span className="text-gray-600 font-medium">Capacity:</span>
-                          <span className="font-semibold text-gray-900">{project.capacity}</span>
+                      <div className="space-y-6">
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-600 font-medium" style={{ minWidth: '5cm' }}>Country:</span>
+                          <span className="font-semibold text-gray-900">{project.country}</span>
                         </div>
-                      )}
-                      {project.value && (
-                        <div className="flex justify-between items-center py-2">
-                          <span className="text-gray-600 font-medium">Total Value:</span>
-                          <span className="font-semibold text-green-600">{project.value}</span>
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-600 font-medium" style={{ minWidth: '5cm' }}>City:</span>
+                          <span className="font-semibold text-gray-900">{project.city}</span>
                         </div>
-                      )}
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-600 font-medium" style={{ minWidth: '5cm' }}>District:</span>
+                          <span className="font-semibold text-gray-900">{project.district}</span>
+                        </div>
+                        {project.capacity && (
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-600 font-medium" style={{ minWidth: '5cm' }}>Capacity:</span>
+                            <span className="font-semibold text-gray-900">{project.capacity}</span>
+                          </div>
+                        )}
+                        {project.value && (
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-600 font-medium" style={{ minWidth: '5cm' }}>Total Value:</span>
+                            <span className="font-semibold text-green-600">{project.value}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    
+                    {/* Satellite Map View */}
+                    <div className="space-y-6">
+                      <h4 className="font-semibold text-gray-900 mb-6 flex items-center">
+                        <svg className="w-5 h-5 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                        </svg>
+                        Satellite View
+                      </h4>
+                      <div className="bg-gray-100 rounded-xl border-2 border-gray-200 overflow-hidden shadow-sm">
+                        <div className="relative h-80 bg-gradient-to-br from-green-100 via-green-200 to-blue-200">
+                          {/* Simulated satellite view */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-green-300/20 to-blue-300/30"></div>
+                          
+                          {/* Map overlay elements */}
+                          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-2 rounded-lg shadow-sm">
+                            <p className="text-sm font-medium text-gray-800">{project.city}, {project.country}</p>
+                          </div>
+                          
+                          {/* Project location marker */}
+                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                            <div className="w-6 h-6 bg-red-500 rounded-full border-4 border-white shadow-lg animate-pulse"></div>
+                          </div>
+                          
+                          {/* Zoom controls */}
+                          <div className="absolute top-4 right-4 flex flex-col bg-white/90 backdrop-blur rounded-lg shadow-sm">
+                            <button className="p-2 hover:bg-gray-100 rounded-t-lg">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                              </svg>
+                            </button>
+                            <div className="border-t border-gray-200"></div>
+                            <button className="p-2 hover:bg-gray-100 rounded-b-lg">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 12H6" />
+                              </svg>
+                            </button>
+                          </div>
+                          
+                          {/* Scale indicator */}
+                          <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-2 rounded-lg shadow-sm">
+                            <div className="flex items-center space-x-2">
+                              <div className="w-12 h-1 bg-gray-800"></div>
+                              <span className="text-xs font-medium text-gray-800">1 km</span>
+                            </div>
+                          </div>
+                          
+                          {/* Map type toggle */}
+                          <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-3 py-2 rounded-lg shadow-sm">
+                            <button className="text-xs font-medium text-gray-800 hover:text-gray-600">
+                              Satellite
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   
