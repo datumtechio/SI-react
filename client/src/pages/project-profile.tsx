@@ -2008,35 +2008,30 @@ export default function ProjectProfile() {
                         </div>
                       </div>
                     </div>
+
+                    {/* Permits & Approvals - Under Project Details */}
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                        <Shield className="w-5 h-5 mr-3 text-green-600" />
+                        Permits & Approvals
+                      </h4>
+                      <div className="space-y-3">
+                        {project.permits.map((permit, index) => (
+                          <div key={index} className="flex items-center py-1">
+                            <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
+                            <span className="text-sm text-gray-700 font-medium">
+                              {permit}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Permits & Approvals - Moved to end */}
-            <div className="grid grid-cols-1 lg:grid-cols-1 gap-8">
-              {/* Permits & Approvals */}
-              <Card className="shadow-sm hover:shadow-md transition-shadow duration-200">
-                <CardHeader className="pb-6">
-                  <CardTitle className="text-xl font-semibold text-gray-900 flex items-center">
-                    <Shield className="w-5 h-5 mr-3 text-green-600" />
-                    Permits & Approvals
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="space-y-3">
-                    {project.permits.map((permit, index) => (
-                      <div key={index} className="flex items-center py-1">
-                        <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                        <span className="text-sm text-gray-700 font-medium">
-                          {permit}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+
           </TabsContent>
 
           {/* Financials Tab */}
