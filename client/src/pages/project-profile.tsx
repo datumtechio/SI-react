@@ -1715,33 +1715,37 @@ export default function ProjectProfile() {
                       Basic Information
                     </h4>
                     <div className="space-y-4">
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center">
                         <span className="text-gray-600 font-medium w-32">Status:</span>
-                        <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
+                        <div className="ml-8">
+                          <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
+                        </div>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center">
                         <span className="text-gray-600 font-medium w-32">Sector:</span>
-                        <Badge variant="outline">{project.sector}</Badge>
+                        <div className="ml-8">
+                          <Badge variant="outline">{project.sector}</Badge>
+                        </div>
                       </div>
                       {project.subsector && (
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center">
                           <span className="text-gray-600 font-medium w-32">Subsector:</span>
-                          <span className="font-semibold text-gray-900">{project.subsector}</span>
+                          <span className="font-semibold text-gray-900 ml-8">{project.subsector}</span>
                         </div>
                       )}
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center">
                         <span className="text-gray-600 font-medium w-32">Project Type:</span>
-                        <span className="font-semibold text-gray-900">{project.projectType}</span>
+                        <span className="font-semibold text-gray-900 ml-8">{project.projectType}</span>
                       </div>
                       {project.contractType && (
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center">
                           <span className="text-gray-600 font-medium w-32">Contract Type:</span>
-                          <span className="font-semibold text-gray-900">{project.contractType}</span>
+                          <span className="font-semibold text-gray-900 ml-8">{project.contractType}</span>
                         </div>
                       )}
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center">
                         <span className="text-gray-600 font-medium w-32">Completion Date:</span>
-                        <span className="font-semibold text-gray-900">{project.completionDate}</span>
+                        <span className="font-semibold text-gray-900 ml-8">{project.completionDate}</span>
                       </div>
                     </div>
                   </div>
