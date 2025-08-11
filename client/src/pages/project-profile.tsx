@@ -1707,35 +1707,35 @@ export default function ProjectProfile() {
                         Related Companies
                       </h4>
                       <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-4">
                           {project.owner && (
-                            <div className="flex items-center">
-                              <span className="text-gray-600 font-medium w-24 flex-shrink-0">Owner:</span>
-                              <span className="font-semibold text-gray-900 ml-3">{project.owner}</span>
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-600 font-medium">Owner:</span>
+                              <span className="font-semibold text-gray-900">{project.owner}</span>
                             </div>
                           )}
                           {project.developer && (
-                            <div className="flex items-center">
-                              <span className="text-gray-600 font-medium w-24 flex-shrink-0">Developer:</span>
-                              <span className="font-semibold text-gray-900 ml-3">{project.developer}</span>
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-600 font-medium">Developer:</span>
+                              <span className="font-semibold text-gray-900">{project.developer}</span>
                             </div>
                           )}
                           {project.contractor && (
-                            <div className="flex items-center">
-                              <span className="text-gray-600 font-medium w-24 flex-shrink-0">Contractor:</span>
-                              <span className="font-semibold text-gray-900 ml-3">{project.contractor}</span>
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-600 font-medium">Contractor:</span>
+                              <span className="font-semibold text-gray-900">{project.contractor}</span>
                             </div>
                           )}
                           {project.consultant && (
-                            <div className="flex items-center">
-                              <span className="text-gray-600 font-medium w-24 flex-shrink-0">Consultant:</span>
-                              <span className="font-semibold text-gray-900 ml-3">{project.consultant}</span>
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-600 font-medium">Consultant:</span>
+                              <span className="font-semibold text-gray-900">{project.consultant}</span>
                             </div>
                           )}
                           {project.supplier && (
-                            <div className="flex items-center">
-                              <span className="text-gray-600 font-medium w-24 flex-shrink-0">Supplier:</span>
-                              <span className="font-semibold text-gray-900 ml-3">{project.supplier}</span>
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-600 font-medium">Supplier:</span>
+                              <span className="font-semibold text-gray-900">{project.supplier}</span>
                             </div>
                           )}
                         </div>
