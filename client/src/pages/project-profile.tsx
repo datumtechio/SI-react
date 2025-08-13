@@ -1827,31 +1827,33 @@ export default function ProjectProfile() {
                         <MapPin className="w-5 h-5 mr-3 text-red-500" />
                         Location & Scale
                       </h4>
-                      <div className="space-y-4">
-                        <div className="flex items-start">
-                          <span className="text-gray-600 font-medium w-24 flex-shrink-0">Country:</span>
-                          <span className="font-semibold text-gray-900 ml-2">{project.country}</span>
-                        </div>
-                        <div className="flex items-center">
-                          <span className="text-gray-600 font-medium w-24 flex-shrink-0">City:</span>
-                          <span className="font-semibold text-gray-900 ml-2">{project.city}</span>
-                        </div>
-                        <div className="flex items-center">
-                          <span className="text-gray-600 font-medium w-24 flex-shrink-0">District:</span>
-                          <span className="font-semibold text-gray-900 ml-2">{project.district}</span>
-                        </div>
-                        {project.capacity && (
-                          <div className="flex items-center">
-                            <span className="text-gray-600 font-medium w-24 flex-shrink-0">Capacity:</span>
-                            <span className="font-semibold text-gray-900 ml-2">{project.capacity}</span>
+                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <div className="space-y-4">
+                          <div className="flex items-start">
+                            <span className="text-gray-600 font-medium w-24 flex-shrink-0">Country:</span>
+                            <span className="font-semibold text-gray-900 ml-2">{project.country}</span>
                           </div>
-                        )}
-                        {project.value && (
                           <div className="flex items-center">
-                            <span className="text-gray-600 font-medium w-24 flex-shrink-0">Total Value:</span>
-                            <span className="font-semibold text-green-600 ml-2">{project.value}</span>
+                            <span className="text-gray-600 font-medium w-24 flex-shrink-0">City:</span>
+                            <span className="font-semibold text-gray-900 ml-2">{project.city}</span>
                           </div>
-                        )}
+                          <div className="flex items-center">
+                            <span className="text-gray-600 font-medium w-24 flex-shrink-0">District:</span>
+                            <span className="font-semibold text-gray-900 ml-2">{project.district}</span>
+                          </div>
+                          {project.capacity && (
+                            <div className="flex items-center">
+                              <span className="text-gray-600 font-medium w-24 flex-shrink-0">Capacity:</span>
+                              <span className="font-semibold text-gray-900 ml-2">{project.capacity}</span>
+                            </div>
+                          )}
+                          {project.value && (
+                            <div className="flex items-center">
+                              <span className="text-gray-600 font-medium w-24 flex-shrink-0">Total Value:</span>
+                              <span className="font-semibold text-green-600 ml-2">{project.value}</span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
 
@@ -1935,16 +1937,18 @@ export default function ProjectProfile() {
                         <Zap className="w-5 h-5 mr-3 text-yellow-500" />
                         Key Features
                       </h4>
-                      <div className="flex flex-wrap gap-3">
-                        {project.features.map((feature, index) => (
-                          <Badge
-                            key={index}
-                            variant="secondary"
-                            className="text-sm px-3 py-1"
-                          >
-                            {feature}
-                          </Badge>
-                        ))}
+                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <div className="flex flex-wrap gap-3">
+                          {project.features.map((feature, index) => (
+                            <Badge
+                              key={index}
+                              variant="secondary"
+                              className="text-sm px-3 py-1"
+                            >
+                              {feature}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
                     </div>
                     <div>
@@ -1952,16 +1956,18 @@ export default function ProjectProfile() {
                         <Star className="w-5 h-5 mr-3 text-purple-500" />
                         Amenities
                       </h4>
-                      <div className="flex flex-wrap gap-3">
-                        {project.amenities.map((amenity, index) => (
-                          <Badge
-                            key={index}
-                            variant="outline"
-                            className="text-sm px-3 py-1"
-                          >
-                            {amenity}
-                          </Badge>
-                        ))}
+                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <div className="flex flex-wrap gap-3">
+                          {project.amenities.map((amenity, index) => (
+                            <Badge
+                              key={index}
+                              variant="outline"
+                              className="text-sm px-3 py-1"
+                            >
+                              {amenity}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
                     </div>
 
@@ -1974,34 +1980,36 @@ export default function ProjectProfile() {
                           <Home className="w-5 h-5 mr-3 text-green-600" />
                           Residential Details
                         </h4>
-                        <div className="space-y-3">
-                          {project.residentialType && (
-                            <div className="flex items-center py-2">
-                              <span className="text-gray-600 font-medium w-20">Type:</span>
-                              <span className="font-semibold text-gray-900">{project.residentialType}</span>
-                            </div>
-                          )}
-                          {project.residentialClass && (
-                            <div className="flex items-center py-2">
-                              <span className="text-gray-600 font-medium w-20">Class:</span>
-                              <span className="font-semibold text-gray-900">{project.residentialClass}</span>
-                            </div>
-                          )}
-                          {project.rating && (
-                            <div className="flex items-center py-2">
-                              <span className="text-gray-600 font-medium w-20">Rating:</span>
-                              <span className="font-semibold text-gray-900 flex items-center">
-                                <Star className="w-4 h-4 mr-2 text-yellow-500" />
-                                {project.rating}
-                              </span>
-                            </div>
-                          )}
-                          {project.category && (
-                            <div className="flex items-center py-2">
-                              <span className="text-gray-600 font-medium w-20">Category:</span>
-                              <span className="font-semibold text-gray-900">{project.category}</span>
-                            </div>
-                          )}
+                        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                          <div className="space-y-3">
+                            {project.residentialType && (
+                              <div className="flex items-center py-2">
+                                <span className="text-gray-600 font-medium w-20">Type:</span>
+                                <span className="font-semibold text-gray-900">{project.residentialType}</span>
+                              </div>
+                            )}
+                            {project.residentialClass && (
+                              <div className="flex items-center py-2">
+                                <span className="text-gray-600 font-medium w-20">Class:</span>
+                                <span className="font-semibold text-gray-900">{project.residentialClass}</span>
+                              </div>
+                            )}
+                            {project.rating && (
+                              <div className="flex items-center py-2">
+                                <span className="text-gray-600 font-medium w-20">Rating:</span>
+                                <span className="font-semibold text-gray-900 flex items-center">
+                                  <Star className="w-4 h-4 mr-2 text-yellow-500" />
+                                  {project.rating}
+                                </span>
+                              </div>
+                            )}
+                            {project.category && (
+                              <div className="flex items-center py-2">
+                                <span className="text-gray-600 font-medium w-20">Category:</span>
+                                <span className="font-semibold text-gray-900">{project.category}</span>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     )}
@@ -2012,18 +2020,20 @@ export default function ProjectProfile() {
                         <Building className="w-5 h-5 mr-3 text-gray-600" />
                         Project Details
                       </h4>
-                      <div className="space-y-3">
-                        <div className="flex items-center py-2">
-                          <span className="text-gray-600 font-medium w-24">Total Units:</span>
-                          <span className="font-semibold text-gray-900">{project.totalUnits}</span>
-                        </div>
-                        <div className="flex items-center py-2">
-                          <span className="text-gray-600 font-medium w-24">Built-up Area:</span>
-                          <span className="font-semibold text-gray-900">{project.builtUpArea}</span>
-                        </div>
-                        <div className="flex items-center py-2">
-                          <span className="text-gray-600 font-medium w-24">Floors:</span>
-                          <span className="font-semibold text-gray-900">{project.floors}</span>
+                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <div className="space-y-3">
+                          <div className="flex items-center py-2">
+                            <span className="text-gray-600 font-medium w-24">Total Units:</span>
+                            <span className="font-semibold text-gray-900">{project.totalUnits}</span>
+                          </div>
+                          <div className="flex items-center py-2">
+                            <span className="text-gray-600 font-medium w-24">Built-up Area:</span>
+                            <span className="font-semibold text-gray-900">{project.builtUpArea}</span>
+                          </div>
+                          <div className="flex items-center py-2">
+                            <span className="text-gray-600 font-medium w-24">Floors:</span>
+                            <span className="font-semibold text-gray-900">{project.floors}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -2034,15 +2044,17 @@ export default function ProjectProfile() {
                         <Shield className="w-5 h-5 mr-3 text-green-600" />
                         Permits & Approvals
                       </h4>
-                      <div className="space-y-3">
-                        {project.permits.map((permit, index) => (
-                          <div key={index} className="flex items-center py-1">
-                            <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                            <span className="text-sm text-gray-700 font-medium">
-                              {permit}
-                            </span>
-                          </div>
-                        ))}
+                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <div className="space-y-3">
+                          {project.permits.map((permit, index) => (
+                            <div key={index} className="flex items-center py-1">
+                              <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
+                              <span className="text-sm text-gray-700 font-medium">
+                                {permit}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
