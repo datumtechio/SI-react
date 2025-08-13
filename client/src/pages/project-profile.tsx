@@ -1761,7 +1761,7 @@ export default function ProjectProfile() {
                         <Building className="w-5 h-5 mr-3 text-blue-600" />
                         Project Owner
                       </h4>
-                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                      <div className="bg-gray-50 border-l-4 border-l-[#00a7b2] border border-gray-200 rounded-lg p-6">
                         <div className="flex items-center justify-between">
                           <span className="text-gray-600 font-medium">Owner:</span>
                           <span className="font-semibold text-gray-900">{project.owner}</span>
@@ -1786,7 +1786,7 @@ export default function ProjectProfile() {
                         <Briefcase className="w-5 h-5 mr-3 text-blue-600" />
                         Related Companies
                       </h4>
-                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                      <div className="bg-gray-50 border-l-4 border-l-[#00a7b2] border border-gray-200 rounded-lg p-6">
                         <div className="space-y-4">
                           {project.developer && (
                             <div className="flex items-center justify-between">
@@ -1964,7 +1964,7 @@ export default function ProjectProfile() {
                     </div>
 
                     {/* Combined Project & Residential Details */}
-                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                    <div className="bg-gray-50 border-l-4 border-l-[#00a7b2] border border-gray-200 rounded-lg p-6">
                       <h4 className="font-semibold text-gray-900 mb-6 flex items-center">
                         <Building className="w-5 h-5 mr-3 text-gray-600" />
                         Project Details
