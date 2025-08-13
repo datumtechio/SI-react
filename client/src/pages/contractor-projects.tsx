@@ -241,8 +241,8 @@ export default function ContractorProjects() {
                 Back to Dashboard
               </Button>
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center">
-                  <HardHat className="w-6 h-6 text-cyan-600" />
+                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                  <HardHat className="w-6 h-6 text-orange-600" />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">Project Results</h1>
@@ -351,8 +351,8 @@ export default function ContractorProjects() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <div className="p-2 bg-cyan-100 rounded-lg">
-                  <DollarSign className="w-6 h-6 text-cyan-600" />
+                <div className="p-2 bg-orange-100 rounded-lg">
+                  <DollarSign className="w-6 h-6 text-orange-600" />
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600">Total Value</p>
@@ -486,7 +486,7 @@ export default function ContractorProjects() {
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex-1">
                         <h3 
-                          className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-cyan-600 transition-colors mb-1"
+                          className="text-lg font-semibold text-gray-900 line-clamp-1 cursor-pointer hover:text-orange-600 transition-colors mb-1"
                           onClick={() => {
                             sessionStorage.setItem('previousPage', window.location.pathname);
                             setLocation(`/project/${project.id}`);
@@ -523,7 +523,7 @@ export default function ContractorProjects() {
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 uppercase tracking-wide">Ongoing Projects</p>
-                        <p className="font-medium text-cyan-600">{ongoingProjects} Active</p>
+                        <p className="font-medium text-orange-600">{ongoingProjects} Active</p>
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 uppercase tracking-wide">Completed</p>
@@ -586,10 +586,10 @@ export default function ContractorProjects() {
                       >
                         View Full Profile
                       </Button>
-                      <Button variant="outline" size="sm" className="border-cyan-200 text-cyan-700 hover:bg-cyan-50">
+                      <Button variant="outline" size="sm" className="border-orange-200 text-orange-700 hover:bg-orange-50">
                         Compare
                       </Button>
-                      <Button variant="outline" size="sm" className="border-cyan-200 text-cyan-700 hover:bg-cyan-50">
+                      <Button variant="outline" size="sm" className="border-orange-200 text-orange-700 hover:bg-orange-50">
                         Save
                       </Button>
                     </div>
