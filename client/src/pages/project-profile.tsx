@@ -1722,36 +1722,34 @@ export default function ProjectProfile() {
                       <FileText className="w-5 h-5 mr-3 text-gray-600" />
                       Basic Information
                     </h4>
-                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                      <div className="space-y-4">
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-600 font-medium">Status:</span>
+                        <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-600 font-medium">Sector:</span>
+                        <Badge variant="outline">{project.sector}</Badge>
+                      </div>
+                      {project.subsector && (
                         <div className="flex items-center justify-between">
-                          <span className="text-gray-600 font-medium">Status:</span>
-                          <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
+                          <span className="text-gray-600 font-medium">Subsector:</span>
+                          <span className="font-semibold text-gray-900">{project.subsector}</span>
                         </div>
+                      )}
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-600 font-medium">Project Type:</span>
+                        <span className="font-semibold text-gray-900">{project.projectType}</span>
+                      </div>
+                      {project.contractType && (
                         <div className="flex items-center justify-between">
-                          <span className="text-gray-600 font-medium">Sector:</span>
-                          <Badge variant="outline">{project.sector}</Badge>
+                          <span className="text-gray-600 font-medium">Contract Type:</span>
+                          <span className="font-semibold text-gray-900">{project.contractType}</span>
                         </div>
-                        {project.subsector && (
-                          <div className="flex items-center justify-between">
-                            <span className="text-gray-600 font-medium">Subsector:</span>
-                            <span className="font-semibold text-gray-900">{project.subsector}</span>
-                          </div>
-                        )}
-                        <div className="flex items-center justify-between">
-                          <span className="text-gray-600 font-medium">Project Type:</span>
-                          <span className="font-semibold text-gray-900">{project.projectType}</span>
-                        </div>
-                        {project.contractType && (
-                          <div className="flex items-center justify-between">
-                            <span className="text-gray-600 font-medium">Contract Type:</span>
-                            <span className="font-semibold text-gray-900">{project.contractType}</span>
-                          </div>
-                        )}
-                        <div className="flex items-center justify-between">
-                          <span className="text-gray-600 font-medium">Completion Date:</span>
-                          <span className="font-semibold text-gray-900">{project.completionDate}</span>
-                        </div>
+                      )}
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-600 font-medium">Completion Date:</span>
+                        <span className="font-semibold text-gray-900">{project.completionDate}</span>
                       </div>
                     </div>
                   </div>
@@ -1827,33 +1825,31 @@ export default function ProjectProfile() {
                         <MapPin className="w-5 h-5 mr-3 text-red-500" />
                         Location & Scale
                       </h4>
-                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                        <div className="space-y-4">
-                          <div className="flex items-start">
-                            <span className="text-gray-600 font-medium w-24 flex-shrink-0">Country:</span>
-                            <span className="font-semibold text-gray-900 ml-2">{project.country}</span>
-                          </div>
-                          <div className="flex items-center">
-                            <span className="text-gray-600 font-medium w-24 flex-shrink-0">City:</span>
-                            <span className="font-semibold text-gray-900 ml-2">{project.city}</span>
-                          </div>
-                          <div className="flex items-center">
-                            <span className="text-gray-600 font-medium w-24 flex-shrink-0">District:</span>
-                            <span className="font-semibold text-gray-900 ml-2">{project.district}</span>
-                          </div>
-                          {project.capacity && (
-                            <div className="flex items-center">
-                              <span className="text-gray-600 font-medium w-24 flex-shrink-0">Capacity:</span>
-                              <span className="font-semibold text-gray-900 ml-2">{project.capacity}</span>
-                            </div>
-                          )}
-                          {project.value && (
-                            <div className="flex items-center">
-                              <span className="text-gray-600 font-medium w-24 flex-shrink-0">Total Value:</span>
-                              <span className="font-semibold text-green-600 ml-2">{project.value}</span>
-                            </div>
-                          )}
+                      <div className="space-y-4">
+                        <div className="flex items-start">
+                          <span className="text-gray-600 font-medium w-24 flex-shrink-0">Country:</span>
+                          <span className="font-semibold text-gray-900 ml-2">{project.country}</span>
                         </div>
+                        <div className="flex items-center">
+                          <span className="text-gray-600 font-medium w-24 flex-shrink-0">City:</span>
+                          <span className="font-semibold text-gray-900 ml-2">{project.city}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <span className="text-gray-600 font-medium w-24 flex-shrink-0">District:</span>
+                          <span className="font-semibold text-gray-900 ml-2">{project.district}</span>
+                        </div>
+                        {project.capacity && (
+                          <div className="flex items-center">
+                            <span className="text-gray-600 font-medium w-24 flex-shrink-0">Capacity:</span>
+                            <span className="font-semibold text-gray-900 ml-2">{project.capacity}</span>
+                          </div>
+                        )}
+                        {project.value && (
+                          <div className="flex items-center">
+                            <span className="text-gray-600 font-medium w-24 flex-shrink-0">Total Value:</span>
+                            <span className="font-semibold text-green-600 ml-2">{project.value}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -1937,18 +1933,16 @@ export default function ProjectProfile() {
                         <Zap className="w-5 h-5 mr-3 text-yellow-500" />
                         Key Features
                       </h4>
-                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                        <div className="flex flex-wrap gap-3">
-                          {project.features.map((feature, index) => (
-                            <Badge
-                              key={index}
-                              variant="secondary"
-                              className="text-sm px-3 py-1"
-                            >
-                              {feature}
-                            </Badge>
-                          ))}
-                        </div>
+                      <div className="flex flex-wrap gap-3">
+                        {project.features.map((feature, index) => (
+                          <Badge
+                            key={index}
+                            variant="secondary"
+                            className="text-sm px-3 py-1"
+                          >
+                            {feature}
+                          </Badge>
+                        ))}
                       </div>
                     </div>
                     <div>
@@ -1956,18 +1950,16 @@ export default function ProjectProfile() {
                         <Star className="w-5 h-5 mr-3 text-purple-500" />
                         Amenities
                       </h4>
-                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                        <div className="flex flex-wrap gap-3">
-                          {project.amenities.map((amenity, index) => (
-                            <Badge
-                              key={index}
-                              variant="outline"
-                              className="text-sm px-3 py-1"
-                            >
-                              {amenity}
-                            </Badge>
-                          ))}
-                        </div>
+                      <div className="flex flex-wrap gap-3">
+                        {project.amenities.map((amenity, index) => (
+                          <Badge
+                            key={index}
+                            variant="outline"
+                            className="text-sm px-3 py-1"
+                          >
+                            {amenity}
+                          </Badge>
+                        ))}
                       </div>
                     </div>
 
@@ -2044,17 +2036,15 @@ export default function ProjectProfile() {
                         <Shield className="w-5 h-5 mr-3 text-green-600" />
                         Permits & Approvals
                       </h4>
-                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                        <div className="space-y-3">
-                          {project.permits.map((permit, index) => (
-                            <div key={index} className="flex items-center py-1">
-                              <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                              <span className="text-sm text-gray-700 font-medium">
-                                {permit}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
+                      <div className="space-y-3">
+                        {project.permits.map((permit, index) => (
+                          <div key={index} className="flex items-center py-1">
+                            <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
+                            <span className="text-sm text-gray-700 font-medium">
+                              {permit}
+                            </span>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
