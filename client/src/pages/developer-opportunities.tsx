@@ -447,7 +447,32 @@ export default function DeveloperOpportunities() {
                     <tbody>
                       {competitivePipeline.map((project, index) => (
                         <tr key={index} className="border-b hover:bg-gray-50">
-                          <td className="py-3 px-4 font-medium">{project.project}</td>
+                          <td className="py-3 px-4 font-medium">
+                            <button
+                              onClick={() => {
+                                // Map competitive projects to actual project IDs
+                                const projectMapping: Record<string, number> = {
+                                  "Dubai Marina Tower": 1,
+                                  "Azure Residences": 2,
+                                  "Business Bay Tower": 3,
+                                  "Al Maktoum Logistics Hub": 4,
+                                  "The Towers Complex": 1, // fallback to Dubai Marina Tower
+                                  "Marina Heights": 1, // fallback to Dubai Marina Tower
+                                  "Bay View Residences": 3, // fallback to Business Bay
+                                  "Al Barsha Gardens": 2, // fallback to Azure Residences
+                                  "Mohammed Bin Rashid City": 4, // fallback to Al Maktoum
+                                  "The Creek Harbour": 2, // fallback to Azure Residences
+                                };
+                                
+                                const projectId = projectMapping[project.project] || 1;
+                                sessionStorage.setItem('previousPage', window.location.pathname);
+                                setLocation(`/project/${projectId}`);
+                              }}
+                              className="text-left hover:text-purple-600 hover:underline transition-colors"
+                            >
+                              {project.project}
+                            </button>
+                          </td>
                           <td className="py-3 px-4">{project.developer}</td>
                           <td className="py-3 px-4">
                             <span className={`font-medium ${getStageColor(project.stage)}`}>

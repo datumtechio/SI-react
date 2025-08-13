@@ -1351,19 +1351,36 @@ export default function ProjectProfile() {
   }, [params?.id]);
 
   const handleBack = () => {
-    // Follow the navigation history: Results Page → Dashboard → Homepage
-    if (navigationHistory.length > 0) {
-      // Get the next page in the navigation sequence
-      const nextPage = navigationHistory[0];
-      setLocation(nextPage);
-    } else {
-      // Fallback: go to role-specific dashboard
-      const currentRole = localStorage.getItem("selectedRole");
-      const fallbackPage = currentRole
-        ? `/${currentRole}-dashboard`
-        : "/dashboard";
-      setLocation(fallbackPage);
+    // First, try to get the previous page from sessionStorage
+    const previousPage = sessionStorage.getItem("previousPage");
+    
+    if (previousPage && previousPage !== window.location.pathname) {
+      // Clear the previous page to avoid loops
+      sessionStorage.removeItem("previousPage");
+      setLocation(previousPage);
+      return;
     }
+
+    // Fallback: use role-specific navigation
+    const currentRole = localStorage.getItem("selectedRole");
+    if (currentRole) {
+      const roleSpecificPages = {
+        investor: "/investor-projects",
+        contractor: "/contractor-projects", 
+        consultant: "/consultant-analysis",
+        developer: "/developer-opportunities",
+        supplier: "/supplier-opportunities"
+      };
+      
+      const targetPage = roleSpecificPages[currentRole as keyof typeof roleSpecificPages];
+      if (targetPage) {
+        setLocation(targetPage);
+        return;
+      }
+    }
+
+    // Final fallback
+    setLocation("/");
   };
 
   const getRoleSpecificTabs = () => {
