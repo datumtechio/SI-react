@@ -480,7 +480,7 @@ export default function ContractorProjects() {
               const completedProjects = Math.floor(Math.random() * 15) + 5;
 
               return (
-                <Card key={project.id} className="hover:shadow-lg transition-shadow border-l-4 border-l-orange-500">
+                <Card key={project.id} className="hover:shadow-lg transition-shadow border-l-4 border-l-cyan-600">
                   <CardContent className="p-6">
                     {/* Header Section */}
                     <div className="flex justify-between items-start mb-4">
@@ -586,10 +586,10 @@ export default function ContractorProjects() {
                       >
                         View Full Profile
                       </Button>
-                      <Button variant="outline" size="sm" className="border-orange-200 text-orange-700 hover:bg-orange-50">
+                      <Button variant="outline" size="sm" className="border-cyan-200 text-cyan-700 hover:bg-cyan-50">
                         Compare
                       </Button>
-                      <Button variant="outline" size="sm" className="border-orange-200 text-orange-700 hover:bg-orange-50">
+                      <Button variant="outline" size="sm" className="border-cyan-200 text-cyan-700 hover:bg-cyan-50">
                         Save
                       </Button>
                     </div>
