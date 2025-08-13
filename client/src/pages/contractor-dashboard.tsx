@@ -132,8 +132,8 @@ export default function ContractorDashboard() {
               >
                 ← Back to Role Selection
               </Button>
-              <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-                <HardHat className="w-6 h-6 text-orange-600" />
+              <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center">
+                <HardHat className="w-6 h-6 text-cyan-600" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-white">Contractor Dashboard</h1>
@@ -336,7 +336,7 @@ export default function ContractorDashboard() {
                 <label className="text-sm font-medium text-gray-700">&nbsp;</label>
                 <Button 
                   onClick={handleFindProjects}
-                  className="w-full h-10 bg-orange-600 hover:bg-orange-700"
+                  className="w-full h-10 bg-cyan-600 hover:bg-cyan-700"
                 >
                   <Search className="w-4 h-4 mr-2" />
                   Find Projects
@@ -349,7 +349,7 @@ export default function ContractorDashboard() {
         {/* Information Section */}
         <Card>
           <CardContent className="p-8 text-center">
-            <HardHat className="w-16 h-16 text-orange-600 mx-auto mb-4" />
+            <HardHat className="w-16 h-16 text-cyan-600 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Ready to Find Projects?</h3>
             <p className="text-gray-600 mb-6">
               Use the filters above to search for construction projects and bidding opportunities. 
@@ -357,15 +357,15 @@ export default function ContractorDashboard() {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                <div className="w-2 h-2 bg-cyan-600 rounded-full"></div>
                 <span>Dynamic project types based on sector</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                <div className="w-2 h-2 bg-cyan-600 rounded-full"></div>
                 <span>Location filtering with city and district</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                <div className="w-2 h-2 bg-cyan-600 rounded-full"></div>
                 <span>Contract value range filtering</span>
               </div>
             </div>
