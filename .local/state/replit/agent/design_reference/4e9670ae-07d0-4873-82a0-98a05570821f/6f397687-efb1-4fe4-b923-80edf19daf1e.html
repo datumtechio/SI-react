@@ -1,0 +1,943 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sector Intelligence - Professional Project Discovery Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563EB',
+                        secondary: '#64748B',
+                        investor: '#10B981',
+                        contractor: '#F59E0B',
+                        consultant: '#8B5CF6',
+                        developer: '#EF4444',
+                    },
+                    animation: {
+                        'slide-in': 'slideIn 0.3s ease-out',
+                        'fade-in': 'fadeIn 0.2s ease-out',
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        @keyframes slideIn {
+            from { transform: translateY(10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="font-inter bg-slate-50 text-slate-700">
+
+    <!-- @COMPONENT: PageNavigationTabs -->
+    <div class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-8 py-3">
+                <button onclick="showPage('role-selection')" class="page-tab active px-3 py-2 text-sm font-medium rounded-md transition-colors" data-page="role-selection">
+                    <i class="fas fa-user-circle mr-2"></i>Role Selection
+                </button>
+                <button onclick="showPage('search-filter')" class="page-tab px-3 py-2 text-sm font-medium rounded-md transition-colors" data-page="search-filter">
+                    <i class="fas fa-search mr-2"></i>Search & Filter
+                </button>
+                <button onclick="showPage('dashboard')" class="page-tab px-3 py-2 text-sm font-medium rounded-md transition-colors" data-page="dashboard">
+                    <i class="fas fa-chart-bar mr-2"></i>Dashboard
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: PageNavigationTabs -->
+
+    <!-- @COMPONENT: Page1RoleSelection -->
+    <div id="role-selection" class="page-content">
+        <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+            <!-- Header Section -->
+            <div class="pt-16 pb-12">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <div class="mb-8">
+                        <h1 class="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+                            <i class="fas fa-building text-primary mr-3"></i>
+                            Sector Intelligence
+                        </h1>
+                        <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+                            Professional project discovery and market intelligence platform for real estate and development professionals
+                        </p>
+                    </div>
+
+                    <!-- Role Selection Cards -->
+                    <!-- @FUNCTIONALITY: Role selection should store user preference and customize subsequent experiences -->
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+                        <!-- Investor Card -->
+                        <div class="role-card bg-white rounded-xl shadow-lg border-2 border-transparent hover:border-investor hover:shadow-xl transition-all duration-300 cursor-pointer" data-role="investor">
+                            <div class="p-8 text-center">
+                                <div class="w-16 h-16 bg-investor/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-chart-line text-2xl text-investor"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-slate-900 mb-2">Investor</h3>
+                                <p class="text-slate-600 text-sm mb-4">Discover investment opportunities and market trends</p>
+                                <ul class="text-xs text-slate-500 space-y-1">
+                                    <li>• ROI Analysis</li>
+                                    <li>• Market Comparisons</li>
+                                    <li>• Investment Reports</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Contractor Card -->
+                        <div class="role-card bg-white rounded-xl shadow-lg border-2 border-transparent hover:border-contractor hover:shadow-xl transition-all duration-300 cursor-pointer" data-role="contractor">
+                            <div class="p-8 text-center">
+                                <div class="w-16 h-16 bg-contractor/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-hard-hat text-2xl text-contractor"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-slate-900 mb-2">Contractor</h3>
+                                <p class="text-slate-600 text-sm mb-4">Find active projects and bidding opportunities</p>
+                                <ul class="text-xs text-slate-500 space-y-1">
+                                    <li>• Project Pipeline</li>
+                                    <li>• Tender Alerts</li>
+                                    <li>• Construction Timeline</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Consultant Card -->
+                        <div class="role-card bg-white rounded-xl shadow-lg border-2 border-transparent hover:border-consultant hover:shadow-xl transition-all duration-300 cursor-pointer" data-role="consultant">
+                            <div class="p-8 text-center">
+                                <div class="w-16 h-16 bg-consultant/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-lightbulb text-2xl text-consultant"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-slate-900 mb-2">Consultant</h3>
+                                <p class="text-slate-600 text-sm mb-4">Access market insights and advisory data</p>
+                                <ul class="text-xs text-slate-500 space-y-1">
+                                    <li>• Market Analysis</li>
+                                    <li>• Feasibility Studies</li>
+                                    <li>• Trend Reports</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Developer Card -->
+                        <div class="role-card bg-white rounded-xl shadow-lg border-2 border-transparent hover:border-developer hover:shadow-xl transition-all duration-300 cursor-pointer" data-role="developer">
+                            <div class="p-8 text-center">
+                                <div class="w-16 h-16 bg-developer/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-drafting-compass text-2xl text-developer"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-slate-900 mb-2">Developer</h3>
+                                <p class="text-slate-600 text-sm mb-4">Identify development sites and market gaps</p>
+                                <ul class="text-xs text-slate-500 space-y-1">
+                                    <li>• Site Analysis</li>
+                                    <li>• Zoning Data</li>
+                                    <li>• Competition Mapping</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Call to Action -->
+                    <div class="mt-12">
+                        <button id="continueBtn" class="bg-primary text-white px-8 py-3 rounded-lg font-medium text-lg hover:bg-blue-700 transition-colors duration-200 opacity-50 cursor-not-allowed" disabled>
+                            <i class="fas fa-arrow-right mr-2"></i>
+                            Select Your Role to Continue
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: Page1RoleSelection -->
+
+    <!-- @COMPONENT: Page2SearchFilter -->
+    <div id="search-filter" class="page-content hidden">
+        <div class="min-h-screen bg-slate-50">
+            <!-- Header -->
+            <div class="bg-white border-b border-slate-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 class="text-2xl font-bold text-slate-900">Project Discovery</h1>
+                            <p class="text-slate-600 mt-1">Find projects that match your specific criteria</p>
+                        </div>
+                        <div class="text-sm text-slate-500">
+                            <span data-bind="selectedRole" data-mock="true">Role: Investor</span>
+                        </div>
+                    </div>
+
+                    <!-- Persistent Header Filters -->
+                    <div class="mt-6 flex flex-wrap gap-4">
+                        <div class="min-w-0 flex-1 sm:max-w-xs">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Country</label>
+                            <select class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                                <option data-mock="true">United Arab Emirates</option>
+                                <option data-mock="true">Saudi Arabia</option>
+                                <option data-mock="true">Qatar</option>
+                                <option data-mock="true">Kuwait</option>
+                            </select>
+                        </div>
+                        <div class="min-w-0 flex-1 sm:max-w-xs">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Sector</label>
+                            <select class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                                <option data-mock="true">All Sectors</option>
+                                <option data-mock="true">Real Estate</option>
+                                <option data-mock="true">Hospitality</option>
+                                <option data-mock="true">Retail</option>
+                                <option data-mock="true">Mixed Use</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Search Filters -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
+                    <h2 class="text-lg font-semibold text-slate-900 mb-6">Advanced Search Criteria</h2>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Project Type -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Project Type</label>
+                            <select class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                                <option data-mock="true">All Types</option>
+                                <option data-mock="true">Residential</option>
+                                <option data-mock="true">Commercial</option>
+                                <option data-mock="true">Retail</option>
+                                <option data-mock="true">Office</option>
+                                <option data-mock="true">Mixed Use</option>
+                            </select>
+                        </div>
+
+                        <!-- Location -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">City</label>
+                            <select class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                                <option data-mock="true">All Cities</option>
+                                <option data-mock="true">Dubai</option>
+                                <option data-mock="true">Abu Dhabi</option>
+                                <option data-mock="true">Sharjah</option>
+                                <option data-mock="true">Riyadh</option>
+                            </select>
+                        </div>
+
+                        <!-- District -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">District</label>
+                            <select class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                                <option data-mock="true">All Districts</option>
+                                <option data-mock="true">Downtown Dubai</option>
+                                <option data-mock="true">Dubai Marina</option>
+                                <option data-mock="true">Business Bay</option>
+                                <option data-mock="true">DIFC</option>
+                            </select>
+                        </div>
+
+                        <!-- Project Status -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Project Status</label>
+                            <select class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                                <option data-mock="true">All Status</option>
+                                <option data-mock="true">Planning</option>
+                                <option data-mock="true">Under Construction</option>
+                                <option data-mock="true">Completed</option>
+                                <option data-mock="true">On Hold</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Additional Filters -->
+                    <div class="mt-6 grid md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Investment Range (USD)</label>
+                            <div class="flex space-x-2">
+                                <input type="text" placeholder="Min" class="flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" data-mock="true">
+                                <input type="text" placeholder="Max" class="flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" data-mock="true">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Project Size (sq ft)</label>
+                            <select class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                                <option data-mock="true">Any Size</option>
+                                <option data-mock="true">< 50,000</option>
+                                <option data-mock="true">50,000 - 200,000</option>
+                                <option data-mock="true">200,000 - 500,000</option>
+                                <option data-mock="true">500,000+</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Completion Timeline</label>
+                            <select class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                                <option data-mock="true">Any Timeline</option>
+                                <option data-mock="true">Within 1 Year</option>
+                                <option data-mock="true">1-2 Years</option>
+                                <option data-mock="true">2-5 Years</option>
+                                <option data-mock="true">5+ Years</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Search Button -->
+                    <div class="mt-8 flex justify-center">
+                        <button onclick="showPage('dashboard')" class="bg-primary text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200">
+                            <i class="fas fa-search mr-2"></i>
+                            Find Projects
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Filters -->
+                <div class="mt-6 bg-white rounded-lg shadow-sm border border-slate-200 p-6">
+                    <h3 class="text-md font-medium text-slate-900 mb-4">Quick Filters</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 cursor-pointer hover:bg-blue-200 transition-colors" data-mock="true">
+                            Luxury Residential
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 cursor-pointer hover:bg-green-200 transition-colors" data-mock="true">
+                            High ROI Projects
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 cursor-pointer hover:bg-purple-200 transition-colors" data-mock="true">
+                            Waterfront Properties
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800 cursor-pointer hover:bg-orange-200 transition-colors" data-mock="true">
+                            Off-Plan Projects
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 cursor-pointer hover:bg-red-200 transition-colors" data-mock="true">
+                            Ready to Move
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: Page2SearchFilter -->
+
+    <!-- @COMPONENT: Page3Dashboard -->
+    <div id="dashboard" class="page-content hidden">
+        <div class="min-h-screen bg-slate-50">
+            <div class="flex">
+                <!-- Sidebar Filters -->
+                <!-- @STATE: filtersOpen:boolean = true -->
+                <div class="w-80 bg-white border-r border-slate-200 fixed h-full overflow-y-auto">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-lg font-semibold text-slate-900">Filters</h2>
+                            <button class="text-slate-400 hover:text-slate-600">
+                                <i class="fas fa-filter"></i>
+                            </button>
+                        </div>
+
+                        <!-- Active Filters -->
+                        <div class="mb-6">
+                            <h3 class="text-sm font-medium text-slate-700 mb-3">Active Filters</h3>
+                            <div class="space-y-2">
+                                <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800" data-mock="true">
+                                    Dubai
+                                    <button class="ml-1 text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-times text-xs"></i>
+                                    </button>
+                                </span>
+                                <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-green-100 text-green-800" data-mock="true">
+                                    Real Estate
+                                    <button class="ml-1 text-green-600 hover:text-green-800">
+                                        <i class="fas fa-times text-xs"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Filter Sections -->
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-sm font-medium text-slate-700 mb-3">Project Type</h3>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="rounded border-slate-300 text-primary focus:ring-primary" data-mock="true">
+                                        <span class="ml-2 text-sm text-slate-600">Residential (24)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded border-slate-300 text-primary focus:ring-primary" data-mock="true">
+                                        <span class="ml-2 text-sm text-slate-600">Commercial (18)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="rounded border-slate-300 text-primary focus:ring-primary" data-mock="true">
+                                        <span class="ml-2 text-sm text-slate-600">Mixed Use (12)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="text-sm font-medium text-slate-700 mb-3">Investment Range</h3>
+                                <div class="px-2">
+                                    <div class="relative mb-4">
+                                        <input type="range" min="0" max="100" value="30" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider" data-mock="true">
+                                    </div>
+                                    <div class="flex justify-between text-xs text-slate-500">
+                                        <span data-mock="true">$1M</span>
+                                        <span data-mock="true">$100M+</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="text-sm font-medium text-slate-700 mb-3">Status</h3>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded border-slate-300 text-primary focus:ring-primary" data-mock="true">
+                                        <span class="ml-2 text-sm text-slate-600">Under Construction (15)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="rounded border-slate-300 text-primary focus:ring-primary" data-mock="true">
+                                        <span class="ml-2 text-sm text-slate-600">Planning (8)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="rounded border-slate-300 text-primary focus:ring-primary" data-mock="true">
+                                        <span class="ml-2 text-sm text-slate-600">Completed (21)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="flex-1 ml-80">
+                    <div class="p-6">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h1 class="text-2xl font-bold text-slate-900">Project Dashboard</h1>
+                                <p class="text-slate-600 mt-1">Found <span class="font-medium" data-bind="totalProjects" data-mock="true">147 projects</span> matching your criteria</p>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-sm text-slate-600">View:</span>
+                                    <button class="view-toggle active p-2 rounded border border-slate-300 hover:bg-slate-50" data-view="grid">
+                                        <i class="fas fa-th-large"></i>
+                                    </button>
+                                    <button class="view-toggle p-2 rounded border border-slate-300 hover:bg-slate-50" data-view="list">
+                                        <i class="fas fa-list"></i>
+                                    </button>
+                                </div>
+                                <select class="rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                                    <option data-mock="true">Sort by: Relevance</option>
+                                    <option data-mock="true">Investment Size</option>
+                                    <option data-mock="true">Completion Date</option>
+                                    <option data-mock="true">ROI Potential</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Market Opportunity Indicators -->
+                        <div class="grid lg:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-arrow-trend-up text-green-600"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-sm font-medium text-slate-900">High Opportunity</h3>
+                                        <p class="text-xs text-slate-600 mt-1">Retail gap in Business Bay</p>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex items-center text-xs text-green-600">
+                                        <span class="font-medium">+23%</span>
+                                        <span class="ml-1">demand vs supply</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-chart-line text-blue-600"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-sm font-medium text-slate-900">Market Trend</h3>
+                                        <p class="text-xs text-slate-600 mt-1">Mixed-use developments rising</p>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex items-center text-xs text-blue-600">
+                                        <span class="font-medium">+15%</span>
+                                        <span class="ml-1">new projects Q1</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-exclamation-triangle text-orange-600"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-sm font-medium text-slate-900">Market Alert</h3>
+                                        <p class="text-xs text-slate-600 mt-1">Oversupply in luxury segment</p>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex items-center text-xs text-orange-600">
+                                        <span class="font-medium">-8%</span>
+                                        <span class="ml-1">price adjustment</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Comparison Module -->
+                        <div class="bg-white rounded-lg shadow-sm border border-slate-200 mb-8">
+                            <div class="p-6 border-b border-slate-200">
+                                <div class="flex items-center justify-between">
+                                    <h2 class="text-lg font-semibold text-slate-900">Project Comparison</h2>
+                                    <button class="text-sm text-primary hover:text-blue-700">
+                                        <i class="fas fa-plus mr-1"></i>Add Project
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <!-- @FUNCTIONALITY: Comparison should allow side-by-side analysis of selected projects -->
+                                <div class="grid lg:grid-cols-2 gap-6">
+                                    <div class="border border-slate-200 rounded-lg p-4">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <h3 class="font-medium text-slate-900" data-mock="true">Marina Luxury Tower</h3>
+                                            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded" data-mock="true">Under Construction</span>
+                                        </div>
+                                        <div class="space-y-3 text-sm">
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-600">Investment:</span>
+                                                <span class="font-medium" data-mock="true">$45M</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-600">Expected ROI:</span>
+                                                <span class="font-medium text-green-600" data-mock="true">18.5%</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-600">Completion:</span>
+                                                <span class="font-medium" data-mock="true">Q2 2025</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-600">Size:</span>
+                                                <span class="font-medium" data-mock="true">850,000 sq ft</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="border border-slate-200 rounded-lg p-4">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <h3 class="font-medium text-slate-900" data-mock="true">Business Bay Hotel</h3>
+                                            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded" data-mock="true">Planning</span>
+                                        </div>
+                                        <div class="space-y-3 text-sm">
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-600">Investment:</span>
+                                                <span class="font-medium" data-mock="true">$62M</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-600">Expected ROI:</span>
+                                                <span class="font-medium text-green-600" data-mock="true">22.3%</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-600">Completion:</span>
+                                                <span class="font-medium" data-mock="true">Q4 2026</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-600">Size:</span>
+                                                <span class="font-medium" data-mock="true">1,200,000 sq ft</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Grid -->
+                        <!-- @MAP: projects.map(project => ( -->
+                        <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                            <!-- Project Card 1 -->
+                            <div class="bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow duration-200">
+                                <!-- Modern luxury residential tower with glass facade and city skyline -->
+                                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=240" alt="Modern luxury residential tower" class="w-full h-48 object-cover rounded-t-lg" data-mock-image="true">
+                                <div class="p-6">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h3 class="text-lg font-semibold text-slate-900" data-mock="true">Azure Residences</h3>
+                                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded" data-mock="true">Under Construction</span>
+                                    </div>
+                                    <div class="text-sm text-slate-600 mb-4">
+                                        <div class="flex items-center mb-1">
+                                            <i class="fas fa-map-marker-alt mr-2 text-slate-400"></i>
+                                            <span data-mock="true">Downtown Dubai</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-building mr-2 text-slate-400"></i>
+                                            <span data-mock="true">Residential • Luxury</span>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+                                        <div>
+                                            <span class="text-slate-500">Investment:</span>
+                                            <div class="font-semibold text-slate-900" data-mock="true">$28M</div>
+                                        </div>
+                                        <div>
+                                            <span class="text-slate-500">Expected ROI:</span>
+                                            <div class="font-semibold text-green-600" data-mock="true">16.2%</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-slate-500" data-mock="true">Completion: Q3 2025</span>
+                                        <div class="flex space-x-2">
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-share"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-info-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Project Card 2 -->
+                            <div class="bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow duration-200">
+                                <!-- Modern commercial office building with glass and steel architecture -->
+                                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=240" alt="Modern commercial office building" class="w-full h-48 object-cover rounded-t-lg" data-mock-image="true">
+                                <div class="p-6">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h3 class="text-lg font-semibold text-slate-900" data-mock="true">Tech Hub Central</h3>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded" data-mock="true">Planning</span>
+                                    </div>
+                                    <div class="text-sm text-slate-600 mb-4">
+                                        <div class="flex items-center mb-1">
+                                            <i class="fas fa-map-marker-alt mr-2 text-slate-400"></i>
+                                            <span data-mock="true">Business Bay</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-building mr-2 text-slate-400"></i>
+                                            <span data-mock="true">Commercial • Office</span>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+                                        <div>
+                                            <span class="text-slate-500">Investment:</span>
+                                            <div class="font-semibold text-slate-900" data-mock="true">$85M</div>
+                                        </div>
+                                        <div>
+                                            <span class="text-slate-500">Expected ROI:</span>
+                                            <div class="font-semibold text-green-600" data-mock="true">21.8%</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-slate-500" data-mock="true">Completion: Q1 2027</span>
+                                        <div class="flex space-x-2">
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-share"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-info-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Project Card 3 -->
+                            <div class="bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow duration-200">
+                                <!-- Luxury resort hotel with palm trees and beachfront setting -->
+                                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=240" alt="Luxury resort hotel with palm trees" class="w-full h-48 object-cover rounded-t-lg" data-mock-image="true">
+                                <div class="p-6">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h3 class="text-lg font-semibold text-slate-900" data-mock="true">Coastal Resort & Spa</h3>
+                                        <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded" data-mock="true">Completed</span>
+                                    </div>
+                                    <div class="text-sm text-slate-600 mb-4">
+                                        <div class="flex items-center mb-1">
+                                            <i class="fas fa-map-marker-alt mr-2 text-slate-400"></i>
+                                            <span data-mock="true">Jumeirah Beach</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-building mr-2 text-slate-400"></i>
+                                            <span data-mock="true">Hospitality • Resort</span>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+                                        <div>
+                                            <span class="text-slate-500">Investment:</span>
+                                            <div class="font-semibold text-slate-900" data-mock="true">$125M</div>
+                                        </div>
+                                        <div>
+                                            <span class="text-slate-500">Current ROI:</span>
+                                            <div class="font-semibold text-green-600" data-mock="true">14.6%</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-slate-500" data-mock="true">Completed: 2023</span>
+                                        <div class="flex space-x-2">
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-share"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-info-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Project Card 4 -->
+                            <div class="bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow duration-200">
+                                <!-- Modern shopping mall with glass ceiling and contemporary design -->
+                                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=240" alt="Modern shopping mall interior" class="w-full h-48 object-cover rounded-t-lg" data-mock-image="true">
+                                <div class="p-6">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h3 class="text-lg font-semibold text-slate-900" data-mock="true">Grand Shopping District</h3>
+                                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded" data-mock="true">Under Construction</span>
+                                    </div>
+                                    <div class="text-sm text-slate-600 mb-4">
+                                        <div class="flex items-center mb-1">
+                                            <i class="fas fa-map-marker-alt mr-2 text-slate-400"></i>
+                                            <span data-mock="true">Dubai Mall District</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-building mr-2 text-slate-400"></i>
+                                            <span data-mock="true">Retail • Mixed Use</span>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+                                        <div>
+                                            <span class="text-slate-500">Investment:</span>
+                                            <div class="font-semibold text-slate-900" data-mock="true">$95M</div>
+                                        </div>
+                                        <div>
+                                            <span class="text-slate-500">Expected ROI:</span>
+                                            <div class="font-semibold text-green-600" data-mock="true">19.4%</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-slate-500" data-mock="true">Completion: Q4 2025</span>
+                                        <div class="flex space-x-2">
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-share"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-info-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Project Card 5 -->
+                            <div class="bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow duration-200">
+                                <!-- Modern residential complex with green spaces and contemporary architecture -->
+                                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=240" alt="Modern residential complex with gardens" class="w-full h-48 object-cover rounded-t-lg" data-mock-image="true">
+                                <div class="p-6">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h3 class="text-lg font-semibold text-slate-900" data-mock="true">Green Valley Communities</h3>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded" data-mock="true">Planning</span>
+                                    </div>
+                                    <div class="text-sm text-slate-600 mb-4">
+                                        <div class="flex items-center mb-1">
+                                            <i class="fas fa-map-marker-alt mr-2 text-slate-400"></i>
+                                            <span data-mock="true">Dubai South</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-building mr-2 text-slate-400"></i>
+                                            <span data-mock="true">Residential • Sustainable</span>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+                                        <div>
+                                            <span class="text-slate-500">Investment:</span>
+                                            <div class="font-semibold text-slate-900" data-mock="true">$52M</div>
+                                        </div>
+                                        <div>
+                                            <span class="text-slate-500">Expected ROI:</span>
+                                            <div class="font-semibold text-green-600" data-mock="true">17.9%</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-slate-500" data-mock="true">Completion: Q2 2026</span>
+                                        <div class="flex space-x-2">
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-share"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-info-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Project Card 6 -->
+                            <div class="bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow duration-200">
+                                <!-- Modern office tower with innovative glass design and urban setting -->
+                                <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=240" alt="Modern office tower with glass facade" class="w-full h-48 object-cover rounded-t-lg" data-mock-image="true">
+                                <div class="p-6">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h3 class="text-lg font-semibold text-slate-900" data-mock="true">Innovation Tower</h3>
+                                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded" data-mock="true">Under Construction</span>
+                                    </div>
+                                    <div class="text-sm text-slate-600 mb-4">
+                                        <div class="flex items-center mb-1">
+                                            <i class="fas fa-map-marker-alt mr-2 text-slate-400"></i>
+                                            <span data-mock="true">DIFC</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-building mr-2 text-slate-400"></i>
+                                            <span data-mock="true">Commercial • Premium Office</span>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+                                        <div>
+                                            <span class="text-slate-500">Investment:</span>
+                                            <div class="font-semibold text-slate-900" data-mock="true">$135M</div>
+                                        </div>
+                                        <div>
+                                            <span class="text-slate-500">Expected ROI:</span>
+                                            <div class="font-semibold text-green-600" data-mock="true">23.1%</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-slate-500" data-mock="true">Completion: Q1 2026</span>
+                                        <div class="flex space-x-2">
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-share"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-blue-700 text-sm">
+                                                <i class="fas fa-info-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- @END_MAP )) -->
+
+                        <!-- Export & Save Options -->
+                        <div class="mt-8 flex items-center justify-center">
+                            <div class="flex items-center space-x-4">
+                                <button class="bg-white border border-slate-300 text-slate-700 px-4 py-2 rounded-lg hover:bg-slate-50 transition-colors duration-200">
+                                    <i class="fas fa-download mr-2"></i>
+                                    Export Report
+                                </button>
+                                <button class="bg-white border border-slate-300 text-slate-700 px-4 py-2 rounded-lg hover:bg-slate-50 transition-colors duration-200">
+                                    <i class="fas fa-table mr-2"></i>
+                                    Export Data
+                                </button>
+                                <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                                    <i class="fas fa-bookmark mr-2"></i>
+                                    Save Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: Page3Dashboard -->
+
+    <script>
+        // TODO: Implement business logic, API calls, and state management
+        
+        (function() {
+            let selectedRole = null;
+            
+            function showPage(pageId) {
+                // Hide all pages
+                document.querySelectorAll('.page-content').forEach(page => {
+                    page.classList.add('hidden');
+                });
+                
+                // Show selected page
+                document.getElementById(pageId).classList.remove('hidden');
+                
+                // Update tab states
+                document.querySelectorAll('.page-tab').forEach(tab => {
+                    tab.classList.remove('active', 'bg-primary', 'text-white');
+                    tab.classList.add('text-slate-600', 'hover:text-slate-900');
+                });
+                
+                const activeTab = document.querySelector(`[data-page="${pageId}"]`);
+                if (activeTab) {
+                    activeTab.classList.add('active', 'bg-primary', 'text-white');
+                    activeTab.classList.remove('text-slate-600', 'hover:text-slate-900');
+                }
+            }
+            
+            // Role selection functionality
+            document.querySelectorAll('.role-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove previous selections
+                    document.querySelectorAll('.role-card').forEach(c => {
+                        c.classList.remove('border-primary', 'bg-blue-50');
+                    });
+                    
+                    // Add selection to clicked card
+                    this.classList.add('border-primary', 'bg-blue-50');
+                    
+                    selectedRole = this.dataset.role;
+                    
+                    // Enable continue button
+                    const continueBtn = document.getElementById('continueBtn');
+                    continueBtn.disabled = false;
+                    continueBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    continueBtn.classList.add('hover:bg-blue-700');
+                    continueBtn.innerHTML = '<i class="fas fa-arrow-right mr-2"></i>Continue to Search';
+                    
+                    continueBtn.onclick = () => showPage('search-filter');
+                });
+            });
+            
+            // View toggle functionality
+            document.querySelectorAll('.view-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    document.querySelectorAll('.view-toggle').forEach(t => {
+                        t.classList.remove('active', 'bg-slate-100');
+                    });
+                    this.classList.add('active', 'bg-slate-100');
+                });
+            });
+            
+            // Make showPage globally available
+            window.showPage = showPage;
+            
+            // Initialize first page
+            showPage('role-selection');
+        })();
+    </script>
+</body>
+</html>

@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
-import { loginSchema, registerSchema, type LoginData, type RegisterData } from "@shared/schema";
+//import { loginSchema, registerSchema, type LoginData, type RegisterData } from "@shared/schema";
 import { Eye, EyeOff, LogIn, UserPlus } from "lucide-react";
 import { useLocation } from "wouter";
 

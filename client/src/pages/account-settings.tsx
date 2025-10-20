@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { apiRequest } from "@/lib/queryClient";
-import { updateUserProfileSchema, changePasswordSchema, type UpdateUserProfile, type ChangePassword } from "@shared/schema";
+//import { updateUserProfileSchema, changePasswordSchema } from "@shared/schema";
 import { User, Settings, Lock, Bell, Camera, Calendar, Badge } from "lucide-react";
 import { format } from "date-fns";
 
